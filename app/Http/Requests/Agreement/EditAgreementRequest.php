@@ -1,0 +1,96 @@
+<?php
+
+namespace App\Http\Requests\Agreement;
+
+use App\Rules\ValidDocumentUpload;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+
+class EditAgreementRequest extends FormRequest
+{
+    public function authorize(): bool
+    {
+        return true;
+    }
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function rules(): array
+    {
+        $agreementId = $this->route('agreement');
+        
+        return [
+
+            'category' => 'required|exists:agreement_categories,Agmt_Catg_UIN',
+
+            'type' => 'required|exists:agreement_types,Agmt_Type_UIN',
+
+            'name' => 'required|string|max:255',
+
+            'file_no' => [
+                'nullable',
+                'string',
+                'max:4',
+                Rule::unique('agreements', 'Agmt_File_no')->ignore($agreementId ?? null, 'Agmt_UIN'),
+            ],
+
+            'agreement_date' => 'required|date',
+
+            'expiry_date' => 'nullable|date|after_or_equal:agreement_date',
+
+            'signing_date' => 'nullable|date',
+
+            'notary_date' => 'nullable|date',
+
+            'version' => 'nullable|string|max:50',
+
+            'drafted_by' => 'nullable|string|max:255',
+
+            'jurisdiction' => 'nullable|string|max:255',
+
+            'attachment' =>  [
+                'nullable',
+                new ValidDocumentUpload,
+            ],
+
+            'remarks' => 'nullable|string',
+
+            'parties'              => 'required|array|min:2',
+            'parties.*.role'       => 'required|string|max:50',
+            'parties.*.org_name'   => 'required|string|max:255',
+            'parties.*.signatory'  => 'nullable|string|max:255',
+            'parties.*.is_primary' => 'nullable',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+
+            'agreement_category.required' => 'Please select an agreement category.',
+
+            'agreement_category.exists' => 'The selected agreement category is invalid.',
+
+            'agreement_type.required' => 'Please select an agreement type.',
+
+            'agreement_type.exists' => 'The selected agreement type is invalid.',
+
+            'agreement_name.required' => 'Agreement name is required.',
+
+            'agreement_name.max' => 'Agreement name may not exceed 255 characters.',
+
+            'expiry_date.after_or_equal' => 'Expiry date must be after or equal to the agreement date.',
+
+            'attachment.mimes' => 'Only PDF files are allowed.',
+
+            'attachment.max' => 'The PDF must not exceed 20 MB.',
+
+            'parties.required' => 'At least two parties are required.',
+            'parties.min'      => 'At least two parties are required.',
+
+            'parties.*.role.required'      => 'Party role is required.',
+            'parties.*.org_name.required'  => 'Organization name is required.',
+            'parties.*.signatory.required' => 'Authorised signatory is required.',
+        ];
+    }
+}
