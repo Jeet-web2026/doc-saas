@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             AgreementCategorySeeder::class,
             AgreementTypeSeeder::class,
-            AgreementStatusSeeder::class
+            OrganizationSeeder::class,
+            UserLoginSeeder::class
         ]);
     }
 }

@@ -9,7 +9,7 @@ class AgreementTypeSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::table('agreement_types')->insert([
+        DB::table('tbl_mast_agmt_type')->insert([
 
             // Procurement & Supply
             ['Agmt_Catg_UIN'=>4,'Agmt_Type_Name'=>'Vendor Agreement','Stau_UIN'=>1,'CrBy'=>1],

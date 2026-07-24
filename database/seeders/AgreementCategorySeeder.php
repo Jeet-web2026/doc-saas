@@ -9,7 +9,7 @@ class AgreementCategorySeeder extends Seeder
 {
     public function run(): void
     {
-        DB::table('agreement_categories')->insert([
+        DB::table('tbl_mast_agmt_catg')->insert([
 
             // Parent Categories
             [
