@@ -74,11 +74,16 @@ class AgreementService
                 'Stau_UIN'       => 'active',
             ]);
 
-            if ($request->filled('remarks')) {
+            $remarks = trim($request->remarks);
+
+            if (
+                $remarks !== '<p><br></p>' &&
+                !empty(trim(strip_tags($remarks)))
+            ) {
                 TranAgmtRemk::create([
                     'agmt_uin'       => $agreement->Agmt_UIN,
                     'agmt_remk_date' => now()->toDateString(),
-                    'agmt_remk'      => $request->remarks,
+                    'agmt_remk'      => $remarks,
                     'stau_uin'       => 1,
                     'crby'           => 1,
                     'moby'           => 1,
@@ -197,28 +202,28 @@ class AgreementService
                     ];
                 })->values(),
 
-                'date' => optional($agreement->Agmt_Strt_Date)?->format('Y-m-d'),
-                'expiry' => optional($agreement->Agmt_Expy_Date)?->format('Y-m-d'),
-                'signingDate' => optional($agreement->Agmt_Sign_Date)?->format('Y-m-d'),
-                'notaryDate' => optional($agreement->Agmt_Ntry_Date)?->format('Y-m-d'),
+                'date' => optional($agreement->Agmt_Strt_Date)?->format('Y-m-d') ?? '-',
+                'expiry' => optional($agreement->Agmt_Expy_Date)?->format('Y-m-d') ?? '-',
+                'signingDate' => optional($agreement->Agmt_Sign_Date)?->format('Y-m-d') ?? '-',
+                'notaryDate' => optional($agreement->Agmt_Ntry_Date)?->format('Y-m-d') ?? '-',
 
-                'version' => $agreement->Agmt_Vson,
-                'drafted' => $agreement->Agmt_Drft_By,
+                'version' => $agreement->Agmt_Vson ?? '-',
+                'drafted' => $agreement->Agmt_Drft_By ?? '-',
 
                 'parentAgreement' => $agreement->parentAgreement ? [
-                    'id'   => $agreement->parentAgreement->Agmt_UIN,
-                    'name' => $agreement->parentAgreement->Agmt_Name,
-                    'file_no' => $agreement->parentAgreement->Agmt_File_no,
+                    'id'   => $agreement->parentAgreement->Agmt_UIN ?? '-',
+                    'name' => $agreement->parentAgreement->Agmt_Name ?? '-',
+                    'file_no' => $agreement->parentAgreement->Agmt_File_no ?? '-',
                 ] : null,
 
                 'daysLeft' => $agreement->child_agreements_count > 0
                     ? "Renewed"
                     : ($expiryDate ? (int) now()->diffInDays($expiryDate, false) : null),
 
-                'categoryLabel' => optional($agreement->category)->Agmt_Catg_Name,
-                'jurisdiction' => $agreement->Agmt_Judn,
-                'remarks' => $agreement->remarks->pluck('agmt_remk')->implode(', '),
-                'fileNo' => $agreement->Agmt_File_no,
+                'categoryLabel' => optional($agreement->category)->Agmt_Catg_Name ?? '-',
+                'jurisdiction' => $agreement->Agmt_Judn ?? '-',
+                'remarks' => $agreement->remarks->pluck('agmt_remk')->implode(', ') ?? '-',
+                'fileNo' => $agreement->Agmt_File_no ?? '-',
             ];
         });
 
