@@ -1,5 +1,5 @@
 let companyId = null;
-let dateFilterType = "agreement_date"; 
+let dateFilterType = "agreement_date";
 $(document).ready(function () {
     const $initial = $(".company-item")
         .filter(function () {
@@ -221,28 +221,46 @@ $(document).ready(function () {
     });
 
     // ---------- Helpers ----------
-    const fmtDate = (iso) =>
-        !iso
-            ? ""
-            : new Date(iso).toLocaleDateString("en-GB", {
-                  day: "2-digit",
-                  month: "short",
-                  year: "numeric",
-              });
+    const fmtDate = (iso) => {
+        if (!iso || iso === "-" || iso === "0000-00-00") {
+            return "-";
+        }
+
+        const date = new Date(iso);
+
+        if (isNaN(date.getTime())) {
+            return "-";
+        }
+
+        return date.toLocaleDateString("en-GB", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+        });
+    };
 
     const expiryBadge = (d, parentAgreement) => {
-        let badge = `<span></span>`;
-
-        if (d !== null && d !== undefined) {
-            if (d <= 30) {
-                badge = `<span class="rounded bg-destructive/80 text-white px-1.5 py-0.5 text-[10px]">in ${d}d</span>`;
-            } else if (d <= 90 || d > 90) {
-                badge = `<span class="rounded bg-amber-500/20 text-amber-300 px-1.5 py-0.5 text-[10px]">in ${d}d</span>`;
-            } else {
-                badge = `<span class="rounded bg-white/10 px-1.5 py-0.5 text-[10px]">${d}</span>`;
-            }
+        if (
+            d === null ||
+            d === undefined ||
+            d === "" ||
+            d === "-" ||
+            isNaN(Number(d))
+        ) {
+            return `<span>-</span>`;
         }
-        return badge;
+
+        d = Number(d);
+
+        if (d <= 30) {
+            return `<span class="rounded bg-destructive/80 text-white px-1.5 py-0.5 text-[10px]">in ${d}d</span>`;
+        }
+
+        if (d <= 90) {
+            return `<span class="rounded bg-amber-500/20 text-amber-300 px-1.5 py-0.5 text-[10px]">in ${d}d</span>`;
+        }
+
+        return `<span class="rounded bg-white/10 px-1.5 py-0.5 text-[10px]">in ${d}d</span>`;
     };
 
     function escapeHtml(str) {
@@ -523,7 +541,7 @@ $(document).ready(function () {
     renderCalendarEvents();
 
     // ---------- Date range filter (server-side) ----------
-    let selectedRange = [];// default selection
+    let selectedRange = []; // default selection
 
     const fp = flatpickr("#agreementDateRange", {
         mode: "range",
