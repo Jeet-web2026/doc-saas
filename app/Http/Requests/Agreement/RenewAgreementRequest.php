@@ -16,13 +16,13 @@ class RenewAgreementRequest extends FormRequest
     {
         return [
 
-            'agreement_category' => 'required|exists:agreement_categories,Agmt_Catg_UIN',
+            'agreement_category' => 'required|exists:tbl_mast_agmt_catg,Agmt_Catg_UIN',
 
-            'agreement_type' => 'required|exists:agreement_types,Agmt_Type_UIN',
+            'agreement_type' => 'required|exists:tbl_mast_agmt_type,Agmt_Type_UIN',
 
             'agreement_name' => 'required|string|max:255',
 
-            'file_no' => 'nullable|string|max:4|unique:agreements,Agmt_File_no',
+            'file_no' => 'nullable|string|max:4|unique:tbl_tran_agmt,Agmt_File_no',
 
             'agreement_date' => 'required|date',
 

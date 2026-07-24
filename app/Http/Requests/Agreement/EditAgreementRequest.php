@@ -21,9 +21,9 @@ class EditAgreementRequest extends FormRequest
         
         return [
 
-            'category' => 'required|exists:agreement_categories,Agmt_Catg_UIN',
+            'category' => 'required|exists:tbl_mast_agmt_catg,Agmt_Catg_UIN',
 
-            'type' => 'required|exists:agreement_types,Agmt_Type_UIN',
+            'type' => 'required|exists:tbl_mast_agmt_type,Agmt_Type_UIN',
 
             'name' => 'required|string|max:255',
 
@@ -31,7 +31,7 @@ class EditAgreementRequest extends FormRequest
                 'nullable',
                 'string',
                 'max:4',
-                Rule::unique('agreements', 'Agmt_File_no')->ignore($agreementId ?? null, 'Agmt_UIN'),
+                Rule::unique('tbl_tran_agmt', 'Agmt_File_no')->ignore($agreementId ?? null, 'Agmt_UIN'),
             ],
 
             'agreement_date' => 'required|date',
