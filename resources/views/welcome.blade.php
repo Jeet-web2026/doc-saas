@@ -23,7 +23,7 @@
                             <path d="M10 18h4" />
                         </svg>
                     </button>
-                    <div id="companyMenu" class="hidden absolute lg:right-0 left-0 mt-2 w-56 rounded-md border border-white/10 bg-card shadow-xl z-30 py-1">
+                    <div id="companyMenu" class="hidden absolute lg:right-0 left-0 lg:left-auto mt-2 w-56 rounded-md border border-white/10 bg-card shadow-xl z-30 py-1">
                         <div class="px-3 py-1.5 text-xs font-semibold text-muted-foreground">Switch company</div>
                         <div class="border-t border-white/10 my-1"></div>
                         <!-- Companies -->
