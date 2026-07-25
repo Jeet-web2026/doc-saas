@@ -421,6 +421,9 @@
             background: #1e293b;
             color: white;
         }
+        .ql-editor{
+            min-height: auto;
+        }
     </style>
     @endsection
 

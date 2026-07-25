@@ -517,7 +517,7 @@
 
         /* Editable area */
         .ql-editor {
-            min-height: 250px;
+            min-height: auto;
             color: #fff;
             font-family: inherit;
         }
