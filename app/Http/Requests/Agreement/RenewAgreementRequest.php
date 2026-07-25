@@ -45,7 +45,21 @@ class RenewAgreementRequest extends FormRequest
 
             'remarks' => 'nullable|string',
 
-            'parties'              => 'required|array|min:2',
+            'parties'              => [
+                'required',
+                'array',
+                'min:2',
+                function ($attribute, $value, $fail) {
+                    $primaryCount = collect($value)->filter(
+                        fn($party) =>
+                        filter_var($party['is_primary'] ?? false, FILTER_VALIDATE_BOOLEAN)
+                    )->count();
+
+                    if ($primaryCount === 0) {
+                        $fail('At least one party must be marked as VS.');
+                    }
+                },
+            ],
             'parties.*.role'       => 'required|string|max:50',
             'parties.*.org_name'   => 'required|string|max:255',
             'parties.*.signatory'  => 'nullable|string|max:255',

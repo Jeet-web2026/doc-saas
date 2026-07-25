@@ -190,10 +190,11 @@
                         </div>
                 </div>
                 @endfor
-
-                @error('parties')
-                <small class="text-red-500">{{ $message }}</small>
-                @enderror
+                <div>
+                    @error('parties')
+                    <small class="text-red-500">{{ $message }}</small>
+                    @enderror
+                </div>
 
                 <button type="button" class="btn btn-outline mt-3" onclick="addParty()">
                     <i class="bi bi-plus-lg"></i> Add More Party
