@@ -304,7 +304,7 @@
 
                     <div style="max-height: 280px; overflow-y: auto;">
                         @forelse($agreement->remarks->sortByDesc('agmt_remk_date') as $remark)
-                            <div class="flex justify-start items-center gap-3 py-2 px-3 mb-2"
+                            <div class="flex flex-col justify-start items-start gap-3 py-2 px-3 mb-2"
                                 style="background-color: #1a2338; border: 1px solid #2a3654; border-radius: 6px;">
                                 <div class="flex items-center gap-1.5 text-nowrap text-[#6b7fa3] text-xs whitespace-nowrap">
                                     <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -520,6 +520,8 @@
             min-height: auto;
             color: #fff;
             font-family: inherit;
+            padding: 0px;
+            white-space: inherit;
         }
 
         /* Placeholder */

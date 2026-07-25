@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Agreement extends Model
 {
-    protected $table = "tbl_tran_agmt"; 
+    protected $table = "tbl_tran_agmt";
     protected $primaryKey = 'Agmt_UIN';
     public $incrementing = false;
-    
+
     protected $keyType = 'int';
 
     protected $fillable = [
@@ -127,6 +127,7 @@ class Agreement extends Model
 
     public function remarks()
     {
-        return $this->hasMany(TranAgmtRemk::class, 'agmt_uin', 'Agmt_UIN')->orderBy('agmt_remk_date', 'desc');
+        return $this->hasMany(TranAgmtRemk::class, 'agmt_uin', 'Agmt_UIN')
+            ->orderBy('agmt_remk_uin', 'desc');
     }
 }
