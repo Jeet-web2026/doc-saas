@@ -137,6 +137,8 @@
                     <input id="searchInput" type="text" placeholder="Search agreements…"
                         class="h-9 w-72 rounded-md border border-white/10 bg-transparent pl-9 pr-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary lg:w-[350px] w-full" />
                 </div>
+            </div>
+            <div class="flex items-center gap-2">
                 <div class="lg:relative" data-menu>
                     <button type="button" data-menu-toggle="calMenu" aria-label="Calendar view"
                         class="inline-flex h-9 w-9 items-center justify-center rounded-md border border-white/10 hover:bg-white/5">
@@ -181,9 +183,6 @@
                         <div id="calList" class="max-h-80 overflow-y-auto p-2"></div>
                     </div>
                 </div>
-            </div>
-            <div class="flex items-center gap-2">
-
                 <!-- Add Agreement -->
                 <a id="addAgreementBtn" href="{{ route('add-agreement', ['company' => $companyInformation->first()?->Orga_Type_UIN]) }}" class="inline-flex h-9 items-center gap-2 rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground hover:bg-primary/90 lg:w-auto w-full">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
