@@ -313,7 +313,7 @@
                                     {{ \Carbon\Carbon::parse($remark->agmt_remk_date)->format('d-m-Y') }} | Partha Das
                                 </div>
 
-                                <div class="flex-grow-1" style="color: #e2e8f0; font-size: 0.9rem; word-break: break-word;">
+                                <div class="flex-grow-1 ql-editor" style="color: #e2e8f0; font-size: 0.9rem; word-break: break-word;">
                                     {!! $remark->agmt_remk !!}
                                 </div>
 
