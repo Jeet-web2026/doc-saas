@@ -522,6 +522,7 @@
     @section('extrajscdns')
     <script src="{{ asset('assets/agreement-page-functionality.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @endsection
 
     @section('extracsscdns')
