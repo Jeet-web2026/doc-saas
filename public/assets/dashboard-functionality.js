@@ -256,7 +256,7 @@ $(document).ready(function () {
         d = Number(d);
 
         if (d < 0) {
-            return `<span class="rounded bg-destructive text-white px-1.5 py-0.5 text-[10px]">Expired</span>`;
+            return `<span class="rounded bg-destructive text-white px-1.5 py-0.5 text-[10px]">${d}</span>`;
         }
 
         if (d === 0) {
