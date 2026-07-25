@@ -216,9 +216,7 @@ class AgreementService
                     'file_no' => $agreement->parentAgreement->Agmt_File_no ?? '-',
                 ] : null,
 
-                'daysLeft' => $agreement->child_agreements_count > 0
-                    ? "Renewed"
-                    : ($expiryDate ? (int) now()->diffInDays($expiryDate, false) : null),
+                'daysLeft' => $expiryDate ? (int) now()->diffInDays($expiryDate, false) : null,
 
                 'categoryLabel' => optional($agreement->category)->Agmt_Catg_Name ?? '-',
                 'jurisdiction' => $agreement->Agmt_Judn ?? '-',
