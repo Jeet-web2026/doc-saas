@@ -205,7 +205,7 @@
                 <h2 class="section-title">Agreement Information</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="space-y-1.5"><label class="label">Agreement Date</label>
-                        <input type="date" class="input" name="agreement_date" value="{{ old('agreement_date') }} max="{{ date('Y-m-d') }}" />
+                        <input type="date" class="input" name="agreement_date" value="{{ old('agreement_date') }}" max="{{ date('Y-m-d') }}" />
                         @error('agreement_date')
                         <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
                         @enderror
