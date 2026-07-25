@@ -252,12 +252,20 @@ $(document).ready(function () {
 
         d = Number(d);
 
-        if (d <= 30) {
-            return `<span class="rounded bg-destructive/80 text-white px-1.5 py-0.5 text-[10px]">in ${d}d</span>`;
+        if (d < 0) {
+            return `<span class="rounded bg-destructive text-white px-1.5 py-0.5 text-[10px]">Expired</span>`;
+        }
+
+        if (d === 0) {
+            return `<span class="rounded bg-green-500/20 text-green-400 px-1.5 py-0.5 text-[10px]">Today</span>`;
         }
 
         if (d <= 90) {
             return `<span class="rounded bg-amber-500/20 text-amber-300 px-1.5 py-0.5 text-[10px]">in ${d}d</span>`;
+        }
+
+        if (d <= 30) {
+            return `<span class="rounded bg-destructive/80 text-white px-1.5 py-0.5 text-[10px]">in ${d}d</span>`;
         }
 
         return `<span class="rounded bg-white/10 px-1.5 py-0.5 text-[10px]">in ${d}d</span>`;
