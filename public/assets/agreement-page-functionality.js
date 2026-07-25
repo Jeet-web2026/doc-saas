@@ -443,20 +443,22 @@ $(document).ready(function () {
 
     document
         .getElementById("expiry_date")
-        .addEventListener("change", function () {
+        .addEventListener("blur", function () {
             const selectedDate = this.value;
 
             if (!selectedDate) return;
 
+            const expiryDate = new Date(selectedDate);
+
+            if (isNaN(expiryDate.getTime())) return;
+
             const today = new Date();
             today.setHours(0, 0, 0, 0);
-
-            const expiryDate = new Date(selectedDate);
             expiryDate.setHours(0, 0, 0, 0);
 
             if (expiryDate < today) {
                 Swal.fire({
-                    icon: "warning",
+                    background: "#e6f2ff",
                     title: "Past Expiry Date Selected",
                     text: 'You have selected a past Expiry Date. If saved, the agreement status will be set to "Expired".',
                     confirmButtonText: "OK",
