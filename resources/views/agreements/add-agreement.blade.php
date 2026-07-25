@@ -528,6 +528,7 @@
             min-height: 250px;
             color: #fff;
             font-family: inherit;
+            width: 100%;
         }
 
         /* Placeholder */

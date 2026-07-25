@@ -427,6 +427,7 @@
             min-height: auto;
             padding: 0px;
             white-space: inherit;
+            width: 100%;
         }
     </style>
     @endsection
