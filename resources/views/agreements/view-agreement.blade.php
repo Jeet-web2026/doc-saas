@@ -170,6 +170,7 @@
             </section>
 
             <!-- Remarks -->
+            <x-rich-text-editor name="remarks" :value="old('remarks')" :editable="false" />
             <div class="card p-4 mt-4" style="background-color: #0f1729; border: 1px solid #2a3654; border-radius: 8px;">
                     <h3 class="mb-3" style="color: #94a3c4; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase;">
                         Previous Internal Notes
