@@ -240,6 +240,9 @@ $(document).ready(function () {
     };
 
     const expiryBadge = (d, parentAgreement) => {
+        if (d === "Renewed") {
+            return `<span class="rounded bg-blue-500/20 text-blue-300 px-1.5 py-0.5 text-[10px]">Renewed</span>`;
+        }
         if (
             d === null ||
             d === undefined ||
