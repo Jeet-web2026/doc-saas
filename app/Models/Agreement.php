@@ -127,6 +127,6 @@ class Agreement extends Model
 
     public function remarks()
     {
-        return $this->hasMany(TranAgmtRemk::class, 'agmt_uin', 'Agmt_UIN');
+        return $this->hasMany(TranAgmtRemk::class, 'agmt_uin', 'Agmt_UIN')->orderBy('agmt_remk_date', 'desc');
     }
 }
