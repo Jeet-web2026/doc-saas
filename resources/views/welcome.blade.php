@@ -248,14 +248,14 @@
                             <button data-sort="expiry" class="sort-btn inline-flex items-center gap-1 uppercase tracking-wider hover:text-white">Expiry Date <span class="sort-icon"></span></button>
                         </th>
                         <th data-col="expiry_by" class="px-5 py-3">
-                            <button data-sort="expiry_by" class="sort-btn inline-flex items-center gap-1 uppercase tracking-wider hover:text-white">Expiry By <span class="sort-icon"></span></button>
+                            <button data-sort="expiry_by" class="sort-btn inline-flex items-center gap-1 uppercase tracking-wider hover:text-white">Expires In <span class="sort-icon"></span></button>
                         </th>
                         <th data-col="signingDate" class="px-5 py-3 hidden">Signing Date</th>
                         <th data-col="notaryDate" class="px-5 py-3 hidden">Notary Date</th>
                         <th data-col="version" class="px-5 py-3">Version</th>
                         <th data-col="drafted" class="px-5 py-3 hidden">Drafted By</th>
                         <th data-col="jurisdiction" class="px-5 py-3 hidden">Jurisdiction</th>
-                        <th data-col="remarks" class="px-5 py-3 hidden">Remarks</th>
+                        <th data-col="remarks" class="px-5 py-3 hidden">Internal Notes</th>
                         <th class="px-5 py-3 text-right">Action</th>
                     </tr>
                 </thead>
