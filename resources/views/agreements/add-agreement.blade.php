@@ -184,7 +184,8 @@
                             type="date"
                             class="input"
                             name="agreement_date"
-                            value="{{ old('agreement_date') }}">
+                            value="{{ old('agreement_date') }}"
+                            max="{{ date('Y-m-d') }}">
 
                         @error('agreement_date')
                         <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
