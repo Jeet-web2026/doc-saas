@@ -190,7 +190,7 @@
                         <path d="M5 12h14" />
                         <path d="M12 5v14" />
                     </svg>
-                    Add Agreement
+                    Add
                 </a>
                 <!-- More View (columns) -->
                 <div class="relative" data-menu>
@@ -205,7 +205,7 @@
                         <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-white/5 text-sm cursor-pointer"><input type="checkbox" data-col="secondParty" class="accent-primary" checked> 2nd Party</label>
                         <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-white/5 text-sm cursor-pointer"><input type="checkbox" data-col="date" class="accent-primary" checked> Agreement Date</label>
                         <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-white/5 text-sm cursor-pointer"><input type="checkbox" data-col="expiry" class="accent-primary" checked> Expiry Date</label>
-                        <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-white/5 text-sm cursor-pointer"><input type="checkbox" data-col="expiry_by" class="accent-primary" checked> Expiry by</label>
+                        <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-white/5 text-sm cursor-pointer"><input type="checkbox" data-col="expiry_by" class="accent-primary" checked> Expires In</label>
                         <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-white/5 text-sm cursor-pointer"><input type="checkbox" data-col="signingDate" class="accent-primary"> Signing Date</label>
                         <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-white/5 text-sm cursor-pointer"><input type="checkbox" data-col="notaryDate" class="accent-primary"> Notary Date</label>
                         <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-white/5 text-sm cursor-pointer"><input type="checkbox" data-col="version" class="accent-primary" checked> Version</label>

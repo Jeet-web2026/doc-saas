@@ -281,7 +281,7 @@ $(document).ready(function () {
     // ---------- State (columns / sort / calendar month) ----------
     let sort = null; // {key, dir}
     const visible = {
-        fileNo: true,
+        fileNo: false,
         category: false,
         type: false,
         firstParty: true,

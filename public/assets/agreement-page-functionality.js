@@ -424,9 +424,14 @@ $(document).ready(function () {
 
         Swal.fire({
             icon: "warning",
-            title: "Are you sure you want to submit?",
+            title: "Are you sure you want to save this agreement?",
+            html: `
+                <p>Once this agreement is saved, <strong>Internal Notes</strong> will be
+                <strong>permanently locked</strong> and cannot be edited or deleted.</p>
+                <p>Please verify that all information is complete and accurate before proceeding.</p>
+            `,
             showCancelButton: true,
-            confirmButtonText: "Yes, submit",
+            confirmButtonText: "Save Agreement",
             cancelButtonText: "Cancel",
             confirmButtonColor: "#3085d6",
         }).then((result) => {

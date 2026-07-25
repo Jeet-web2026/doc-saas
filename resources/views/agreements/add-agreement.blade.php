@@ -2,16 +2,14 @@
     <header class="border-b border-white/10 bg-white/[0.02]">
         <div class="mx-auto max-w-5xl flex items-center justify-between px-6 py-4">
             <a href="/" class="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-white">
-                <i class="bi bi-arrow-left"></i> Back to Agreements
+                <i class="bi bi-arrow-left"></i> Back
             </a>
             <span class="text-xs uppercase tracking-wider text-slate-400">Add Agreement</span>
+            <div></div>
         </div>
     </header>
 
     <main class="mx-auto max-w-5xl px-6 py-8">
-        <div class="mb-6">
-            <h1 class="text-3xl font-semibold tracking-tight">Add Agreement</h1>
-        </div>
 
         <x-globalresponse />
 
@@ -24,7 +22,7 @@
 
             <!-- Classification -->
             <section class="card p-6">
-                <h2 class="section-title">Classification</h2>
+                <h2 class="section-title">Agreement Details</h2>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
@@ -96,7 +94,7 @@
 
             <!-- Parties -->
             <section class="card p-6">
-                <h2 class="section-title">Parties</h2>
+                <h2 class="section-title">Agreement Parties</h2>
 
                 <div class="space-y-3" id="parties">
 
@@ -175,7 +173,7 @@
 
             <!-- Dates & Version -->
             <section class="card p-6">
-                <h2 class="section-title">Dates & Version</h2>
+                <h2 class="section-title">Agreement Information</h2>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 

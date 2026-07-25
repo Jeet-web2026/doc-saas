@@ -12,7 +12,7 @@
 @endphp
 
 <section class="card p-6">
-    <h2 class="section-title">Remarks</h2>
+    <h2 class="section-title">Internal Notes</h2>
 
     <div>
         <div

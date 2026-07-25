@@ -27,7 +27,7 @@ class AddAgreementController extends Controller
         $this->agreementService->store($request);
 
         return redirect()
-            ->back()
+            ->route('home')
             ->with('success', 'Agreement created successfully.');
     }
 }

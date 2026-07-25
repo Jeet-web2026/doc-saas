@@ -3,7 +3,7 @@
     <header class="border-b border-white/10 bg-white/[0.02]">
         <div class="mx-auto max-w-5xl flex items-center justify-between px-6 py-4">
             <a href="/" class="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-white">
-                <i class="bi bi-arrow-left"></i> Back to Agreements
+                <i class="bi bi-arrow-left"></i> Back
             </a>
             <span class="text-xs uppercase tracking-wider text-slate-400" id="mode-label">View Agreement</span>
         </div>
@@ -173,7 +173,7 @@
             <x-rich-text-editor name="remarks" :value="old('remarks', $agreement->Agmt_Remk)" :editable="false" />
             <div class="card p-4 mt-4" style="background-color: #0f1729; border: 1px solid #2a3654; border-radius: 8px;">
                     <h3 class="mb-3" style="color: #94a3c4; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase;">
-                        Previous Remarks
+                        Previous Internal Notes
                     </h3>
 
                     <div style="max-height: 280px; overflow-y: auto;">
@@ -193,7 +193,7 @@
                                 </div>
                             </div>
                         @empty
-                            <p class="mb-0" style="color: #6b7fa3; font-style: italic;">No previous remarks found.</p>
+                            <p class="mb-0" style="color: #6b7fa3; font-style: italic;">No previous Internal Notes found.</p>
                         @endforelse
                     </div>
                 </div>
