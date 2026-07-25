@@ -153,7 +153,7 @@ class AgreementService
                 },
             ])
             ->withCount('childAgreements')
-            ->whereIn('Stau_UIN', ['active', 'renewed']);
+            ->whereIn('Stau_UIN', ['active', 'renewed', 'expired']);
 
         if ($companyId) {
             $query->where('Orga_UIN', $companyId);
