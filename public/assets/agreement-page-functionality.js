@@ -427,7 +427,7 @@ $(document).ready(function () {
             title: "Are you sure you want to save this agreement?",
             html: `
                 <p>Once this agreement is saved, <strong>Internal Notes</strong> will be
-                <strong>permanently locked</strong> and cannot be edited or deleted.</p>
+                permanently locked and cannot be edited or deleted.</p>
                 <p>Please verify that all information is complete and accurate before proceeding.</p>
             `,
             showCancelButton: true,
@@ -440,4 +440,28 @@ $(document).ready(function () {
             }
         });
     });
+
+    document
+        .getElementById("expiry_date")
+        .addEventListener("change", function () {
+            const selectedDate = this.value;
+
+            if (!selectedDate) return;
+
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            const expiryDate = new Date(selectedDate);
+            expiryDate.setHours(0, 0, 0, 0);
+
+            if (expiryDate < today) {
+                Swal.fire({
+                    icon: "warning",
+                    title: "Past Expiry Date Selected",
+                    text: 'You have selected a past Expiry Date. If saved, the agreement status will be set to "Expired".',
+                    confirmButtonText: "OK",
+                    confirmButtonColor: "#3085d6",
+                });
+            }
+        });
 });

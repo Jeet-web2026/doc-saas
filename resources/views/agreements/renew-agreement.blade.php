@@ -210,7 +210,7 @@
                         @enderror
                     </div>
                     <div class="space-y-1.5"><label class="label">Expiry Date</label>
-                        <input type="date" class="input" name="expiry_date" value="{{ old('expiry_date') }}" />
+                        <input type="date" class="input" name="expiry_date" id="expiry_date" value="{{ old('expiry_date') }}" />
                         @error('expiry_date')
                         <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
                         @enderror

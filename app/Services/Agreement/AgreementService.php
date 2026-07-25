@@ -8,6 +8,7 @@ use App\Models\Agreement;
 use App\Models\AgreementCategories;
 use App\Models\AgreementType;
 use App\Models\TranAgmtRemk;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
@@ -41,8 +42,7 @@ class AgreementService
 
             if ($request->hasFile('attachment')) {
                 $file = $request->file('attachment');
-                $fileName = time() . '.' . $file->getClientOriginalExtension();
-                $attachment = $file->storeAs('agreements', $fileName, 'public');
+                $attachment = $this->storeAgreementAttachment($file);
             }
 
             $agreement = Agreement::create([
@@ -71,7 +71,7 @@ class AgreementService
                 'CrBy'           => 1,
                 'MoBy'           => 1,
 
-                'Stau_UIN'       => 'active',
+                'Stau_UIN'       => $this->determineStatusUin($request->expiry_date),
             ]);
 
             $remarks = trim($request->remarks);
@@ -249,8 +249,7 @@ class AgreementService
 
             if ($request->hasFile('attachment')) {
                 $file = $request->file('attachment');
-                $fileName = time() . '.' . $file->getClientOriginalExtension();
-                $attachment = $file->storeAs('agreements', $fileName, 'public');
+                $attachment = $this->storeAgreementAttachment($file);
 
                 if ($agreement->Agmt_Atch) {
                     Storage::disk('public')->delete($agreement->Agmt_Atch);
@@ -271,6 +270,7 @@ class AgreementService
                 'Agmt_Judn'      => $request->jurisdiction,
                 'MoBy'           => 1,
                 'Agmt_Atch'      => $attachment,
+                'Stau_UIN'       => $request->expiry_date ? $this->determineStatusUin($request->expiry_date) : $this->determineStatusUin($agreement->expiry_date),
             ]);
 
             if ($request->filled('remarks')) {
@@ -376,7 +376,7 @@ class AgreementService
                 'Agmt_File_no'        => $request->file_no ?? $oldAgreement->Agmt_File_no,
 
                 'Agmt_Strt_Date' => $request->agreement_date ?? $oldAgreement->Agmt_Strt_Date,
-                'Agmt_Expy_Date' => $request->expiry_date ?? $request->expiry_date, // ← the only date field that changes
+                'Agmt_Expy_Date' => $request->expiry_date ?? $oldAgreement->expiry_date, // ← the only date field that changes
                 'Agmt_Sign_Date' => $request->signing_date ?? $oldAgreement->Agmt_Sign_Date,
                 'Agmt_Ntry_Date' => $request->notary_date ?? $oldAgreement->Agmt_Ntry_Date,
 
@@ -391,7 +391,7 @@ class AgreementService
                 'CrBy'           => 1,
                 'MoBy'           => 1,
 
-                'Stau_UIN'       => 'active',
+                'Stau_UIN'       => $request->expiry_date ? $this->determineStatusUin($request->expiry_date) : $this->determineStatusUin($oldAgreement->expiry_date),
             ]);
 
             if ($request->filled('remarks')) {
@@ -446,5 +446,33 @@ class AgreementService
                 'file_no'     => $item->Agmt_File_no,
             ];
         });
+    }
+
+    private function determineStatusUin(?string $expiryDate): string
+    {
+        if (!$expiryDate) {
+            return 'active';
+        }
+
+        $expiry = Carbon::parse($expiryDate)->startOfDay();
+        $today  = Carbon::today();
+
+        return $expiry->lt($today) ? 'expired' : 'active';
+    }
+
+    private function storeAgreementAttachment($file): string
+    {
+        $systemNumber = $this->generateSystemNumber();
+
+        $originalName = $file->getClientOriginalName();
+
+        $fileName = $systemNumber . '_' . $originalName;
+
+        return $file->storeAs('agreements', $fileName, 'public');
+    }
+
+    private function generateSystemNumber(): string
+    {
+        return time() . rand(1000, 9999);
     }
 }

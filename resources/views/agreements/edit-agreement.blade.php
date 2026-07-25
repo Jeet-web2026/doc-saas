@@ -6,13 +6,14 @@
                 <i class="bi bi-arrow-left"></i> Back
             </a>
             <span class="text-xs uppercase tracking-wider text-slate-400" id="mode-label">Edit Agreement</span>
+            <div></div>
         </div>
     </header>
 
     <main class="mx-auto max-w-5xl px-6 py-8">
         <div class="flex flex-col lg:flex-row items-center justify-between">
             <div class="mb-6">
-                <h1 class="text-3xl font-semibold tracking-tight" id="page-title">Edit Agreement</h1>
+                <h1 class="text-3xl font-semibold tracking-tight hidden" id="page-title">Edit Agreement</h1>
             </div>
             <x-a-greement-history :agreementId="$agreement->Agmt_UIN" />
         </div>
@@ -30,7 +31,7 @@
 
             <!-- Classification -->
             <section class="card p-6">
-                <h2 class="section-title">Classification</h2>
+                <h2 class="section-title">Agreement Details</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="space-y-1.5">
                         <label class="label">Agreement Category</label>
@@ -86,7 +87,7 @@
 
             <!-- Parties -->
             <section class="card p-6">
-                <h2 class="section-title">Parties</h2>
+                <h2 class="section-title">Agreement Parties</h2>
 
                 <div class="space-y-3" id="parties">
 
@@ -203,16 +204,16 @@
 
                 <!-- Dates & Version -->
                 <section class="card p-6">
-                    <h2 class="section-title">Dates & Version</h2>
+                    <h2 class="section-title">Agreement Information</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="space-y-1.5"><label class="label">Agreement Date</label>
-                            <input type="date" class="input" name="agreement_date" value="{{ old('agreement_date', optional($agreement->Agmt_Strt_Date)->format('Y-m-d')) }}" />
+                            <input type="date" class="input" name="agreement_date" value="{{ old('agreement_date', optional($agreement->Agmt_Strt_Date)->format('Y-m-d')) }}" max="{{ date('Y-m-d') }}" />
                             @error('agreement_date')
                             <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="space-y-1.5"><label class="label">Expiry Date</label>
-                            <input type="date" class="input" name="expiry_date" value="{{ old('expiry_date', optional($agreement->Agmt_Expy_Date)->format('Y-m-d')) }}" />
+                            <input type="date" class="input" name="expiry_date" id="expiry_date" value="{{ old('expiry_date', optional($agreement->Agmt_Expy_Date)->format('Y-m-d')) }}" />
                             @error('expiry_date')
                             <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
                             @enderror
@@ -326,7 +327,7 @@
                 <div class="flex flex-wrap justify-end gap-3 pt-2">
                     <a href="{{ route('home') }}" class="btn btn-ghost">Cancel</a>
                     <button type="submit" class="btn btn-primary" id="submit-btn">
-                        <i class="bi bi-floppy"></i> <span id="submit-text">Update</span>
+                        <i class="bi bi-floppy"></i> <span id="submitBtn">Update</span>
                     </button>
                 </div>
         </form>

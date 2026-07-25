@@ -199,6 +199,7 @@
                             type="date"
                             class="input"
                             name="expiry_date"
+                            id="expiry_date"
                             value="{{ old('expiry_date') }}">
 
                         @error('expiry_date')
