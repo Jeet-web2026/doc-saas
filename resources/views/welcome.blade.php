@@ -211,7 +211,7 @@
                         <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-white/5 text-sm cursor-pointer"><input type="checkbox" data-col="version" class="accent-primary" checked> Version</label>
                         <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-white/5 text-sm cursor-pointer"><input type="checkbox" data-col="drafted" class="accent-primary"> Drafted By</label>
                         <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-white/5 text-sm cursor-pointer"><input type="checkbox" data-col="jurisdiction" class="accent-primary"> Jurisdiction</label>
-                        <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-white/5 text-sm cursor-pointer"><input type="checkbox" data-col="remarks" class="accent-primary"> Remarks</label>
+                        <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-white/5 text-sm cursor-pointer"><input type="checkbox" data-col="remarks" class="accent-primary"> Internal Notes</label>
                     </div>
                     <button type="button" data-menu-toggle="colsMenu"
                         class="inline-flex h-9 items-center gap-2 rounded-md border border-white/10 bg-transparent px-3 text-sm hover:bg-white/5">
