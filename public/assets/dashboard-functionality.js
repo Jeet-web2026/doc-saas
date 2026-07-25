@@ -554,6 +554,9 @@ $(document).ready(function () {
     // ---------- Date range filter (server-side) ----------
     let selectedRange = []; // default selection
 
+    const $filterBtn = $('[data-menu-toggle="calMenuForFilter"]');
+    const defaultBtnLabel = $filterBtn.text().trim(); // "Filter by date"
+
     const fp = flatpickr("#agreementDateRange", {
         mode: "range",
         dateFormat: "Y-m-d",
@@ -579,6 +582,24 @@ $(document).ready(function () {
         });
     });
 
+    // Helper to format the button label from the selected range
+    function updateFilterButtonLabel() {
+        if (selectedRange.length !== 2) {
+            $filterBtn.text(defaultBtnLabel);
+            return;
+        }
+
+        const typeLabel =
+            dateFilterType === "expiry_date" ? "Expiry Date" : "Agreement Date";
+
+        const fromStr = fmtDate(selectedRange[0].toISOString().split("T")[0]);
+        const toStr = fmtDate(selectedRange[1].toISOString().split("T")[0]);
+
+        $filterBtn.html(
+            `${typeLabel}: ${fromStr} - ${toStr}`,
+        );
+    }
+
     document.getElementById("applyDate").addEventListener("click", () => {
         if (selectedRange.length !== 2) {
             Swal.fire({
@@ -592,6 +613,8 @@ $(document).ready(function () {
 
         dateFrom = selectedRange[0].toISOString().split("T")[0];
         dateTo = selectedRange[1].toISOString().split("T")[0];
+
+        updateFilterButtonLabel(); // <-- reflect selection on the button
 
         fetchAgreements(1, { dateFilterType }); // pass along which date field to filter by
         document.getElementById("calMenuForFilter").classList.add("hidden");
@@ -611,6 +634,8 @@ $(document).ready(function () {
         document.querySelector(
             'input[name="dateFilterType"][value="agreement_date"]',
         ).checked = true;
+
+        $filterBtn.text(defaultBtnLabel); // <-- reset button label
 
         fetchAgreements(1);
     });
