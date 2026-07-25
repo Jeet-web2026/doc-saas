@@ -280,7 +280,7 @@
 
             <div class="flex flex-wrap justify-end gap-3 pt-2">
                 <a href="{{ route('home') }}" class="btn btn-ghost">Cancel</a>
-                <button type="submit" class="btn btn-primary" id="submit-btn">
+                <button type="submit" class="btn btn-primary" id="submitBtn">
                     <i class="bi bi-floppy"></i> <span id="submit-text">Renew</span>
                 </button>
             </div>
