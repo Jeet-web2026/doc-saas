@@ -40,7 +40,7 @@ class EditAgreementRequest extends FormRequest
 
             'signing_date' => 'nullable|date|after_or_equal:agreement_date',
 
-            'notary_date' => 'nullable|date|before_or_equal:expiry_date|required_with:expiry_date',
+            'notary_date' => 'nullable|date|before_or_equal:expiry_date|required_with:signing_date',
 
             'version' => 'nullable|string|max:50',
 
