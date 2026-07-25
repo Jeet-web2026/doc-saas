@@ -144,7 +144,7 @@
                         class="inline-flex h-9 w-9 items-center justify-center rounded-md border border-white/10 hover:bg-white/5">
                         <i class="bi bi-calendar3"></i>
                     </button>
-                    <div id="calMenu" class="hidden absolute left-0 mt-2 lg:w-96 w-full rounded-md border border-white/10 bg-card shadow-xl z-30">
+                    <div id="calMenu" class="hidden absolute right-0 mt-2 lg:w-96 w-full rounded-md border border-white/10 bg-card shadow-xl z-30">
                         <!-- Header -->
                         <div class="flex items-center justify-between border-b border-white/10 px-4 py-3">
                             <button id="calPrev" class="h-8 w-8 flex items-center justify-center rounded hover:bg-white/10">
