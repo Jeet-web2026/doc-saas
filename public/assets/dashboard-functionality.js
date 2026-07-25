@@ -595,9 +595,7 @@ $(document).ready(function () {
         const fromStr = fmtDate(selectedRange[0].toISOString().split("T")[0]);
         const toStr = fmtDate(selectedRange[1].toISOString().split("T")[0]);
 
-        $filterBtn.html(
-            `${typeLabel}: ${fromStr} - ${toStr}`,
-        );
+        $filterBtn.html(`${typeLabel}: ${fromStr} - ${toStr}`);
     }
 
     document.getElementById("applyDate").addEventListener("click", () => {
@@ -645,9 +643,9 @@ $(document).ready(function () {
         fetchAgreements(1);
     });
 
-    $(document).on("click", ".company-item", function () {
-        const newCompanyId = $(this).data("company-id");
-        const companyName = $(this).data("company");
+    function selectCompany($item) {
+        const newCompanyId = $item.data("company-id");
+        const companyName = $item.data("company");
 
         $("#addAgreementBtn").attr(
             "href",
@@ -656,12 +654,29 @@ $(document).ready(function () {
         $("#companyName").text(companyName);
 
         $(".check-icon").addClass("hidden");
-        $(this).find(".check-icon").removeClass("hidden");
+        $item.find(".check-icon").removeClass("hidden");
 
         $("#companyMenu").addClass("hidden");
 
         companyId = newCompanyId;
         fetchAgreements(1);
+    }
+
+    $(document).on("click", ".company-item", function () {
+        selectCompany($(this));
+    });
+
+    $(document).ready(function () {
+        // Pick whichever item should be selected on load
+        const $initial = $(".company-item .check-icon:not(.hidden)").closest(
+            ".company-item",
+        );
+
+        if ($initial.length) {
+            selectCompany($initial);
+        } else {
+            selectCompany($(".company-item").first());
+        }
     });
 
     $(document).on("click", ".delete-agreement-btn", function (e) {
