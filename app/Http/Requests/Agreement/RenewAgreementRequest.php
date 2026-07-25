@@ -22,15 +22,15 @@ class RenewAgreementRequest extends FormRequest
 
             'agreement_name' => 'required|string|max:255',
 
-            'file_no' => 'nullable|string|max:4|unique:tbl_tran_agmt,Agmt_File_no',
+            'file_no' => 'nullable|string|max:4',
 
-            'agreement_date' => 'required|date',
+            'agreement_date' => 'required|date|before_or_equal:today',
 
             'expiry_date' => 'nullable|date|after_or_equal:agreement_date',
 
-            'signing_date' => 'nullable|date',
+            'signing_date' => 'nullable|date|after_or_equal:agreement_date',
 
-            'notary_date' => 'nullable|date',
+            'notary_date' => 'nullable|date|before_or_equal:expiry_date|required_with:expiry_date',
 
             'agreement_version' => 'nullable|string|max:50',
 
