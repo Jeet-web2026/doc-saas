@@ -65,6 +65,8 @@
                         <select class="input js-lock" name="agreement_type" id="agreementType">
                             {{-- populated dynamically via AJAX --}}
                         </select>
+                        <input type="hidden" id="currentAgreementType" 
+                                    value="{{ old('agreement_type', $agreement->Agmt_Type_UIN ?? '') }}">
                         @error('agreement_type')
                         <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
                         @enderror

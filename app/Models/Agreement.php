@@ -39,7 +39,8 @@ class Agreement extends Model
         'MoBy',
 
         'Stau_UIN',
-        'update_count'
+        'update_count',
+        'Agmt_Size_KB'
     ];
 
     protected $casts = [

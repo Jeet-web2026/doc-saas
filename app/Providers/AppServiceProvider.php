@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Agreement;
+use App\Observers\AgreementObserver;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\URL;
 
@@ -23,5 +25,7 @@ class AppServiceProvider extends ServiceProvider
         if (app()->environment('production') || app()->environment('development')) {
             URL::forceScheme('https');
         }
+
+        Agreement::observe(AgreementObserver::class);
     }
 }
