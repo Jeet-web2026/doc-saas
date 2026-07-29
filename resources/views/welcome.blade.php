@@ -3,7 +3,7 @@
         <div class="mx-auto flex flex-wrap gap-3 max-w-7xl items-center justify-between px-6 py-4 relative">
             <div>
                 <div class="text-lg font-semibold" id="companyName">Ujan Logistic</div>
-                <p class="text-xs text-muted-foreground">Partha Das</p>
+                <p class="text-xs text-muted-foreground">Partha Das 2</p>
             </div>
 
             <div class="text-xl font-semibold lg:absolute lg:left-[45%]">Agreements</div>
