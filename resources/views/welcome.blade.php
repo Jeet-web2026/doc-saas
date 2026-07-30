@@ -1,14 +1,7 @@
 <x-base-component tailwind="true" jQuery="true" subheading="Home" metadata="Ujan Logistic - Agreement Vault" metadescription="description" bIcons="true">
     <header class="border-b border-white/10 bg-white/[0.03]">
         <div class="mx-auto flex flex-wrap gap-3 max-w-7xl items-center justify-between px-6 py-4 relative">
-            <div>
-                <div class="text-lg font-semibold" id="companyName">Ujan Logistic</div>
-                <p class="text-xs text-muted-foreground">Partha Das 3</p>
-            </div>
-
-            <div class="text-xl font-semibold lg:absolute lg:left-[45%]">Agreements</div>
-            <!-- Company switcher -->
-            <div class="relative flex flex-row items-center">
+            <div class="flex flex-wrap gap-2 items-start">
                 <div class="relative" data-menu>
                     <button type="button" data-menu-toggle="companyMenu"
                         class="inline-flex h-9 w-9 items-center justify-center rounded-full hover:bg-white/10 transition">
@@ -33,7 +26,7 @@
                             data-company-id="{{ $info->Orga_Type_UIN }}"
                             class="company-item flex w-full items-center justify-between px-3 py-1.5 text-sm hover:bg-white/5">
                             <span>{{ $info->Orga_Name }}</span>
-
+        
                             <svg
                                 class="check-icon {{ $loop->first ? 'text-primary' : 'hidden' }}"
                                 xmlns="http://www.w3.org/2000/svg"
@@ -53,6 +46,15 @@
                         @endforelse
                     </div>
                 </div>
+                <div>
+                    <div class="text-lg font-semibold" id="companyName">Ujan Logistic</div>
+                    <p class="text-xs text-muted-foreground">Partha Das 3</p>
+                </div>
+            </div>
+
+            <div class="text-xl font-semibold lg:absolute lg:left-[45%]">Agreements</div>
+            <!-- Company switcher -->
+            <div class="relative flex flex-row items-center">
                 <a href="/" class="inline-flex items-center gap-2 px-3 py-1.5 border border-white/10 rounded-md text-sm text-white/80 hover:text-white hover:bg-white/10 transition">
                     Back
                 </a>
