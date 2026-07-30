@@ -3,7 +3,6 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -12,46 +11,63 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable;
+   use Notifiable;
+
+    protected $table = 'tbl_mast_user_logi';
 
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
+     * Primary key is User_UIN, not the default 'id'.
      */
+    protected $primaryKey = 'User_UIN';
+
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'User_Name',
+        'User_Logo',
+        'Prmy_Emai',
+        'Prmy_Emai_Vefi',
+        'Altn_Emai',
+        'Altn_Emai_Vefi',
+        'Cutr_UIN',
+        'ISD_UIN',
+        'Prmy_MoNo',
+        'Prmy_MoNo_Vefi',
+        'OTP_Prmy_MoNo',
+        'Altn_MoNo',
+        'Altn_MoNo_Vefi',
+        'OTP_Altn_MoNo',
+        'User_pasw',
+        'Pasw_Self_Gntd',
+        'Pasw_Rest_By',
+        'Pasw_Rest_On',
+        'CrBy',
+        'Stau_UIN',
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
+     * Hide sensitive fields from arrays/JSON.
      */
     protected $hidden = [
-        'password',
-        'remember_token',
+        'User_pasw',
+        'OTP_Prmy_MoNo',
+        'OTP_Altn_MoNo',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
+    
+    public function getAuthPassword()
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->User_pasw;
     }
+
+    protected $casts = [
+        'Prmy_Emai_Vefi' => 'integer',
+        'Altn_Emai_Vefi' => 'integer',
+        'Pasw_Self_Gntd' => 'integer',
+    ];
 
     public function organisations(): BelongsToMany
     {
         return $this->belongsToMany(
-            \App\Models\OrganisationDetails::class,
+            OrganisationDetails::class,
             'tbl_user_orga_rela',
             'User_UIN',
             'Orga_UIN',
