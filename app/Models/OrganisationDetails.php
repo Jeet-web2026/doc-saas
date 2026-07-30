@@ -41,4 +41,16 @@ class OrganisationDetails extends Model
         'Prmy_Emai_Vefi',
         'mpos_key',
     ];
+
+    public function users(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            User::class,
+            'tbl_user_orga_rela',
+            'Orga_UIN', 
+            'User_UIN', 
+            'Orga_UIN',
+            'UIN'
+        )->withPivot(['Vert_UIN', 'Stau_UIN', 'Expy', 'CrOn', 'CrBy', 'MoOn', 'MoBy']);
+    }
 }
