@@ -42,7 +42,7 @@ class OrganisationDetails extends Model
         'mpos_key',
     ];
 
-    public function users(): BelongsToMany
+    public function users()
     {
         return $this->belongsToMany(
             User::class,
