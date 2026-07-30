@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\OrganisationDetails;
+use App\Models\UserOrgaRela;
 use App\Services\Agreement\AgreementService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -16,11 +16,17 @@ class HomeController extends Controller
 
     public function index()
     {
-        $companyInformation = Auth::user()
-            ->organisations()
-            ->select('tbl_mast_orga.Orga_Type_UIN', 'tbl_mast_orga.Orga_Name')
-            ->orderBy('tbl_mast_orga.Orga_Type_UIN', 'desc')
-            ->get();
+        $companyInformation = UserOrgaRela::where('User_UIN', Auth::id())
+            ->where('Stau_UIN', 1)
+            ->with(['organisation' => function ($query) {
+                $query->select('Orga_UIN', 'Orga_Type_UIN', 'Orga_Name');
+            }])
+            ->get()
+            ->pluck('organisation')
+            ->filter() // drop nulls if any orphaned relation rows exist
+            ->sortByDesc('Orga_Type_UIN')
+            ->values();
+
         return view('welcome', compact('companyInformation'));
     }
 

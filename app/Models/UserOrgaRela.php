@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class UserOrgaRela extends Model
 {
@@ -29,8 +30,13 @@ class UserOrgaRela extends Model
         'MoOn' => 'datetime',
     ];
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'User_UIN', 'User_UIN');
+    }
+
+    public function organisation(): BelongsTo
+    {
+        return $this->belongsTo(OrganisationDetails::class, 'Orga_UIN', 'Orga_UIN');
     }
 }

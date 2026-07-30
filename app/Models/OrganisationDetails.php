@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class OrganisationDetails extends Model
 {
@@ -43,15 +43,8 @@ class OrganisationDetails extends Model
         'mpos_key',
     ];
 
-    public function users(): BelongsToMany
+    public function userRelations(): HasMany
     {
-        return $this->belongsToMany(
-            User::class,
-            'tbl_user_orga_rela',
-            'Orga_UIN', 
-            'User_UIN', 
-            'Orga_UIN',
-            'UIN'
-        )->withPivot(['Vert_UIN', 'Stau_UIN', 'Expy', 'CrOn', 'CrBy', 'MoOn', 'MoBy']);
+        return $this->hasMany(UserOrgaRela::class, 'Orga_UIN', 'Orga_UIN');
     }
 }

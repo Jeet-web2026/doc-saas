@@ -488,7 +488,7 @@ class AgreementService
     }
 
     private function getFileSizeInKb(UploadedFile $file): int
-{
-    return (int) round($file->getSize() / 1024);
-}
+    {
+        return (int) round($file->getSize() / 1024);
+    }
 }
