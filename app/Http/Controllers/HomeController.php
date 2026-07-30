@@ -6,6 +6,7 @@ use App\Models\OrganisationDetails;
 use App\Services\Agreement\AgreementService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -15,7 +16,11 @@ class HomeController extends Controller
 
     public function index()
     {
-        $companyInformation = OrganisationDetails::select('Orga_Type_UIN', 'Orga_Name')->orderBy('Orga_Type_UIN', 'desc')->get();
+        $companyInformation = Auth::user()
+            ->organisations()
+            ->select('tbl_mast_orga.Orga_Type_UIN', 'tbl_mast_orga.Orga_Name')
+            ->orderBy('tbl_mast_orga.Orga_Type_UIN', 'desc')
+            ->get();
         return view('welcome', compact('companyInformation'));
     }
 
