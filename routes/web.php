@@ -9,8 +9,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('home');
-    Route::get('/agreements', 'allAgreements')
-        ->name('all-agreements');
+    Route::post('/select-organisation', 'selectOrganisation')->name('select-organisation');
+    Route::get('/agreements', 'allAgreements')->name('all-agreements');
+    Route::get('/agreements/data', 'agreementsData')->name('agreements.data');
 });
 
 Route::controller(AddAgreementController::class)->group(function () {

@@ -13,8 +13,8 @@ use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
 class AgreementService
@@ -40,6 +40,8 @@ class AgreementService
     {
         return DB::transaction(function () use ($request) {
 
+            $userData = Session::get('partaker_user_data');
+
             $attachment = null;
             $attachmentSizeKb = null;
 
@@ -51,7 +53,7 @@ class AgreementService
 
             $agreement = Agreement::create([
                 'Orga_UIN'       => $request->company_id,
-                'User_UIN'       => Auth::id() ?? 1,
+                'User_UIN'       => $userData['User_UIN'] ?? 1,
 
                 'Agmt_Catg_UIN'  => $request->agreement_category,
                 'Agmt_Type_UIN'  => $request->agreement_type,
@@ -73,8 +75,8 @@ class AgreementService
                 'Agmt_Parn_UIN'  => null,
                 'Agmt_Prty_UIN'  => null,
 
-                'CrBy'           => Auth::id() ?? 1,
-                'MoBy'           => Auth::id() ?? 1,
+                'CrBy'           => $userData['User_UIN'] ?? 1,
+                'MoBy'           => $userData['User_UIN'] ?? 1,
 
                 'Stau_UIN'       => $this->determineStatusUin($request->expiry_date),
             ]);
@@ -90,8 +92,8 @@ class AgreementService
                     'agmt_remk_date' => now()->toDateString(),
                     'agmt_remk'      => $remarks,
                     'stau_uin'       => 1,
-                    'crby'           => Auth::id() ?? 1,
-                    'moby'           => Auth::id() ?? 1,
+                    'crby'           => $userData['User_UIN'] ?? 1,
+                    'moby'           => $userData['User_UIN'] ?? 1,
                 ]);
             }
 
@@ -103,8 +105,8 @@ class AgreementService
                     'Agmt_Prty_No'       => $partyData['role'] ?? null,
                     'Agmt_Prty_Org_Name' => $partyData['org_name'] ?? null,
                     'Agmt_Athr_Sgnt'     => $partyData['signatory'] ?? null,
-                    'CrBy'               => Auth::id() ?? 1,
-                    'MoBy'               => Auth::id() ?? 1,
+                    'CrBy'               => $userData['User_UIN'] ?? 1,
+                    'MoBy'               => $userData['User_UIN'] ?? 1,
                 ]);
 
                 if (isset($partyData['is_primary'])) {
@@ -129,6 +131,7 @@ class AgreementService
         int $perPage = 5,
         ?int $companyId = null
     ) {
+        $userData = Session::get('partaker_user_data');
         $query = Agreement::query()
             ->select([
                 'Agmt_UIN',
@@ -147,6 +150,7 @@ class AgreementService
                 'Agmt_Catg_UIN',
                 'Agmt_Type_UIN',
                 'Agmt_Parn_UIN',
+                'User_UIN'
             ])
             ->with([
                 'category:Agmt_Catg_UIN,Agmt_Catg_Name',
@@ -158,6 +162,7 @@ class AgreementService
                         ->orderBy('agmt_remk_date');
                 },
             ])
+            ->where('User_UIN', $userData['User_UIN'])
             ->withCount('childAgreements')
             ->whereIn('Stau_UIN', ['active', 'renewed', 'expired']);
 
@@ -251,6 +256,7 @@ class AgreementService
             $agreement = Agreement::findOrFail($agreementId);
             $attachment = $agreement->Agmt_Atch;
             $attachmentSizeKb = $agreement->Agmt_Size_KB;
+            $userData = Session::get('partaker_user_data');
 
             if ($request->hasFile('attachment')) {
                 $file = $request->file('attachment');
@@ -274,7 +280,7 @@ class AgreementService
                 'Agmt_Vson'      => $request->version,
                 'Agmt_Drft_By'   => $request->drafted_by,
                 'Agmt_Judn'      => $request->jurisdiction,
-                'MoBy'           => Auth::id() ?? 1,
+                'MoBy'           => $userData['User_UIN'] ?? 1,
                 'Agmt_Atch'      => $attachment,
                 'Agmt_Size_KB'  => $attachmentSizeKb,
                 'Stau_UIN'       => $request->expiry_date ? $this->determineStatusUin($request->expiry_date) : $this->determineStatusUin($agreement->expiry_date),
@@ -286,8 +292,8 @@ class AgreementService
                     'agmt_remk_date' => now()->toDateString(),
                     'agmt_remk'      => $request->remarks,
                     'stau_uin'       => 1,
-                    'crby'           => Auth::id() ?? 1,
-                    'moby'           => Auth::id() ?? 1,
+                    'crby'           => $userData['User_UIN'] ?? 1,
+                    'moby'           => $userData['User_UIN'] ?? 1,
                 ]);
             }
 
@@ -306,7 +312,7 @@ class AgreementService
                     'Agmt_Prty_No'       => $partyData['role'] ?? null,
                     'Agmt_Prty_Org_Name' => $partyData['org_name'] ?? null,
                     'Agmt_Athr_Sgnt'     => $partyData['signatory'] ?? null,
-                    'MoBy'               => Auth::id() ?? 1,
+                    'MoBy'               => $userData['User_UIN'] ?? 1,
                 ];
 
                 if ($partyId) {
@@ -318,8 +324,8 @@ class AgreementService
                     }
                 } else {
                     $party = $agreement->parties()->create(array_merge($attributes, [
-                        'CrBy' => Auth::id() ?? 1,
-                        'MoBy' => Auth::id() ?? 1,
+                        'CrBy' => $userData['User_UIN'] ?? 1,
+                        'MoBy' => $userData['User_UIN'] ?? 1,
                     ]));
                     $submittedPartyIds[] = $party->Agmt_Prty_UIN;
                 }
@@ -353,6 +359,7 @@ class AgreementService
         return DB::transaction(function () use ($agreementId, $request) {
 
             $oldAgreement = Agreement::with('parties')->findOrFail($agreementId);
+            $userData = Session::get('partaker_user_data');
 
             if ($oldAgreement->childAgreements()->exists()) {
                 throw new Exception('This agreement has already been renewed.');
@@ -361,7 +368,7 @@ class AgreementService
             // 1. Mark the old agreement inactive
             $oldAgreement->update([
                 'Stau_UIN' => 'renewed',
-                'MoBy'     => Auth::id() ?? 1,
+                'MoBy'     => $userData['User_UIN'] ?? 1,
             ]);
 
             // 2. Handle new attachment if uploaded, otherwise carry over the old one
@@ -399,8 +406,8 @@ class AgreementService
                 'Agmt_Parn_UIN'  => $oldAgreement->Agmt_UIN, // link back to the original agreement
                 'Agmt_Prty_UIN'  => null, // set after parties are copied
 
-                'CrBy'           => Auth::id() ?? 1,
-                'MoBy'           => Auth::id() ?? 1,
+                'CrBy'           => $userData['User_UIN'] ?? 1,
+                'MoBy'           => $userData['User_UIN'] ?? 1,
 
                 'Stau_UIN'       => $request->expiry_date ? $this->determineStatusUin($request->expiry_date) : $this->determineStatusUin($oldAgreement->expiry_date),
             ]);
@@ -411,8 +418,8 @@ class AgreementService
                     'agmt_remk_date' => now()->toDateString(),
                     'agmt_remk'      => $request->remarks,
                     'stau_uin'       => 1,
-                    'crby'           => Auth::id() ?? 1,
-                    'moby'           => Auth::id() ?? 1,
+                    'crby'           => $userData['User_UIN'] ?? 1,
+                    'moby'           => $userData['User_UIN'] ?? 1,
                 ]);
             }
 
@@ -425,8 +432,8 @@ class AgreementService
                     'Agmt_Prty_No'       => $partyData['role'] ?? null,
                     'Agmt_Prty_Org_Name' => $partyData['org_name'] ?? null,
                     'Agmt_Athr_Sgnt'     => $partyData['signatory'] ?? null,
-                    'CrBy'               => Auth::id() ?? 1,
-                    'MoBy'               => Auth::id() ?? 1,
+                    'CrBy'               => $userData['User_UIN'] ?? 1,
+                    'MoBy'               => $userData['User_UIN'] ?? 1,
                 ]);
 
                 if (isset($partyData['is_primary'])) {

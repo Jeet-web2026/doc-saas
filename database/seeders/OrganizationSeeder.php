@@ -15,7 +15,8 @@ class OrganizationSeeder extends Seeder
     {
         DB::table('tbl_mast_orga')->insert([
             [
-                'Orga_Type_UIN' => 1,
+                'Orga_UIN' => 1724774817,
+                'Orga_Type_UIN' => 1724774817,
 
                 'Orga_Name' => 'ABC Technologies',
                 'orga_Logo' => 'abc-logo.png',
@@ -68,7 +69,8 @@ class OrganizationSeeder extends Seeder
             ],
 
             [
-                'Orga_Type_UIN' => 2,
+                'Orga_UIN' => 1500000046,
+                'Orga_Type_UIN' => 1500000001,
 
                 'Orga_Name' => 'XYZ Solutions',
                 'orga_Logo' => 'xyz-logo.png',

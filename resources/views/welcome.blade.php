@@ -16,16 +16,16 @@
                             <path d="M10 18h4" />
                         </svg>
                     </button>
-                    <div id="companyMenu" class="hidden absolute lg:right-0 left-0 lg:left-auto mt-2 w-56 rounded-md border border-white/10 bg-card shadow-xl z-30 py-1">
+                    <div id="companyMenu" class="hidden absolute lg:right-0 right-0 lg:right-auto mt-2 w-56 rounded-md border border-white/10 bg-card shadow-xl z-30 py-1">
                         <div class="px-3 py-1.5 text-xs font-semibold text-muted-foreground">Switch company</div>
                         <div class="border-t border-white/10 my-1"></div>
                         <!-- Companies -->
                         @forelse($companyInformation as $info)
                         <button
-                            data-company="{{ $info->Orga_Name }}"
-                            data-company-id="{{ $info->Orga_Type_UIN }}"
+                            data-company="{{ $info->organisation->Orga_Name }}"
+                            data-company-id="{{ $info->organisation->Orga_UIN }}"
                             class="company-item flex w-full items-center justify-between px-3 py-1.5 text-sm hover:bg-white/5">
-                            <span>{{ $info->Orga_Name }}</span>
+                            <span>{{ $info->organisation->Orga_Name }}</span>
         
                             <svg
                                 class="check-icon {{ $loop->first ? 'text-primary' : 'hidden' }}"
@@ -48,7 +48,7 @@
                 </div>
                 <div>
                     <div class="text-lg font-semibold" id="companyName">Ujan Logistic</div>
-                    <p class="text-xs text-muted-foreground">Partha Das 3</p>
+                    <p class="text-xs text-muted-foreground">{{ $userData['User_Name'] }}</p>
                 </div>
             </div>
 
@@ -186,7 +186,7 @@
                     </div>
                 </div>
                 <!-- Add Agreement -->
-                <a id="addAgreementBtn" href="{{ route('add-agreement', ['company' => $companyInformation->first()?->Orga_Type_UIN]) }}" class="inline-flex h-9 items-center gap-2 rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground hover:bg-primary/90 lg:w-auto w-full">
+                <a id="addAgreementBtn" href="{{ route('add-agreement', ['company' => $companyInformation->first()?->Orga_UIN]) }}" class="inline-flex h-9 items-center gap-2 rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground hover:bg-primary/90 lg:w-auto w-full">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M5 12h14" />
                         <path d="M12 5v14" />
@@ -293,7 +293,7 @@
         }
     </script>
     <script>
-        const AGREEMENTS_URL = "{{ route('all-agreements') }}";
+        const AGREEMENTS_URL = "{{ route('agreements.data') }}";
     </script>
     @endsection
 
