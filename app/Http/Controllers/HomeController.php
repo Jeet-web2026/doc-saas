@@ -109,7 +109,7 @@ class HomeController extends Controller
     public function agreementsData(Request $request): JsonResponse
     {
         $userUin = Session::get('partaker_user_uin');
-        $orgaUin = Session::get('selected_orga_uin');
+        $orgaUin = $request->company_id;
 
         if (! $userUin || ! $orgaUin) {
             return response()->json(['message' => 'No organisation selected.'], Response::HTTP_UNAUTHORIZED);
