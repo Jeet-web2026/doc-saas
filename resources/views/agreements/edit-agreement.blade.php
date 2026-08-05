@@ -2,7 +2,7 @@
 
     <header class="border-b border-white/10 bg-white/[0.02]">
         <div class="mx-auto max-w-5xl flex items-center justify-between px-6 py-4">
-            <a href="/" class="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-white">
+            <a href="{{ route('all-agreements') }}" class="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-white">
                 <i class="bi bi-arrow-left"></i> Back
             </a>
             <span class="text-xs uppercase tracking-wider text-slate-400" id="mode-label">Edit Agreement</span>
@@ -314,7 +314,7 @@
                                     <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                     </svg>
-                                    {{ \Carbon\Carbon::parse($remark->agmt_remk_date)->format('d-m-Y') }} | Partha Das
+                                    {{ \Carbon\Carbon::parse($remark->agmt_remk_date)->format('d-m-Y') }} | {{ $agreement->user?->User_Name }}
                                 </div>
 
                                 <div class="flex-grow-1 ql-editor" style="color: #e2e8f0; font-size: 0.9rem; word-break: break-word;">

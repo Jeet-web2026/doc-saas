@@ -2,7 +2,7 @@
 
     <header class="border-b border-white/10 bg-white/[0.02]">
         <div class="mx-auto max-w-5xl flex items-center justify-between px-6 py-4">
-            <a href="/" class="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-white">
+            <a href="{{ route('all-agreements') }}" class="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-white">
                 <i class="bi bi-arrow-left"></i> Back
             </a>
             <span class="text-xs uppercase tracking-wider text-slate-400" id="mode-label">Renew Agreement</span>

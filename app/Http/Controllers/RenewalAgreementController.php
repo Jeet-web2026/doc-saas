@@ -40,7 +40,7 @@ class RenewalAgreementController extends Controller
             $this->agreementService->renewAgreement($agreementId, $request);
 
             return redirect()
-                ->route('home')
+                ->route('all-agreements')
                 ->with('success', 'Agreement renewed successfully.');
         } catch (Exception $e) {
             return redirect()

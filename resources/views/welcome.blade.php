@@ -55,7 +55,7 @@
             <div class="text-xl font-semibold lg:absolute lg:left-[45%]">Agreements</div>
             <!-- Company switcher -->
             <div class="relative flex flex-row items-center">
-                <a href="/" class="inline-flex items-center gap-2 px-3 py-1.5 border border-white/10 rounded-md text-sm text-white/80 hover:text-white hover:bg-white/10 transition">
+                <a href="{{ route('all-agreements') }}" class="inline-flex items-center gap-2 px-3 py-1.5 border border-white/10 rounded-md text-sm text-white/80 hover:text-white hover:bg-white/10 transition">
                     Back
                 </a>
             </div>

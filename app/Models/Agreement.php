@@ -131,4 +131,9 @@ class Agreement extends Model
         return $this->hasMany(TranAgmtRemk::class, 'agmt_uin', 'Agmt_UIN')
             ->orderBy('agmt_remk_uin', 'desc');
     }
+
+    public function user()
+    {
+        return $this->hasOne(User::class, 'User_UIN', 'User_UIN');
+    }
 }

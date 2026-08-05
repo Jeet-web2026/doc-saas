@@ -245,7 +245,8 @@ class AgreementService
             'category',
             'type',
             'parties',
-            'remarks'
+            'remarks',
+            'user'
         ])->findOrFail($agreementId);
     }
 
