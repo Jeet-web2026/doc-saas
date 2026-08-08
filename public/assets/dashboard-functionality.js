@@ -666,17 +666,36 @@ $(document).ready(function () {
                         </div>
                         <div>
 
+                            <div class="flex flex-row items-center gap-3">
+                            
                             <div
                                 class="text-[10px] font-semibold uppercase
-                                tracking-wider text-cyan-400 mb-2">
+                                tracking-wider text-cyan-400">
 
                                 File no.
 
                             </div>
 
-                            <div class="text-xs text-muted-foreground mt-0.5">
-                                    ${r.fileNo ?? ""}
-                                </div>
+                            <div class="text-[10px] text-muted-foreground">
+                                ${r.fileNo ?? ""}
+                            </div>
+                            
+                            </div>
+                            <div class="flex flex-row items-center gap-3 mt-4">
+                            
+                            <div
+                                class="text-[10px] font-semibold uppercase
+                                tracking-wider text-cyan-400">
+
+                               Verson
+
+                            </div>
+
+                            <div class="text-[10px] text-muted-foreground">
+                                ${r.version ?? ""}
+                            </div>
+                            
+                            </div>
                         </div>
 
                     </div>
