@@ -47,7 +47,7 @@
                             {{-- Filter Dropdown --}}
                             <div
                                 id="calMenuForFilter"
-                                class="hidden absolute right-0 sm:left-0 sm:right-auto mt-2 w-[calc(100vw-2rem)] sm:w-80 max-w-80 rounded-md border border-white/10 bg-card shadow-xl z-50">
+                                class="hidden absolute right-0 left-[-50px] mt-2 w-[calc(100vw-2rem)] max-w-80 rounded-md border border-white/10 bg-card shadow-xl z-50">
 
                                 <div class="p-4">
 
@@ -127,6 +127,7 @@
                         <div class="relative" data-menu>
 
                             <button
+                                id="searchToggle"
                                 type="button"
                                 data-menu-toggle="searchMenu"
                                 aria-label="Search"
@@ -160,37 +161,6 @@
 
                             </div>
 
-
-                            {{-- Mobile Search Dropdown --}}
-                            <div
-                                id="searchMenu"
-                                class="hidden absolute right-0 mt-2 w-[calc(100vw-2rem)] rounded-md border border-white/10 bg-card shadow-xl z-50 p-3 sm:hidden">
-
-                                <div class="relative">
-
-                                    <svg
-                                        class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="16"
-                                        height="16"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        stroke-width="2">
-                                        <circle cx="11" cy="11" r="8" />
-                                        <path d="m21 21-4.3-4.3" />
-                                    </svg>
-
-                                    <input
-                                        id="searchInput"
-                                        type="text"
-                                        placeholder="Search agreements..."
-                                        class="h-10 w-full rounded-md border border-white/10 bg-transparent pl-9 pr-3 text-sm focus:outline-none focus:ring-1 focus:ring-primary">
-
-                                </div>
-
-                            </div>
-
                         </div>
 
                     </div>
@@ -213,7 +183,7 @@
                             {{-- Calendar Dropdown --}}
                             <div
                                 id="calMenu"
-                                class="hidden absolute right-0 mt-2 w-[calc(100vw-2rem)] sm:w-96 max-w-96 rounded-md border border-white/10 bg-card shadow-xl z-50">
+                                class="hidden absolute right-0 mt-2 max-w-96 rounded-md border border-white/10 bg-card shadow-xl z-50">
 
                                 {{-- Header --}}
                                 <div class="flex items-center justify-between border-b border-white/10 px-4 py-3">
@@ -418,6 +388,36 @@
 
         <x-globalresponse />
         <!-- Table -->
+        {{-- Mobile Search Dropdown --}}
+        <div
+            id="searchMenu"
+            class="hidden mb-3 rounded-md border border-white/10 bg-card shadow-xl z-50 p-3">
+
+            <div class="relative">
+
+                <svg
+                    class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2">
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="m21 21-4.3-4.3" />
+                </svg>
+
+                <input
+                    id="searchInput"
+                    type="text"
+                    placeholder="Search agreements..."
+                    class="h-10 w-full rounded-md border border-white/10 bg-transparent pl-9 pr-3 text-sm focus:outline-none focus:ring-1 focus:ring-primary">
+
+            </div>
+
+        </div>
+
         <div class="rounded-xl border border-white/10 bg-card overflow-x-auto">
             <table class="w-full text-sm">
                 <thead>

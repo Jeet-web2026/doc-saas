@@ -455,6 +455,16 @@ $(document).ready(function () {
         }
     });
 
+    const searchInputDesktop = document.getElementById("searchInputDesktop");
+
+    searchInputDesktop.addEventListener("blur", runSearch);
+    searchInputDesktop.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+            runSearch(e);
+            searchInputDesktop.blur(); // optional: also removes focus after Enter
+        }
+    });
+
     // ---------- Calendar events list ----------
     function renderCalendarEvents() {
         document.getElementById("calTitle").textContent =
