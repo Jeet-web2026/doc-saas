@@ -251,7 +251,8 @@ class AgreementService
             'type',
             'parties',
             'remarks',
-            'user'
+            'user',
+            'organisationDetails'
         ])->findOrFail($agreementId);
     }
 

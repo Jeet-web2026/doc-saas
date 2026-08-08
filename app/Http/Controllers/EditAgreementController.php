@@ -6,6 +6,7 @@ use App\Http\Requests\Agreement\EditAgreementRequest;
 use App\Models\AgreementCategories;
 use App\Models\AgreementType;
 use App\Services\Agreement\AgreementService;
+use Illuminate\Support\Facades\Session;
 
 class EditAgreementController extends Controller
 {
@@ -19,6 +20,7 @@ class EditAgreementController extends Controller
     public function editAgreement(int $agreementId)
     {
         $agreement = $this->agreementService->getAgreementById($agreementId);
+        $userData = $this->agreementService->fetchUserData(Session::get('partaker_access_token'));
 
         $agreementCategories = AgreementCategories::with(['children' => function ($query) {
             $query->orderBy('Agmt_Catg_Name', 'asc');
@@ -30,7 +32,7 @@ class EditAgreementController extends Controller
             ->orderBy('Agmt_Type_Name', 'asc')
             ->get();
 
-        return view('agreements.edit-agreement', compact('agreement', 'agreementCategories', 'types'));
+        return view('agreements.edit-agreement', compact('agreement', 'agreementCategories', 'types', 'userData'));
     }
 
     public function updateAgreement(EditAgreementRequest $request, int $agreementId)

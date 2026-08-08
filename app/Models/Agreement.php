@@ -136,4 +136,9 @@ class Agreement extends Model
     {
         return $this->hasOne(User::class, 'User_UIN', 'User_UIN');
     }
+
+    public function organisationDetails()
+    {
+        return $this->hasOne(OrganisationDetails::class, 'Orga_UIN', 'Orga_UIN');
+    }
 }
