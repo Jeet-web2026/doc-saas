@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\OrganisationDetails;
 use App\Models\UserOrgaRela;
 use App\Services\Agreement\AgreementService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
@@ -23,7 +20,7 @@ class HomeController extends Controller
         $token = $request->query('token');
 
         if ($token) {
-            $userData = $this->fetchUserData($token);
+            $userData = $this->agreementService->fetchUserData($token);
 
             if (! $userData || empty($userData['data'][0]['User_UIN'])) {
                 abort(Response::HTTP_UNAUTHORIZED, 'Unable to verify user with Partakers API.');
@@ -44,7 +41,7 @@ class HomeController extends Controller
             abort(Response::HTTP_UNAUTHORIZED, 'No session token found. Please re-open the link with a valid token.');
         }
 
-        $companyInformation = $this->getCompanyInformation($userUin);
+        $companyInformation = $this->agreementService->getCompanyInformation($userUin);
 
         if ($companyInformation->isEmpty()) {
             abort(Response::HTTP_FORBIDDEN, 'No organisations found for this user.');
@@ -55,6 +52,7 @@ class HomeController extends Controller
 
             return redirect()->route('all-agreements');
         }
+
 
         return view('organisation-select', compact('companyInformation'));
     }
@@ -71,7 +69,7 @@ class HomeController extends Controller
             abort(Response::HTTP_UNAUTHORIZED, 'Session expired. Please re-open the link with a valid token.');
         }
 
-        $isValidOrg = $this->getCompanyInformation($userUin)
+        $isValidOrg = $this->agreementService->getCompanyInformation($userUin)
             ->contains('Orga_UIN', $request->input('Orga_UIN'));
 
         if (! $isValidOrg) {
@@ -136,37 +134,5 @@ class HomeController extends Controller
         return response()->json($agreements);
     }
 
-    private function getCompanyInformation($userUin)
-    {
-        $organisationUIN = UserOrgaRela::where('User_UIN', $userUin)
-            ->pluck('Orga_UIN')
-            ->values();
-
-        return OrganisationDetails::whereIn('Orga_UIN', $organisationUIN)->get();
-    }
-
-    private function fetchUserData(string $token): ?array
-    {
-        try {
-            $response = Http::timeout(10)
-                ->post('https://api.partakers.in/User/getUserData', [
-                    'token' => $token,
-                ]);
-
-            if ($response->failed()) {
-                Log::warning('Partakers getUserData failed', [
-                    'status' => $response->status(),
-                    'body' => $response->body(),
-                ]);
-
-                return null;
-            }
-
-            return $response->json();
-        } catch (\Throwable $e) {
-            Log::error('Partakers getUserData exception: ' . $e->getMessage());
-
-            return null;
-        }
-    }
+    
 }

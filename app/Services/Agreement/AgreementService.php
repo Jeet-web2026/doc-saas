@@ -7,15 +7,20 @@ use App\Http\Requests\Agreement\StoreAgreementrequest;
 use App\Models\Agreement;
 use App\Models\AgreementCategories;
 use App\Models\AgreementType;
+use App\Models\OrganisationDetails;
 use App\Models\TranAgmtRemk;
+use App\Models\UserOrgaRela;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use Throwable;
 
 class AgreementService
 {
@@ -498,5 +503,39 @@ class AgreementService
     private function getFileSizeInKb(UploadedFile $file): int
     {
         return (int) round($file->getSize() / 1024);
+    }
+
+    public function getCompanyInformation($userUin)
+    {
+        $organisationUIN = UserOrgaRela::where('User_UIN', $userUin)
+            ->pluck('Orga_UIN')
+            ->values();
+
+        return OrganisationDetails::whereIn('Orga_UIN', $organisationUIN)->get();
+    }
+
+    public function fetchUserData(string $token): ?array
+    {
+        try {
+            $response = Http::timeout(10)
+                ->post('https://api.partakers.in/User/getUserData', [
+                    'token' => $token,
+                ]);
+
+            if ($response->failed()) {
+                Log::warning('Partakers getUserData failed', [
+                    'status' => $response->status(),
+                    'body' => $response->body(),
+                ]);
+
+                return null;
+            }
+
+            return $response->json();
+        } catch (Throwable $e) {
+            Log::error('Partakers getUserData exception: ' . $e->getMessage());
+
+            return null;
+        }
     }
 }
