@@ -418,41 +418,102 @@
 
         </div>
 
-        <div class="rounded-xl border border-white/10 bg-card overflow-x-auto">
+        <!-- Desktop Table -->
+        <div class="hidden lg:block rounded-xl border border-white/10 bg-card overflow-x-auto">
             <table class="w-full text-sm">
                 <thead>
                     <tr class="border-b border-white/10 bg-white/[0.04] text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                         <th class="px-5 py-3">Agreement</th>
-                        <th data-col="fileNo" class="px-5 py-3 hidden">File No</th>
-                        <th data-col="category" class="px-5 py-3 hidden">Category</th>
-                        <th data-col="type" class="px-5 py-3 hidden">Agreement Type</th>
+
+                        <th data-col="fileNo" class="px-5 py-3 hidden">
+                            File No
+                        </th>
+
+                        <th data-col="category" class="px-5 py-3 hidden">
+                            Category
+                        </th>
+
+                        <th data-col="type" class="px-5 py-3 hidden">
+                            Agreement Type
+                        </th>
+
                         <th data-col="firstParty" class="px-5 py-3">
-                            <button data-sort="firstParty" class="sort-btn inline-flex items-center gap-1 uppercase tracking-wider hover:text-white">1st Party <span class="sort-icon"></span></button>
+                            <button data-sort="firstParty"
+                                class="sort-btn inline-flex items-center gap-1 uppercase tracking-wider hover:text-white">
+                                1st Party
+                                <span class="sort-icon"></span>
+                            </button>
                         </th>
+
                         <th data-col="secondParty" class="px-5 py-3">
-                            <button data-sort="secondParty" class="sort-btn inline-flex items-center gap-1 uppercase tracking-wider hover:text-white">2nd Party <span class="sort-icon"></span></button>
+                            <button data-sort="secondParty"
+                                class="sort-btn inline-flex items-center gap-1 uppercase tracking-wider hover:text-white">
+                                2nd Party
+                                <span class="sort-icon"></span>
+                            </button>
                         </th>
+
                         <th data-col="date" class="px-5 py-3">
-                            <button data-sort="date" class="sort-btn inline-flex items-center gap-1 uppercase tracking-wider hover:text-white">Agreement Date <span class="sort-icon"></span></button>
+                            <button data-sort="date"
+                                class="sort-btn inline-flex items-center gap-1 uppercase tracking-wider hover:text-white">
+                                Agreement Date
+                                <span class="sort-icon"></span>
+                            </button>
                         </th>
+
                         <th data-col="expiry" class="px-5 py-3">
-                            <button data-sort="expiry" class="sort-btn inline-flex items-center gap-1 uppercase tracking-wider hover:text-white">Expiry Date <span class="sort-icon"></span></button>
+                            <button data-sort="expiry"
+                                class="sort-btn inline-flex items-center gap-1 uppercase tracking-wider hover:text-white">
+                                Expiry Date
+                                <span class="sort-icon"></span>
+                            </button>
                         </th>
+
                         <th data-col="expiry_by" class="px-5 py-3">
-                            <button data-sort="expiry_by" class="sort-btn inline-flex items-center gap-1 uppercase tracking-wider hover:text-white">Expires In <span class="sort-icon"></span></button>
+                            <button data-sort="expiry_by"
+                                class="sort-btn inline-flex items-center gap-1 uppercase tracking-wider hover:text-white">
+                                Expires In
+                                <span class="sort-icon"></span>
+                            </button>
                         </th>
-                        <th data-col="signingDate" class="px-5 py-3 hidden">Signing Date</th>
-                        <th data-col="notaryDate" class="px-5 py-3 hidden">Notary Date</th>
-                        <th data-col="version" class="px-5 py-3">Version</th>
-                        <th data-col="drafted" class="px-5 py-3 hidden">Drafted By</th>
-                        <th data-col="jurisdiction" class="px-5 py-3 hidden">Jurisdiction</th>
-                        <th data-col="remarks" class="px-5 py-3 hidden">Internal Notes</th>
-                        <th class="px-5 py-3 text-right">Action</th>
+
+                        <th data-col="signingDate" class="px-5 py-3 hidden">
+                            Signing Date
+                        </th>
+
+                        <th data-col="notaryDate" class="px-5 py-3 hidden">
+                            Notary Date
+                        </th>
+
+                        <th data-col="version" class="px-5 py-3">
+                            Version
+                        </th>
+
+                        <th data-col="drafted" class="px-5 py-3 hidden">
+                            Drafted By
+                        </th>
+
+                        <th data-col="jurisdiction" class="px-5 py-3 hidden">
+                            Jurisdiction
+                        </th>
+
+                        <th data-col="remarks" class="px-5 py-3 hidden">
+                            Internal Notes
+                        </th>
+
+                        <th class="px-5 py-3 text-right">
+                            Action
+                        </th>
                     </tr>
                 </thead>
+
                 <tbody id="tbody"></tbody>
             </table>
         </div>
+
+
+        <!-- Mobile Cards -->
+        <div id="mobileAgreementList" class="lg:hidden space-y-3"></div>
 
         <!-- Pagination (static) -->
         <div class="mt-4 flex items-center justify-between text-xs text-muted-foreground">

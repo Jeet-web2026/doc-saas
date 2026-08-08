@@ -327,73 +327,394 @@ $(document).ready(function () {
     function renderTable(data = AGREEMENTS) {
         let rows = data;
 
+        // Sorting
         if (sort) {
             rows = [...rows].sort((a, b) => {
-                const av = sortValue(a, sort.key),
-                    bv = sortValue(b, sort.key);
+                const av = sortValue(a, sort.key);
+                const bv = sortValue(b, sort.key);
+
                 if (av === bv) return 0;
+
                 return (av < bv ? -1 : 1) * (sort.dir === "asc" ? 1 : -1);
             });
         }
 
+        // =========================
+        // DESKTOP TABLE
+        // =========================
+
         const tbody = document.getElementById("tbody");
+
         tbody.innerHTML = rows
             .map(
                 (r) => `
             <tr class="border-b border-white/10 hover:bg-white/5 last:border-b-0">
+
+                <!-- Agreement -->
                 <td class="px-5 py-4">
-                <div class="min-w-0">
-                    <a href='/view-agreement/${r.id}''>
-                        <div class="truncate font-medium">${r.name}</div>
-                    </a>
-                </div>
-                </td>
-                 <td data-col="fileNo"    class="px-5 py-4 text-muted-foreground hidden">${r.fileNo}</td>
-                <td data-col="category"    class="px-5 py-4 text-muted-foreground hidden">${r.categoryLabel}</td>
-                <td data-col="type"        class="px-5 py-4 text-muted-foreground hidden">${r.type}</td>
-                <td data-col="firstParty"  class="px-5 py-4 text-muted-foreground">${r.parties[0]?.org ?? "—"}</td>
-                <td data-col="secondParty" class="px-5 py-4 text-muted-foreground">${r.parties[1]?.org ?? "—"}</td>
-                <td data-col="date"        class="px-5 py-4 text-muted-foreground">${fmtDate(r.date)}</td>
-                <td data-col="expiry"      class="px-5 py-4 text-muted-foreground">
-                <div><span>${fmtDate(r.expiry)}</span></div>
-                </td>
-                <td data-col="expiry_by"      class="px-5 py-4 text-muted-foreground">
-                <div>${expiryBadge(r.daysLeft, r.parentAgreement)}</div>
-                </td>
-                <td data-col="signingDate" class="px-5 py-4 text-muted-foreground hidden">${fmtDate(r.signingDate)}</td>
-                <td data-col="notaryDate"  class="px-5 py-4 text-muted-foreground hidden">${fmtDate(r.notaryDate)}</td>
-                <td data-col="version"     class="px-5 py-4 text-muted-foreground">${r.version}</td>
-                <td data-col="drafted"     class="px-5 py-4 text-muted-foreground hidden">${r.drafted}</td>
-                <td data-col="jurisdiction" class="px-5 py-4 text-muted-foreground hidden">${r.jurisdiction || "—"}</td>
-                <td data-col="remarks"     class="px-5 py-4 text-muted-foreground hidden"><span class="line-clamp-2">${r.remarks || "—"}</span></td>
-                <td class="px-5 py-4 text-right">
-                <div class="relative inline-block" data-menu>
-                    <button data-menu-toggle="row-${r.id}" class="h-9 w-9 inline-flex items-center justify-center rounded hover:bg-white/10">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
-                    </button>
-                    <div id="row-${r.id}" class="hidden absolute right-0 mt-1 w-36 rounded-md border border-white/10 bg-card shadow-xl z-20 p-1">
-                    <a href="/edit-agreement/${r.id}" class="flex items-center gap-2 px-2 py-1.5 text-sm rounded hover:bg-white/5">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
-                        Edit
-                    </a>
-                    <a href="/renewal-agreement/${r.id}" class="flex items-center gap-2 px-2 py-1.5 text-sm rounded hover:bg-white/5">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
-                        Renew
-                    </a>
-                    <a href="#" data-id="${r.id}" class="delete-agreement-btn flex items-center gap-2 px-2 py-1.5 text-sm rounded hover:bg-white/5 text-red-400">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
-                        Delete
-                    </a>
+                    <div class="min-w-0">
+                        <a href="/view-agreement/${r.id}">
+                            <div class="truncate font-medium">
+                                ${r.name}
+                            </div>
+                        </a>
                     </div>
-                </div>
                 </td>
+
+                <td data-col="fileNo"
+                    class="px-5 py-4 text-muted-foreground hidden">
+                    ${r.fileNo ?? "—"}
+                </td>
+
+                <td data-col="category"
+                    class="px-5 py-4 text-muted-foreground hidden">
+                    ${r.categoryLabel ?? "—"}
+                </td>
+
+                <td data-col="type"
+                    class="px-5 py-4 text-muted-foreground hidden">
+                    ${r.type ?? "—"}
+                </td>
+
+                <td data-col="firstParty"
+                    class="px-5 py-4 text-muted-foreground">
+                    ${r.parties?.[0]?.org ?? "—"}
+                </td>
+
+                <td data-col="secondParty"
+                    class="px-5 py-4 text-muted-foreground">
+                    ${r.parties?.[1]?.org ?? "—"}
+                </td>
+
+                <td data-col="date"
+                    class="px-5 py-4 text-muted-foreground">
+                    ${fmtDate(r.date)}
+                </td>
+
+                <td data-col="expiry"
+                    class="px-5 py-4 text-muted-foreground">
+                    ${fmtDate(r.expiry)}
+                </td>
+
+                <td data-col="expiry_by"
+                    class="px-5 py-4 text-muted-foreground">
+                    ${expiryBadge(r.daysLeft, r.parentAgreement)}
+                </td>
+
+                <td data-col="signingDate"
+                    class="px-5 py-4 text-muted-foreground hidden">
+                    ${fmtDate(r.signingDate)}
+                </td>
+
+                <td data-col="notaryDate"
+                    class="px-5 py-4 text-muted-foreground hidden">
+                    ${fmtDate(r.notaryDate)}
+                </td>
+
+                <td data-col="version"
+                    class="px-5 py-4 text-muted-foreground">
+                    ${r.version ?? "—"}
+                </td>
+
+                <td data-col="drafted"
+                    class="px-5 py-4 text-muted-foreground hidden">
+                    ${r.drafted ?? "—"}
+                </td>
+
+                <td data-col="jurisdiction"
+                    class="px-5 py-4 text-muted-foreground hidden">
+                    ${r.jurisdiction ?? "—"}
+                </td>
+
+                <td data-col="remarks"
+                    class="px-5 py-4 text-muted-foreground hidden">
+                    <span class="line-clamp-2">
+                        ${r.remarks ?? "—"}
+                    </span>
+                </td>
+
+                <!-- Action -->
+                <td class="px-5 py-4 text-right">
+                    <div class="relative inline-block" data-menu>
+
+                        <button
+                            data-menu-toggle="row-${r.id}"
+                            class="h-9 w-9 inline-flex items-center justify-center rounded hover:bg-white/10">
+
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round">
+
+                                <circle cx="12" cy="12" r="1"/>
+                                <circle cx="12" cy="5" r="1"/>
+                                <circle cx="12" cy="19" r="1"/>
+
+                            </svg>
+                        </button>
+
+                        <div
+                            id="row-${r.id}"
+                            class="hidden absolute right-0 mt-1 w-36 rounded-md border border-white/10 bg-card shadow-xl z-20 p-1">
+
+                            <a href="/edit-agreement/${r.id}"
+                                class="flex items-center gap-2 px-2 py-1.5 text-sm rounded hover:bg-white/5">
+
+                                Edit
+                            </a>
+
+                            <a href="/renewal-agreement/${r.id}"
+                                class="flex items-center gap-2 px-2 py-1.5 text-sm rounded hover:bg-white/5">
+
+                                Renew
+                            </a>
+
+                            <a href="#"
+                                data-id="${r.id}"
+                                class="delete-agreement-btn flex items-center gap-2 px-2 py-1.5 text-sm rounded hover:bg-white/5 text-red-400">
+
+                                Delete
+                            </a>
+
+                        </div>
+                    </div>
+                </td>
+
             </tr>
-            `,
+        `,
             )
             .join("");
 
+        // =========================
+        // MOBILE CARDS
+        // =========================
+
+        const mobileList = document.getElementById("mobileAgreementList");
+
+        mobileList.innerHTML = rows
+            .map((r) => {
+                const name = r.name ?? "Unknown";
+
+                // Generate initials
+                const initials = name
+                    .split(" ")
+                    .map((word) => word.charAt(0))
+                    .join("")
+                    .substring(0, 2)
+                    .toUpperCase();
+
+                const phone = r.phone ?? r.mobile ?? r.phoneNumber ?? null;
+
+                const email = r.email ?? r.emailAddress ?? null;
+
+                const firstParty = r.parties?.[0]?.org ?? "—";
+
+                const secondParty = r.parties?.[1]?.org ?? "—";
+
+                return `
+                <div
+                    class="rounded-xl border border-white/10 bg-card overflow-hidden"
+                    data-mobile-card="${r.id}">
+
+                    <!-- Card Header -->
+                    <div class="flex items-center justify-between px-4 py-3">
+
+                        <a
+                            href="/view-agreement/${r.id}"
+                            class="flex items-center gap-3 min-w-0">
+
+                            <!-- Name -->
+                            <div class="min-w-0">
+
+                                <div
+                                    class="font-semibold text-lg truncate">
+
+                                    ${name}
+
+                                </div>
+
+                            </div>
+
+                        </a>
+
+
+                        <!-- Right Side -->
+                        <div class="flex items-center gap-2 shrink-0">
+
+                            <!-- Date -->
+                            <span
+                                class="rounded-md bg-white/5 px-2 py-1
+                                text-[10px] font-medium
+                                text-muted-foreground capitalize">
+
+                                ${fmtDate(r.date)}
+
+                            </span>
+
+
+                            <!-- Menu -->
+                            <div class="relative" data-menu>
+
+                                <button
+                                    data-menu-toggle="mobile-row-${r.id}"
+                                    class="h-8 w-8 flex items-center justify-center
+                                    rounded hover:bg-white/10">
+
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2">
+
+                                        <circle cx="12" cy="12" r="1"/>
+                                        <circle cx="12" cy="5" r="1"/>
+                                        <circle cx="12" cy="19" r="1"/>
+
+                                    </svg>
+
+                                </button>
+
+
+                                <div
+                                    id="mobile-row-${r.id}"
+                                    class="hidden absolute right-0 top-9
+                                    w-36 rounded-md border border-white/10
+                                    bg-card shadow-xl z-50 p-1">
+
+
+                                    <a
+                                        href="/edit-agreement/${r.id}"
+                                        class="block px-3 py-2 text-sm rounded hover:bg-white/5">
+
+                                        Edit
+
+                                    </a>
+
+                                    <a
+                                        href="/renewal-agreement/${r.id}"
+                                        class="block px-3 py-2 text-sm rounded hover:bg-white/5">
+
+                                        Renew
+
+                                    </a>
+
+                                    <a
+                                        href="#"
+                                        data-id="${r.id}"
+                                        class="delete-agreement-btn block px-3 py-2 text-sm rounded hover:bg-white/5 text-red-400">
+
+                                        Delete
+
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Card Body -->
+                    <div class="grid grid-cols-2 gap-4 px-4 pb-4 pt-2">
+
+                        <!-- Personal Info -->
+                        
+
+
+                        <!-- Organization -->
+                        <div>
+
+                            <div
+                                class="text-[10px] font-semibold uppercase
+                                tracking-wider text-cyan-400 mb-2">
+
+                                Parties
+
+                            </div>
+
+                            <div
+                                class="text-xs text-muted-foreground truncate">
+
+                                ${firstParty}
+
+                            </div>
+
+                            ${
+                                secondParty !== "—"
+                                    ? `
+                                    <div
+                                        class="text-xs text-muted-foreground
+                                        truncate mt-1">
+
+                                        ${secondParty}
+
+                                    </div>
+                                    `
+                                    : ""
+                            }
+
+                        </div>
+                        <div>
+
+                            <div
+                                class="text-[10px] font-semibold uppercase
+                                tracking-wider text-cyan-400 mb-2">
+
+                                File no.
+
+                            </div>
+
+                            <div class="text-xs text-muted-foreground mt-0.5">
+                                    ${r.fileNo ?? ""}
+                                </div>
+                        </div>
+
+                    </div>
+
+
+                    <!-- Bottom Info -->
+                    <div
+                        class="border-t border-white/5
+                        px-4 py-2.5 flex items-center
+                        justify-between">
+
+                        <div class="text-xs text-muted-foreground">
+
+                            Expiry:
+                            <span class="text-white/70">
+                                ${fmtDate(r.expiry)}
+                            </span>
+
+                        </div>
+
+                        <div>
+                            ${expiryBadge(r.daysLeft, r.parentAgreement)}
+                        </div>
+
+                    </div>
+
+                </div>
+            `;
+            })
+            .join("");
+
+        // =========================
+        // EXISTING FUNCTIONS
+        // =========================
+
         document.getElementById("entriesLabel").textContent =
             `Showing 1 to ${rows.length} of ${rows.length} entries`;
+
         applyColumnVisibility();
         renderSortIcons();
     }
