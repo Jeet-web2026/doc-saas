@@ -1,24 +1,12 @@
 <x-filament-panels::page>
     <style>
-        html,
-        body {
-            background: #020618;
-            color: hsl(0 0% 98%);
-        }
-
         .line-clamp-2 {
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
-
-        .bg-card {
-            background-color: #0F172B !important;
-        }
     </style>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css">
 
     <main class="mt-8">
         <!-- Toolbar -->
@@ -548,5 +536,4 @@
     <script src="{{ asset('assets/dashboard-functionality.js') }}"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </x-filament-panels::page>

@@ -345,6 +345,8 @@ $(document).ready(function () {
 
         const tbody = document.getElementById("tbody");
 
+        if(!tbody) return;
+
         tbody.innerHTML = rows
             .map(
                 (r) => `

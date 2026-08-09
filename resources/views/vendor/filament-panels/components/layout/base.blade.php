@@ -50,6 +50,10 @@
                 display: inline-flex !important;
             }
 
+            .bg-card {
+                background-color: #0F172B !important;
+            }
+
             @media (max-width: 1023px) {
                 [x-cloak='-lg'] {
                     display: none !important;
@@ -64,6 +68,9 @@
         </style>
 
         @filamentStyles
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css">
 
         {{ filament()->getTheme()->getHtml() }}
         {{ filament()->getFontHtml() }}
@@ -137,12 +144,9 @@
 
         @filamentScripts(withCore: true)
         <script>
-            window.addEventListener('pageshow', function (event) {
-                if (event.persisted) {
-                    window.location.reload();
-                }
-            });
+            var AGREEMENTS_URL = "{{ route('agreements.data') }}";
         </script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         @if (filament()->hasBroadcasting() && config('filament.broadcasting.echo'))
             <script data-navigate-once>
