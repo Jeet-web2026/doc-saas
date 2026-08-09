@@ -13,4 +13,6 @@ class Checklist extends Page
     protected static ?int $navigationSort = 2;
 
     protected string $view = 'filament.dashboard.pages.checklist';
+    
+    protected static bool $shouldRegisterNavigation = false;
 }
