@@ -1,9 +1,25 @@
 @import "../../../../vendor/filament/filament/resources/css/theme.css";
+@import "@fontsource/figtree/400.css";
+@import "@fontsource/figtree/500.css";
+@import "@fontsource/figtree/600.css";
+@import "@fontsource/figtree/700.css";
 
 @source "../../../../app/Filament/Dashboard/**/*";
 @source "../../../../app/Filament/Widgets/**/*";
 @source "../../../../resources/views/filament/**/*";
+@source "../../../../resources/views/agreements/**/*";
 
+@theme {
+    --color-background: hsl(240 10% 4%);
+    --color-card: hsl(240 6% 10%);
+    --color-muted: hsl(240 4% 16%);
+    --color-muted-foreground: hsl(240 5% 65%);
+    --color-foreground: hsl(0 0% 98%);
+    --color-border: hsl(240 4% 20%);
+    --color-primary: hsl(217 91% 60%);
+    --color-primary-foreground: hsl(0 0% 100%);
+    --color-destructive: hsl(0 72% 51%);
+}
 
 .fi-main {
     background-color: rgb(10, 21, 39) !important;
@@ -35,6 +51,6 @@
     font-optical-sizing: auto;
 }
 
-.fi-header{
+.fi-header {
     display: none !important;
 }

@@ -30,11 +30,6 @@ class DashboardPanelProvider extends PanelProvider
             ->id('dashboard')
             ->path('dashboard')
             ->spa()
-            ->brandName('')
-            ->spaUrlExceptions(fn(): array => [
-                url('/dashboard/agreements'),
-                url('/dashboard/agreements/*'),
-            ])
             ->viteTheme('resources/css/filament/dashboard/theme.css')
             ->colors([
                 'primary' => Color::hex('#ffffff'),
