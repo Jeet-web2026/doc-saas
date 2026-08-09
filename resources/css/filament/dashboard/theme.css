@@ -7,6 +7,7 @@
 @source "../../../../app/Filament/Dashboard/**/*";
 @source "../../../../app/Filament/Widgets/**/*";
 @source "../../../../resources/views/filament/**/*";
+@source "../../../../resources/views/components/*";
 @source "../../../../public/assets/*.js";
 
 @theme {
@@ -30,7 +31,7 @@
 }
 
 .fi-topbar {
-    background-color: rgb(10, 21, 39) !important;
+    background-color: rgb(18, 28, 46) !important;
 }
 
 .fi-sidebar-nav {
