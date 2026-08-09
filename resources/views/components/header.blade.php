@@ -84,7 +84,7 @@
                     <a
                         href="{{ $backurl }}"
                         class="flex items-center gap-2 px-3 py-2 text-sm text-white/80 hover:text-white hover:bg-white/10 transition">
-                        <i class="ri-menu-3-line"></i>
+                        <i class="ri-arrow-left-long-line"></i>
                         Back
                     </a>
 
