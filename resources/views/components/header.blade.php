@@ -57,7 +57,8 @@
                 </div>
             </div>
             <i
-                class="ri-menu-fold-3-line absolute right-[-115px] text-xl cursor-pointer hidden lg:block"
+                class="absolute right-[-115px] text-xl cursor-pointer hidden lg:block"
+                x-bind:class="$store.sidebar.isOpen ? 'ri-menu-unfold-2-line' : 'ri-menu-fold-2-line'"
                 x-on:click="$store.sidebar.isOpen = !$store.sidebar.isOpen"></i>
         </div>
 
