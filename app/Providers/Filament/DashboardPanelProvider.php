@@ -29,6 +29,8 @@ class DashboardPanelProvider extends PanelProvider
             ->default()
             ->id('dashboard')
             ->path('dashboard')
+            ->sidebarCollapsibleOnDesktop()
+            ->brandName('')
             ->spa()
             ->viteTheme('resources/css/filament/dashboard/theme.css')
             ->colors([

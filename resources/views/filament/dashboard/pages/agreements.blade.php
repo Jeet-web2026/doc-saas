@@ -18,8 +18,9 @@
         }
     </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css">
 
-    <main class="lg:mx-auto lg:max-w-5xl mt-8">
+    <main class="mt-8">
         <!-- Toolbar -->
         <div class="mb-6">
             <div class="flex flex-col gap-3">
