@@ -16,7 +16,10 @@ use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\View;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Illuminate\Support\Str;
 
 class DashboardPanelProvider extends PanelProvider
 {
@@ -27,6 +30,7 @@ class DashboardPanelProvider extends PanelProvider
             ->id('dashboard')
             ->path('dashboard')
             ->spa()
+            ->brandName('')
             ->spaUrlExceptions(fn(): array => [
                 url('/dashboard/agreements'),
                 url('/dashboard/agreements/*'),
@@ -54,5 +58,17 @@ class DashboardPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ]);
+    }
+
+    public function boot(): void
+    {
+        View::composer('filament-panels::livewire.topbar', function ($view) {
+            $view->with([
+                'userData' => Session::get('partaker_user_data', []),
+                'companyInformation' => Session::get('company_information'),
+                'backurl' => 'https://partakers.in/dashboard',
+                'title' => Str::headline(collect(explode('/', request()->path()))->last()),
+            ]);
+        });
     }
 }

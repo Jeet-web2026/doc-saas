@@ -1,7 +1,4 @@
 <x-base-component tailwind="true" jQuery="true" subheading="Home" metadata="Ujan Logistic - Agreement Vault" metadescription="description" bIcons="true">
-    <div class="hidden">
-        <x-header :userData="$userData" :companyInformation="$companyInformation" backurl="https://partakers.in/dashboard" />
-    </div>
 
     <main class="mx-auto max-w-5xl">
         <!-- Toolbar -->

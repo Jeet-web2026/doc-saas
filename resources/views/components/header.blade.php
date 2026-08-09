@@ -3,8 +3,8 @@
 'userData' => '',
 'backurl' => ''
 ])
-<header class="border-b border-white/10 bg-white/[0.03]">
-    <div class="mx-auto flex flex-wrap gap-3 max-w-7xl items-center justify-between px-6 py-4 relative">
+<header class="border-b border-white/10 bg-white/[0.03] w-full">
+    <div class="mx-auto flex flex-wrap gap-3  items-center justify-between px-6 py-4 relative">
         <div class="flex flex-wrap gap-2 items-start">
             <div class="relative" data-menu>
                 <button type="button" data-menu-toggle="companyMenu"
