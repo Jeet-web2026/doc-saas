@@ -1,0 +1,36 @@
+@import "../../../../vendor/filament/filament/resources/css/theme.css";
+
+@source "../../../../app/Filament/Dashboard/**/*";
+@source "../../../../app/Filament/Widgets/**/*";
+@source "../../../../resources/views/filament/**/*";
+
+
+.fi-main {
+    background-color: rgb(10, 21, 39) !important;
+}
+
+.fi-body {
+    background-color: rgb(10, 21, 39) !important;
+}
+
+.fi-topbar {
+    background-color: rgb(10, 21, 39) !important;
+}
+
+.fi-sidebar-nav {
+    background-color: rgb(14, 31, 61) !important;
+}
+
+.fi-page-header-main-ctn {
+    padding-top: 0px !important;
+}
+
+.fi-body,
+.fi-body *,
+.fi-sidebar,
+.fi-sidebar *,
+.fi-main,
+.fi-main * {
+    font-family: "Figtree", sans-serif;
+    font-optical-sizing: auto;
+}

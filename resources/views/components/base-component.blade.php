@@ -40,11 +40,6 @@
 
     {{--default css--}}
     <style>
-        * {
-            font-family: "Figtree", sans-serif;
-            font-optical-sizing: auto;
-        }
-
         body {
             margin: 0;
             padding: 0;

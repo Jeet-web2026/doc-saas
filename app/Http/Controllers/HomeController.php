@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Filament\Dashboard\Pages\Agreements;
 use App\Models\UserOrgaRela;
 use App\Services\Agreement\AgreementService;
 use Illuminate\Http\JsonResponse;
@@ -101,7 +102,10 @@ class HomeController extends Controller
             abort(Response::HTTP_FORBIDDEN, 'Organisation data not found.');
         }
 
-        return view('welcome', compact('companyInformation', 'userData'));
+        Session::put('company_information', $companyInformation);
+        Session::put('user_data', $userData);
+
+        return redirect()->to(Agreements::getUrl());
     }
 
     public function agreementsData(Request $request): JsonResponse
@@ -133,6 +137,4 @@ class HomeController extends Controller
 
         return response()->json($agreements);
     }
-
-    
 }

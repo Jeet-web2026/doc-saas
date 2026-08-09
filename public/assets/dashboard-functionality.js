@@ -1,6 +1,6 @@
-let companyId = null;
-let dateFilterType = "agreement_date";
 $(document).ready(function () {
+    let companyId = null;
+    let dateFilterType = "agreement_date";
     const $initial = $(".company-item")
         .filter(function () {
             return !$(this).find(".check-icon").hasClass("hidden");

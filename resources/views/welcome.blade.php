@@ -1,7 +1,9 @@
 <x-base-component tailwind="true" jQuery="true" subheading="Home" metadata="Ujan Logistic - Agreement Vault" metadescription="description" bIcons="true">
-    <x-header :userData="$userData" :companyInformation="$companyInformation" backurl="https://partakers.in/dashboard" />
+    <div class="hidden">
+        <x-header :userData="$userData" :companyInformation="$companyInformation" backurl="https://partakers.in/dashboard" />
+    </div>
 
-    <main class="mx-auto max-w-7xl px-6 py-8">
+    <main class="mx-auto max-w-5xl">
         <!-- Toolbar -->
         <div class="mb-6">
             <div class="flex flex-col gap-3">
@@ -256,7 +258,7 @@
                             href="{{ route('add-agreement', ['company' => $companyInformation->first()?->Orga_UIN]) }}"
                             aria-label="Add Agreement"
                             title="Add Agreement"
-                            class="inline-flex h-9 w-9 sm:w-auto sm:px-4 items-center justify-center gap-2 rounded-md bg-primary text-sm font-medium text-primary-foreground hover:bg-primary/90 transition">
+                            class="inline-flex h-9 w-9 sm:w-auto sm:px-4 items-center justify-center gap-2 rounded-md bg-[#3c83f6] text-sm font-medium text-[#3c83f6]-foreground hover:bg-[#3c83f6]/90 transition">
 
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
