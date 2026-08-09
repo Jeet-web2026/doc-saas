@@ -1,6 +1,6 @@
 <x-base-component tailwind="true" jQuery="true" subheading="Home" metadata="Ujan Logistic - Agreement Vault" metadescription="description" bIcons="true">
 
-    <main class="lg:mx-auto lg:max-w-5xl">
+    <main class="lg:mx-auto lg:max-w-5xl mt-8">
         <!-- Toolbar -->
         <div class="mb-6">
             <div class="flex flex-col gap-3">

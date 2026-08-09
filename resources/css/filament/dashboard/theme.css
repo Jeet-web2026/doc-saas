@@ -34,3 +34,7 @@
     font-family: "Figtree", sans-serif;
     font-optical-sizing: auto;
 }
+
+.fi-header{
+    display: none !important;
+}
