@@ -7,7 +7,7 @@
 @source "../../../../app/Filament/Dashboard/**/*";
 @source "../../../../app/Filament/Widgets/**/*";
 @source "../../../../resources/views/filament/**/*";
-@source "../../../../public/assets/dashboard-functionality.js";
+@source "../../../../public/assets/*.js";
 
 @theme {
     --color-background: hsl(240 10% 4%);
