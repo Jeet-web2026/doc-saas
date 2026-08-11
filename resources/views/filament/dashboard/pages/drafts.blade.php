@@ -207,7 +207,7 @@
 
                             <button
                                 type="button"
-                                data-menu-toggle="colsMenu"
+                                data-menu-toggle="colsMenu2"
                                 aria-label="Show columns"
                                 title="Show columns"
                                 class="inline-flex h-9 w-9 sm:w-auto sm:px-3 items-center justify-center gap-2 rounded-md border border-white/10 hover:bg-white/5 transition">
@@ -219,7 +219,7 @@
 
                             {{-- Columns Menu --}}
                             <div
-                                id="colsMenu"
+                                id="colsMenu2"
                                 class="hidden absolute right-0 mt-2 w-60 max-h-96 overflow-y-auto rounded-md border border-white/10 bg-card shadow-xl z-50 p-1">
 
                                 <div class="px-2 py-1.5 text-xs font-semibold text-muted-foreground">

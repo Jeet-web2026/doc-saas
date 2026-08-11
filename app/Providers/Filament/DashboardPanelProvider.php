@@ -31,7 +31,6 @@ class DashboardPanelProvider extends PanelProvider
             ->path('dashboard')
             ->sidebarCollapsibleOnDesktop()
             ->brandName('')
-            ->spa()
             ->viteTheme('resources/css/filament/dashboard/theme.css')
             ->colors([
                 'primary' => Color::hex('#ffffff'),

@@ -143,9 +143,6 @@
         {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::SCRIPTS_BEFORE, scopes: $renderHookScopes) }}
 
         @filamentScripts(withCore: true)
-        <script>
-            var AGREEMENTS_URL = "{{ route('agreements.data') }}";
-        </script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         @if (filament()->hasBroadcasting() && config('filament.broadcasting.echo'))

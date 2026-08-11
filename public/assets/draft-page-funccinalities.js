@@ -1,7 +1,4 @@
-function initAgreementsPage() {
-    if (!document.querySelector('[data-col="approved_by"]')) return; // not the drafts page — stop
-    if (window.__draftsPageInitialized) return;
-    window.__draftsPageInitialized = true;
+$(document).ready(function () {
     let companyId = null;
     let dateFilterType = "agreement_date";
     const $initial = $(".company-item")
@@ -198,7 +195,7 @@ function initAgreementsPage() {
     let calMonth = new Date(today.getFullYear(), today.getMonth(), 1);
 
     document
-        .querySelectorAll('#colsMenu input[type="checkbox"]')
+        .querySelectorAll('#colsMenu2 input[type="checkbox"]')
         .forEach((cb) => {
             // Sync checkbox UI state to match the `visible` object on load
             cb.checked = visible[cb.dataset.col] ?? false;
@@ -837,9 +834,4 @@ function initAgreementsPage() {
             }
         });
     });
- document.addEventListener('livewire:navigating', function cleanup() {
-        window.__draftsPageInitialized = false;
-        document.removeEventListener('livewire:navigating', cleanup);
-    }, { once: true });
-}
-document.addEventListener('livewire:navigated', initAgreementsPage);
+});
