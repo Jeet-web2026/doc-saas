@@ -316,18 +316,6 @@ $(document).ready(function () {
                                 id="row-${r.id}"
                                 class="hidden absolute right-0 mt-1 w-36 rounded-md border border-white/10 bg-card shadow-xl z-20 p-1">
 
-                                <a href="/edit-agreement/${r.id}"
-                                    class="flex items-center gap-2 px-2 py-1.5 text-sm rounded hover:bg-white/5">
-
-                                    Edit
-                                </a>
-
-                                <a href="/renewal-agreement/${r.id}"
-                                    class="flex items-center gap-2 px-2 py-1.5 text-sm rounded hover:bg-white/5">
-
-                                    Renew
-                                </a>
-
                                 <a href="#"
                                     data-id="${r.id}"
                                     class="delete-agreement-btn flex items-center gap-2 px-2 py-1.5 text-sm rounded hover:bg-white/5 text-red-400">
@@ -442,23 +430,6 @@ $(document).ready(function () {
                                     class="hidden absolute right-0 top-9
                                     w-36 rounded-md border border-white/10
                                     bg-card shadow-xl z-50 p-1">
-
-
-                                    <a
-                                        href="/edit-agreement/${r.id}"
-                                        class="block px-3 py-2 text-sm rounded hover:bg-white/5">
-
-                                        Edit
-
-                                    </a>
-
-                                    <a
-                                        href="/renewal-agreement/${r.id}"
-                                        class="block px-3 py-2 text-sm rounded hover:bg-white/5">
-
-                                        Renew
-
-                                    </a>
 
                                     <a
                                         href="#"
