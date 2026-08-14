@@ -5,7 +5,7 @@
 
         <x-globalresponse />
 
-        <form class="space-y-6" action=""
+        <form class="space-y-6" action="{{ route('draft-agreements.store') }}"
             method="POST"
             enctype="multipart/form-data" id="agreementForm">
             @csrf
