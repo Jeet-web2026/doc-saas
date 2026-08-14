@@ -175,12 +175,12 @@
                     <div class="flex items-center gap-1.5 sm:gap-2">
 
 
-                        {{-- Add Agreement --}}
+                        {{-- Draft Agreement --}}
                         <a
                             id="addAgreementBtn"
                             href="{{ route('add-agreement', ['company' => $companyInformation->first()?->Orga_UIN]) }}"
-                            aria-label="Add Agreement"
-                            title="Add Agreement"
+                            aria-label="Draft Agreement"
+                            title="Draft Agreement"
                             class="inline-flex h-9 w-9 sm:w-auto sm:px-4 items-center justify-center gap-2 rounded-md bg-[#3c83f6] text-sm font-medium text-[#3c83f6]-foreground hover:bg-[#3c83f6]/90 transition">
 
                             <svg
@@ -196,7 +196,7 @@
                             </svg>
 
                             <span class="hidden sm:inline">
-                                Add
+                                Draft
                             </span>
 
                         </a>
