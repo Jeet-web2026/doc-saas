@@ -99,12 +99,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @endsection
 
-    @section('extrajs')
-    <script>
-        window.partyIndex = {{ count($partiesData) }};
-    </script>
-    @endsection
-
     @section('extracsscdns')
     <link href="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.snow.css" rel="stylesheet">
     @endsection
