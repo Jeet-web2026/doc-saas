@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AddAgreementController;
+use App\Http\Controllers\DraftAgreementManagementController;
 use App\Http\Controllers\EditAgreementController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RenewalAgreementController;
@@ -16,6 +17,14 @@ Route::controller(HomeController::class)->group(function () {
 
 Route::controller(AddAgreementController::class)->group(function () {
     Route::get('add-agreement', 'index')->name('add-agreement');
+    Route::get('agreement-types/{category}', 'getAgreementTypes')
+        ->name('agreement.types');
+    Route::post('agreements', 'store')
+        ->name('agreements.store');
+});
+
+Route::controller(DraftAgreementManagementController::class)->group(function () {
+    Route::get('draft-agreement', 'index')->name('draft-agreement');
     Route::get('agreement-types/{category}', 'getAgreementTypes')
         ->name('agreement.types');
     Route::post('agreements', 'store')

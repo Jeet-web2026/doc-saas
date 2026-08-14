@@ -178,7 +178,7 @@
                         {{-- Draft Agreement --}}
                         <a
                             id="addAgreementBtn"
-                            href="{{ route('add-agreement', ['company' => $companyInformation->first()?->Orga_UIN]) }}"
+                            href="{{ route('draft-agreement', ['company' => $companyInformation->first()?->Orga_UIN]) }}"
                             aria-label="Draft Agreement"
                             title="Draft Agreement"
                             class="inline-flex h-9 w-9 sm:w-auto sm:px-4 items-center justify-center gap-2 rounded-md bg-[#3c83f6] text-sm font-medium text-[#3c83f6]-foreground hover:bg-[#3c83f6]/90 transition">
