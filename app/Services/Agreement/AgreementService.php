@@ -296,8 +296,7 @@ class AgreementService
                 'MoBy'           => $userData['User_UIN'] ?? 1,
                 'Agmt_Atch'      => $attachment,
                 'Agmt_Size_KB'  => $attachmentSizeKb,
-                'Stau_UIN'       => $request->expiry_date ? $this->determineStatusUin($request->expiry_date) : $this->determineStatusUin($agreement->expiry_date),
-                'Agmt_Depst_Amt' => $request->deposit_amount
+                'Stau_UIN'       => $request->expiry_date ? $this->determineStatusUin($request->expiry_date) : $this->determineStatusUin($agreement->expiry_date)
             ];
 
             $remarks = trim($request->remarks);
