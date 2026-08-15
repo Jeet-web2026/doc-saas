@@ -21,6 +21,7 @@
             @csrf
             @method('PUT')
 
+            <input type="hidden" name="company_id" value="{{ $agreement->Orga_UIN }}">
             <!-- Classification -->
             <section class="card p-6">
                 <h2 class="section-title">Agreement Details</h2>
@@ -240,16 +241,42 @@
                         </div>
                     </div>
                     <div class="flex flex-col lg:flex-row items-center gap-4 mt-3">
-                            <div class="space-y-1.5 md:col-span-2 w-1/2"><label class="label">Jurisdiction</label>
-                                <input class="input js-lock" name="jurisdiction" placeholder="e.g. Kolkata, West Bengal" value="{{ old('jurisdiction', $agreement->Agmt_Judn) }}" />
-                                @error('jurisdiction')
+                        <div class="space-y-1.5 md:col-span-2 w-1/2"><label class="label">Jurisdiction</label>
+                            <input class="input js-lock" name="jurisdiction" placeholder="e.g. Kolkata, West Bengal" value="{{ old('jurisdiction', $agreement->Agmt_Judn) }}" />
+                            @error('jurisdiction')
+                            <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="space-y-1.5 md:col-span-2 w-1/2">
+                            <label class="label">File No</label>
+                            <input class="input" name="file_no" maxlength="4" value="{{ old('file_no', $agreement->Agmt_File_no) }}" />
+                            @error('file_no')
+                            <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+                        <div class="flex flex-col lg:flex-row gap-3">
+                            <div class="flex-1 mt-4">
+                                <h2 class="label mb-2">Deposit Amount</h2>
+                                <input
+                                    type="text"
+                                    class="input"
+                                    name="deposit_amount"
+                                    value="{{ old('deposit_amount', $agreement->Agmt_Depst_Amt ) }}">
+
+                                @error('deposit_amount')
                                 <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
                                 @enderror
                             </div>
-                            <div class="space-y-1.5 md:col-span-2 w-1/2">
-                                <label class="label">File No</label>
-                                <input class="input" name="file_no" maxlength="4" value="{{ old('file_no', $agreement->Agmt_File_no) }}" />
-                                @error('file_no')
+                            <div class="flex-1 mt-4">
+                                <h2 class="label mb-2">Reference No.</h2>
+                                <input
+                                    type="text"
+                                    class="input"
+                                    name="ref_no"
+                                    value="{{ old('ref_no', $agreement->Agmt_Ref_No ) }}">
+
+                                @error('ref_no')
                                 <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
                                 @enderror
                             </div>
@@ -321,7 +348,7 @@
                 </div>
 
                 <div class="flex flex-wrap justify-end gap-3 pt-2">
-                    <a href="{{ route('home') }}" class="btn btn-ghost">Cancel</a>
+                    <a href="/dashboard/agreements" class="btn btn-ghost">Cancel</a>
                     <button type="submit" class="btn btn-primary" id="submitBtn">
                         <i class="bi bi-floppy"></i> <span>Update</span>
                     </button>

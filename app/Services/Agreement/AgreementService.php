@@ -281,6 +281,7 @@ class AgreementService
                     Storage::disk('public')->delete($agreement->Agmt_Atch);
                 }
             }
+            $refNo = $request->ref_no ?? $this->generateAgreementRefNo($request->company_id);
 
             $updatePayload = [
                 'Agmt_Catg_UIN'  => $request->category,
@@ -297,7 +298,9 @@ class AgreementService
                 'MoBy'           => $userData['User_UIN'] ?? 1,
                 'Agmt_Atch'      => $attachment,
                 'Agmt_Size_KB'  => $attachmentSizeKb,
-                'Stau_UIN'       => $request->expiry_date ? $this->determineStatusUin($request->expiry_date) : $this->determineStatusUin($agreement->expiry_date)
+                'Stau_UIN'       => $request->expiry_date ? $this->determineStatusUin($request->expiry_date) : $this->determineStatusUin($agreement->expiry_date),
+                'Agmt_Ref_No' => $refNo,
+                'Agmt_Depst_Amt' => $request->deposit_amount ?? null,
             ];
 
             $remarks = trim($request->remarks);
