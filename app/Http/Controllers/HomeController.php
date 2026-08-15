@@ -137,4 +137,32 @@ class HomeController extends Controller
 
         return response()->json($agreements);
     }
+
+    public function draftAgreementsData(Request $request): JsonResponse
+    {
+        $userUin = Session::get('partaker_user_uin');
+        $orgaUin = $request->company_id;
+
+        if (! $userUin || ! $orgaUin) {
+            return response()->json(['message' => 'No organisation selected.'], Response::HTTP_UNAUTHORIZED);
+        }
+
+        $validated = $request->validate([
+            'search'    => 'nullable|string|max:255',
+            'date_from' => 'nullable|date',
+            'date_to'   => 'nullable|date|after_or_equal:date_from',
+            'per_page'  => 'nullable|integer|min:1|max:100',
+            'page'      => 'nullable|integer|min:1',
+        ]);
+
+        $draftAgreements = $this->agreementService->getDraftAgreements(
+            search: $validated['search'] ?? null,
+            dateFrom: $validated['date_from'] ?? null,
+            dateTo: $validated['date_to'] ?? null,
+            perPage: $validated['per_page'] ?? 5,
+            companyId: $orgaUin,
+        );
+
+        return response()->json($draftAgreements);
+    }
 }

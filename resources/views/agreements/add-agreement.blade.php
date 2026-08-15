@@ -317,7 +317,7 @@
             <x-rich-text-editor :editable="true" />
 
             <div class="flex flex-wrap justify-end gap-3 pt-2">
-                <a href="{{ route('home') }}" class="btn btn-ghost">Cancel</a>
+                <a href="/dashboard/agreements" class="btn btn-ghost">Cancel</a>
                 <button id="submitBtn" type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Submit</button>
             </div>
         </form>

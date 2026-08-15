@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\AgmtDraft;
 use App\Models\Agreement;
+use App\Observers\AgmtDraftObserver;
 use App\Observers\AgreementObserver;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\URL;
@@ -27,5 +29,6 @@ class AppServiceProvider extends ServiceProvider
         }
 
         Agreement::observe(AgreementObserver::class);
+        AgmtDraft::observe(AgmtDraftObserver::class);
     }
 }

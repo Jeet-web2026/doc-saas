@@ -323,10 +323,6 @@
                             Agreement Type
                         </th>
 
-                        <th data-col="category" class="px-5 py-3">
-                            Category
-                        </th>
-
                         <th data-col="name" class="px-5 py-3">
                             Agreement Name
                         </th>
@@ -373,7 +369,7 @@
     </main>
 
     <script>
-        var AGREEMENTS_URL = "{{ route('agreements.data') }}";
+        var AGREEMENTS_URL = "{{ route('drafts.data') }}";
     </script>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/4.0.0/jquery.min.js" integrity="sha512-8LENNbXmzI/Gbj+OwXmqR6V4QaUAw0/porPzy1+dQoJqC0JPHedWoe0DDOTL2uHA5XXJyIsPtiMHH86pVlay6A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

@@ -230,7 +230,7 @@ $(document).ready(function () {
                 (r) => `
                 <tr class="border-b border-white/10 hover:bg-white/5 last:border-b-0">
 
-                    <!-- Agreement Category (always visible, first col) -->
+                    <!-- Agreement Category (always visible, first col, matches thead) -->
                     <td class="px-5 py-4">
                         <div class="min-w-0">
                             <a href="/view-agreement/${r.id}">
@@ -244,11 +244,6 @@ $(document).ready(function () {
                     <td data-col="type"
                         class="px-5 py-4 text-muted-foreground hidden">
                         ${r.type ?? "—"}
-                    </td>
-
-                    <td data-col="category"
-                        class="px-5 py-4 text-muted-foreground">
-                        ${r.categoryLabel ?? "—"}
                     </td>
 
                     <td data-col="name"
@@ -271,15 +266,35 @@ $(document).ready(function () {
                         ${fmtDate(r.approvedDate)}
                     </td>
 
-                    <td data-col="upload_draft_file_name"
-                        class="px-5 py-4 text-muted-foreground hidden">
-                        ${r.uploadDraftFileName ?? "—"}
-                    </td>
+                   <td data-col="upload_draft_file_name"
+                            class="px-5 py-4 text-muted-foreground hidden">
+                            ${
+                                r.uploadDraftFileName
+                                    ? `<a href="/storage/${r.uploadDraftFileName}"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="inline-flex items-center gap-1.5 text-cyan-400 hover:text-cyan-300 hover:underline">
+                                        <i class="ri-file-line text-base"></i>
+                                        <span class="truncate max-w-[140px]">View</span>
+                                    </a>`
+                                    : "—"
+                            }
+                        </td>
 
-                    <td data-col="upload_checklist_file_name"
-                        class="px-5 py-4 text-muted-foreground hidden">
-                        ${r.uploadChecklistFileName ?? "—"}
-                    </td>
+                        <td data-col="upload_checklist_file_name"
+                            class="px-5 py-4 text-muted-foreground hidden">
+                            ${
+                                r.uploadChecklistFileName
+                                    ? `<a href="/storage/${r.uploadChecklistFileName}"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="inline-flex items-center gap-1.5 text-cyan-400 hover:text-cyan-300 hover:underline">
+                                        <i class="ri-file-line text-base"></i>
+                                        <span class="truncate max-w-[140px]">View</span>
+                                    </a>`
+                                    : "—"
+                            }
+                        </td>
 
                     <!-- Action -->
                     <td class="px-5 py-4 text-right">
@@ -305,213 +320,130 @@ $(document).ready(function () {
             .map((r) => {
                 const name = r.name ?? "Unknown";
 
-                // Generate initials
-                const initials = name
-                    .split(" ")
-                    .map((word) => word.charAt(0))
-                    .join("")
-                    .substring(0, 2)
-                    .toUpperCase();
-
-                const phone = r.phone ?? r.mobile ?? r.phoneNumber ?? null;
-
-                const email = r.email ?? r.emailAddress ?? null;
-
-                const firstParty = r.parties?.[0]?.org ?? "—";
-
-                const secondParty = r.parties?.[1]?.org ?? "—";
-
                 return `
-                <div
-                    class="rounded-xl border border-white/10 bg-card overflow-hidden"
-                    data-mobile-card="${r.id}">
+                    <div
+                        class="rounded-xl border border-white/10 bg-card overflow-hidden"
+                        data-mobile-card="${r.id}">
 
-                    <!-- Card Header -->
-                    <div class="flex items-center justify-between px-4 py-3">
+                        <!-- Card Header -->
+                        <div class="flex items-center justify-between px-4 py-3">
+                            <a
+                            
+                                href="/view-agreement/${r.id}"
+                                class="flex items-center gap-3 min-w-0">
 
-                        <a
-                            href="/view-agreement/${r.id}"
-                            class="flex items-center gap-3 min-w-0">
-
-                            <!-- Name -->
-                            <div class="min-w-0">
-
-                                <div
-                                    class="font-semibold text-lg truncate">
-
-                                    ${name}
-
+                                <div class="min-w-0">
+                                    <div class="font-semibold text-lg truncate">
+                                        ${name}
+                                    </div>
                                 </div>
 
-                            </div>
+                            </a>
 
-                        </a>
+                            <!-- Right Side -->
+                            <div class="flex items-center gap-2 shrink-0">
 
+                                <span
+                                    class="rounded-md bg-white/5 px-2 py-1
+                                    text-[10px] font-medium
+                                    text-muted-foreground capitalize">
 
-                        <!-- Right Side -->
-                        <div class="flex items-center gap-2 shrink-0">
+                                    ${fmtDate(r.approvedDate)}
 
-                            <!-- Date -->
-                            <span
-                                class="rounded-md bg-white/5 px-2 py-1
-                                text-[10px] font-medium
-                                text-muted-foreground capitalize">
+                                </span>
 
-                                ${fmtDate(r.date)}
+                                <!-- Menu -->
+                                <div class="relative" data-menu>
 
-                            </span>
+                                    <button
+                                        data-menu-toggle="mobile-row-${r.id}"
+                                        class="h-8 w-8 flex items-center justify-center
+                                        rounded hover:bg-white/10">
 
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="16"
+                                            height="16"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2">
 
-                            <!-- Menu -->
-                            <div class="relative" data-menu>
+                                            <circle cx="12" cy="12" r="1"/>
+                                            <circle cx="12" cy="5" r="1"/>
+                                            <circle cx="12" cy="19" r="1"/>
 
-                                <button
-                                    data-menu-toggle="mobile-row-${r.id}"
-                                    class="h-8 w-8 flex items-center justify-center
-                                    rounded hover:bg-white/10">
+                                        </svg>
 
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="16"
-                                        height="16"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        stroke-width="2">
+                                    </button>
 
-                                        <circle cx="12" cy="12" r="1"/>
-                                        <circle cx="12" cy="5" r="1"/>
-                                        <circle cx="12" cy="19" r="1"/>
-
-                                    </svg>
-
-                                </button>
-
-
-                                <div
-                                    id="mobile-row-${r.id}"
-                                    class="hidden absolute right-0 top-9
-                                    w-36 rounded-md border border-white/10
-                                    bg-card shadow-xl z-50 p-1">
-
-                                    <a
-                                        href="#"
-                                        data-id="${r.id}"
-                                        class="delete-agreement-btn block px-3 py-2 text-sm rounded hover:bg-white/5 text-red-400">
-
-                                        Delete
-
-                                    </a>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- Card Body -->
-                    <div class="grid grid-cols-2 gap-4 px-4 pb-4 pt-2">
-
-                        <!-- Personal Info -->
-                        
-
-
-                        <!-- Organization -->
-                        <div>
-
-                            <div
-                                class="text-[10px] font-semibold uppercase
-                                tracking-wider text-cyan-400 mb-2">
-
-                                Parties
-
-                            </div>
-
-                            <div
-                                class="text-xs text-muted-foreground truncate">
-
-                                ${firstParty}
-
-                            </div>
-
-                            ${
-                                secondParty !== "—"
-                                    ? `
                                     <div
-                                        class="text-xs text-muted-foreground
-                                        truncate mt-1">
+                                        id="mobile-row-${r.id}"
+                                        class="hidden absolute right-0 top-9
+                                        w-36 rounded-md border border-white/10
+                                        bg-card shadow-xl z-50 p-1">
 
-                                        ${secondParty}
+                                        
+                                            href="#"
+                                            data-id="${r.id}"
+                                            class="delete-agreement-btn block px-3 py-2 text-sm rounded hover:bg-white/5 text-red-400">
+
+                                            Delete
+
+                                        </a>
 
                                     </div>
-                                    `
-                                    : ""
-                            }
 
-                        </div>
-                        <div>
-
-                            <div class="flex flex-row items-center gap-3">
-                            
-                            <div
-                                class="text-[10px] font-semibold uppercase
-                                tracking-wider text-cyan-400">
-
-                                File no.
+                                </div>
 
                             </div>
-
-                            <div class="text-[10px] text-muted-foreground">
-                                ${r.fileNo ?? ""}
-                            </div>
-                            
-                            </div>
-                            <div class="flex flex-row items-center gap-3 mt-4">
-                            
-                            <div
-                                class="text-[10px] font-semibold uppercase
-                                tracking-wider text-cyan-400">
-
-                               Verson
-
-                            </div>
-
-                            <div class="text-[10px] text-muted-foreground">
-                                ${r.version ?? ""}
-                            </div>
-                            
-                            </div>
-                        </div>
-
-                    </div>
-
-
-                    <!-- Bottom Info -->
-                    <div
-                        class="border-t border-white/5
-                        px-4 py-2.5 flex items-center
-                        justify-between">
-
-                        <div class="text-xs text-muted-foreground">
-
-                            Expiry:
-                            <span class="text-white/70">
-                                ${fmtDate(r.expiry)}
-                            </span>
 
                         </div>
 
-                        <div>
-                            ${expiryBadge(r.daysLeft, r.parentAgreement)}
+                        <!-- Card Body -->
+                        <div class="grid grid-cols-2 gap-4 px-4 pb-4 pt-2">
+
+                            <div>
+                                <div class="text-[10px] font-semibold uppercase tracking-wider text-cyan-400 mb-2">
+                                    Category
+                                </div>
+                                <div class="text-xs text-muted-foreground truncate">
+                                    ${r.categoryLabel ?? "—"}
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex flex-row items-center gap-3">
+                                    <div class="text-[10px] font-semibold uppercase tracking-wider text-cyan-400">
+                                        Version
+                                    </div>
+                                    <div class="text-[10px] text-muted-foreground">
+                                        ${r.version ?? "—"}
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-row items-center gap-3 mt-4">
+                                    <div class="text-[10px] font-semibold uppercase tracking-wider text-cyan-400">
+                                        Approved By
+                                    </div>
+                                    <div class="text-[10px] text-muted-foreground">
+                                        ${r.approvedBy ?? "—"}
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Bottom Info -->
+                        <div class="border-t border-white/5 px-4 py-2.5 flex items-center justify-between">
+                            <div class="text-xs text-muted-foreground">
+                                Approved:
+                                <span class="text-white/70">${fmtDate(r.approvedDate)}</span>
+                            </div>
                         </div>
 
                     </div>
-
-                </div>
-            `;
+                `;
             })
             .join("");
 

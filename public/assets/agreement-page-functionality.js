@@ -110,7 +110,10 @@ $(document).ready(function () {
         window.partyIndex = parseInt(window.partyIndex - 1);
     };
 
-    document.getElementById("parties").addEventListener("change", function (e) {
+    const partiesEl = document.getElementById("parties");
+    if (!partiesEl) return;
+
+    partiesEl.addEventListener("change", function (e) {
         if (!e.target.classList.contains("vs-toggle")) return;
         toggleDivider(e.target);
     });

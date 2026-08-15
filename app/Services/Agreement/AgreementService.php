@@ -4,6 +4,8 @@ namespace App\Services\Agreement;
 
 use App\Http\Requests\Agreement\RenewAgreementRequest;
 use App\Http\Requests\Agreement\StoreAgreementrequest;
+use App\Http\Resources\AgmtDraftResource;
+use App\Models\AgmtDraft;
 use App\Models\Agreement;
 use App\Models\AgreementCategories;
 use App\Models\AgreementType;
@@ -538,5 +540,63 @@ class AgreementService
 
             return null;
         }
+    }
+
+    public function storeDraftAgreement(
+        array $validated,
+        ?string $accessToken,
+        ?UploadedFile $draftFile,
+        ?UploadedFile $checklistFile,
+    ): AgmtDraft {
+        $userData = $this->fetchUserData($accessToken);
+
+        $draftFileName = $draftFile
+            ? $draftFile->store('agreement-drafts', 'public')
+            : null;
+
+        $checklistFileName = $checklistFile
+            ? $checklistFile->store('agreement-checklists', 'public')
+            : null;
+
+        return AgmtDraft::create([
+            'Orga_UIN'              => $validated['company_id'],
+            'User_UIN'              => $userData->User_UIN ?? null,
+
+            'Agmt_Catg_UIN'         => $validated['agreement_category'],
+            'Agmt_Type_UIN'         => $validated['agreement_type'],
+            'Agmt_Name'             => $validated['agreement_name'],
+
+            'Agmt_Vson'             => $validated['draft_version_no'] ?? null,
+
+            'Agmt_Aprv_By'          => $validated['approved_by'] ?? null,
+            'Agmt_Aprv_Date'        => $validated['approved_date'] ?? null,
+
+            'Agmt_Drft_File_Name'   => $draftFileName,
+            'Agmt_Chklst_File_Name' => $checklistFileName,
+        ]);
+    }
+
+    public function getDraftAgreements(
+        ?string $search,
+        ?string $dateFrom,
+        ?string $dateTo,
+        int $perPage,
+        int|string $companyId,
+    ) {
+        $paginated = AgmtDraft::query()
+            ->where('Orga_UIN', $companyId)
+            ->when($search, function ($query, $search) {
+                $query->where('Agmt_Name', 'like', "%{$search}%");
+            })
+            ->when($dateFrom, function ($query, $dateFrom) {
+                $query->whereDate('Agmt_Aprv_Date', '>=', $dateFrom);
+            })
+            ->when($dateTo, function ($query, $dateTo) {
+                $query->whereDate('Agmt_Aprv_Date', '<=', $dateTo);
+            })
+            ->latest()
+            ->paginate($perPage);
+
+        return AgmtDraftResource::collection($paginated)->response()->getData(true);
     }
 }
