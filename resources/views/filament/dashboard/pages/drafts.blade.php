@@ -42,7 +42,7 @@
                                 data-menu-toggle="calMenuForFilter"
                                 aria-label="Filter by date"
                                 title="Filter by date"
-                                class="inline-flex h-9 w-9 sm:w-auto sm:px-3 items-center justify-center gap-2 rounded-md border border-white/10 hover:bg-white/5 transition">
+                                class="h-9 hidden w-9 sm:w-auto sm:px-3 items-center justify-center gap-2 rounded-md border border-white/10 hover:bg-white/5 transition">
                                 <i class="bi bi-funnel text-base"></i>
 
                                 <span class="hidden sm:inline text-sm">
