@@ -667,7 +667,7 @@ $(document).ready(function () {
 
         Swal.fire({
             icon: "warning",
-            title: "Are you sure you want to delete this agreement?",
+            title: "Are you sure you want to delete this draft?",
             showCancelButton: true,
             confirmButtonText: "Yes, delete",
             cancelButtonText: "Cancel",

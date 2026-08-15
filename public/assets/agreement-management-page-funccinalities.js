@@ -177,13 +177,8 @@ $(document).ready(function () {
     let sort = null; // {key, dir}
     const visible = {
         category: true,
-        type: false,
-        name: true,
-        version: true,
-        approved_by: true,
-        approved_date: true,
-        upload_draft_file_name: false,
-        upload_checklist_file_name: false,
+        type: true,
+        name: true
     };
     const today = new Date();
     let calMonth = new Date(today.getFullYear(), today.getMonth(), 1);
@@ -248,52 +243,6 @@ $(document).ready(function () {
                         class="px-5 py-4 text-muted-foreground">
                         ${r.name ?? "—"}
                     </td>
-
-                    <td data-col="version"
-                        class="px-5 py-4 text-muted-foreground">
-                        ${r.version ?? "—"}
-                    </td>
-
-                    <td data-col="approved_by"
-                        class="px-5 py-4 text-muted-foreground">
-                        ${r.approvedBy ?? "—"}
-                    </td>
-
-                    <td data-col="approved_date"
-                        class="px-5 py-4 text-muted-foreground">
-                        ${fmtDate(r.approvedDate)}
-                    </td>
-
-                   <td data-col="upload_draft_file_name"
-                            class="px-5 py-4 text-muted-foreground hidden">
-                            ${
-                                r.uploadDraftFileName
-                                    ? `<a href="/storage/${r.uploadDraftFileName}"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        class="inline-flex items-center gap-1.5 text-cyan-400 hover:text-cyan-300 hover:underline">
-                                        <i class="ri-file-line text-base"></i>
-                                        <span class="truncate max-w-[140px]">View</span>
-                                    </a>`
-                                    : "—"
-                            }
-                        </td>
-
-                        <td data-col="upload_checklist_file_name"
-                            class="px-5 py-4 text-muted-foreground hidden">
-                            ${
-                                r.uploadChecklistFileName
-                                    ? `<a href="/storage/${r.uploadChecklistFileName}"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        class="inline-flex items-center gap-1.5 text-cyan-400 hover:text-cyan-300 hover:underline">
-                                        <i class="ri-file-line text-base"></i>
-                                        <span class="truncate max-w-[140px]">View</span>
-                                    </a>`
-                                    : "—"
-                            }
-                        </td>
-
                     <!-- Action -->
                     <td class="px-5 py-4 text-right">
                         <a href="#"
@@ -667,7 +616,7 @@ $(document).ready(function () {
 
         Swal.fire({
             icon: "warning",
-            title: "Are you sure you want to delete this agreement?",
+            title: "Are you sure you want to delete this agreement name?",
             showCancelButton: true,
             confirmButtonText: "Yes, delete",
             cancelButtonText: "Cancel",

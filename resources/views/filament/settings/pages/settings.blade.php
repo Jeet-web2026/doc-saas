@@ -42,7 +42,7 @@
                                 data-menu-toggle="calMenuForFilter"
                                 aria-label="Filter by date"
                                 title="Filter by date"
-                                class="inline-flex h-9 w-9 sm:w-auto sm:px-3 items-center justify-center gap-2 rounded-md border border-white/10 hover:bg-white/5 transition">
+                                class="hidden h-9 w-9 sm:w-auto sm:px-3 items-center justify-center gap-2 rounded-md border border-white/10 hover:bg-white/5 transition">
                                 <i class="bi bi-funnel text-base"></i>
 
                                 <span class="hidden sm:inline text-sm">
@@ -163,7 +163,7 @@
                                 <input
                                     id="searchInputDesktop"
                                     type="text"
-                                    placeholder="Search drafts…"
+                                    placeholder="Search agreements name…"
                                     class="h-9 w-[250px] lg:w-[350px] rounded-md border border-white/10 bg-transparent pl-9 pr-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary">
 
                             </div>
@@ -175,8 +175,31 @@
                     <div class="flex items-center gap-1.5 sm:gap-2">
 
 
-                        {{-- Draft Agreement --}}
+                        {{-- Add Agreement Name --}}
+                        <a
+                            id="addAgreementNameBtn"
+                            href="{{ route('draft-agreement', ['company' => $companyInformation->first()?->Orga_UIN]) }}"
+                            aria-label="Add Agreement Name"
+                            title="Add Agreement Name"
+                            class="inline-flex h-9 w-9 sm:w-auto sm:px-4 items-center justify-center gap-2 rounded-md bg-[#3c83f6] text-sm font-medium text-[#3c83f6]-foreground hover:bg-[#3c83f6]/90 transition">
 
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M5 12h14" />
+                                <path d="M12 5v14" />
+                            </svg>
+
+                            <span class="hidden sm:inline">
+                                Add
+                            </span>
+
+                        </a>
 
 
                         {{-- Columns --}}
@@ -218,31 +241,6 @@
                                 <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-white/5 text-sm cursor-pointer">
                                     <input type="checkbox" data-col="name" class="accent-primary" checked>
                                     Agreement Name
-                                </label>
-
-                                <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-white/5 text-sm cursor-pointer">
-                                    <input type="checkbox" data-col="version" class="accent-primary" checked>
-                                    Draft Version No
-                                </label>
-
-                                <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-white/5 text-sm cursor-pointer">
-                                    <input type="checkbox" data-col="approved_by" class="accent-primary" checked>
-                                    Approved By
-                                </label>
-
-                                <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-white/5 text-sm cursor-pointer">
-                                    <input type="checkbox" data-col="approved_date" class="accent-primary" checked>
-                                    Approved Date
-                                </label>
-
-                                <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-white/5 text-sm cursor-pointer">
-                                    <input type="checkbox" data-col="upload_draft_file_name" class="accent-primary" checked>
-                                    Upload Draft File Name
-                                </label>
-
-                                <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-white/5 text-sm cursor-pointer">
-                                    <input type="checkbox" data-col="upload_checklist_file_name" class="accent-primary" checked>
-                                    Upload Checklist File Name
                                 </label>
 
                             </div>
@@ -302,26 +300,6 @@
 
                         <th data-col="name" class="px-5 py-3">
                             Agreement Name
-                        </th>
-
-                        <th data-col="version" class="px-5 py-3">
-                            Draft Version No
-                        </th>
-
-                        <th data-col="approved_by" class="px-5 py-3">
-                            Approved By
-                        </th>
-
-                        <th data-col="approved_date" class="px-5 py-3">
-                            Approved date
-                        </th>
-
-                        <th data-col="upload_draft_file_name" class="px-5 py-3 hidden">
-                            Upload Draft File Name
-                        </th>
-
-                        <th data-col="upload_checklist_file_name" class="px-5 py-3 hidden">
-                            Upload Checklist File Name
                         </th>
 
                         <th class="px-5 py-3 text-right">
