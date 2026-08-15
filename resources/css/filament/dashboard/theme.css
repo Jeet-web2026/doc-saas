@@ -55,3 +55,6 @@
 .fi-header {
     display: none !important;
 }
+.fi-sidebar-nav-groups{
+    gap: 5px !important;
+}

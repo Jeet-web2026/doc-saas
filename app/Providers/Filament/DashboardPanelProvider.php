@@ -3,13 +3,18 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Dashboard\Pages\Agreements;
+use App\Filament\Dashboard\Pages\Settings;
 use App\Http\Middleware\EnsurePartakerSessionExists;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationGroup;
+use Filament\Navigation\NavigationItem;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Filament\Support\Facades\FilamentIcon;
+use Filament\View\PanelsIconAlias;
 use Filament\Widgets\AccountWidget;
 use Filament\Widgets\FilamentInfoWidget;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
@@ -39,6 +44,11 @@ class DashboardPanelProvider extends PanelProvider
             ->discoverResources(in: app_path('Filament/Dashboard/Resources'), for: 'App\Filament\Dashboard\Resources')
             ->discoverPages(in: app_path('Filament/Dashboard/Pages'), for: 'App\Filament\Dashboard\Pages')
             ->homeUrl(fn() => Agreements::getUrl())
+            ->navigationGroups([
+                NavigationGroup::make('Settings')
+                    ->icon('heroicon-o-cog-6-tooth')
+                    ->collapsed(),
+            ])
             ->discoverWidgets(in: app_path('Filament/Dashboard/Widgets'), for: 'App\Filament\Dashboard\Widgets')
             ->widgets([
                 AccountWidget::class,
@@ -68,5 +78,9 @@ class DashboardPanelProvider extends PanelProvider
                 'title' => Str::headline(collect(explode('/', request()->path()))->last()),
             ]);
         });
+
+        FilamentIcon::register([
+            PanelsIconAlias::SIDEBAR_GROUP_COLLAPSE_BUTTON => 'heroicon-o-plus',
+        ]);
     }
 }
