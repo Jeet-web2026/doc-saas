@@ -466,20 +466,20 @@ $(document).ready(function () {
 
                             <a href="/edit-agreement/${r.id}"
                                 class="flex items-center gap-2 px-2 py-1.5 text-sm rounded hover:bg-white/5">
-
+                                <i class="ri-edit-box-line"></i>
                                 Edit
                             </a>
 
                             <a href="/renewal-agreement/${r.id}"
                                 class="flex items-center gap-2 px-2 py-1.5 text-sm rounded hover:bg-white/5">
-
+                                <i class="ri-file-add-line"></i>
                                 Renew
                             </a>
 
                             <a href="#"
                                 data-id="${r.id}"
                                 class="delete-agreement-btn flex items-center gap-2 px-2 py-1.5 text-sm rounded hover:bg-white/5 text-red-400">
-
+                                <i class="ri-delete-bin-5-line"></i>
                                 Delete
                             </a>
 
