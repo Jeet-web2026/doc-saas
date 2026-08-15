@@ -1046,7 +1046,7 @@ $(document).ready(function () {
             cancelButtonColor: "#3085d6",
         }).then((result) => {
             if (result.isConfirmed) {
-                const csrfToken = $('meta[name="Csrf-token"]').attr("content");
+                const csrfToken = $('meta[name="csrf-token"]').attr("content");
 
                 const form = $(`
                     <form action="/agreements/${agreementId}" method="POST" style="display: none;">

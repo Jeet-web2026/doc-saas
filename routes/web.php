@@ -28,6 +28,7 @@ Route::controller(DraftAgreementManagementController::class)->group(function () 
     Route::get('draft-agreement', 'index')->name('draft-agreement');
     Route::post('draft-agreements', 'store')
         ->name('draft-agreements.store');
+    Route::delete('draft/{agreement}', 'destroy')->name('draft.destroy');
 });
 
 Route::controller(EditAgreementController::class)->group(function () {

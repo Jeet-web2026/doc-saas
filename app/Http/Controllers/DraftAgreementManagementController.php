@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreDraftAgreementRequest;
+use App\Models\AgmtDraft;
 use App\Models\OrganisationDetails;
 use App\Services\Agreement\AgreementService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class DraftAgreementManagementController extends Controller
@@ -34,5 +37,19 @@ class DraftAgreementManagementController extends Controller
 
         return redirect('/dashboard/drafts')
             ->with('success', 'Agreement draft saved successfully.');
+    }
+
+    public function destroy(AgmtDraft $agreement)
+    {
+        $filePath = $agreement->file_path;
+        DB::transaction(function () use ($agreement) {
+            $agreement->delete();
+        });
+
+        if ($filePath && Storage::exists($filePath)) {
+            Storage::delete($filePath);
+        }
+
+        return redirect()->back()->with('success', 'Draft deleted successfully.');
     }
 }
