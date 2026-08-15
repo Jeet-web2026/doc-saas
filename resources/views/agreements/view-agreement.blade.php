@@ -14,7 +14,6 @@
             <div class="mb-6">
                 <h1 class="text-3xl font-semibold tracking-tight" id="page-title">View Agreement</h1>
                 <p class="mt-1 text-sm text-slate-400" id="page-subtitle">View the agreement details.</p>
-                <p class="mt-1 text-sm text-slate-400" id="page-subtitle">Reference No. <strong>({{ $agreement->Agmt_Ref_No ?? '' }})</strong></p>
             </div>
             <x-a-greement-history :agreementId="$agreement->Agmt_UIN" />
         </div>
@@ -142,39 +141,46 @@
                 </div>
                 <div class="flex flex-col lg:flex-row gap-3 items-center">
                     <div class="flex-1 mt-4">
-                        <h2 class="label mb-2">Attachment</h2>
-
-                        <div class="flex items-center gap-3">
-                            @if($agreement->Agmt_Atch)
-                            <a
-                                href="{{ asset('storage/' . $agreement->Agmt_Atch) }}"
-                                target="_blank"
-                                download
-                                class="inline-flex items-center gap-2 px-3 py-1.5 border border-white/10 rounded-md text-sm text-slate-300 hover:text-white hover:bg-white/10 transition shrink-0">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                                    <polyline points="7 10 12 15 17 10" />
-                                    <line x1="12" y1="15" x2="12" y2="3" />
-                                </svg>
-                                Previous Document
-                            </a>
-                            @endif
-
-                            <input
-                                type="file"
-                                name="attachment"
-                                accept="image/jpeg,image/png,application/pdf,.doc,.docx,.xls,.xlsx"
-                                id="upload-input"
-                                class="block w-full text-sm text-slate-300 border border-white/10 rounded-md cursor-pointer bg-transparent focus:outline-none file:mr-3 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-sm file:bg-white/10 file:text-white file:hover:bg-white/20 file:cursor-pointer"
-                                disabled />
-                        </div>
-                    </div>
-                    <div class="flex-1 mt-4">
                         <h2 class="label mb-2">Deposit Amount</h2>
                         <input
                             type="text"
                             class="input"
                             value="{{ $agreement->Agmt_Depst_Amt }}" readonly>
+                    </div>
+                    <div class="flex-1 mt-4">
+                        <h2 class="label mb-2">Reference No.</h2>
+                        <input
+                            type="text"
+                            class="input"
+                            value="{{ $agreement->Agmt_Ref_No ?? '' }}" readonly>
+                    </div>
+                </div>
+                <div class="w-full mt-4">
+                    <h2 class="label mb-2">Attachment</h2>
+
+                    <div class="flex items-center gap-3">
+                        @if($agreement->Agmt_Atch)
+                        <a
+                            href="{{ asset('storage/' . $agreement->Agmt_Atch) }}"
+                            target="_blank"
+                            download
+                            class="inline-flex items-center gap-2 px-3 py-1.5 border border-white/10 rounded-md text-sm text-slate-300 hover:text-white hover:bg-white/10 transition shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                <polyline points="7 10 12 15 17 10" />
+                                <line x1="12" y1="15" x2="12" y2="3" />
+                            </svg>
+                            Previous Document
+                        </a>
+                        @endif
+
+                        <input
+                            type="file"
+                            name="attachment"
+                            accept="image/jpeg,image/png,application/pdf,.doc,.docx,.xls,.xlsx"
+                            id="upload-input"
+                            class="block w-full text-sm text-slate-300 border border-white/10 rounded-md cursor-pointer bg-transparent focus:outline-none file:mr-3 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-sm file:bg-white/10 file:text-white file:hover:bg-white/20 file:cursor-pointer"
+                            disabled />
                     </div>
                 </div>
                 </div>
