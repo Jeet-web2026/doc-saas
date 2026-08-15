@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Dashboard\Pages\Agreements;
+use App\Http\Middleware\EnsurePartakerSessionExists;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -53,6 +54,7 @@ class DashboardPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
+                EnsurePartakerSessionExists::class
             ]);
     }
 
