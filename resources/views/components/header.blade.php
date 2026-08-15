@@ -63,10 +63,10 @@
                 x-on:click="$store.sidebar.isOpen = !$store.sidebar.isOpen"></i>
         </div>
 
-        <div class="text-xl font-semibold lg:absolute lg:left-[45%] hidden lg:block">{{ $title }}</div>
+        <div class="text-xl font-semibold lg:absolute lg:left-[45%] hidden lg:block">Agreements</div>
 
         <div class="flex flex-col items-end gap-2">
-            <div class="text-xl font-semibold lg:absolute lg:left-[45%] lg:hidden block">{{ $title }}</div>
+            <div class="text-xl font-semibold lg:absolute lg:left-[45%] lg:hidden block">Agreements</div>
             <!-- Company switcher -->
             <div class="relative flex flex-row items-center" x-data="{ open: false }" @click.outside="open = false">
                 <button
