@@ -41,8 +41,7 @@ class RenewalAgreementController extends Controller
         try {
             $this->agreementService->renewAgreement($agreementId, $request);
 
-            return redirect()
-                ->route('all-agreements')
+            return redirect('/dashboard/agreements')
                 ->with('success', 'Agreement renewed successfully.');
         } catch (Exception $e) {
             return redirect()

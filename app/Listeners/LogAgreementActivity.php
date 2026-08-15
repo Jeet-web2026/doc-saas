@@ -56,7 +56,7 @@ class LogAgreementActivity
             'Cont' => '1',
             'UOM' => 'Single',
             'Size' => 0.00,
-            'Vert_Uin' => $agreement->vert_uin ?? 1,
+            'Vert_Uin' => $agreement->vert_uin ?? 113,
             'Desc' => $desc,
             'User_UIN' => Auth::id() ?? 1,
             'CrOn' => now(),

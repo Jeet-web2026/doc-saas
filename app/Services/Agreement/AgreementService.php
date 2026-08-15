@@ -162,7 +162,9 @@ class AgreementService
                 'Agmt_Catg_UIN',
                 'Agmt_Type_UIN',
                 'Agmt_Parn_UIN',
-                'User_UIN'
+                'User_UIN',
+                'Agmt_Ref_No',
+                'Agmt_Depst_Amt'
             ])
             ->with([
                 'category:Agmt_Catg_UIN,Agmt_Catg_Name',
@@ -186,6 +188,7 @@ class AgreementService
             $query->where(function ($q) use ($search) {
                 $q->where('Agmt_Name', 'like', "%{$search}%")
                     ->orWhere('Agmt_File_no', 'like', "%{$search}%")
+                    ->orWhere('Agmt_Ref_No', 'like', "%{$search}%")
                     ->orWhereHas('type', function ($q2) use ($search) {
                         $q2->where('Agmt_Type_Name', 'like', "%{$search}%");
                     })
@@ -403,6 +406,8 @@ class AgreementService
                 $attachmentSizeKb = $this->getFileSizeInKb($file);
             }
 
+            $refNo = $request->ref_no ?? $this->generateAgreementRefNo($request->company_id);
+
             // 3. Create the new agreement as a copy of the old one, overriding only expiry (+ optional remarks/attachment)
             $newAgreement = Agreement::create([
                 'Orga_UIN'       => $oldAgreement->Orga_UIN,
@@ -432,6 +437,8 @@ class AgreementService
                 'MoBy'           => $userData['User_UIN'] ?? 1,
 
                 'Stau_UIN'       => $request->expiry_date ? $this->determineStatusUin($request->expiry_date) : $this->determineStatusUin($oldAgreement->expiry_date),
+                'Agmt_Ref_No' => $refNo,
+                'Agmt_Depst_Amt' => $request->deposit_amount ?? null,
             ]);
 
             $remarks = trim($request->remarks);
