@@ -5,9 +5,11 @@ namespace App\Services\Agreement;
 use App\Http\Requests\Agreement\RenewAgreementRequest;
 use App\Http\Requests\Agreement\StoreAgreementrequest;
 use App\Http\Resources\AgmtDraftResource;
+use App\Http\Resources\AgmtNameResource;
 use App\Models\AgmtDraft;
 use App\Models\Agreement;
 use App\Models\AgreementCategories;
+use App\Models\AgreementName;
 use App\Models\AgreementType;
 use App\Models\OrganisationDetails;
 use App\Models\TranAgmtRemk;
@@ -655,5 +657,50 @@ class AgreementService
 
             return $refNo;
         });
+    }
+
+    public function create(array $data): AgreementName
+    {
+        return AgreementName::create([
+            'Orga_UIN' => $data['company_id'],
+            'Agmt_Catg_UIN' => $data['agreement_category'],
+            'Agmt_Type_UIN' => $data['agreement_type'],
+            'Agmt_Name'     => $data['agmt_Name'],
+            'CrBy'       => Session::get('partaker_user_uin'),
+        ]);
+    }
+    public function getAgreementNames(
+        ?string $search,
+        ?string $dateFrom,
+        ?string $dateTo,
+        int $perPage,
+        int|string $companyId,
+    ) {
+        $paginated = AgreementName::query()
+            ->where('Orga_UIN', $companyId)
+            ->when($search, function ($query, $search) {
+                $query->where('Agmt_Name', 'like', "%{$search}%");
+            })
+            ->when($dateFrom, function ($query, $dateFrom) {
+                $query->whereDate('created_at', '>=', $dateFrom);
+            })
+            ->when($dateTo, function ($query, $dateTo) {
+                $query->whereDate('created_at', '<=', $dateTo);
+            })
+            ->latest()
+            ->paginate($perPage);
+
+        $paginated->getCollection()->transform(
+            fn($item) => (new AgmtNameResource($item))->toArray(request())
+        );
+
+        return $paginated->toArray();
+    }
+
+    public function deleteAgreementName(int|string $id): bool
+    {
+        $agreementName = AgreementName::query()->findOrFail($id);
+
+        return $agreementName->delete();
     }
 }

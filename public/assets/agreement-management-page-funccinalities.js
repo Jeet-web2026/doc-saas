@@ -627,7 +627,7 @@ $(document).ready(function () {
                 const csrfToken = $('meta[name="csrf-token"]').attr("content");
 
                 const form = $(`
-                    <form action="/draft/${agreementId}" method="POST" style="display: none;">
+                    <form action="/agreement-names/${agreementId}" method="POST" style="display: none;">
                         <input type="hidden" name="_token" value="${csrfToken}">
                         <input type="hidden" name="_method" value="DELETE">
                     </form>

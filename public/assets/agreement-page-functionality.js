@@ -89,6 +89,26 @@ $(document).ready(function () {
         });
     });
 
+    $(document).on("click", "#submitAgreementCreateBtn", function (e) {
+        e.preventDefault();
+
+        Swal.fire({
+            title: "Are you sure you want to create this agreement name?",
+            html: `
+                <p>Please verify that all information is complete and accurate before proceeding.</p>
+            `,
+            showCancelButton: true,
+            background: "#e6f2ff",
+            confirmButtonText: "Save Name",
+            cancelButtonText: "Cancel",
+            confirmButtonColor: "#3085d6",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $(this).closest("form").submit();
+            }
+        });
+    });
+
     // On category change, load its types (no pre-selection — user is actively switching)
     $("#agreementCategory").on("change", function () {
         loadAgreementTypes($(this).val());

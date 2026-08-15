@@ -178,7 +178,7 @@
                         {{-- Add Agreement Name --}}
                         <a
                             id="addAgreementNameBtn"
-                            href="{{ route('draft-agreement', ['company' => $companyInformation->first()?->Orga_UIN]) }}"
+                            href="{{ route('add-agreement-name', ['company' => $companyInformation->first()?->Orga_UIN]) }}"
                             aria-label="Add Agreement Name"
                             title="Add Agreement Name"
                             class="inline-flex h-9 w-9 sm:w-auto sm:px-4 items-center justify-center gap-2 rounded-md bg-[#3c83f6] text-sm font-medium text-[#3c83f6]-foreground hover:bg-[#3c83f6]/90 transition">
@@ -324,7 +324,7 @@
     </main>
 
     <script>
-        var AGREEMENTS_URL = "{{ route('drafts.data') }}";
+        var AGREEMENTS_URL = "{{ route('agreements-name.data') }}";
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/4.0.0/jquery.min.js" integrity="sha512-8LENNbXmzI/Gbj+OwXmqR6V4QaUAw0/porPzy1+dQoJqC0JPHedWoe0DDOTL2uHA5XXJyIsPtiMHH86pVlay6A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

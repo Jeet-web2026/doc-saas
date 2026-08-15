@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AddAgreementController;
+use App\Http\Controllers\AgreementNameController;
 use App\Http\Controllers\DraftAgreementManagementController;
 use App\Http\Controllers\EditAgreementController;
 use App\Http\Controllers\HomeController;
@@ -15,9 +16,10 @@ Route::controller(HomeController::class)->group(function () {
 
 Route::middleware('partaker.session')->group(function () {
     Route::controller(HomeController::class)->group(function () {
-        Route::get('/agreements', 'allAgreements')->name('all-agreements');
-        Route::get('/agreements/data', 'agreementsData')->name('agreements.data');
-        Route::get('/drafts/data', 'draftAgreementsData')->name('drafts.data');
+        Route::get('agreements', 'allAgreements')->name('all-agreements');
+        Route::get('agreements/data', 'agreementsData')->name('agreements.data');
+        Route::get('drafts/data', 'draftAgreementsData')->name('drafts.data');
+        Route::get('agreements-name/data', 'agreementNamesData')->name('agreements-name.data');
     });
 
     Route::controller(AddAgreementController::class)->group(function () {
@@ -51,6 +53,14 @@ Route::middleware('partaker.session')->group(function () {
         Route::get('view-agreement/{agreementId}', 'index')->name('view-agreement');
         Route::get('agreements/{id}/history', 'history')->name('agreements.history');
         Route::delete('agreements/{agreement}', 'destroy')->name('agreements.destroy');
+    });
+
+    Route::controller(AgreementNameController::class)->group(function () {
+        Route::get('add-agreement-name', 'index')->name('add-agreement-name');
+        Route::post('agreement-names', 'store')
+            ->name('agreement-names.store');
+        Route::delete('/agreement-names/{id}', 'destroy')
+            ->name('agreement-names.destroy');
     });
 
     Route::fallback(function () {

@@ -131,7 +131,7 @@ class HomeController extends Controller
             dateFrom: $validated['date_from'] ?? null,
             dateTo: $validated['date_to'] ?? null,
             dateFilterType: $validated['date_filter_type'] ?? 'agreement_date',
-            perPage: $validated['per_page'] ?? 5,
+            perPage: $validated['per_page'] ?? 100,
             companyId: $orgaUin,
         );
 
@@ -159,7 +159,35 @@ class HomeController extends Controller
             search: $validated['search'] ?? null,
             dateFrom: $validated['date_from'] ?? null,
             dateTo: $validated['date_to'] ?? null,
-            perPage: $validated['per_page'] ?? 5,
+            perPage: $validated['per_page'] ?? 100,
+            companyId: $orgaUin,
+        );
+
+        return response()->json($draftAgreements);
+    }
+
+    public function agreementNamesData(Request $request): JsonResponse
+    {
+        $userUin = Session::get('partaker_user_uin');
+        $orgaUin = $request->company_id;
+
+        if (! $userUin || ! $orgaUin) {
+            return response()->json(['message' => 'No organisation selected.'], Response::HTTP_UNAUTHORIZED);
+        }
+
+        $validated = $request->validate([
+            'search'    => 'nullable|string|max:255',
+            'date_from' => 'nullable|date',
+            'date_to'   => 'nullable|date|after_or_equal:date_from',
+            'per_page'  => 'nullable|integer|min:1|max:100',
+            'page'      => 'nullable|integer|min:1',
+        ]);
+
+        $draftAgreements = $this->agreementService->getAgreementNames(
+            search: $validated['search'] ?? null,
+            dateFrom: $validated['date_from'] ?? null,
+            dateTo: $validated['date_to'] ?? null,
+            perPage: $validated['per_page'] ?? 100,
             companyId: $orgaUin,
         );
 
