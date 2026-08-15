@@ -176,14 +176,14 @@ $(document).ready(function () {
     // ---------- State (columns / sort / calendar month) ----------
     let sort = null; // {key, dir}
     const visible = {
-        category: false,
+        category: true,
         type: false,
         name: true,
         version: true,
         approved_by: true,
         approved_date: true,
-        upload_draft_file_name: true,
-        upload_checklist_file_name: true,
+        upload_draft_file_name: false,
+        upload_checklist_file_name: false,
     };
     const today = new Date();
     let calMonth = new Date(today.getFullYear(), today.getMonth(), 1);
@@ -283,42 +283,11 @@ $(document).ready(function () {
 
                     <!-- Action -->
                     <td class="px-5 py-4 text-right">
-                        <div class="relative inline-block" data-menu>
-
-                            <button
-                                data-menu-toggle="row-${r.id}"
-                                class="h-9 w-9 inline-flex items-center justify-center rounded hover:bg-white/10">
-
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                    width="16"
-                                    height="16"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round">
-
-                                    <circle cx="12" cy="12" r="1"/>
-                                    <circle cx="12" cy="5" r="1"/>
-                                    <circle cx="12" cy="19" r="1"/>
-
-                                </svg>
-                            </button>
-
-                            <div
-                                id="row-${r.id}"
-                                class="hidden absolute right-0 mt-1 w-36 rounded-md border border-white/10 bg-card shadow-xl z-20 p-1">
-
-                                <a href="#"
-                                    data-id="${r.id}"
-                                    class="delete-agreement-btn flex items-center gap-2 px-2 py-1.5 text-sm rounded hover:bg-white/5 text-red-400">
-
-                                    Delete
-                                </a>
-
-                            </div>
-                        </div>
+                        <a href="#"
+                            data-id="${r.id}"
+                            class="delete-agreement-btn flex items-center justify-center gap-2 px-2 py-1.5 text-sm rounded hover:bg-white/5 text-red-400">
+                            <i class="ri-delete-bin-line text-base"></i>
+                        </a>
                     </td>
 
                 </tr>
