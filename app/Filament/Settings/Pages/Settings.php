@@ -2,35 +2,32 @@
 
 namespace App\Filament\Settings\Pages;
 
+use App\Filament\Dashboard\Pages\Concerns\HasCompanyHeader;
 use Filament\Pages\Page;
 use Illuminate\Support\Facades\Session;
 
 class Settings extends Page
 {
-    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-document-text';
+    use HasCompanyHeader;
+
     protected static ?string $navigationLabel = 'Agreement Management';
-    protected static string|\UnitEnum|null $navigationGroup = null;
-    protected static ?int $navigationSort = 10;
+
+    protected static ?int $navigationSort =13;
+
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-document-text';
 
     protected string $view = 'filament.settings.pages.settings';
 
-    public ?string $userUin = null;
-    public ?string $orgaUin = null;
-
-    public int $totalAgreements = 0;
-    public int $totalDrafts = 0;
-    public int $expiringSoon = 0;
-    public int $expiredCount = 0;
-
-    public array $categoryBreakdown = [];
+    public string $userUin;
+    public string $orgaUin;
 
     public function mount(): void
     {
         $this->userUin = Session::get('partaker_user_uin');
-        $this->orgaUin = Session::get('partaker_orga_uin');
+        $this->orgaUin = Session::get('selected_orga_uin');
 
-        abort_if(! $this->userUin, 419, 'Session expired.');
-
-        // TODO: load agreement-management data here
+        if (! $this->userUin || ! $this->orgaUin || ! $this->userData) {
+            $this->redirect(route('home'));
+        }
     }
 }

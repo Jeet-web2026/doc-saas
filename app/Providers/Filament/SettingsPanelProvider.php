@@ -15,6 +15,9 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use App\Http\Middleware\EnsurePartakerSessionExists;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Str;
 
 class SettingsPanelProvider extends PanelProvider
 {
@@ -22,8 +25,10 @@ class SettingsPanelProvider extends PanelProvider
     {
         return $panel
             ->id('settings')
-            ->path('settings-panel')
+            ->path('settings')
+            ->sidebarCollapsibleOnDesktop()
             ->brandName('')
+            ->viteTheme('resources/css/filament/dashboard/theme.css')
             ->colors([
                 'primary' => Color::hex('#ffffff'),
             ])
@@ -42,5 +47,17 @@ class SettingsPanelProvider extends PanelProvider
                 DispatchServingFilamentEvent::class,
                 EnsurePartakerSessionExists::class,
             ]);
+    }
+
+    public function boot(): void
+    {
+        View::composer('filament-panels::livewire.topbar', function ($view) {
+            $view->with([
+                'userData' => Session::get('partaker_user_data', []),
+                'companyInformation' => Session::get('company_information'),
+                'backurl' => '/dashboard',
+                'title' => Str::headline(collect(explode('/', request()->path()))->last()),
+            ]);
+        });
     }
 }
