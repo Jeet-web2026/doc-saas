@@ -189,6 +189,11 @@
 
     @section('extracss')
     <style>
+        * {
+            font-family: "Figtree", sans-serif;
+            font-optical-sizing: auto;
+        }
+
         body {
             background: #0b1220;
             color: #e2e8f0;
