@@ -47,6 +47,48 @@ $(document).ready(function () {
         });
     }
 
+    $(document).on("click", "#submitBtn", function (e) {
+        e.preventDefault();
+
+        Swal.fire({
+            title: "Are you sure you want to save this agreement?",
+            html: `
+                <p>Once this agreement is saved, <strong>Internal Notes</strong> will be
+                permanently locked and cannot be edited or deleted.</p>
+                <p>Please verify that all information is complete and accurate before proceeding.</p>
+            `,
+            showCancelButton: true,
+            background: "#e6f2ff",
+            confirmButtonText: "Save Agreement",
+            cancelButtonText: "Cancel",
+            confirmButtonColor: "#3085d6",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $(this).closest("form").submit();
+            }
+        });
+    });
+
+    $(document).on("click", "#submitDraftBtn", function (e) {
+        e.preventDefault();
+
+        Swal.fire({
+            title: "Are you sure you want to draft this agreement?",
+            html: `
+                <p>Please verify that all information is complete and accurate before proceeding.</p>
+            `,
+            showCancelButton: true,
+            background: "#e6f2ff",
+            confirmButtonText: "Save Draft",
+            cancelButtonText: "Cancel",
+            confirmButtonColor: "#3085d6",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $(this).closest("form").submit();
+            }
+        });
+    });
+
     // On category change, load its types (no pre-selection — user is actively switching)
     $("#agreementCategory").on("change", function () {
         loadAgreementTypes($(this).val());
@@ -421,28 +463,6 @@ $(document).ready(function () {
 
         historyContent.html(html);
     }
-
-    $(document).on("click", "#submitBtn", function (e) {
-        e.preventDefault();
-
-        Swal.fire({
-            title: "Are you sure you want to save this agreement?",
-            html: `
-                <p>Once this agreement is saved, <strong>Internal Notes</strong> will be
-                permanently locked and cannot be edited or deleted.</p>
-                <p>Please verify that all information is complete and accurate before proceeding.</p>
-            `,
-            showCancelButton: true,
-            background: "#e6f2ff",
-            confirmButtonText: "Save Agreement",
-            cancelButtonText: "Cancel",
-            confirmButtonColor: "#3085d6",
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $(this).closest("form").submit();
-            }
-        });
-    });
 
     document
         .getElementById("expiry_date")

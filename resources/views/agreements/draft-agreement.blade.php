@@ -172,7 +172,7 @@
 
             <div class="flex flex-wrap justify-end gap-3 pt-2">
                 <a href="/dashboard/drafts" class="btn btn-ghost">Cancel</a>
-                <button id="submitBtn" type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Submit</button>
+                <button id="submitDraftBtn" type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Submit</button>
             </div>
         </form>
     </main>
