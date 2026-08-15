@@ -44,7 +44,7 @@
                 <line x1="15" y1="12" x2="3" y2="12" />
             </svg>
 
-            Go to Login
+            Go to Home
         </a>
 
     </div>
