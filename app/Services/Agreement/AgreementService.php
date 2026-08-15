@@ -612,7 +612,11 @@ class AgreementService
             ->latest()
             ->paginate($perPage);
 
-        return AgmtDraftResource::collection($paginated)->response()->getData(true);
+        $paginated->getCollection()->transform(
+            fn($item) => (new AgmtDraftResource($item))->toArray(request())
+        );
+
+        return $paginated->toArray();
     }
 
     public function generateAgreementRefNo(int|string $orgaUin): string

@@ -5,7 +5,7 @@
     <main class="mx-auto max-w-5xl px-6 py-8">
         <div class="flex flex-col lg:flex-row items-center justify-between">
             <div class="mb-6">
-                <p class="mt-1 text-sm text-slate-400" id="page-subtitle">Reference No. <strong>({{ $agreement->Agmt_Ref_No ?? '' }})</strong></p>
+                <p class="mt-1 text-sm text-slate-400 hidden" id="page-subtitle">Reference No. <strong>({{ $agreement->Agmt_Ref_No ?? '' }})</strong></p>
             </div>
             <x-a-greement-history :agreementId="$agreement->Agmt_UIN" />
         </div>

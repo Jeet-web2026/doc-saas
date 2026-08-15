@@ -31,8 +31,7 @@ class AddAgreementController extends Controller
     {
         $this->agreementService->store($request);
 
-        return redirect()
-            ->route('all-agreements')
+        return redirect('/dashboard/drafts')
             ->with('success', 'Agreement created successfully.');
     }
 }

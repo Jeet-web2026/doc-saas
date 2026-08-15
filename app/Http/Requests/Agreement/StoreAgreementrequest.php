@@ -67,7 +67,7 @@ class StoreAgreementrequest extends FormRequest
             'parties.*.is_primary' => 'nullable',
             'deposit_amount' => 'nullable|numeric',
             'ref_no' => [
-                'nullable',
+                'required',
                 new ValidAgreementRefNo(
                     table: 'tbl_tran_agmt',
                     companyId: $this->input('company_id'),

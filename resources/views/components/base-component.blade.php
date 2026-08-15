@@ -46,6 +46,8 @@
             box-sizing: border-box;
             background-color: #020618;
             color: hsl(0 0% 98%);
+            font-family: "Figtree", sans-serif;
+            font-optical-sizing: auto;
         }
 
         /* navbar css */

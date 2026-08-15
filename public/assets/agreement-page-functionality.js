@@ -101,10 +101,6 @@ $(document).ready(function () {
         loadAgreementTypes($("#agreementCategory").val(), savedType);
     });
 
-    $("form").on("submit", function () {
-        $("#remarks").val(quill.root.innerHTML);
-    });
-
     $("#attachment").on("change", function () {
         const file = this.files[0];
 
@@ -231,6 +227,10 @@ $(document).ready(function () {
                 userOnly: true,
             },
         },
+    });
+
+    $("form").on("submit", function () {
+        $("#remarks").val(quill.root.innerHTML);
     });
 
     // Only sync hidden input + wire up submit-time value when editable
