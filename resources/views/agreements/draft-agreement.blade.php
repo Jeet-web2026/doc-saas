@@ -1,5 +1,5 @@
 <x-base-component tailwind="true" jQuery="true" subheading="Draft Agreement" metadata="Draft Agreement — Renewal Tracker" metadescription="description" bIcons="true">
-    <x-secondary-header backurl="/dashboard/drafts" :companyInformation="$companyInformation" :userData="$userData" />
+    <x-secondary-header backurl="/dashboard/drafts" :companyInformation="$companyInformation" :userData="$userData" title="Drafts" />
 
     <main class="mx-auto max-w-5xl px-6 py-8">
 

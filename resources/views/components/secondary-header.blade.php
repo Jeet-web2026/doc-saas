@@ -1,7 +1,8 @@
 @props([
 'companyInformation' => '',
 'userData' => '',
-'backurl' => ''
+'backurl' => '',
+'title' => ''
 ])
 <header class="border-b border-white/10 bg-white/[0.03]">
     <div class="mx-auto flex flex-wrap gap-3 max-w-5xl items-center justify-between px-6 py-4 relative">
@@ -53,7 +54,7 @@
         </div>
 
         <div class="flex flex-col items-end">
-            <div class="text-xl font-semibold lg:absolute lg:left-[45%]">Agreements</div>
+            <div class="text-xl font-semibold lg:absolute lg:left-[45%]">{{ $title }}</div>
             <!-- Company switcher -->
             <div class="relative flex flex-row items-center">
                 <a href="{{ $backurl }}" class="inline-flex items-center gap-2 px-3 py-1.5 border border-white/10 rounded-md text-sm text-white/80 hover:text-white hover:bg-white/10 transition">
