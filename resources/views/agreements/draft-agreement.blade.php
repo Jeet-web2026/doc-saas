@@ -1,5 +1,5 @@
 <x-base-component tailwind="true" jQuery="true" subheading="Add Agreement" metadata="Add Agreement — Renewal Tracker" metadescription="description" bIcons="true">
-    <x-secondary-header backurl="{{ route('all-agreements') }}" :companyInformation="$companyInformation" :userData="$userData" />
+    <x-secondary-header backurl="/dashboard/drafts" :companyInformation="$companyInformation" :userData="$userData" />
 
     <main class="mx-auto max-w-5xl px-6 py-8">
 
