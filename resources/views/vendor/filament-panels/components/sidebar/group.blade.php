@@ -49,19 +49,9 @@
             @if ($collapsible)
                 <x-filament::icon-button
                     color="gray"
-                    icon="heroicon-o-plus"
+                    :icon="\Filament\Support\Icons\Heroicon::ChevronUp"
+                    :icon-alias="\Filament\View\PanelsIconAlias::SIDEBAR_GROUP_COLLAPSE_BUTTON"
                     :label="$label"
-                    x-show="$store.sidebar.groupIsCollapsed(label)"
-                    x-bind:aria-expanded="! $store.sidebar.groupIsCollapsed(label)"
-                    x-on:click.stop="$store.sidebar.toggleCollapsedGroup(label)"
-                    class="fi-sidebar-group-collapse-btn"
-                />
-
-                <x-filament::icon-button
-                    color="gray"
-                    icon="heroicon-o-minus"
-                    :label="$label"
-                    x-show="! $store.sidebar.groupIsCollapsed(label)"
                     x-bind:aria-expanded="! $store.sidebar.groupIsCollapsed(label)"
                     x-on:click.stop="$store.sidebar.toggleCollapsedGroup(label)"
                     class="fi-sidebar-group-collapse-btn"
