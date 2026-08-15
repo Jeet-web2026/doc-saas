@@ -176,20 +176,14 @@ $(document).ready(function () {
     // ---------- State (columns / sort / calendar month) ----------
     let sort = null; // {key, dir}
     const visible = {
-        fileNo: false,
         category: false,
         type: false,
-        firstParty: true,
-        secondParty: true,
-        date: true,
-        expiry: true,
-        expiry_by: true,
-        signingDate: false,
-        notaryDate: false,
+        name: true,
         version: true,
-        drafted: false,
-        jurisdiction: false,
-        remarks: false,
+        approved_by: true,
+        approved_date: true,
+        upload_draft_file_name: true,
+        upload_checklist_file_name: true,
     };
     const today = new Date();
     let calMonth = new Date(today.getFullYear(), today.getMonth(), 1);

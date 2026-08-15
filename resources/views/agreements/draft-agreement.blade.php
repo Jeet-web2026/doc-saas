@@ -26,14 +26,14 @@
                             name="agreement_category"
                             id="agreementCategory">
                             @php
-                                $allChildren = $agreementCategories
-                                    ->flatMap(function ($parent) {
-                                        return $parent->children->map(function ($child) use ($parent) {
-                                            $child->parentName = $parent->Agmt_Catg_Name;
-                                            return $child;
-                                        });
-                                    })
-                                    ->sortBy('Agmt_Catg_Name'); // ascending, a to z
+                            $allChildren = $agreementCategories
+                            ->flatMap(function ($parent) {
+                            return $parent->children->map(function ($child) use ($parent) {
+                            $child->parentName = $parent->Agmt_Catg_Name;
+                            return $child;
+                            });
+                            })
+                            ->sortBy('Agmt_Catg_Name');
                             @endphp
 
                             @foreach($allChildren as $child)
@@ -42,7 +42,6 @@
                                 {{ $child->Agmt_Catg_Name }} &lt; {{ $child->parentName }}
                             </option>
                             @endforeach
-
                         </select>
 
                         @error('agreement_category')
@@ -57,10 +56,9 @@
                         <select id="agreementType"
                             class="input"
                             name="agreement_type">
-
                         </select>
-                        <input type="hidden" id="currentAgreementType" 
-                                    value="{{ old('agreement_type', $agreement->Agmt_Type_UIN ?? '') }}">
+                        <input type="hidden" id="currentAgreementType"
+                            value="{{ old('agreement_type', $agreement->Agmt_Type_UIN ?? '') }}">
 
                         @error('agreement_type')
                         <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
@@ -79,6 +77,92 @@
                             placeholder="e.g. Courier Service Agreement — FY26">
 
                         @error('agreement_name')
+                        <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <!-- Draft Version No -->
+                    <div class="space-y-1.5">
+                        <label class="label">Draft Version No</label>
+
+                        <input
+                            type="text"
+                            class="input"
+                            name="draft_version_no"
+                            value="{{ old('draft_version_no') }}"
+                            placeholder="e.g. v1.0">
+
+                        @error('draft_version_no')
+                        <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <!-- Approved By -->
+                    <div class="space-y-1.5">
+                        <label class="label">Approved By</label>
+
+                        <input
+                            type="text"
+                            class="input"
+                            name="approved_by"
+                            value="{{ old('approved_by') }}"
+                            placeholder="e.g. John Doe">
+
+                        @error('approved_by')
+                        <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <!-- Approved Date -->
+                    <div class="space-y-1.5">
+                        <label class="label">Approved Date</label>
+
+                        <input
+                            type="date"
+                            class="input"
+                            name="approved_date"
+                            value="{{ old('approved_date') }}">
+
+                        @error('approved_date')
+                        <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- File Uploads -->
+            <section class="card p-6">
+                <h2 class="section-title">Attachments</h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                    <!-- Upload Draft File -->
+                    <div class="space-y-1.5">
+                        <label class="label">Upload Draft File</label>
+
+                        <input
+                            type="file"
+                            class="input file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:bg-slate-700 file:text-slate-100 file:text-sm hover:file:bg-slate-600 cursor-pointer"
+                            name="draft_file"
+                            id="draftFile">
+
+                        @error('draft_file')
+                        <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <!-- Upload Checklist File -->
+                    <div class="space-y-1.5">
+                        <label class="label">Upload Checklist File</label>
+
+                        <input
+                            type="file"
+                            class="input file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:bg-slate-700 file:text-slate-100 file:text-sm hover:file:bg-slate-600 cursor-pointer"
+                            name="checklist_file"
+                            id="checklistFile">
+
+                        @error('checklist_file')
                         <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
                         @enderror
                     </div>
