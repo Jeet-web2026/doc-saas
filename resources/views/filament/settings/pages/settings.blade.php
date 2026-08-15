@@ -210,7 +210,7 @@
                                 data-menu-toggle="colsMenu2"
                                 aria-label="Show columns"
                                 title="Show columns"
-                                class="inline-flex h-9 w-9 sm:w-auto sm:px-3 items-center justify-center gap-2 rounded-md border border-white/10 hover:bg-white/5 transition">
+                                class="hidden h-9 w-9 sm:w-auto sm:px-3 items-center justify-center gap-2 rounded-md border border-white/10 hover:bg-white/5 transition">
 
                                 <i class="bi bi-sliders2"></i>
 
