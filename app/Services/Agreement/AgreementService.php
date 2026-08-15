@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Throwable;
+use Illuminate\Support\Str;
 
 class AgreementService
 {
@@ -58,7 +59,7 @@ class AgreementService
                 $attachmentSizeKb = $this->getFileSizeInKb($file);
             }
 
-            $refNo = $this->generateAgreementRefNo($request->company_id);
+            $refNo = $request->ref_no ?? $this->generateAgreementRefNo($request->company_id);
 
             $agreement = Agreement::create([
                 'Orga_UIN'       => $request->company_id,
@@ -629,7 +630,16 @@ class AgreementService
 
             $sequence = str_pad((string) ($todaysCount + 1), 3, '0', STR_PAD_LEFT);
 
-            return "{$companyCode}{$today}{$sequence}";
+            do {
+                $randomSegment = strtoupper(Str::random(4));
+                $refNo = "{$companyCode}/{$today}#{$sequence}#{$randomSegment}";
+            } while (
+                Agreement::where('Orga_UIN', $orgaUin)
+                ->where('Agmt_Ref_No', $refNo)
+                ->exists()
+            );
+
+            return $refNo;
         });
     }
 }

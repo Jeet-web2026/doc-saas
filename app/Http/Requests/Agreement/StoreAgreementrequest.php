@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Agreement;
 
+use App\Rules\ValidAgreementRefNo;
 use App\Rules\ValidDocumentUpload;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -64,7 +65,14 @@ class StoreAgreementrequest extends FormRequest
             'parties.*.org_name'   => 'required|string|max:255',
             'parties.*.signatory'  => 'nullable|string|max:255',
             'parties.*.is_primary' => 'nullable',
-            'deposit_amount' => 'nullable|numeric'
+            'deposit_amount' => 'nullable|numeric',
+            'ref_no' => [
+                'nullable',
+                new ValidAgreementRefNo(
+                    table: 'tbl_tran_agmt',
+                    companyId: $this->input('company_id'),
+                ),
+            ]
         ];
     }
 
