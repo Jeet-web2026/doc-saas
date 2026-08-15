@@ -9,6 +9,13 @@
         #calMenu{
             width: 350px !important;
         }
+
+        @media (max-width: 600px) {
+            #calMenu {
+                right: -40px;
+                width: 300px !important;
+            }
+        }
     </style>
 
     <main class="mt-8">
