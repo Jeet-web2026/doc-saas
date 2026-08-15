@@ -58,6 +58,8 @@ class AgreementService
                 $attachmentSizeKb = $this->getFileSizeInKb($file);
             }
 
+            $refNo = $this->generateAgreementRefNo($request->company_id);
+
             $agreement = Agreement::create([
                 'Orga_UIN'       => $request->company_id,
                 'User_UIN'       => $userData['User_UIN'] ?? 1,
@@ -86,6 +88,8 @@ class AgreementService
                 'MoBy'           => $userData['User_UIN'] ?? 1,
 
                 'Stau_UIN'       => $this->determineStatusUin($request->expiry_date),
+                'Agmt_Ref_No' => $refNo,
+                'Agmt_Depst_Amt' => $request->deposit_amount ?? null,
             ]);
 
             $remarks = trim($request->remarks);
@@ -293,9 +297,15 @@ class AgreementService
                 'Agmt_Atch'      => $attachment,
                 'Agmt_Size_KB'  => $attachmentSizeKb,
                 'Stau_UIN'       => $request->expiry_date ? $this->determineStatusUin($request->expiry_date) : $this->determineStatusUin($agreement->expiry_date),
+                'Agmt_Depst_Amt' => $request->deposit_amount
             ];
 
-            if ($request->filled('remarks')) {
+            $remarks = trim($request->remarks);
+
+            if (
+                $remarks !== '<p><br></p>' &&
+                !empty(trim(strip_tags($remarks)))
+            ) {
                 TranAgmtRemk::create([
                     'agmt_uin'       => $agreement->Agmt_UIN,
                     'agmt_remk_date' => now()->toDateString(),
@@ -421,7 +431,12 @@ class AgreementService
                 'Stau_UIN'       => $request->expiry_date ? $this->determineStatusUin($request->expiry_date) : $this->determineStatusUin($oldAgreement->expiry_date),
             ]);
 
-            if ($request->filled('remarks')) {
+            $remarks = trim($request->remarks);
+
+            if (
+                $remarks !== '<p><br></p>' &&
+                !empty(trim(strip_tags($remarks)))
+            ) {
                 TranAgmtRemk::create([
                     'agmt_uin'       => $newAgreement->Agmt_UIN,
                     'agmt_remk_date' => now()->toDateString(),
@@ -598,5 +613,24 @@ class AgreementService
             ->paginate($perPage);
 
         return AgmtDraftResource::collection($paginated)->response()->getData(true);
+    }
+
+    public function generateAgreementRefNo(int|string $orgaUin): string
+    {
+        $company = OrganisationDetails::where('Orga_UIN', $orgaUin)->first();
+        $companyCode = $company->Orga_UIN ?? 'ORG';
+
+        $today = now()->format('Ymd');
+
+        return DB::transaction(function () use ($companyCode, $orgaUin, $today) {
+            $todaysCount = Agreement::where('Orga_UIN', $orgaUin)
+                ->whereDate('created_at', now()->toDateString())
+                ->lockForUpdate()
+                ->count();
+
+            $sequence = str_pad((string) ($todaysCount + 1), 3, '0', STR_PAD_LEFT);
+
+            return "{$companyCode}{$today}{$sequence}";
+        });
     }
 }

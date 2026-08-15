@@ -40,7 +40,9 @@ class Agreement extends Model
 
         'Stau_UIN',
         'update_count',
-        'Agmt_Size_KB'
+        'Agmt_Size_KB',
+        'Agmt_Ref_No',
+        'Agmt_Depst_Amt'
     ];
 
     protected $casts = [

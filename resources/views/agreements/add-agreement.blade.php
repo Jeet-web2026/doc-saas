@@ -294,22 +294,36 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="w-full mt-4">
-                         <h2 class="label mb-2">Attachment</h2>
-                        <input
-                            type="file"
-                            name="attachment"
-                            accept="image/jpeg,image/png,application/pdf,.doc,.docx,.xls,.xlsx"
-                            id="attachment"
-                            class="block w-full text-sm text-slate-300 border border-white/10 rounded-md cursor-pointer bg-transparent focus:outline-none file:mr-3 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-sm file:bg-white/10 file:text-white file:hover:bg-white/20 file:cursor-pointer" />
-                    </div>
-                    <div class="text-xs text-slate-400 my-2 w-full">
-                        *PDF, Word, Excel, JPG, PNG, JPEG documents only · Max 1 MB
-                    </div>
-                    <div class="w-full">
-                        @error('attachment')
-                        <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
-                        @enderror
+                    <div class="flex flex-col lg:flex-row gap-3">
+                        <div class="flex-1 mt-4">
+                            <h2 class="label mb-2">Attachment</h2>
+                            <input
+                                type="file"
+                                name="attachment"
+                                accept="image/jpeg,image/png,application/pdf,.doc,.docx,.xls,.xlsx"
+                                id="attachment"
+                                class="block w-full text-sm text-slate-300 border border-white/10 rounded-md cursor-pointer bg-transparent focus:outline-none file:mr-3 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-sm file:bg-white/10 file:text-white file:hover:bg-white/20 file:cursor-pointer" />
+                                <div class="text-xs text-slate-400 my-2 w-full">
+                                    *PDF, Word, Excel, JPG, PNG, JPEG documents only · Max 1 MB
+                                </div>
+                                <div class="w-full">
+                                    @error('attachment')
+                                    <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                        </div>
+                        <div class="flex-1 mt-4">
+                            <h2 class="label mb-2">Deposit Amount</h2>
+                            <input
+                                type="text"
+                                class="input"
+                                name="deposit_amount"
+                                value="{{ old('deposit_amount') }}">
+
+                            @error('deposit_amount')
+                            <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
                     </div>
             </section>
 

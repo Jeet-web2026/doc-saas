@@ -74,6 +74,7 @@ class EditAgreementRequest extends FormRequest
             'parties.*.org_name'   => 'required|string|max:255',
             'parties.*.signatory'  => 'nullable|string|max:255',
             'parties.*.is_primary' => 'nullable',
+            'deposit_amount' => 'nullable|numeric'
         ];
     }
 
