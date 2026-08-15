@@ -6,6 +6,9 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
+        #calMenu{
+            width: 350px !important;
+        }
     </style>
 
     <main class="mt-8">
