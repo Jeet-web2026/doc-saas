@@ -233,11 +233,9 @@ $(document).ready(function () {
                     <!-- Agreement Category (always visible, first col, matches thead) -->
                     <td class="px-5 py-4">
                         <div class="min-w-0">
-                            <a href="/view-agreement/${r.id}">
-                                <div class="truncate font-medium">
-                                    ${r.categoryLabel ?? "—"}
-                                </div>
-                            </a>
+                            <div class="truncate font-medium">
+                                ${r.categoryLabel ?? "—"}
+                            </div>
                         </div>
                     </td>
 
@@ -327,18 +325,9 @@ $(document).ready(function () {
 
                         <!-- Card Header -->
                         <div class="flex items-center justify-between px-4 py-3">
-                            <a
-                            
-                                href="/view-agreement/${r.id}"
-                                class="flex items-center gap-3 min-w-0">
-
-                                <div class="min-w-0">
-                                    <div class="font-semibold text-lg truncate">
-                                        ${name}
-                                    </div>
-                                </div>
-
-                            </a>
+                            <div class="font-semibold text-lg truncate">
+                                ${name}
+                            </div>
 
                             <!-- Right Side -->
                             <div class="flex items-center gap-2 shrink-0">

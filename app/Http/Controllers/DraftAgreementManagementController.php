@@ -32,8 +32,7 @@ class DraftAgreementManagementController extends Controller
             $request->file('checklist_file'),
         );
 
-        return redirect()
-            ->route('home')
+        return redirect('/dashboard/drafts')
             ->with('success', 'Agreement draft saved successfully.');
     }
 }
