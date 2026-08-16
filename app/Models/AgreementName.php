@@ -7,15 +7,20 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class AgreementName extends Model
 {
-    protected $table = 'tbl_tran_agreement_names';
+    protected $table = 'tbl_mast_agmt_name';
     protected $primaryKey = 'Agmt_Name_UIN';
+
+    const CREATED_AT = 'CrOn';
+    const UPDATED_AT = 'MoOn';
 
     protected $fillable = [
         'Orga_UIN',
         'Agmt_Catg_UIN',
         'Agmt_Type_UIN',
         'Agmt_Name',
+        'Stau_UIN',
         'CrBy',
+        'MoBy',
     ];
 
     public function category()

@@ -661,14 +661,19 @@ class AgreementService
 
     public function create(array $data): AgreementName
     {
+        $userUin = Session::get('partaker_user_uin');
+
         return AgreementName::create([
-            'Orga_UIN' => $data['company_id'],
+            'Orga_UIN'      => $data['company_id'],
             'Agmt_Catg_UIN' => $data['agreement_category'],
             'Agmt_Type_UIN' => $data['agreement_type'],
             'Agmt_Name'     => $data['agmt_Name'],
-            'CrBy'       => Session::get('partaker_user_uin'),
+            'Stau_UIN'      => $data['status'] ?? 1,
+            'CrBy'          => $userUin,
+            'MoBy'          => $userUin,
         ]);
     }
+
     public function getAgreementNames(
         ?string $search,
         ?string $dateFrom,
@@ -682,10 +687,10 @@ class AgreementService
                 $query->where('Agmt_Name', 'like', "%{$search}%");
             })
             ->when($dateFrom, function ($query, $dateFrom) {
-                $query->whereDate('created_at', '>=', $dateFrom);
+                $query->whereDate('CrOn', '>=', $dateFrom);
             })
             ->when($dateTo, function ($query, $dateTo) {
-                $query->whereDate('created_at', '<=', $dateTo);
+                $query->whereDate('CrOn', '<=', $dateTo);
             })
             ->latest()
             ->paginate($perPage);
