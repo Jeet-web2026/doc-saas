@@ -744,4 +744,9 @@ class AgreementService
 
         return $link;
     }
+
+    public function getCategoriesWithChildren()
+    {
+        return AgreementCategories::with('children')->get();
+    }
 }
