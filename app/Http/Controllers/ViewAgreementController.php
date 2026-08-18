@@ -66,7 +66,7 @@ class ViewAgreementController extends Controller
 
     public function generateDraftViewLink(AgmtDraft $agreement)
     {
-        $url = $this->agreementService->generateViewLink($agreement);
+        $url = $this->agreementService->generateDraftViewLink($agreement);
 
         return response()->json([
             'url' => $url,
