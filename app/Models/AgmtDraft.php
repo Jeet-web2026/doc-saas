@@ -11,6 +11,8 @@ class AgmtDraft extends Model
     use HasFactory;
 
     protected $table = 'tbl_tran_agmt_draft';
+    protected $primaryKey = 'id';
+    public $incrementing = true;
 
     protected $fillable = [
         'Orga_UIN',
