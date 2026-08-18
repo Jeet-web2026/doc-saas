@@ -83,8 +83,9 @@ class ViewAgreementController extends Controller
                 'agreementCategories' => $this->agreementService->getCategoriesWithChildren(),
                 'public'              => true,
             ]),
-            'draft' => view('agreements.draft-public-view', [
+            'draft' => view('agreements.view-draft', [
                 'draft'   => $link->foreign,
+                'agreementCategories' => $this->agreementService->getCategoriesWithChildren(),
                 'public'  => true,
             ]),
             default => abort(404),
