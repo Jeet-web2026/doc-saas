@@ -60,10 +60,19 @@
 
                     <div class="space-y-1.5">
                         <label class="label">Agreement Type</label>
+                        @unless($public ?? false)
                         <select class="input js-lock" name="type" id="agreementType" disabled>
                             {{-- populated dynamically via AJAX --}}
                         </select>
+                        @else
+                            <input
+                                type="text"
+                                class="input"
+                                value="{{ $agreement->type->Agmt_Type_Name ?? '' }}"
+                                readonly>
+                        @endunless
                     </div>
+                    
 
                     <div class="space-y-1.5 md:col-span-2">
                         <label class="label">Agreement Name</label>
