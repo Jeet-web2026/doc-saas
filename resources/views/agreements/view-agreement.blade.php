@@ -2,9 +2,15 @@
 
     <header class="border-b border-white/10 bg-white/[0.02]">
         <div class="mx-auto max-w-5xl flex items-center justify-between px-6 py-4">
-            <a href="{{ route('all-agreements') }}" class="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-white">
-                <i class="bi bi-arrow-left"></i> Back
-            </a>
+            @if($public ?? false)
+                <span class="inline-flex items-center gap-2 text-sm text-slate-400">
+                    <i class="bi bi-link-45deg"></i> Shared Agreement
+                </span>
+            @else
+                <a href="{{ route('all-agreements') }}" class="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-white">
+                    <i class="bi bi-arrow-left"></i> Back
+                </a>
+            @endif
             <span class="text-xs uppercase tracking-wider text-slate-400" id="mode-label">View Agreement</span>
         </div>
     </header>
@@ -15,16 +21,22 @@
                 <h1 class="text-3xl font-semibold tracking-tight" id="page-title">View Agreement</h1>
                 <p class="mt-1 text-sm text-slate-400" id="page-subtitle">View the agreement details.</p>
             </div>
-            <x-a-greement-history :agreementId="$agreement->Agmt_UIN" />
+            @unless($public ?? false)
+                <x-a-greement-history :agreementId="$agreement->Agmt_UIN" />
+            @endunless
         </div>
-        <x-globalresponse />
+        @unless($public ?? false)
+            <x-globalresponse />
+        @endunless
 
         <form
-            action="{{ route('agreements.renew', $agreement->Agmt_UIN) }}"
+            @unless($public ?? false) action="{{ route('agreements.renew', $agreement->Agmt_UIN) }}" @endunless
             method="POST"
             enctype="multipart/form-data"
             class="space-y-6">
-            @csrf
+            @unless($public ?? false)
+                @csrf
+            @endunless
 
             <!-- Classification -->
             <section class="card p-6">
@@ -160,7 +172,7 @@
 
                     <div class="flex items-center gap-3">
                         @if($agreement->Agmt_Atch)
-                        <a
+                        
                             href="{{ asset('storage/' . $agreement->Agmt_Atch) }}"
                             target="_blank"
                             download
@@ -174,6 +186,7 @@
                         </a>
                         @endif
 
+                        @unless($public ?? false)
                         <input
                             type="file"
                             name="attachment"
@@ -181,6 +194,7 @@
                             id="upload-input"
                             class="block w-full text-sm text-slate-300 border border-white/10 rounded-md cursor-pointer bg-transparent focus:outline-none file:mr-3 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-sm file:bg-white/10 file:text-white file:hover:bg-white/20 file:cursor-pointer"
                             disabled />
+                        @endunless
                     </div>
                 </div>
                 </div>
@@ -188,6 +202,8 @@
 
             <!-- Remarks -->
             <x-rich-text-editor name="remarks" :value="old('remarks')" :editable="false" />
+
+            @unless($public ?? false)
             <div class="card p-4 mt-4" style="background-color: #0f1729; border: 1px solid #2a3654; border-radius: 8px;">
                 <h3 class="mb-3" style="color: #94a3c4; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase;">
                     Previous Internal Notes
@@ -213,6 +229,7 @@
                     @endforelse
                 </div>
             </div>
+            @endunless
         </form>
     </main>
 
