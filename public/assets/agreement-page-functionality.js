@@ -42,7 +42,6 @@ $(document).ready(function () {
                 $("#agreementType").html(
                     '<option value="" class="bg-slate-900">Select Agreement Type</option>',
                 );
-                alert("Failed to load agreement types.");
             },
         });
     }
