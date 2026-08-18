@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Throwable;
 use Illuminate\Support\Str;
+use App\Models\ShareLink;
 
 class AgreementService
 {
@@ -707,5 +708,21 @@ class AgreementService
         $agreementName = AgreementName::query()->findOrFail($id);
 
         return $agreementName->delete();
+    }
+
+    public function generateViewLink(Agreement $agreement): string
+    {
+        $userUin = Session::get('partaker_user_uin');
+
+        $link = ShareLink::create([
+            'Link_Foreign_Id_UIN' => $agreement->getKey(),
+            'Link_Type'           => $agreement->getMorphClass(),
+            'Link_Token'          => Str::random(40),
+            'Link_Expy_On'        => now()->addHours(48),
+            'CrBy'                => $userUin,
+            'MoBy'                => $userUin,
+        ]);
+
+        return route('agreements.public-view', $link->Link_Token);
     }
 }

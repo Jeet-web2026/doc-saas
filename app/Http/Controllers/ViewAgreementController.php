@@ -8,8 +8,6 @@ use App\Models\AgreementType;
 use App\Services\Agreement\AgreementService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 
 class ViewAgreementController extends Controller
 {
@@ -56,19 +54,12 @@ class ViewAgreementController extends Controller
         return redirect()->back()->with('success', 'Agreement deleted successfully.');
     }
 
-    public function generateViewLink(Model $target)
+    public function generateViewLink(Agreement $agreement)
     {
-        $link = ShareLink::create([
-            'Link_Foreign_Id_UIN' => $target->getKey(),
-            'Link_Type'           => $target->getMorphClass(),
-            'Link_Token'          => Str::random(40),
-            'Link_Expy_On'        => now()->addHours(48),
-            'CrBy'                => auth()->id(),
-            'MoBy'                => auth()->id(),
-        ]);
+        $url = $this->agreementService->generateViewLink($agreement);
 
         return response()->json([
-            'url' => route('agreements.public-view', $link->Link_Token),
+            'url' => $url,
         ]);
     }
 
