@@ -186,7 +186,6 @@
                         </a>
                         @endif
 
-                        @unless($public ?? false)
                         <input
                             type="file"
                             name="attachment"
@@ -194,7 +193,6 @@
                             id="upload-input"
                             class="block w-full text-sm text-slate-300 border border-white/10 rounded-md cursor-pointer bg-transparent focus:outline-none file:mr-3 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-sm file:bg-white/10 file:text-white file:hover:bg-white/20 file:cursor-pointer"
                             disabled />
-                        @endunless
                     </div>
                 </div>
                 </div>
