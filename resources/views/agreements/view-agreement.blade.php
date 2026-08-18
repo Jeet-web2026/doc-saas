@@ -172,7 +172,7 @@
 
                     <div class="flex items-center gap-3">
                         @if($agreement->Agmt_Atch)
-                        
+                        <a
                             href="{{ asset('storage/' . $agreement->Agmt_Atch) }}"
                             target="_blank"
                             download
