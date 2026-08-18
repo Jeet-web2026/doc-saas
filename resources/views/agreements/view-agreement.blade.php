@@ -477,4 +477,17 @@
     @section('extracsscdns')
     <link href="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.snow.css" rel="stylesheet">
     @endsection
+
+    @section('extrajs')
+        <script>
+            $(document).ready(function () {
+                const categoryId = $("#agreementCategory").val();
+                const currentType = $("#currentAgreementType").val();
+
+                if (categoryId) {
+                    loadAgreementTypes(categoryId, currentType);
+                }
+            });
+        </script>
+    @endsection
 </x-base-component>
