@@ -58,12 +58,14 @@
                         </select>
                     </div>
 
+                    @unless($public ?? false)
                     <div class="space-y-1.5">
                         <label class="label">Agreement Type</label>
                         <select class="input js-lock" name="type" id="agreementType" disabled>
                             {{-- populated dynamically via AJAX --}}
                         </select>
                     </div>
+                    @endunless
 
                     <div class="space-y-1.5 md:col-span-2">
                         <label class="label">Agreement Name</label>
