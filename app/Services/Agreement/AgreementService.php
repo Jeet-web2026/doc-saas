@@ -718,12 +718,12 @@ class AgreementService
             'Link_Foreign_Id_UIN' => $agreement->getKey(),
             'Link_Type'           => $agreement->getMorphClass(),
             'Link_Token'          => Str::random(40),
-            'Link_Expy_On'        => now()->addHours(48),
+            'Link_Expy_On'        => now()->addHours(24),
             'CrBy'                => $userUin,
             'MoBy'                => $userUin,
         ]);
 
-        return route('agreements.public-view', $link->Link_Token);
+        return route('agreements.public-view', ['token' => $link->Link_Token, 'timeStamp' => $link->Link_Expy_On]);
     }
 
     public function generateDraftViewLink(AgmtDraft $draft): string
@@ -734,12 +734,12 @@ class AgreementService
             'Link_Foreign_Id_UIN' => $draft->getKey(),
             'Link_Type'           => $draft->getMorphClass(),
             'Link_Token'          => Str::random(40),
-            'Link_Expy_On'        => now()->addHours(48),
+            'Link_Expy_On'        => now()->addHours(24),
             'CrBy'                => $userUin,
             'MoBy'                => $userUin,
         ]);
 
-        return route('agreements.public-view', $link->Link_Token);
+        return route('agreements.public-view', ['token' => $link->Link_Token, 'timeStamp' => $link->Link_Expy_On]);
     }
 
     public function resolveShareLink(string $token): ShareLink

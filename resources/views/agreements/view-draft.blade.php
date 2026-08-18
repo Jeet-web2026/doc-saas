@@ -9,6 +9,10 @@
         </div>
     </header>
 
+    <div class="max-w-5xl mx-auto mt-8 px-5">
+        <x-link-expiration :expiredAt="request()->route('timeStamp')" />
+    </div>
+
     <main class="mx-auto max-w-5xl px-6 py-8">
 
         <div class="mb-6">
@@ -57,7 +61,7 @@
                             type="text"
                             class="input"
                             value="{{ $draft->type->Agmt_Type_Name ?? '' }}"
-                            readonly>
+                            disabled>
                     </div>
 
                     <!-- Agreement Name -->
@@ -68,7 +72,7 @@
                             type="text"
                             class="input"
                             value="{{ $draft->Agmt_Name }}"
-                            readonly>
+                            disabled>
                     </div>
 
                     <!-- Draft Version No -->
@@ -79,7 +83,7 @@
                             type="text"
                             class="input"
                             value="{{ $draft->Agmt_Vson }}"
-                            readonly>
+                            disabled>
                     </div>
 
                     <!-- Approved By -->
@@ -90,7 +94,7 @@
                             type="text"
                             class="input"
                             value="{{ $draft->Agmt_Aprv_By }}"
-                            readonly>
+                            disabled>
                     </div>
 
                     <!-- Approved Date -->
@@ -101,7 +105,7 @@
                             type="date"
                             class="input"
                             value="{{ optional($draft->Agmt_Aprv_Date)->format('Y-m-d') }}"
-                            readonly>
+                            disabled>
                     </div>
 
                 </div>
@@ -120,7 +124,7 @@
                                 href="{{ asset('storage/' . $draft->Agmt_Drft_File_Name) }}"
                                 target="_blank"
                                 download
-                                class="inline-flex items-center gap-2 px-3 py-1.5 border border-white/10 rounded-md text-sm text-slate-300 hover:text-white hover:bg-white/10 transition">
+                                class="inline-flex items-center gap-2 px-3 py-1.5 border border-white/10 rounded-md text-sm text-slate-300 hover:text-white hover:bg-white/10 transition w-full">
                                 <i class="bi bi-download"></i> Download Draft File
                             </a>
                             @else
@@ -135,7 +139,7 @@
                                 href="{{ asset('storage/' . $draft->Agmt_Chklst_File_Name) }}"
                                 target="_blank"
                                 download
-                                class="inline-flex items-center gap-2 px-3 py-1.5 border border-white/10 rounded-md text-sm text-slate-300 hover:text-white hover:bg-white/10 transition">
+                                class="inline-flex items-center gap-2 px-3 py-1.5 border border-white/10 rounded-md text-sm text-slate-300 hover:text-white hover:bg-white/10 transition w-full">
                                 <i class="bi bi-download"></i> Download Checklist File
                             </a>
                             @else

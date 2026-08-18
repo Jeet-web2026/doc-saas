@@ -15,6 +15,12 @@
         </div>
     </header>
 
+    @if($public ?? false)
+        <div class="max-w-5xl mx-auto mt-8 px-5">
+            <x-link-expiration :expiredAt="request()->route('timeStamp')" />
+        </div>
+    @endif
+
     <main class="mx-auto max-w-5xl px-6 py-8">
         <div class="flex flex-col lg:flex-row items-center justify-between">
             <div class="mb-6">
@@ -69,14 +75,14 @@
                                 type="text"
                                 class="input"
                                 value="{{ $agreement->type->Agmt_Type_Name ?? '' }}"
-                                readonly>
+                                disabled>
                         @endunless
                     </div>
                     
 
                     <div class="space-y-1.5 md:col-span-2">
                         <label class="label">Agreement Name</label>
-                        <input class="input js-lock" readonly name="name" value="{{ old('name', $agreement->Agmt_Name) }}" />
+                        <input class="input js-lock" disabled name="name" value="{{ old('name', $agreement->Agmt_Name) }}" />
                     </div>
                 </div>
 
@@ -101,17 +107,17 @@
                             <input
                                 class="input js-lock text-sm"
                                 name="parties[{{ $index }}][role]"
-                                value="{{ old("parties.$index.role", $party->Agmt_Prty_No) }}" readonly />
+                                value="{{ old("parties.$index.role", $party->Agmt_Prty_No) }}" disabled />
                             <input type="hidden" name="parties[{{ $index }}][id]" value="{{ $party->Agmt_Prty_UIN }}" />
                         </div>
                         <input
                             class="input js-lock"
                             name="parties[{{ $index }}][org_name]"
-                            value="{{ old("parties.$index.org_name", $party->Agmt_Prty_Org_Name) }}" readonly />
+                            value="{{ old("parties.$index.org_name", $party->Agmt_Prty_Org_Name) }}" disabled />
                         <input
                             class="input js-lock"
                             name="parties[{{ $index }}][signatory]"
-                            value="{{ old("parties.$index.signatory", $party->Agmt_Athr_Sgnt) }}" readonly />
+                            value="{{ old("parties.$index.signatory", $party->Agmt_Athr_Sgnt) }}" disabled />
                         <div class="flex items-center justify-end gap-2">
                             <input
                                 type="checkbox"
@@ -131,31 +137,31 @@
                 <h2 class="section-title">Dates & Version</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="space-y-1.5"><label class="label">Agreement Date</label>
-                        <input type="date" class="input" name="agreement_date" value="{{ old('agreement_date', optional($agreement->Agmt_Strt_Date)->format('Y-m-d')) }}" readonly />
+                        <input type="date" class="input" name="agreement_date" value="{{ old('agreement_date', optional($agreement->Agmt_Strt_Date)->format('Y-m-d')) }}" disabled />
                     </div>
                     <div class="space-y-1.5"><label class="label">Expiry Date</label>
-                        <input type="date" class="input" name="expiry_date" value="{{ old('expiry_date', optional($agreement->Agmt_Expy_Date)->format('Y-m-d')) }}" readonly />
+                        <input type="date" class="input" name="expiry_date" value="{{ old('expiry_date', optional($agreement->Agmt_Expy_Date)->format('Y-m-d')) }}" disabled />
                     </div>
                     <div class="space-y-1.5"><label class="label">Signing Date</label>
-                        <input type="date" class="input" name="signing_date" value="{{ old('signing_date', optional($agreement->Agmt_Sign_Date)->format('Y-m-d')) }}" readonly />
+                        <input type="date" class="input" name="signing_date" value="{{ old('signing_date', optional($agreement->Agmt_Sign_Date)->format('Y-m-d')) }}" disabled />
                     </div>
                     <div class="space-y-1.5"><label class="label">Notary Date</label>
-                        <input type="date" class="input" name="notary_date" value="{{ old('notary_date', optional($agreement->Agmt_Ntry_Date)->format('Y-m-d')) }}" readonly />
+                        <input type="date" class="input" name="notary_date" value="{{ old('notary_date', optional($agreement->Agmt_Ntry_Date)->format('Y-m-d')) }}" disabled />
                     </div>
                     <div class="space-y-1.5"><label class="label">Agreement Version</label>
-                        <input class="input" name="version" value="{{ old('version', $agreement->Agmt_Vson) }}" readonly />
+                        <input class="input" name="version" value="{{ old('version', $agreement->Agmt_Vson) }}" disabled />
                     </div>
                     <div class="space-y-1.5"><label class="label">Agreement Drafted By</label>
-                        <input class="input js-lock" name="drafted_by" value="{{ old('drafted_by', $agreement->Agmt_Drft_By) }}" readonly />
+                        <input class="input js-lock" name="drafted_by" value="{{ old('drafted_by', $agreement->Agmt_Drft_By) }}" disabled />
                     </div>
                 </div>
                 <div class="flex flex-col lg:flex-row items-center gap-4 mt-3">
                     <div class="space-y-1.5 md:col-span-2 w-1/2"><label class="label">Jurisdiction</label>
-                        <input class="input js-lock" name="jurisdiction" placeholder="e.g. Kolkata, West Bengal" value="{{ old('jurisdiction', $agreement->Agmt_Judn) }}" readonly />
+                        <input class="input js-lock" name="jurisdiction" placeholder="e.g. Kolkata, West Bengal" value="{{ old('jurisdiction', $agreement->Agmt_Judn) }}" disabled />
                     </div>
                     <div class="space-y-1.5 md:col-span-2 w-1/2">
                         <label class="label">File No</label>
-                        <input class="input" name="file_no" value="{{ old('file_no', $agreement->Agmt_File_no) }}" readonly />
+                        <input class="input" name="file_no" value="{{ old('file_no', $agreement->Agmt_File_no) }}" disabled />
                     </div>
                 </div>
                 <div class="flex flex-col lg:flex-row gap-3 items-center">
@@ -164,14 +170,14 @@
                         <input
                             type="text"
                             class="input"
-                            value="{{ $agreement->Agmt_Depst_Amt }}" readonly>
+                            value="{{ $agreement->Agmt_Depst_Amt }}" disabled>
                     </div>
                     <div class="flex-1 mt-4">
                         <h2 class="label mb-2">Reference No.</h2>
                         <input
                             type="text"
                             class="input"
-                            value="{{ $agreement->Agmt_Ref_No ?? '' }}" readonly>
+                            value="{{ $agreement->Agmt_Ref_No ?? '' }}" disabled>
                     </div>
                 </div>
                 <div class="w-full mt-4">

@@ -3,7 +3,7 @@
         <div class="flex items-start justify-between mb-2">
             <div class="flex items-center gap-2">
                 <i class="ri-links-line text-blue-400 text-xl"></i>
-                <h3 class="text-lg font-semibold">Generate View Link</h3>
+                <h3 class="text-lg font-semibold">Generate Link</h3>
             </div>
             <button id="close-generate-link-modal" class="text-muted-foreground hover:text-white">
                 <i class="ri-close-line text-xl"></i>
@@ -11,7 +11,7 @@
         </div>
 
         <p class="text-sm text-muted-foreground mb-4">
-            Generate a temporary, read-only link to this agreement. It expires after 48 hours and doesn't require login.
+            Generate a unique, single-use link to showcase someone to show their agreement/draft document information. The link will expire after 24 hours or once it has been used.
         </p>
 
         <button id="generate-link-btn-action"

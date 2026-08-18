@@ -70,5 +70,5 @@ Route::middleware('partaker.session')->group(function () {
     });
 });
 
-Route::get('/agreements/public/{token}', [ViewAgreementController::class, 'publicView'])
+Route::get('/agreements/public/{token}/{timeStamp}', [ViewAgreementController::class, 'publicView'])
     ->name('agreements.public-view');

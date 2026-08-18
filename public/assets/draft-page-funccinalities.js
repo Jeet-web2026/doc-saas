@@ -295,17 +295,58 @@ $(document).ready(function () {
                         </td>
 
                     <!-- Action -->
-                    <td class="px-5 py-4 flex flex-col lg:flex-row items-center">
-                        <a href="#"
-                            data-id="${r.id}"
-                            class="delete-agreement-btn flex items-center justify-center gap-2 px-2 py-1.5 text-sm rounded hover:bg-white/5 text-red-400">
-                            <i class="ri-delete-bin-line text-base"></i>
-                        </a>
-                        <a href="#"
-                            data-id="${r.id}"
-                            class="generate-link-btn flex items-center justify-center gap-2 px-2 py-1.5 text-sm rounded hover:bg-white/5 text-red-400">
-                            <i class="ri-links-line"></i>
-                        </a>
+                    <td class="px-5 py-4">
+                        <div class="relative flex justify-center items-center" data-menu>
+
+                            <!-- 3 Dot Button -->
+                            <button
+                                type="button"
+                                data-menu-toggle="agreement-row-${r.id}"
+                                class="h-8 w-8 flex items-center justify-center rounded hover:bg-white/10"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="16"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <circle cx="12" cy="12" r="1"/>
+                                    <circle cx="12" cy="5" r="1"/>
+                                    <circle cx="12" cy="19" r="1"/>
+                                </svg>
+                            </button>
+
+                            <!-- Dropdown -->
+                            <div
+                                id="agreement-row-${r.id}"
+                                class="hidden absolute right-0 top-9 w-40 rounded-md border border-white/10 bg-card shadow-xl z-50 p-1"
+                            >
+
+                                <!-- Generate Link -->
+                                <a
+                                    href="#"
+                                    data-id="${r.id}"
+                                    class="generate-link-btn flex items-center gap-2 px-3 py-2 text-sm rounded hover:bg-white/5"
+                                >
+                                    <i class="ri-links-line"></i>
+                                    Generate Link
+                                </a>
+
+                                <!-- Delete -->
+                                <a
+                                    href="#"
+                                    data-id="${r.id}"
+                                    class="delete-agreement-btn flex items-center gap-2 px-3 py-2 text-sm rounded hover:bg-white/5 text-red-400"
+                                >
+                                    <i class="ri-delete-bin-5-line"></i>
+                                    Delete
+                                </a>
+
+                            </div>
+                        </div>
                     </td>
 
                 </tr>
