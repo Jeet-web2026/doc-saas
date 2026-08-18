@@ -17,4 +17,14 @@ return Application::configure(basePath: dirname(__DIR__))
             'partaker.session' => EnsurePartakerSessionExists::class,
         ]);
     })
-    ->withExceptions(function (Exceptions $exceptions): void {})->create();
+    ->withExceptions(function (Exceptions $exceptions){
+        $exceptions->respond(function (Response $response, Throwable $e, Request $request) {
+            if ($response->getStatusCode() === 410) {
+                return response()->view('errors.410', [
+                    'expiredAt' => $e->getMessage(),
+                ], 410);
+            }
+
+            return $response;
+        });
+    })->create();
