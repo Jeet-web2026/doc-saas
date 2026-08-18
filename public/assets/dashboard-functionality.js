@@ -345,7 +345,7 @@ $(document).ready(function () {
 
         const tbody = document.getElementById("tbody");
 
-        if(!tbody) return;
+        if (!tbody) return;
 
         tbody.innerHTML = rows
             .map(
@@ -478,6 +478,13 @@ $(document).ready(function () {
 
                             <a href="#"
                                 data-id="${r.id}"
+                                class="generate-link-btn flex items-center gap-2 px-2 py-1.5 text-sm rounded hover:bg-white/5">
+                                <i class="ri-links-line"></i>
+                                Generate Link
+                            </a>
+
+                            <a href="#"
+                                data-id="${r.id}"
                                 class="delete-agreement-btn flex items-center gap-2 px-2 py-1.5 text-sm rounded hover:bg-white/5 text-red-400">
                                 <i class="ri-delete-bin-5-line"></i>
                                 Delete
@@ -595,7 +602,7 @@ $(document).ready(function () {
                                     <a
                                         href="/edit-agreement/${r.id}"
                                         class="block px-3 py-2 text-sm rounded hover:bg-white/5">
-
+                                        <i class="ri-edit-box-line"></i>
                                         Edit
 
                                     </a>
@@ -603,16 +610,23 @@ $(document).ready(function () {
                                     <a
                                         href="/renewal-agreement/${r.id}"
                                         class="block px-3 py-2 text-sm rounded hover:bg-white/5">
-
+                                        <i class="ri-file-add-line"></i>
                                         Renew
 
+                                    </a>
+
+                                    <a href="#"
+                                        data-id="${r.id}"
+                                        class="generate-link-btn flex items-center gap-2 px-2 py-1.5 text-sm rounded hover:bg-white/5">
+                                        <i class="ri-links-line"></i>
+                                        Generate Link
                                     </a>
 
                                     <a
                                         href="#"
                                         data-id="${r.id}"
                                         class="delete-agreement-btn block px-3 py-2 text-sm rounded hover:bg-white/5 text-red-400">
-
+                                        <i class="ri-delete-bin-5-line"></i>
                                         Delete
 
                                     </a>
@@ -1060,4 +1074,69 @@ $(document).ready(function () {
             }
         });
     });
+
+    function initGenerateLinkModal() {
+        let currentAgreementId = null;
+
+        const modal = document.getElementById("generate-link-modal");
+        const linkInput = document.getElementById("generated-link-input");
+        const linkWrapper = document.getElementById("generated-link-wrapper");
+        const generateBtn = document.getElementById("generate-link-btn-action");
+
+        document.addEventListener("click", (e) => {
+            const trigger = e.target.closest(".generate-link-btn");
+            if (trigger) {
+                e.preventDefault();
+                currentAgreementId = trigger.dataset.id;
+                linkWrapper.classList.add("hidden");
+                linkInput.value = "";
+                modal.classList.remove("hidden");
+            }
+        });
+
+        document
+            .getElementById("close-generate-link-modal")
+            ?.addEventListener("click", () => {
+                modal.classList.add("hidden");
+            });
+
+        generateBtn?.addEventListener("click", async () => {
+            if (!currentAgreementId) return;
+            generateBtn.disabled = true;
+            generateBtn.innerHTML = `<i class="ri-loader-4-line animate-spin"></i> Generating...`;
+
+            try {
+                const res = await fetch(
+                    `/agreements/${currentAgreementId}/generate-view-link`,
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-CSRF-TOKEN": document.querySelector(
+                                'meta[name="csrf-token"]',
+                            ).content,
+                        },
+                    },
+                );
+                if (!res.ok) throw new Error("Request failed");
+                const data = await res.json();
+                linkInput.value = data.url;
+                linkWrapper.classList.remove("hidden");
+            } catch (err) {
+                alert("Failed to generate link. Please try again.");
+            } finally {
+                generateBtn.disabled = false;
+                generateBtn.innerHTML = `<i class="ri-magic-line"></i> Generate Link`;
+            }
+        });
+
+        document
+            .getElementById("copy-generated-link")
+            ?.addEventListener("click", () => {
+                linkInput.select();
+                navigator.clipboard.writeText(linkInput.value);
+            });
+    }
+
+    initGenerateLinkModal()
 });
