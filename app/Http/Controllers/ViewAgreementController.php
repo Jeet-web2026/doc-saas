@@ -8,6 +8,8 @@ use App\Models\AgreementType;
 use App\Services\Agreement\AgreementService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class ViewAgreementController extends Controller
 {
