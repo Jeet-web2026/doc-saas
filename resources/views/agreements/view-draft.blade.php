@@ -116,31 +116,31 @@
                     <div class="space-y-1.5">
                         <label class="label">Draft File</label>
                         @if($draft->Agmt_Drft_File_Name)
-                        
-                            href="{{ asset('storage/' . $draft->Agmt_Drft_File_Name) }}"
-                            target="_blank"
-                            download
-                            class="inline-flex items-center gap-2 px-3 py-1.5 border border-white/10 rounded-md text-sm text-slate-300 hover:text-white hover:bg-white/10 transition">
-                            <i class="bi bi-download"></i> Download Draft File
-                        </a>
-                        @else
-                        <p class="text-sm text-slate-500 italic">No draft file uploaded.</p>
-                        @endif
+                            <a
+                                href="{{ asset('storage/' . $draft->Agmt_Drft_File_Name) }}"
+                                target="_blank"
+                                download
+                                class="inline-flex items-center gap-2 px-3 py-1.5 border border-white/10 rounded-md text-sm text-slate-300 hover:text-white hover:bg-white/10 transition">
+                                <i class="bi bi-download"></i> Download Draft File
+                            </a>
+                            @else
+                            <p class="text-sm text-slate-500 italic">No draft file uploaded.</p>
+                            @endif
                     </div>
 
                     <div class="space-y-1.5">
                         <label class="label">Checklist File</label>
                         @if($draft->Agmt_Chklst_File_Name)
-                        
-                            href="{{ asset('storage/' . $draft->Agmt_Chklst_File_Name) }}"
-                            target="_blank"
-                            download
-                            class="inline-flex items-center gap-2 px-3 py-1.5 border border-white/10 rounded-md text-sm text-slate-300 hover:text-white hover:bg-white/10 transition">
-                            <i class="bi bi-download"></i> Download Checklist File
-                        </a>
-                        @else
-                        <p class="text-sm text-slate-500 italic">No checklist file uploaded.</p>
-                        @endif
+                            <a
+                                href="{{ asset('storage/' . $draft->Agmt_Chklst_File_Name) }}"
+                                target="_blank"
+                                download
+                                class="inline-flex items-center gap-2 px-3 py-1.5 border border-white/10 rounded-md text-sm text-slate-300 hover:text-white hover:bg-white/10 transition">
+                                <i class="bi bi-download"></i> Download Checklist File
+                            </a>
+                            @else
+                            <p class="text-sm text-slate-500 italic">No checklist file uploaded.</p>
+                            @endif
                     </div>
 
                 </div>
