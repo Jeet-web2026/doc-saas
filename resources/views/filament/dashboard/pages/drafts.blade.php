@@ -366,6 +366,8 @@
             <span id="entriesLabel"></span>
             <div id="pagination" class="flex items-center gap-1"></div>
         </div>
+        
+        <x-common.generate-link-modal />
     </main>
 
     <script>
