@@ -68,7 +68,7 @@ class ViewAgreementController extends Controller
         $link = $this->agreementService->resolveShareLink($token);
 
         return match ($link->Link_Type) {
-            'agreement' => view('agreements.view', [
+            'agreement' => view('agreements.view-agreement', [
                 'agreement'           => $link->foreign,
                 'agreementCategories' => $this->agreementService->getCategoriesWithChildren(),
                 'public'              => true,
