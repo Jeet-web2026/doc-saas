@@ -21,9 +21,7 @@
                 <h1 class="text-3xl font-semibold tracking-tight" id="page-title">View Agreement</h1>
                 <p class="mt-1 text-sm text-slate-400" id="page-subtitle">View the agreement details.</p>
             </div>
-            @unless($public ?? false)
-                <x-a-greement-history :agreementId="$agreement->Agmt_UIN" />
-            @endunless
+            <x-a-greement-history :agreementId="$agreement->Agmt_UIN" />
         </div>
         @unless($public ?? false)
             <x-globalresponse />
