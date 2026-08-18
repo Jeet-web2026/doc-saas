@@ -377,13 +377,20 @@ $(document).ready(function () {
                                         w-36 rounded-md border border-white/10
                                         bg-card shadow-xl z-50 p-1">
 
-                                        
+                                        <a
                                             href="#"
                                             data-id="${r.id}"
                                             class="delete-agreement-btn block px-3 py-2 text-sm rounded hover:bg-white/5 text-red-400">
-
+                                            <i class="ri-delete-bin-line text-base"></i>
                                             Delete
 
+                                        </a>
+
+                                        <a href="#"
+                                            data-id="${r.id}"
+                                            class="generate-link-btn flex items-center justify-center gap-2 px-2 py-1.5 text-sm rounded hover:bg-white/5 text-red-400">
+                                            <i class="ri-links-line"></i>
+                                            Generate Link
                                         </a>
 
                                     </div>
