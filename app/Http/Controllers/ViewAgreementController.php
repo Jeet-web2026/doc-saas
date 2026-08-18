@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Agreement;
+use App\Models\AgmtDraft;
 use App\Models\AgreementCategories;
 use App\Models\AgreementType;
 use App\Services\Agreement\AgreementService;
@@ -55,6 +56,15 @@ class ViewAgreementController extends Controller
     }
 
     public function generateViewLink(Agreement $agreement)
+    {
+        $url = $this->agreementService->generateViewLink($agreement);
+
+        return response()->json([
+            'url' => $url,
+        ]);
+    }
+
+    public function generateDraftViewLink(AgmtDraft $agreement)
     {
         $url = $this->agreementService->generateViewLink($agreement);
 

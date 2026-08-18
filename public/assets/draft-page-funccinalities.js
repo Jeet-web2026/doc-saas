@@ -734,7 +734,7 @@ $(document).ready(function () {
 
             try {
                 const res = await fetch(
-                    `/agreements/${currentAgreementId}/generate-view-link`,
+                    `/drafts/${currentAgreementId}/generate-view-link`,
                     {
                         method: "POST",
                         headers: {
