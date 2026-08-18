@@ -53,4 +53,37 @@ class ViewAgreementController extends Controller
 
         return redirect()->back()->with('success', 'Agreement deleted successfully.');
     }
+
+    public function generateViewLink(Model $target)
+    {
+        $link = ShareLink::create([
+            'Link_Foreign_Id_UIN' => $target->getKey(),
+            'Link_Type'           => $target->getMorphClass(),
+            'Link_Token'          => Str::random(40),
+            'Link_Expy_On'        => now()->addHours(48),
+            'CrBy'                => auth()->id(),
+            'MoBy'                => auth()->id(),
+        ]);
+
+        return response()->json([
+            'url' => route('agreements.public-view', $link->Link_Token),
+        ]);
+    }
+
+    public function publicView(string $token)
+    {
+        $link = ShareLink::where('Link_Token', $token)->firstOrFail();
+
+        abort_if($link->isExpired(), 410, 'This link has expired.');
+
+        $target = $link->foreign;
+
+        abort_if(is_null($target), 404);
+
+        return match ($link->Link_Type) {
+            'agreement' => view('agreements.public-view', ['agreement' => $target]),
+            'draft'     => view('agreements.draft-public-view', ['draft' => $target]),
+            default     => abort(404),
+        };
+    }
 }

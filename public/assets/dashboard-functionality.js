@@ -1138,5 +1138,5 @@ $(document).ready(function () {
             });
     }
 
-    initGenerateLinkModal()
+    initGenerateLinkModal();
 });

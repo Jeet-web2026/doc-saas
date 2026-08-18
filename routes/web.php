@@ -53,6 +53,7 @@ Route::middleware('partaker.session')->group(function () {
         Route::get('view-agreement/{agreementId}', 'index')->name('view-agreement');
         Route::get('agreements/{id}/history', 'history')->name('agreements.history');
         Route::delete('agreements/{agreement}', 'destroy')->name('agreements.destroy');
+        Route::post('/agreements/{agreement}/generate-view-link', 'generateViewLink')->name('agreements.generate-view-link');
     });
 
     Route::controller(AgreementNameController::class)->group(function () {
@@ -67,3 +68,6 @@ Route::middleware('partaker.session')->group(function () {
         return redirect()->route('home');
     });
 });
+
+Route::get('/agreements/public/{token}', [ViewAgreementController::class, 'publicView'])
+    ->name('agreements.public-view');
