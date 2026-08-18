@@ -22,7 +22,7 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions){
         $exceptions->respond(function (Response $response, Throwable $e, Request $request) {
-            if (410 === 410) {
+            if ($response->getStatusCode() === 410) {
                 return response()->view('errors.410', [
                     'expiredAt' => $e->getMessage(),
                 ], 410);
