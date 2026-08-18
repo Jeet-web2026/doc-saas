@@ -725,4 +725,23 @@ class AgreementService
 
         return route('agreements.public-view', $link->Link_Token);
     }
+
+    public function resolveShareLink(string $token): ShareLink
+    {
+        $link = ShareLink::where('Link_Token', $token)->first();
+
+        if (is_null($link)) {
+            abort(404);
+        }
+
+        if ($link->isExpired()) {
+            abort(410, 'This link has expired.');
+        }
+
+        if (is_null($link->foreign)) {
+            abort(404);
+        }
+
+        return $link;
+    }
 }

@@ -65,17 +65,11 @@ class ViewAgreementController extends Controller
 
     public function publicView(string $token)
     {
-        $link = ShareLink::where('Link_Token', $token)->firstOrFail();
-
-        abort_if($link->isExpired(), 410, 'This link has expired.');
-
-        $target = $link->foreign;
-
-        abort_if(is_null($target), 404);
+        $link = $this->agreementService->resolveShareLink($token);
 
         return match ($link->Link_Type) {
-            'agreement' => view('agreements.public-view', ['agreement' => $target]),
-            'draft'     => view('agreements.draft-public-view', ['draft' => $target]),
+            'agreement' => view('agreements.public-view', ['agreement' => $link->foreign]),
+            'draft'     => view('agreements.draft-public-view', ['draft' => $link->foreign]),
             default     => abort(404),
         };
     }
