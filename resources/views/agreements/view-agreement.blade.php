@@ -27,7 +27,9 @@
                 <h1 class="text-3xl font-semibold tracking-tight" id="page-title">View Agreement</h1>
                 <p class="mt-1 text-sm text-slate-400" id="page-subtitle">View the agreement details.</p>
             </div>
+            @unless($public ?? false)
             <x-a-greement-history :agreementId="$agreement->Agmt_UIN" />
+            @endunless
         </div>
         @unless($public ?? false)
             <x-globalresponse />
@@ -211,8 +213,10 @@
                 </div>
             </section>
 
+            @unless($public ?? false)
             <!-- Remarks -->
             <x-rich-text-editor name="remarks" :value="old('remarks')" :editable="false" />
+            @endunless
 
             @unless($public ?? false)
             <div class="card p-4 mt-4" style="background-color: #0f1729; border: 1px solid #2a3654; border-radius: 8px;">
