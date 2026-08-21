@@ -12,8 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tbl_mast_pin_code', function (Blueprint $table) {
-            // Primary key (UIN convention)
-            $table->unsignedInteger('Pin_code_UIN')->primary();
+            // Surrogate primary key. NOTE: Pin_code_UIN is NOT unique in the
+            // source data — the same pincode UIN legitimately repeats across
+            // multiple districts/locality types (confirmed: 1,478 duplicate
+            // UINs out of 21,161 rows in the original dump), so it can't be
+            // the primary key despite the *_UIN naming convention.
+            $table->id();
+
+            // Kept as a plain indexed column, not unique.
+            $table->unsignedInteger('Pin_code_UIN')->index();
 
             // The actual pin code number, e.g. 744301
             $table->unsignedInteger('pin_code_No');

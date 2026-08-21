@@ -12,17 +12,13 @@ class PinCode extends Model
     protected $table = 'tbl_mast_pin_code';
 
     /**
-     * The primary key associated with the table.
+     * Uses Laravel's default auto-increment `id` primary key.
+     *
+     * NOTE: Pin_code_UIN is NOT unique in the source data — the same
+     * pincode UIN legitimately repeats across multiple districts /
+     * locality types, so it can't serve as the primary key despite
+     * the *_UIN naming convention used elsewhere in this project.
      */
-    protected $primaryKey = 'Pin_code_UIN';
-
-    /**
-     * UINs are assigned by the application (not DB auto_increment),
-     * mirroring the rest of the *_UIN master tables in this project.
-     */
-    public $incrementing = false;
-
-    protected $keyType = 'int';
 
     /**
      * This table only tracks creation, not updates.
