@@ -19,7 +19,7 @@ return new class extends Migration
             // the primary key despite the *_UIN naming convention.
 
             // Kept as a plain indexed column, not unique.
-            $table->unsignedInteger('Pin_code_UIN')->index();
+            $table->unsignedInteger('Pin_code_UIN');
 
             // The actual pin code number, e.g. 744301
             $table->unsignedInteger('pin_code_No');
