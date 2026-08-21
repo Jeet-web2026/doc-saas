@@ -17,7 +17,6 @@ return new class extends Migration
             // multiple districts/locality types (confirmed: 1,478 duplicate
             // UINs out of 21,161 rows in the original dump), so it can't be
             // the primary key despite the *_UIN naming convention.
-            $table->id();
 
             // Kept as a plain indexed column, not unique.
             $table->unsignedInteger('Pin_code_UIN')->index();
