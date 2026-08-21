@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
             AgreementTypeSeeder::class,
             OrganizationSeeder::class,
             UserLoginSeeder::class,
-            UserOrgaRelaSeeder::class
+            UserOrgaRelaSeeder::class,
+            TblMastPinCodeSeeder::class
         ]);
     }
 }
