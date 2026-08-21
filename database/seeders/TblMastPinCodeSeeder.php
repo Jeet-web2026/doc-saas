@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -41,7 +42,7 @@ class TblMastPinCodeSeeder extends Seeder
             $buffer[] = array_combine($header, $row);
 
             if (count($buffer) >= self::CHUNK_SIZE) {
-                DB::table('tbl_mast_pin_code')->insert($buffer);
+                DB::table('tbl_mast_pin_code')->insertOrIgnore($buffer);
                 $total += count($buffer);
                 $buffer = [];
             }
@@ -49,7 +50,7 @@ class TblMastPinCodeSeeder extends Seeder
 
         // Insert any remaining rows.
         if (! empty($buffer)) {
-            DB::table('tbl_mast_pin_code')->insert($buffer);
+            DB::table('tbl_mast_pin_code')->insertOrIgnore($buffer);
             $total += count($buffer);
         }
 
