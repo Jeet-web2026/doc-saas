@@ -76,13 +76,19 @@
 
             <p class="text-sm text-slate-800 mt-2">Tick mark one of the cells</p>
 
-            <div class="mt-6">
+            <div class="mt-6 flex flex-col lg:flex-row gap-2 items-center justify-start">
                 <label class="block text-slate-800 mb-2">Feedback and Reviews Type</label>
-                <input
-                    type="text"
+                <select
                     name="feedback_type"
-                    value="{{ old('feedback_type') }}"
-                    class="w-72 rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    class="w-72 rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="" disabled {{ old('feedback_type') ? '' : 'selected' }}></option>
+                    <option value="query_question" @selected(old('feedback_type')==='query_question' )>Query/Question</option>
+                    <option value="page_bug_error" @selected(old('feedback_type')==='page_bug_error' )>Page Bug/Error</option>
+                    <option value="appreciation" @selected(old('feedback_type')==='appreciation' )>Appreciation</option>
+                    <option value="problem_face" @selected(old('feedback_type')==='problem_face' )>Problem Face</option>
+                    <option value="idea_new_features" @selected(old('feedback_type')==='idea_new_features' )>Idea/New Features</option>
+                    <option value="other" @selected(old('feedback_type')==='other' )>Other</option>
+                </select>
                 @error('feedback_type') <p class="text-sm text-red-700 mt-1">{{ $message }}</p> @enderror
             </div>
 
