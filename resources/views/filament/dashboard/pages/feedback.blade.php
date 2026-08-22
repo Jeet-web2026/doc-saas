@@ -5,7 +5,8 @@
             Page Feedback and Reviews
         </h1>
 
-        <form wire:submit="submit" class="bg-sky-300 border border-sky-400 rounded-lg p-8">
+        <form action="" method="POST" class="bg-sky-300 border border-sky-400 rounded-lg p-8">
+            @csrf
 
             <h2 class="text-center text-3xl font-semibold text-slate-800 mb-8">
                 You are in the page
@@ -56,8 +57,9 @@
                             <td class="bg-sky-300 border border-sky-500 px-4 py-3 text-center">
                                 <input
                                     type="radio"
-                                    wire:model="rating.{{ $rowKey }}"
+                                    name="{{ $rowKey }}"
                                     value="{{ $col }}"
+                                    @checked(old($rowKey)===$col)
                                     class="h-5 w-5 rounded border-2 border-slate-400 text-blue-600 focus:ring-blue-500 cursor-pointer" />
                             </td>
                             @endforeach
@@ -66,9 +68,9 @@
                     </tbody>
                 </table>
             </div>
-            @error('rating.page_load') <p class="text-sm text-red-700 mt-1">{{ $message }}</p> @enderror
-            @error('rating.page_design') <p class="text-sm text-red-700 mt-1">{{ $message }}</p> @enderror
-            @error('rating.overall') <p class="text-sm text-red-700 mt-1">{{ $message }}</p> @enderror
+            @error('page_load') <p class="text-sm text-red-700 mt-1">{{ $message }}</p> @enderror
+            @error('page_design') <p class="text-sm text-red-700 mt-1">{{ $message }}</p> @enderror
+            @error('overall') <p class="text-sm text-red-700 mt-1">{{ $message }}</p> @enderror
 
             <p class="text-sm text-slate-800 mt-2">Tick mark one of the cells</p>
 
@@ -76,7 +78,8 @@
                 <label class="block text-slate-800 mb-2">Feedback and Reviews Type</label>
                 <input
                     type="text"
-                    wire:model="feedback_type"
+                    name="feedback_type"
+                    value="{{ old('feedback_type') }}"
                     class="w-72 rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500" />
                 @error('feedback_type') <p class="text-sm text-red-700 mt-1">{{ $message }}</p> @enderror
             </div>
@@ -84,10 +87,10 @@
             <div class="mt-6">
                 <label class="block text-slate-800 mb-2">Tell Us More</label>
                 <textarea
-                    wire:model="comments"
+                    name="comments"
                     rows="4"
                     placeholder="Comments here"
-                    class="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                    class="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500">{{ old('comments') }}</textarea>
                 @error('comments') <p class="text-sm text-red-700 mt-1">{{ $message }}</p> @enderror
             </div>
 
@@ -96,7 +99,8 @@
                     <label class="block text-slate-800 mb-2">Present Location Pincode</label>
                     <input
                         type="text"
-                        wire:model="pincode"
+                        name="pincode"
+                        value="{{ old('pincode') }}"
                         maxlength="6"
                         placeholder="6 Digits Only"
                         class="w-72 rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500" />
@@ -113,4 +117,13 @@
         </form>
 
     </div>
+
+    <script>
+        var AGREEMENTS_URL = "{{ route('drafts.data') }}";
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/4.0.0/jquery.min.js" integrity="sha512-8LENNbXmzI/Gbj+OwXmqR6V4QaUAw0/porPzy1+dQoJqC0JPHedWoe0DDOTL2uHA5XXJyIsPtiMHH86pVlay6A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{{ asset('assets/feedback-page-functions.js') }}"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </x-filament-panels::page>
