@@ -48,16 +48,4 @@ class SettingsPanelProvider extends PanelProvider
                 EnsurePartakerSessionExists::class,
             ]);
     }
-
-    public function boot(): void
-    {
-        View::composer('filament-panels::livewire.topbar', function ($view) {
-            $view->with([
-                'userData' => Session::get('partaker_user_data', []),
-                'companyInformation' => Session::get('company_information'),
-                'backurl' => '/dashboard',
-                'title' => Str::headline(collect(explode('/', request()->path()))->last()),
-            ]);
-        });
-    }
 }
