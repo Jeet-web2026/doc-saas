@@ -24,7 +24,7 @@ class StoreFeedbackRequest extends FormRequest
             'pincode'       => [
                 'required',
                 'digits:6',
-                
+                Rule::exists((new PinCode())->getTable(), 'pin_code_No')
             ],
             'orga_uin'      => ['required'],
         ];
