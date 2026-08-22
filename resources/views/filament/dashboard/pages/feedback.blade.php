@@ -76,7 +76,7 @@
             ->filter();
             @endphp
             @if ($ratingErrors->isNotEmpty())
-            <p class="text-sm text-red-700 mt-1">{{ $ratingErrors->implode(', ') }}</p>
+            <p class="text-sm text-red-700 mt-1">{{ $ratingErrors->implode(' ') }}</p>
             @endif
 
             <p class="text-sm text-slate-800 mt-2">Tick mark one of the cells</p>
