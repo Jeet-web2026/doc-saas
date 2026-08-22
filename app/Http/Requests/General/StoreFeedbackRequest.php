@@ -37,6 +37,7 @@ class StoreFeedbackRequest extends FormRequest
             'page_design.required' => 'Please rate the page design.',
             'overall.required'     => 'Please give an overall rating.',
             'pincode.digits'       => 'Pincode must be exactly 6 digits.',
+            'pincode.exists'       => 'The given pincode is invalid.',
         ];
     }
 }
