@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\General;
 
+use App\Models\PinCode;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreFeedbackRequest extends FormRequest
 {
@@ -19,7 +21,11 @@ class StoreFeedbackRequest extends FormRequest
             'overall'       => ['required', 'in:very_good,good,ok,poor,very_poor'],
             'feedback_type' => ['required', 'string', 'max:255'],
             'comments'      => ['nullable', 'string'],
-            'pincode'       => ['required', 'digits:6'],
+            'pincode'       => [
+                'required',
+                'digits:6',
+                Rule::exists((new PinCode())->getTable(), 'pin_code_No')
+            ],
             'orga_uin'      => ['required'],
         ];
     }
