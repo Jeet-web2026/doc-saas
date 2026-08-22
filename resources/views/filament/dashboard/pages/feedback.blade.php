@@ -70,14 +70,9 @@
                     </tbody>
                 </table>
             </div>
-            @php
-            $ratingErrors = collect(['page_load', 'page_design', 'overall'])
-            ->map(fn ($field) => $errors->first($field))
-            ->filter();
-            @endphp
-            @if ($ratingErrors->isNotEmpty())
-            <p class="text-sm text-red-700 mt-1">{{ $ratingErrors->implode(' ') }}</p>
-            @endif
+            @error('page_load') <p class="text-sm text-red-700 mt-1">{{ $message }}</p> @enderror
+            @error('page_design') <p class="text-sm text-red-700 mt-1">{{ $message }}</p> @enderror
+            @error('overall') <p class="text-sm text-red-700 mt-1">{{ $message }}</p> @enderror
 
             <p class="text-sm text-slate-800 mt-2">Tick mark one of the cells</p>
 
