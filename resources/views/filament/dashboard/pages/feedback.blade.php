@@ -5,9 +5,11 @@
             Page Feedback and Reviews
         </h1>
 
-        <form action="" method="POST" class="bg-sky-300 border border-sky-400 rounded-lg p-8">
-            @csrf
+        <x-globalresponse />
 
+        <form action="{{ route('feedback-store') }}" method="POST" class="bg-sky-300 border border-sky-400 rounded-lg p-8">
+            @csrf
+            <input type="hidden" name="orga_uin" value="{{ $orgaUin }}">
             <h2 class="text-center text-3xl font-semibold text-slate-800 mb-8">
                 You are in the page
             </h2>

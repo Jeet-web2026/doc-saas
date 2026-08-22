@@ -4,6 +4,7 @@ use App\Http\Controllers\AddAgreementController;
 use App\Http\Controllers\AgreementNameController;
 use App\Http\Controllers\DraftAgreementManagementController;
 use App\Http\Controllers\EditAgreementController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RenewalAgreementController;
 use App\Http\Controllers\ViewAgreementController;
@@ -63,6 +64,10 @@ Route::middleware('partaker.session')->group(function () {
             ->name('agreement-names.store');
         Route::delete('/agreement-names/{id}', 'destroy')
             ->name('agreement-names.destroy');
+    });
+
+    Route::controller(FeedbackController::class)->group(function () {
+        Route::post('feedback-store', 'store')->name('feedback-store');
     });
 
     Route::fallback(function () {
