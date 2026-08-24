@@ -440,7 +440,7 @@
             <table class="w-full text-sm">
                 <thead>
                     <tr class="border-b border-white/10 bg-white/[0.04] text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                        <th class="px-5 py-3">Agreement</th>
+                        <th class="px-3 py-3">Executed Agreement</th>
 
                         <th data-col="fileNo" class="px-5 py-3 hidden">
                             File No
