@@ -32,6 +32,7 @@
 
 .fi-topbar {
     background-color: rgb(18, 28, 46) !important;
+    border-bottom: 0.5px solid #f7f7f740 !important;
 }
 
 .fi-sidebar-nav {
