@@ -349,7 +349,7 @@
 
                 <div class="flex flex-wrap justify-end gap-3 pt-2">
                     <a href="/dashboard/agreements" class="btn btn-ghost">Cancel</a>
-                    <button type="submit" class="btn btn-primary" id="submitBtn">
+                    <button type="submit" class="btn btn-primary" id="editSaveBtn">
                         <i class="bi bi-floppy"></i> <span>Update</span>
                     </button>
                 </div>

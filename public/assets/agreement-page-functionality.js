@@ -65,6 +65,25 @@ $(document).ready(function () {
         });
     });
 
+    $(document).on("click", "#editSaveBtn", function (e) {
+        e.preventDefault();
+
+        Swal.fire({
+            html: `
+                <p>Confirm Agreement Submission Once saved, Internal Notes cannot be modified or deleted. Please ensure that all information is correct before saving.</p>
+            `,
+            showCancelButton: true,
+            background: "#e6f2ff",
+            confirmButtonText: "Update",
+            cancelButtonText: "Cancel",
+            confirmButtonColor: "#3085d6",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $(this).closest("form").submit();
+            }
+        });
+    });
+
     $(document).on("click", "#submitDraftBtn", function (e) {
         e.preventDefault();
 
