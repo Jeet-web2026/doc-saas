@@ -18,6 +18,7 @@ $(document).ready(function () {
     let searchTerm = "";
     let dateFrom = "";
     let dateTo = "";
+    let statuses = [];
 
     function fetchAgreements(page = 1, overrides = {}) {
         $.ajax({
@@ -32,6 +33,7 @@ $(document).ready(function () {
                 date_to: dateTo,
                 date_filter_type: dateFilterType,
                 company_id: companyId,
+                statuses,
                 ...overrides,
             },
             success: function (response) {

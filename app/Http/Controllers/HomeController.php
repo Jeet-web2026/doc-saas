@@ -124,6 +124,7 @@ class HomeController extends Controller
             'date_filter_type' => 'nullable|string|in:agreement_date,expiry_date',
             'per_page'         => 'nullable|integer|min:1|max:100',
             'page'             => 'nullable|integer|min:1',
+            'statuses' => 'nullable|string'
         ]);
 
         $agreements = $this->agreementService->getAgreements(
