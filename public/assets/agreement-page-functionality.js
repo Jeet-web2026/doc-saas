@@ -50,15 +50,12 @@ $(document).ready(function () {
         e.preventDefault();
 
         Swal.fire({
-            title: "Are you sure you want to save this agreement?",
             html: `
-                <p>Once this agreement is saved, <strong>Internal Notes</strong> will be
-                permanently locked and cannot be edited or deleted.</p>
-                <p>Please verify that all information is complete and accurate before proceeding.</p>
+                <p>Confirm Agreement Submission Once saved, Internal Notes cannot be modified or deleted. Please ensure that all information is correct before saving.</p>
             `,
             showCancelButton: true,
             background: "#e6f2ff",
-            confirmButtonText: "Save Agreement",
+            confirmButtonText: "Add",
             cancelButtonText: "Cancel",
             confirmButtonColor: "#3085d6",
         }).then((result) => {
@@ -219,25 +216,25 @@ $(document).ready(function () {
         modules: {
             toolbar: isEditable
                 ? [
-                      [
-                          { font: [] },
-                          { size: ["small", false, "large", "huge"] },
-                      ],
-                      [{ header: [1, 2, 3, 4, 5, 6, false] }],
-                      ["bold", "italic", "underline", "strike"],
-                      [{ color: [] }, { background: [] }],
-                      [{ script: "sub" }, { script: "super" }],
-                      [
-                          { list: "ordered" },
-                          { list: "bullet" },
-                          { list: "check" },
-                      ],
-                      [{ indent: "-1" }, { indent: "+1" }],
-                      [{ align: [] }],
-                      ["blockquote", "code-block"],
-                      ["link"],
-                      ["clean"],
-                  ]
+                    [
+                        { font: [] },
+                        { size: ["small", false, "large", "huge"] },
+                    ],
+                    [{ header: [1, 2, 3, 4, 5, 6, false] }],
+                    ["bold", "italic", "underline", "strike"],
+                    [{ color: [] }, { background: [] }],
+                    [{ script: "sub" }, { script: "super" }],
+                    [
+                        { list: "ordered" },
+                        { list: "bullet" },
+                        { list: "check" },
+                    ],
+                    [{ indent: "-1" }, { indent: "+1" }],
+                    [{ align: [] }],
+                    ["blockquote", "code-block"],
+                    ["link"],
+                    ["clean"],
+                ]
                 : false,
 
             history: {
