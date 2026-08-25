@@ -12,9 +12,9 @@ class ValidAgreementRefNo implements ValidationRule
         private readonly string $table,
         private readonly int|string $companyId,
         private readonly ?int $ignoreId = null,
+        private readonly string $idColumn = 'id',
         private readonly string $refColumn = 'Agmt_Ref_No',
         private readonly string $companyColumn = 'Orga_UIN',
-        private readonly string $idColumn = 'id',
     ) {}
 
     public function validate(string $attribute, mixed $value, Closure $fail): void
