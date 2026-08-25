@@ -37,6 +37,7 @@
 
 .fi-sidebar-nav {
     background-color: #121c2e !important;
+    border-right: 0.2px solid #f7f7f740;
 }
 
 .fi-page-header-main-ctn {
