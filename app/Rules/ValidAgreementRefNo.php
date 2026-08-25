@@ -11,9 +11,9 @@ class ValidAgreementRefNo implements ValidationRule
     public function __construct(
         private readonly string $table,
         private readonly int|string $companyId,
+        private readonly ?int $ignoreId = null,
         private readonly string $refColumn = 'Agmt_Ref_No',
         private readonly string $companyColumn = 'Orga_UIN',
-        private readonly ?int $ignoreId = null,
         private readonly string $idColumn = 'id',
     ) {}
 
