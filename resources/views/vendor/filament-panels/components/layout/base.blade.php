@@ -82,7 +82,7 @@
                 --font-family: '{!! filament()->getFontFamily() !!}';
                 --mono-font-family: '{!! filament()->getMonoFontFamily() !!}';
                 --serif-font-family: '{!! filament()->getSerifFontFamily() !!}';
-                --sidebar-width: {{ filament()->getSidebarWidth() }};
+                --sidebar-width: 16rem;
                 --collapsed-sidebar-width: {{ filament()->getCollapsedSidebarWidth() }};
                 --default-theme-mode: {{ filament()->getDefaultThemeMode()->value }};
             }
