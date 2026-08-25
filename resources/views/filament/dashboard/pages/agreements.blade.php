@@ -139,6 +139,101 @@
 
                         </div>
 
+                        {{-- Filter By Status --}}
+                        <div class="relative" data-menu>
+
+                            <button
+                                type="button"
+                                data-menu-toggle="calMenuForFilter"
+                                aria-label="Filter by date"
+                                title="Filter by date"
+                                class="inline-flex h-9 w-9 sm:w-auto sm:px-3 items-center justify-center gap-2 rounded-md border border-white/10 hover:bg-white/5 transition">
+                                <i class="bi bi-filter text-base"></i>
+
+                                <span class="hidden sm:inline text-sm">
+                                    Filter by status
+                                </span>
+                            </button>
+
+
+                            {{-- Filter Dropdown --}}
+                            <div
+                                id="calMenuForFilter"
+                                class="hidden absolute right-0 left-[-50px] mt-2 w-[calc(100vw-2rem)] max-w-80 rounded-md border border-white/10 bg-card shadow-xl z-50">
+
+                                <div class="p-4">
+
+                                    <div class="flex items-center justify-between mb-3">
+
+                                        <label class="text-sm font-medium">
+                                            Select Period
+                                        </label>
+
+                                        <button
+                                            id="closeDateRange"
+                                            type="button"
+                                            class="h-8 w-8 rounded-full hover:bg-white/10 flex items-center justify-center">
+                                            <i class="bi bi-x-lg"></i>
+                                        </button>
+
+                                    </div>
+
+
+                                    {{-- Date type --}}
+                                    <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 mb-3 text-sm">
+
+                                        <label class="flex items-center gap-1.5 cursor-pointer">
+                                            <input
+                                                type="radio"
+                                                name="dateFilterType"
+                                                value="agreement_date"
+                                                checked
+                                                class="accent-blue-600">
+                                            Agreement Date
+                                        </label>
+
+                                        <label class="flex items-center gap-1.5 cursor-pointer">
+                                            <input
+                                                type="radio"
+                                                name="dateFilterType"
+                                                value="expiry_date"
+                                                class="accent-blue-600">
+                                            Expiry Date
+                                        </label>
+
+                                    </div>
+
+
+                                    <input
+                                        id="agreementDateRange"
+                                        class="w-full rounded border border-white/10 bg-transparent px-3 py-2 text-sm"
+                                        placeholder="Select Date Range">
+
+
+                                    <div class="flex justify-end gap-2 mt-4">
+
+                                        <button
+                                            id="clearDate"
+                                            type="button"
+                                            class="px-3 py-2 rounded border border-white/10 text-sm hover:bg-white/5">
+                                            Clear
+                                        </button>
+
+                                        <button
+                                            id="applyDate"
+                                            type="button"
+                                            class="px-3 py-2 rounded bg-blue-600 text-white text-sm hover:bg-blue-700">
+                                            Apply
+                                        </button>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
 
                         {{-- Search --}}
                         <div class="relative" data-menu>
