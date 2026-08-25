@@ -81,7 +81,8 @@ class EditAgreementRequest extends FormRequest
                 new ValidAgreementRefNo(
                     table: 'tbl_tran_agmt',
                     companyId: $this->input('company_id'),
-                    ignoreId: $agreementId
+                    ignoreId: $agreementId,
+                    idColumn: 'Agmt_UIN'
                 ),
             ]
         ];
