@@ -44,18 +44,22 @@
                             </select>
                         </div>
 
-                        {{-- Filter --}}
                         <div class="relative" data-menu>
 
                             <button
                                 type="button"
                                 data-menu-toggle="calMenuForFilter"
                                 aria-label="Filter by date"
-                                title="Filter by date"
-                                class="inline-flex h-9 w-9 sm:w-auto sm:px-3 items-center justify-center gap-2 rounded-md border border-white/10 hover:bg-white/5 transition">
+                                class="group relative inline-flex h-9 w-9 sm:w-auto sm:px-3 items-center justify-center gap-2 rounded-md border border-white/10 hover:bg-white/5 transition">
                                 <i class="bi bi-funnel text-base"></i>
 
                                 <span class="hidden sm:inline text-sm">
+                                    Filter by date
+                                </span>
+
+                                {{-- Tooltip --}}
+                                <span
+                                    class="pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-black/90 px-2 py-1 text-xs text-white opacity-0 shadow-lg transition-opacity duration-150 group-hover:opacity-100 sm:hidden">
                                     Filter by date
                                 </span>
                             </button>
@@ -145,12 +149,17 @@
                             <button
                                 type="button"
                                 data-menu-toggle="calMenuForFilter"
-                                aria-label="Filter by date"
-                                title="Filter by date"
-                                class="inline-flex h-9 w-9 sm:w-auto sm:px-3 items-center justify-center gap-2 rounded-md border border-white/10 hover:bg-white/5 transition">
+                                aria-label="Filter by status"
+                                class="group relative inline-flex h-9 w-9 sm:w-auto sm:px-3 items-center justify-center gap-2 rounded-md border border-white/10 hover:bg-white/5 transition">
                                 <i class="bi bi-filter text-base"></i>
 
                                 <span class="hidden sm:inline text-sm">
+                                    Filter by status
+                                </span>
+
+                                {{-- Tooltip --}}
+                                <span
+                                    class="pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-black/90 px-2 py-1 text-xs text-white opacity-0 shadow-lg transition-opacity duration-150 group-hover:opacity-100 sm:hidden">
                                     Filter by status
                                 </span>
                             </button>
