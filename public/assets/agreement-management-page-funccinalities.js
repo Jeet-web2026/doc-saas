@@ -616,7 +616,10 @@ $(document).ready(function () {
 
         Swal.fire({
             icon: "warning",
-            title: "Are you sure you want to delete this agreement name?",
+            title: "Do you want to save this agreement as a draft?",
+             html: `
+                <p>Once submitted, the agreement will no longer be editable. Please verify that all information is complete and accurate before proceeding.</p>
+            `,
             showCancelButton: true,
             confirmButtonText: "Yes, delete",
             cancelButtonText: "Cancel",

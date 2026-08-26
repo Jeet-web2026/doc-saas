@@ -10,7 +10,7 @@ class Drafts extends Page
 {
     use HasCompanyHeader;
 
-    protected static ?string $navigationLabel = 'Drafts';
+    protected static ?string $navigationLabel = 'Draft Agreement';
 
     protected static ?int $navigationSort = 3;
 

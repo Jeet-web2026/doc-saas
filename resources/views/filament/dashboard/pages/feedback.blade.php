@@ -1,5 +1,24 @@
 <x-filament-panels::page>
-    <div class="min-h-screen py-6 w-full px-5 rounded">
+    <style>
+        .input,
+        select.input,
+        textarea.input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: .5rem;
+            padding: .5rem .75rem;
+            color: #e2e8f0;
+            font-size: .875rem;
+        }
+
+        .input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, .15);
+        }
+    </style>
+    <div class="min-h-screen py-6 w-full px-5 rounded text-white">
 
         <h1 class="text-center text-xl font-medium text-white mb-6">
             Page Feedback and Reviews
@@ -7,35 +26,32 @@
 
         <x-globalresponse />
 
-        <form action="{{ route('feedback-store') }}" method="POST" class="bg-sky-300 border border-sky-400 rounded-lg p-8">
+        <form action="{{ route('feedback-store') }}" method="POST" class="bg-card border border-white/10 rounded-lg p-8 text-white">
             @csrf
             <input type="hidden" name="orga_uin" value="{{ $orgaUin }}">
-            <h2 class="text-center text-3xl font-semibold text-slate-800 mb-8">
-                You are in the page
-            </h2>
 
-            <p class="text-slate-800 mb-3">How satisfied were you using this page?</p>
+            <p class="text-white mb-3 text-white">How satisfied were you using this page?</p>
 
-            <div class="overflow-hidden rounded-md border border-sky-500">
+            <div class="overflow-hidden rounded-md border border-white/10">
                 <table class="w-full border-collapse text-left">
                     <thead>
                         <tr>
-                            <th class="bg-sky-300 border border-sky-500 px-4 py-3 font-semibold text-slate-800">
+                            <th class="bg-card border border-white/10 px-4 py-3 font-semibold text-white">
                                 Page Rating
                             </th>
-                            <th class="bg-green-700 border border-sky-500 px-4 py-3 font-semibold text-white text-center">
+                            <th class="bg-green-700 border border-white/10 px-4 py-3 font-semibold text-white text-center">
                                 Very Good
                             </th>
-                            <th class="bg-lime-500 border border-sky-500 px-4 py-3 font-semibold text-slate-900 text-center">
+                            <th class="bg-lime-600 border border-white/10 px-4 py-3 font-semibold text-white text-center">
                                 Good
                             </th>
-                            <th class="bg-yellow-400 border border-sky-500 px-4 py-3 font-semibold text-slate-900 text-center">
+                            <th class="bg-yellow-500 border border-white/10 px-4 py-3 font-semibold text-white text-center">
                                 Ok
                             </th>
-                            <th class="bg-amber-600 border border-sky-500 px-4 py-3 font-semibold text-white text-center">
+                            <th class="bg-amber-700 border border-white/10 px-4 py-3 font-semibold text-white text-center">
                                 Poor
                             </th>
-                            <th class="bg-red-600 border border-sky-500 px-4 py-3 font-semibold text-white text-center">
+                            <th class="bg-red-700 border border-white/10 px-4 py-3 font-semibold text-white text-center">
                                 Very Poor
                             </th>
                         </tr>
@@ -52,11 +68,11 @@
 
                         @foreach ($rows as $rowKey => $rowLabel)
                         <tr>
-                            <td class="bg-sky-300 border border-sky-500 px-4 py-3 text-slate-800">
+                            <td class="bg-card border border-white/10 px-4 py-3 text-white">
                                 {{ $rowLabel }}
                             </td>
                             @foreach ($columns as $col)
-                            <td class="bg-sky-300 border border-sky-500 px-4 py-3 text-center">
+                            <td class="bg-card border border-white/10 px-4 py-3 text-center">
                                 <input
                                     type="radio"
                                     name="{{ $rowKey }}"
@@ -74,50 +90,51 @@
             @error('page_design') <p class="text-sm text-red-700 mt-1">{{ $message }}</p> @enderror
             @error('overall') <p class="text-sm text-red-700 mt-1">{{ $message }}</p> @enderror
 
-            <p class="text-sm text-slate-800 mt-2">Tick mark one of the cells</p>
+            <p class="text-sm text-white mt-2">Tick mark one of the cells</p>
 
-            <div class="mt-6 flex flex-col lg:flex-row gap-2 items-center justify-start">
-                <label class="block text-slate-800 mb-2">Feedback and Reviews Type</label>
-                <select
-                    name="feedback_type"
-                    class="w-72 rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <option value="" disabled {{ old('feedback_type') ? '' : 'selected' }}></option>
-                    <option value="query_question" @selected(old('feedback_type')==='query_question' )>Query/Question</option>
-                    <option value="page_bug_error" @selected(old('feedback_type')==='page_bug_error' )>Page Bug/Error</option>
-                    <option value="appreciation" @selected(old('feedback_type')==='appreciation' )>Appreciation</option>
-                    <option value="problem_face" @selected(old('feedback_type')==='problem_face' )>Problem Face</option>
-                    <option value="idea_new_features" @selected(old('feedback_type')==='idea_new_features' )>Idea/New Features</option>
-                    <option value="other" @selected(old('feedback_type')==='other' )>Other</option>
-                </select>
-                @error('feedback_type') <p class="text-sm text-red-700 mt-1">{{ $message }}</p> @enderror
-            </div>
-
-            <div class="mt-6">
-                <label class="block text-slate-800 mb-2">Tell Us More</label>
-                <textarea
-                    name="comments"
-                    rows="4"
-                    placeholder="Comments here"
-                    class="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500">{{ old('comments') }}</textarea>
-                @error('comments') <p class="text-sm text-red-700 mt-1">{{ $message }}</p> @enderror
-            </div>
-
-            <div class="mt-6 flex items-end justify-between flex-wrap gap-4">
-                <div>
-                    <label class="block text-slate-800 mb-2">Present Location Pincode</label>
+            <div class="flex flex-col gap-4 mt-6 lg:flex-row items-center">
+                <div class="flex-1">
+                    <label class="block text-white mb-2">Feedback and Reviews Type</label>
+                    <select
+                        name="feedback_type"
+                        class="w-full rounded-md input px-3 py-2 text-white">
+                        <option value="" class="bg-slate-900" disabled {{ old('feedback_type') ? '' : 'selected' }}>Select a type</option>
+                        <option value="Query/Question" class="bg-slate-900" @selected(old('feedback_type')==='Query/Question' )>Query/Question</option>
+                        <option value="Page Bug/Error" class="bg-slate-900" @selected(old('feedback_type')==='Page Bug/Error' )>Page Bug/Error</option>
+                        <option value="Appreciation" class="bg-slate-900" @selected(old('feedback_type')==='Appreciation' )>Appreciation</option>
+                        <option value="Problem Face" class="bg-slate-900" @selected(old('feedback_type')==='Problem Face' )>Problem Face</option>
+                        <option value="Idea/New Features" class="bg-slate-900" @selected(old('feedback_type')==='Idea/New Features' )>Idea/New Features</option>
+                        <option value="Other" class="bg-slate-900" @selected(old('feedback_type')==='Other' )>Other</option>
+                    </select>
+                    @error('feedback_type') <p class="text-sm text-red-700 mt-1">{{ $message }}</p> @enderror
+                </div>
+                <div class="flex-1">
+                    <label class="block text-white mb-2">Present Location Pincode</label>
                     <input
                         type="text"
                         name="pincode"
                         value="{{ old('pincode') }}"
                         maxlength="6"
                         placeholder="6 Digits Only"
-                        class="w-72 rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                        class="w-full rounded-md input px-3 py-2 text-white placeholder-slate-400 border border-white/10" />
                     @error('pincode') <p class="text-sm text-red-700 mt-1">{{ $message }}</p> @enderror
                 </div>
+            </div>
 
+            <div class="mt-6">
+                <label class="block text-white mb-2">Tell Us More</label>
+                <textarea
+                    name="comments"
+                    rows="4"
+                    placeholder="Comments here"
+                    class="w-full rounded-md input px-3 py-2 text-white placeholder-slate-400 border border-white/10">{{ old('comments') }}</textarea>
+                @error('comments') <p class="text-sm text-red-700 mt-1">{{ $message }}</p> @enderror
+            </div>
+
+            <div class="mt-6 flex items-end justify-between flex-wrap gap-4">
                 <button
                     type="submit"
-                    class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-2.5 rounded-md transition-colors">
+                    class="bg-blue-800 hover:bg-blue-700 text-white font-medium px-6 py-2.5 rounded-md transition-colors">
                     Submit
                 </button>
             </div>

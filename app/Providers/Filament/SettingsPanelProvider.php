@@ -15,9 +15,6 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use App\Http\Middleware\EnsurePartakerSessionExists;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\View;
-use Illuminate\Support\Str;
 
 class SettingsPanelProvider extends PanelProvider
 {

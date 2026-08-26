@@ -19,6 +19,6 @@ class FeedbackController extends Controller
             'created_by' => $userUin,
         ]);
 
-        return back()->with('success', 'Thanks for your feedback!');
+        return back()->with('success', 'Thank you for sharing your valuable feedback. Your input is greatly appreciated.');
     }
 }
