@@ -541,12 +541,10 @@ $(document).ready(function () {
         renderTable();
     });
 
-
     function runSearch(e) {
         searchTerm = e.target.value;
         fetchAgreements(1);
     }
-
 
     // ---------- Menu toggling ----------
     document.addEventListener("click", (e) => {
@@ -661,7 +659,8 @@ $(document).ready(function () {
             confirmButtonText: "Yes, delete",
             cancelButtonText: "Cancel",
             confirmButtonColor: "#d33",
-            cancelButtonColor: "#3085d6",
+            background: "#0f172b",
+            color: "#ffffff",
         }).then((result) => {
             if (result.isConfirmed) {
                 const csrfToken = $('meta[name="csrf-token"]').attr("content");

@@ -973,6 +973,9 @@ $(document).ready(function () {
                 title: "Date Range Required",
                 text: "Please select a date range.",
                 confirmButtonText: "OK",
+                background: "#0f172b",
+                confirmButtonColor: "#155dfc",
+                color: "#ffffff",
             });
             return;
         }
@@ -1059,7 +1062,8 @@ $(document).ready(function () {
             confirmButtonText: "Yes, delete",
             cancelButtonText: "Cancel",
             confirmButtonColor: "#d33",
-            cancelButtonColor: "#3085d6",
+            background: "#0f172b",
+            color: "#ffffff",
         }).then((result) => {
             if (result.isConfirmed) {
                 const csrfToken = $('meta[name="csrf-token"]').attr("content");

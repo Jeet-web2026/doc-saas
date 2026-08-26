@@ -54,10 +54,11 @@ $(document).ready(function () {
                 <p>Confirm Agreement Submission Once saved, Internal Notes cannot be modified or deleted. Please ensure that all information is correct before saving.</p>
             `,
             showCancelButton: true,
-            background: "#e6f2ff",
             confirmButtonText: "Add",
             cancelButtonText: "Cancel",
-            confirmButtonColor: "#3085d6",
+            background: "#0f172b",
+            confirmButtonColor: "#155dfc",
+            color: "#ffffff",
         }).then((result) => {
             if (result.isConfirmed) {
                 $(this).closest("form").submit();
@@ -73,10 +74,11 @@ $(document).ready(function () {
                 <p>Confirm Agreement Submission Once saved, Internal Notes cannot be modified or deleted. Please ensure that all information is correct before saving.</p>
             `,
             showCancelButton: true,
-            background: "#e6f2ff",
             confirmButtonText: "Update",
             cancelButtonText: "Cancel",
-            confirmButtonColor: "#3085d6",
+            background: "#0f172b",
+            confirmButtonColor: "#155dfc",
+            color: "#ffffff",
         }).then((result) => {
             if (result.isConfirmed) {
                 $(this).closest("form").submit();
@@ -93,10 +95,11 @@ $(document).ready(function () {
                 <p>Please verify that all information is complete and accurate before proceeding.</p>
             `,
             showCancelButton: true,
-            background: "#e6f2ff",
             confirmButtonText: "Save Draft",
             cancelButtonText: "Cancel",
-            confirmButtonColor: "#3085d6",
+            background: "#0f172b",
+            confirmButtonColor: "#155dfc",
+            color: "#ffffff",
         }).then((result) => {
             if (result.isConfirmed) {
                 $(this).closest("form").submit();
@@ -113,10 +116,11 @@ $(document).ready(function () {
                 <p>Please verify that all information is complete and accurate before proceeding.</p>
             `,
             showCancelButton: true,
-            background: "#e6f2ff",
             confirmButtonText: "Save Name",
             cancelButtonText: "Cancel",
-            confirmButtonColor: "#3085d6",
+            background: "#0f172b",
+            confirmButtonColor: "#155dfc",
+            color: "#ffffff",
         }).then((result) => {
             if (result.isConfirmed) {
                 $(this).closest("form").submit();
@@ -235,25 +239,25 @@ $(document).ready(function () {
         modules: {
             toolbar: isEditable
                 ? [
-                    [
-                        { font: [] },
-                        { size: ["small", false, "large", "huge"] },
-                    ],
-                    [{ header: [1, 2, 3, 4, 5, 6, false] }],
-                    ["bold", "italic", "underline", "strike"],
-                    [{ color: [] }, { background: [] }],
-                    [{ script: "sub" }, { script: "super" }],
-                    [
-                        { list: "ordered" },
-                        { list: "bullet" },
-                        { list: "check" },
-                    ],
-                    [{ indent: "-1" }, { indent: "+1" }],
-                    [{ align: [] }],
-                    ["blockquote", "code-block"],
-                    ["link"],
-                    ["clean"],
-                ]
+                      [
+                          { font: [] },
+                          { size: ["small", false, "large", "huge"] },
+                      ],
+                      [{ header: [1, 2, 3, 4, 5, 6, false] }],
+                      ["bold", "italic", "underline", "strike"],
+                      [{ color: [] }, { background: [] }],
+                      [{ script: "sub" }, { script: "super" }],
+                      [
+                          { list: "ordered" },
+                          { list: "bullet" },
+                          { list: "check" },
+                      ],
+                      [{ indent: "-1" }, { indent: "+1" }],
+                      [{ align: [] }],
+                      ["blockquote", "code-block"],
+                      ["link"],
+                      ["clean"],
+                  ]
                 : false,
 
             history: {
@@ -285,6 +289,9 @@ $(document).ready(function () {
                 title: "At least one party is required",
                 text: "An agreement must have at least one party.",
                 confirmButtonText: "OK",
+                background: "#0f172b",
+                confirmButtonColor: "#155dfc",
+                color: "#ffffff",
             });
             return;
         }
@@ -321,6 +328,8 @@ $(document).ready(function () {
                 title: "Invalid File Type",
                 text: "Only PDF, Word, Excel, JPG, JPEG, and PNG files are allowed.",
                 confirmButtonColor: "#d33",
+                background: "#0f172b",
+                color: "#ffffff",
             });
             $(this).val(""); // reset input
             return;
@@ -336,6 +345,8 @@ $(document).ready(function () {
                     (file.size / (1024 * 1024)).toFixed(2) +
                     " MB.",
                 confirmButtonColor: "#d33",
+                background: "#0f172b",
+                color: "#ffffff",
             });
             $(this).val("");
             return;
@@ -355,6 +366,8 @@ $(document).ready(function () {
                         title: "Corrupt File",
                         text: "The uploaded image appears to be corrupt or unreadable.",
                         confirmButtonColor: "#d33",
+                        background: "#0f172b",
+                        color: "#ffffff",
                     });
                     $("#document").val("");
                 };
@@ -378,6 +391,8 @@ $(document).ready(function () {
                         title: "Corrupt File",
                         text: "The uploaded PDF appears to be corrupt or invalid.",
                         confirmButtonColor: "#d33",
+                        background: "#0f172b",
+                        color: "#ffffff",
                     });
                     $("#document").val("");
                 }
@@ -402,7 +417,9 @@ $(document).ready(function () {
                 icon: "warning",
                 title: "File Too Large",
                 text: "File size must be less than 1 MB.",
-                confirmButtonColor: "#3085d6",
+                background: "#0f172b",
+                confirmButtonColor: "#155dfc",
+                color: "#ffffff",
             }).then((result) => {
                 if (result.isConfirmed) {
                     file.value = "";
@@ -516,11 +533,12 @@ $(document).ready(function () {
 
             if (expiryDate < today) {
                 Swal.fire({
-                    background: "#e6f2ff",
                     title: "Past Expiry Date Selected",
                     text: 'You have selected a past Expiry Date. If saved, the agreement status will be set to "Expired".',
                     confirmButtonText: "OK",
-                    confirmButtonColor: "#3085d6",
+                    background: "#0f172b",
+                    confirmButtonColor: "#155dfc",
+                    color: "#ffffff",
                 });
             }
         });
