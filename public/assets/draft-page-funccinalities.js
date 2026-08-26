@@ -724,6 +724,9 @@ $(document).ready(function () {
         Swal.fire({
             icon: "warning",
             title: "Are you sure you want to delete this draft?",
+            html: `
+                <p>Once deleted, the draft cannot be recovered. Please confirm before proceeding.</p>
+            `,
             showCancelButton: true,
             confirmButtonText: "Yes, delete",
             cancelButtonText: "Cancel",
