@@ -57,6 +57,11 @@
 .fi-header {
     display: none !important;
 }
-.fi-sidebar-nav-groups{
+.fi-sidebar-nav-groups {
     gap: 5px !important;
+}
+
+.fi-section-content-ctn {
+    background-color: #121c2e;
+    border-radius: 12px !important;
 }

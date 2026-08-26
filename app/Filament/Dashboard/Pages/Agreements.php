@@ -12,8 +12,10 @@ class Agreements extends Page
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-document-text';
     protected static ?string $navigationLabel = 'Agreements';
-    protected static ?int $navigationSort = 1;
-    protected string $view = 'filament.dashboard.pages.agreements';
+    protected static ?int $navigationSort = 2;
+     protected string $view = 'filament.dashboard.pages.agreements';
+    protected static ?string $slug = 'agreements';
+    
 
     public string $userUin;
     public string $orgaUin;

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Filament\Dashboard\Pages\Agreements;
+use App\Filament\Dashboard\Pages\Dashboard;
 use App\Models\UserOrgaRela;
 use App\Services\Agreement\AgreementService;
 use Illuminate\Http\JsonResponse;
@@ -105,7 +105,7 @@ class HomeController extends Controller
         Session::put('company_information', $companyInformation);
         Session::put('user_data', $userData);
 
-        return redirect()->to(Agreements::getUrl());
+        return redirect()->to(Dashboard::getUrl());
     }
 
     public function agreementsData(Request $request): JsonResponse

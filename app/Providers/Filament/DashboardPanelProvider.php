@@ -2,7 +2,7 @@
 
 namespace App\Providers\Filament;
 
-use App\Filament\Dashboard\Pages\Agreements;
+use App\Filament\Dashboard\Pages\Dashboard;
 use App\Http\Middleware\EnsurePartakerSessionExists;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -38,7 +38,7 @@ class DashboardPanelProvider extends PanelProvider
             ])
             ->discoverResources(in: app_path('Filament/Dashboard/Resources'), for: 'App\Filament\Dashboard\Resources')
             ->discoverPages(in: app_path('Filament/Dashboard/Pages'), for: 'App\Filament\Dashboard\Pages')
-            ->homeUrl(fn() => Agreements::getUrl())
+            ->homeUrl(fn() => Dashboard::getUrl())
             ->discoverWidgets(in: app_path('Filament/Dashboard/Widgets'), for: 'App\Filament\Dashboard\Widgets')
             ->widgets([
                 AccountWidget::class,
