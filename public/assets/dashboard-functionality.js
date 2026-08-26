@@ -1022,6 +1022,7 @@ $(document).ready(function () {
             "href",
             "/add-agreement?company=" + newCompanyId,
         );
+
         $("#companyName").text(companyName);
 
         $(".check-icon").addClass("hidden");

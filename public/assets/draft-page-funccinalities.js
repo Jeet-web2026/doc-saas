@@ -684,9 +684,9 @@ $(document).ready(function () {
         const newCompanyId = $item.data("company-id");
         const companyName = $item.data("company");
 
-        $("#addAgreementBtn").attr(
+        $("#draftAgreementBtn").attr(
             "href",
-            "/add-agreement?company=" + newCompanyId,
+            "/draft-agreement?company=" + newCompanyId,
         );
         $("#companyName").text(companyName);
 

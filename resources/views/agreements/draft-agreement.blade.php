@@ -69,12 +69,20 @@
                     <div class="space-y-1.5 md:col-span-2">
                         <label class="label">Agreement Name</label>
 
-                        <input
-                            type="text"
-                            class="input"
-                            name="agreement_name"
-                            value="{{ old('agreement_name') }}"
-                            placeholder="e.g. Courier Service Agreement — FY26">
+                            <select class="input"
+                                name="agreement_name">
+                                @if($companyInformation->agreementNames?->isNotEmpty())
+                                    <option value="" class="bg-slate-900">Select agreement name</option>
+                                @else
+                                    <option value="" class="bg-slate-900">No agreement name added</option>
+                                @endif
+                                @foreach($companyInformation->agreementNames as $info)
+                                <option value="{{ $info->Agmt_Name }}" class="bg-slate-900"
+                                    {{ old('agreement_name') == $info->Agmt_Name ? 'selected' : '' }}>
+                                    {{ $info->Agmt_Name }}
+                                </option>
+                                @endforeach
+                            </select>
 
                         @error('agreement_name')
                         <p class="text-sm text-red-500 mt-1">{{ $message }}</p>

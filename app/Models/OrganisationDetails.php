@@ -47,4 +47,9 @@ class OrganisationDetails extends Model
     {
         return $this->hasMany(UserOrgaRela::class, 'Orga_UIN', 'Orga_UIN');
     }
+
+    public function agreementNames(): HasMany
+    {
+        return $this->hasMany(AgreementName::class, 'Orga_UIN', 'Orga_UIN');
+    }
 }

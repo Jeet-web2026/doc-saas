@@ -22,7 +22,7 @@ class DraftAgreementManagementController extends Controller
     {
         $agreementCategories = $this->agreementService->fetchAgreementCategories();
         $userData = $this->agreementService->fetchUserData(Session::get('partaker_access_token'));
-        $companyInformation =  OrganisationDetails::where('Orga_UIN', $request->query('company'))->first();
+        $companyInformation =  OrganisationDetails::with('agreementNames')->where('Orga_UIN', $request->query('company'))->first();
         return view('agreements.draft-agreement', compact('agreementCategories', 'userData', 'companyInformation'));
     }
 
