@@ -1059,7 +1059,7 @@ $(document).ready(function () {
                     <p>If either condition applies, the agreement cannot be deleted at this time.</p>
             `,
             showCancelButton: true,
-            confirmButtonText: "Yes, delete",
+            confirmButtonText: "Yes",
             cancelButtonText: "Cancel",
             confirmButtonColor: "#d33",
             background: "#0f172b",
