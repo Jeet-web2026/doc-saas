@@ -276,13 +276,6 @@ $(document).ready(function () {
         return `<span class="rounded bg-white/10 px-1.5 py-0.5 text-[10px]">${d}</span>`;
     };
 
-    function escapeHtml(str) {
-        return String(str)
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;");
-    }
     const sortValue = (r, key) =>
         ({
             firstParty: r.parties[0]?.org ?? "",
@@ -1059,6 +1052,12 @@ $(document).ready(function () {
         Swal.fire({
             icon: "warning",
             title: "Are you sure you want to delete this agreement?",
+            html: `
+                <p>Please note that the agreement can only be deleted if the following conditions are met:</p>
+                <p>It has no linked or subsequent agreements.
+                    No shared link has been created within the last 24 hours.</p>
+                    <p>If either condition applies, the agreement cannot be deleted at this time.</p>
+            `,
             showCancelButton: true,
             confirmButtonText: "Yes, delete",
             cancelButtonText: "Cancel",
