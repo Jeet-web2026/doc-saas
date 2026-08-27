@@ -10,7 +10,7 @@ class Settings extends Page
 {
     use HasCompanyHeader;
 
-    protected static ?string $navigationLabel = 'Agreement Management';
+    protected static ?string $navigationLabel = 'Agreement Name';
 
     protected static ?int $navigationSort =13;
 
