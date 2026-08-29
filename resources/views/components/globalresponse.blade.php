@@ -3,7 +3,7 @@
     <div class="flex flex-row items-start justify-between">
         <div class="flex items-center gap-3">
             <i class="ri-checkbox-circle-line text-2xl"></i>
-            <span>Successful ! message{{ session('success') }}</span>
+            <span>{{ session('success') }}</span>
         </div>
         <span class="cursor-pointer"><i class="ri-close-line text-2xl"></i></span>
     </div>
@@ -14,7 +14,7 @@
     <div class="flex flex-row items-start justify-between">
         <div class="flex items-center gap-3">
             <i class="ri-error-warning-line text-2xl"></i>
-            <span>Error ! message{{ session('error') }}</span>
+            <span>{{ session('error') }}</span>
         </div>
         <span class="cursor-pointer"><i class="ri-close-line text-2xl"></i></span>
     </div>
