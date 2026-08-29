@@ -247,40 +247,19 @@
                             <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
                             @enderror
                         </div>
-                        <div class="space-y-1.5 md:col-span-2 w-1/2">
-                            <label class="label">File No</label>
-                            <input class="input" name="file_no" maxlength="4" value="{{ old('file_no', $agreement->Agmt_File_no) }}" />
-                            @error('file_no')
+                        <div class="flex-1 mt-4">
+                            <h2 class="label mb-2">Deposit Amount</h2>
+                            <input
+                                type="text"
+                                class="input"
+                                name="deposit_amount"
+                                value="{{ old('deposit_amount', $agreement->Agmt_Depst_Amt ) }}">
+
+                            @error('deposit_amount')
                             <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
                             @enderror
                         </div>
                     </div>
-                        <div class="flex flex-col lg:flex-row gap-3">
-                            <div class="flex-1 mt-4">
-                                <h2 class="label mb-2">Deposit Amount</h2>
-                                <input
-                                    type="text"
-                                    class="input"
-                                    name="deposit_amount"
-                                    value="{{ old('deposit_amount', $agreement->Agmt_Depst_Amt ) }}">
-
-                                @error('deposit_amount')
-                                <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
-                                @enderror
-                            </div>
-                            <div class="flex-1 mt-4">
-                                <h2 class="label mb-2">Reference No.</h2>
-                                <input
-                                    type="text"
-                                    class="input"
-                                    name="ref_no"
-                                    value="{{ old('ref_no', $agreement->Agmt_Ref_No ) }}">
-
-                                @error('ref_no')
-                                <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
                         <div class="w-full mt-4">
                             <h2 class="label mb-2">Attachment</h2>
 
@@ -317,6 +296,14 @@
                             </div>
                         </div>
                 </section>
+
+                <x-additional-documents
+                    :file-no="$agreement->Agmt_File_no"
+                    :ref-no="$agreement->Agmt_Ref_No"
+                    :agreement-signed="$agreement->Agmt_Signed"
+                    :signed-document-received-date="optional($agreement->Signed_Recv_Date)->format('Y-m-d')"
+                    :agreement-received-type="$agreement->Agmt_Recv_Type"
+                />
 
                 <!-- Remarks -->
                 <x-rich-text-editor name="remarks" :value="old('remarks')" :editable="true" />
