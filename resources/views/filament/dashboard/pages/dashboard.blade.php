@@ -14,10 +14,10 @@
         class="space-y-6">
 
         {{-- Layout: calendar fixed on the left, tiles grid on the right --}}
-        <div class="grid grid-cols-1 gap-6 lg:grid-cols-[320px_1fr]">
+        <div class="flex flex-row mt-6 gap-6 items-start">
 
             {{-- Calendar — always visible, left side --}}
-            <div class="w-full">
+            <div class="w-100">
                 <div
                     id="calMenu"
                     class="rounded-md border border-white/10 bg-card shadow-xl">
@@ -150,7 +150,7 @@
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/4.0.0/jquery.min.js" integrity="sha512-8LENNbXmzI/Gbj+OwXmqR6V4QaUAw0/porPzy1+dQoJqC0JPHedWoe0DDOTL2uHA5XXJyIsPtiMHH86pVlay6A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="{{ asset('assets/feedback-page-functions.js') }}"></script>
+    <script src="{{ asset('assets/dashboard-functionality.js') }}"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </x-filament-panels::page>

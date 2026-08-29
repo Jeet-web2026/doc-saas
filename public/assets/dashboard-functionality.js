@@ -790,32 +790,6 @@ $(document).ready(function () {
         renderTable();
     });
 
-    // ---------- Search (server-side) ----------
-    const searchInput = document.getElementById("searchInput");
-
-    function runSearch(e) {
-        searchTerm = e.target.value;
-        fetchAgreements(1);
-    }
-
-    searchInput.addEventListener("blur", runSearch);
-    searchInput.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") {
-            runSearch(e);
-            searchInput.blur(); // optional: also removes focus after Enter
-        }
-    });
-
-    const searchInputDesktop = document.getElementById("searchInputDesktop");
-
-    searchInputDesktop.addEventListener("blur", runSearch);
-    searchInputDesktop.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") {
-            runSearch(e);
-            searchInputDesktop.blur(); // optional: also removes focus after Enter
-        }
-    });
-
     // ---------- Calendar events list ----------
     function renderCalendarEvents() {
         document.getElementById("calTitle").textContent =
@@ -958,54 +932,6 @@ $(document).ready(function () {
 
         $filterBtn.html(`${typeLabel}: ${fromStr} - ${toStr}`);
     }
-
-    document.getElementById("applyDate").addEventListener("click", () => {
-        if (selectedRange.length !== 2) {
-            Swal.fire({
-                icon: "warning",
-                title: "Date Range Required",
-                text: "Please select a date range.",
-                confirmButtonText: "OK",
-                background: "#0f172b",
-                confirmButtonColor: "#155dfc",
-                color: "#ffffff",
-            });
-            return;
-        }
-
-        dateFrom = selectedRange[0].toISOString().split("T")[0];
-        dateTo = selectedRange[1].toISOString().split("T")[0];
-
-        updateFilterButtonLabel(); // <-- reflect selection on the button
-
-        fetchAgreements(1, { dateFilterType }); // pass along which date field to filter by
-        document.getElementById("calMenuForFilter").classList.add("hidden");
-    });
-
-    document.getElementById("closeDateRange").addEventListener("click", () => {
-        document.getElementById("calMenuForFilter").classList.add("hidden");
-    });
-
-    document.getElementById("clearDate").addEventListener("click", () => {
-        document.getElementById("agreementDateRange")._flatpickr.clear();
-
-        selectedRange = [];
-        dateFrom = "";
-        dateTo = "";
-        dateFilterType = "agreement_date";
-        document.querySelector(
-            'input[name="dateFilterType"][value="agreement_date"]',
-        ).checked = true;
-
-        $filterBtn.text(defaultBtnLabel); // <-- reset button label
-
-        fetchAgreements(1);
-    });
-
-    document.getElementById("perPageSelect").addEventListener("change", (e) => {
-        perPage = parseInt(e.target.value, 10);
-        fetchAgreements(1);
-    });
 
     function selectCompany($item) {
         const newCompanyId = $item.data("company-id");
