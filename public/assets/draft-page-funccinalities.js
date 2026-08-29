@@ -183,7 +183,6 @@ $(document).ready(function () {
         approved_by: true,
         approved_date: true,
         upload_draft_file_name: false,
-        upload_checklist_file_name: false,
     };
     const today = new Date();
     let calMonth = new Date(today.getFullYear(), today.getMonth(), 1);
@@ -265,30 +264,26 @@ $(document).ready(function () {
                     </td>
 
                    <td data-col="upload_draft_file_name"
-                            class="px-5 py-4 text-muted-foreground hidden">
+                            class="px-5 py-4 flex flex-col gap-2 text-muted-foreground hidden">
                             ${
                                 r.uploadDraftFileName
                                     ? `<a href="/storage/${r.uploadDraftFileName}"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        class="inline-flex items-center gap-1.5 text-cyan-400 hover:text-cyan-300 hover:underline">
+                                        class="inline-flex items-center gap-1.5 text-blue-600 hover:text-blue-500 hover:underline">
                                         <i class="ri-file-line text-base"></i>
-                                        <span class="truncate max-w-[140px]">View</span>
+                                        <span class="truncate max-w-[140px]">Draft Attachment</span>
                                     </a>`
                                     : "—"
                             }
-                        </td>
-
-                        <td data-col="upload_checklist_file_name"
-                            class="px-5 py-4 text-muted-foreground hidden">
                             ${
                                 r.uploadChecklistFileName
                                     ? `<a href="/storage/${r.uploadChecklistFileName}"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        class="inline-flex items-center gap-1.5 text-cyan-400 hover:text-cyan-300 hover:underline">
+                                        class="inline-flex items-center gap-1.5 text-green-600 hover:text-green-500 hover:underline">
                                         <i class="ri-file-line text-base"></i>
-                                        <span class="truncate max-w-[140px]">View</span>
+                                        <span class="truncate max-w-[140px]">Checklist Attachment</span>
                                     </a>`
                                     : "—"
                             }

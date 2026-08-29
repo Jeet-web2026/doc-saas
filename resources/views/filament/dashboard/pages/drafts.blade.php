@@ -260,12 +260,7 @@
 
                                 <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-white/5 text-sm cursor-pointer">
                                     <input type="checkbox" data-col="upload_draft_file_name" class="accent-primary" checked>
-                                    Upload Draft File Name
-                                </label>
-
-                                <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-white/5 text-sm cursor-pointer">
-                                    <input type="checkbox" data-col="upload_checklist_file_name" class="accent-primary" checked>
-                                    Upload Checklist File Name
+                                    Draft & checklist attachment
                                 </label>
 
                             </div>
@@ -340,11 +335,7 @@
                         </th>
 
                         <th data-col="upload_draft_file_name" class="px-5 py-3 hidden">
-                            Upload Draft File Name
-                        </th>
-
-                        <th data-col="upload_checklist_file_name" class="px-5 py-3 hidden">
-                            Upload Checklist File Name
+                            Draft & checklist attachment
                         </th>
 
                         <th class="px-5 py-3 text-right">
