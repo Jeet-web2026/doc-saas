@@ -916,6 +916,7 @@ $(document).ready(function () {
             }
         });
     });
+    
 
     // Helper to format the button label from the selected range
     function updateFilterButtonLabel() {
