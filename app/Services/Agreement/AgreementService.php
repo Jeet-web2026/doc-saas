@@ -192,7 +192,7 @@ class AgreementService
             $query->where(function ($q) use ($statuses) {
                 foreach ($statuses as $status) {
                     match ($status) {
-                        'expired' => $q->orWhere('Agmt_Expy_Date', 'expired'),
+                        'expired' => $q->orWhere('Stau_UIN', 'expired'),
                         'renew' => $q->orWhere('Stau_UIN', 'renewed'),
                         'new' => $q->orWhere(function ($sub) {
                             $sub->whereMonth('created_at', now()->month)

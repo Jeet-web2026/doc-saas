@@ -184,7 +184,6 @@ $(document).ready(function () {
                 if (!eventMap[agreement.date]) {
                     eventMap[agreement.date] = {};
                 }
-
                 eventMap[agreement.date].created = true;
             }
 
@@ -192,7 +191,6 @@ $(document).ready(function () {
                 if (!eventMap[agreement.expiry]) {
                     eventMap[agreement.expiry] = {};
                 }
-
                 eventMap[agreement.expiry].renewal = true;
             }
         });
@@ -217,44 +215,55 @@ $(document).ready(function () {
             const hasRenewal = event.renewal;
 
             $calendarDays.append(`
-            <div class="flex flex-col items-center">
+        <div class="flex flex-col items-center">
 
-                <button
-                    class="
-                        w-8
-                        h-8
-                        rounded-full
-                        flex
-                        items-center
-                        justify-center
-                        transition
-                        ${isToday ? "bg-slate-700 text-white" : "hover:bg-white/10"}
-                    "
-                    data-day="${day}">
+            <button
+                class="
+                    w-8
+                    h-8
+                    rounded-full
+                    flex
+                    items-center
+                    justify-center
+                    transition
+                    ${isToday ? "bg-slate-700 text-white" : "hover:bg-white/10"}
+                "
+                data-day="${day}">
 
-                    ${day}
+                ${day}
 
-                </button>
+            </button>
 
-                <div class="flex gap-1 mt-1 h-2">
+            <div class="flex gap-1 mt-1 h-2">
 
-                    ${
-                        hasCreated
-                            ? '<span class="w-2 h-2 rounded-full bg-green-500"></span>'
-                            : ""
-                    }
+                ${
+                    hasCreated
+                        ? '<span class="w-2 h-2 rounded-full bg-green-500"></span>'
+                        : ""
+                }
 
-                    ${
-                        hasRenewal
-                            ? '<span class="w-2 h-2 rounded-full bg-red-500"></span>'
-                            : ""
-                    }
-
-                </div>
+                ${
+                    hasRenewal
+                        ? '<span class="w-2 h-2 rounded-full bg-red-500"></span>'
+                        : ""
+                }
 
             </div>
-        `);
+
+        </div>
+    `);
         }
+
+        // Disable "Next" once we've reached the current real-world month
+        const isCurrentMonth =
+            year === today.getFullYear() && month === today.getMonth();
+
+        $("#calNext")
+            .prop("disabled", isCurrentMonth)
+            .toggleClass(
+                "opacity-40 cursor-not-allowed pointer-events-none",
+                isCurrentMonth,
+            );
     }
 
     $("#calPrev").on("click", function () {
@@ -263,13 +272,19 @@ $(document).ready(function () {
     });
 
     $("#calNext").on("click", function () {
+        const today = new Date();
+        const isCurrentMonth =
+            current.getFullYear() === today.getFullYear() &&
+            current.getMonth() === today.getMonth();
+
+        if (isCurrentMonth) return; // safety net — button should already be disabled
+
         current.setMonth(current.getMonth() + 1);
         renderCalendar();
     });
 
     $("#calToday").on("click", function () {
         current = new Date();
-
         renderCalendar();
     });
 

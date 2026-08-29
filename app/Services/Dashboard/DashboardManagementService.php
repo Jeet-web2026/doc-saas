@@ -43,17 +43,23 @@ class DashboardManagementService
 
         return [
             'available'       => (clone $base)->count(),
-            'expired'         => (clone $base)->where('Agmt_Expy_Date', '<', now())->count(),
-            'active'          => (clone $base)->where('Agmt_Expy_Date', '>=', now())->count(),
+            'expired'         => (clone $base)->where('Stau_UIN', 'expired')
+                ->whereBetween('Agmt_Expy_Date', [$monthStart, $monthEnd])->count(),
+            'active' => (clone $base)
+                ->where('Stau_UIN', 'active')
+                ->where('Agmt_Strt_Date', '<=', $monthEnd)
+                ->where('Agmt_Expy_Date', '>=', $monthStart)
+                ->count(),
             'new'             => (clone $base)
                 ->whereYear('Agmt_Strt_Date', $year)
                 ->whereMonth('Agmt_Strt_Date', $month)
                 ->count(),
             'renew'           => (clone $base)
+                ->where('Stau_UIN', 'renewed')
                 ->whereBetween('Agmt_Expy_Date', [$monthStart, $monthEnd])
                 ->count(),
-            'sign_pending'    => (clone $base)->where('Stau_UIN', 'sign_pending')->count(),
-            'received'        => (clone $base)->where('Stau_UIN', 'received')->count(),
+            'sign_pending'    => (clone $base)->whereBetween('Agmt_Strt_Date', [$monthStart, $monthEnd])->where('Stau_UIN', 'sign_pending')->count(),
+            'received'        => (clone $base)->whereBetween('Agmt_Strt_Date', [$monthStart, $monthEnd])->where('Stau_UIN', 'received')->count(),
             'draft_available' => (clone $draftBase)->count(),
             'new_draft'       => (clone $draftBase)
                 ->whereYear('created_at', $year)
