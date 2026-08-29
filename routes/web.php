@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AddAgreementController;
 use App\Http\Controllers\AgreementNameController;
+use App\Http\Controllers\DashboardManagementController;
 use App\Http\Controllers\DraftAgreementManagementController;
 use App\Http\Controllers\EditAgreementController;
 use App\Http\Controllers\FeedbackController;
@@ -68,6 +69,10 @@ Route::middleware('partaker.session')->group(function () {
 
     Route::controller(FeedbackController::class)->group(function () {
         Route::post('feedback-store', 'store')->name('feedback-store');
+    });
+    
+    Route::controller(DashboardManagementController::class)->group(function () {
+        Route::post('dashboard/data', 'index')->name('dashboard-data');
     });
 
     Route::fallback(function () {
