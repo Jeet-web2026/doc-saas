@@ -12,118 +12,114 @@
             },
         }"
         class="space-y-6">
-        {{-- Calendar trigger — opens the month calendar in a themed popover --}}
-        <div class="relative mt-6" data-menu>
 
-            <button
-                type="button"
-                data-menu-toggle="calMenu"
-                aria-label="Calendar"
-                title="Calendar"
-                class="inline-flex h-9 w-9 items-center justify-center rounded-md border border-white/10 hover:bg-white/5 transition">
-                <i class="bi bi-calendar3"></i>
-            </button>
+        {{-- Layout: calendar fixed on the left, tiles grid on the right --}}
+        <div class="grid grid-cols-1 gap-6 lg:grid-cols-[320px_1fr]">
 
+            {{-- Calendar — always visible, left side --}}
+            <div class="w-full">
+                <div
+                    id="calMenu"
+                    class="rounded-md border border-white/10 bg-card shadow-xl">
 
-            {{-- Calendar Dropdown --}}
-            <div
-                id="calMenu"
-                class="hidden absolute right-0 mt-2 max-w-96 rounded-md border border-white/10 bg-card shadow-xl z-50">
+                    {{-- Header --}}
+                    <div class="flex items-center justify-between border-b border-white/10 px-4 py-3">
 
-                {{-- Header --}}
-                <div class="flex items-center justify-between border-b border-white/10 px-4 py-3">
+                        <button
+                            id="calPrev"
+                            class="h-8 w-8 flex items-center justify-center rounded hover:bg-white/10">
+                            &#10094;
+                        </button>
 
-                    <button
-                        id="calPrev"
-                        class="h-8 w-8 flex items-center justify-center rounded hover:bg-white/10">
-                        &#10094;
-                    </button>
+                        <div
+                            id="calTitle"
+                            class="text-sm font-semibold"></div>
+
+                        <button
+                            id="calNext"
+                            class="h-8 w-8 flex items-center justify-center rounded hover:bg-white/10">
+                            &#10095;
+                        </button>
+
+                    </div>
+
+                    {{-- Week Days --}}
+                    <div class="grid grid-cols-7 text-center text-xs font-medium border-b border-white/10 py-2">
+                        <div>Sun</div>
+                        <div>Mon</div>
+                        <div>Tue</div>
+                        <div>Wed</div>
+                        <div>Thu</div>
+                        <div>Fri</div>
+                        <div>Sat</div>
+                    </div>
+
+                    {{-- Calendar --}}
+                    <div
+                        id="calendarDays"
+                        class="grid grid-cols-7 gap-1 p-2"></div>
+
+                    {{-- Footer --}}
+                    <div class="flex items-center justify-between border-y border-white/10 px-4 py-2">
+
+                        <button
+                            id="calToday"
+                            class="h-8 px-3 text-sm rounded hover:bg-white/10">
+                            Agreements
+                        </button>
+
+                        <span
+                            id="calCount"
+                            class="text-xs text-muted-foreground"></span>
+
+                    </div>
 
                     <div
-                        id="calTitle"
-                        class="text-sm font-semibold"></div>
-
-                    <button
-                        id="calNext"
-                        class="h-8 w-8 flex items-center justify-center rounded hover:bg-white/10">
-                        &#10095;
-                    </button>
+                        id="calList"
+                        class="max-h-80 overflow-y-auto p-2"></div>
 
                 </div>
-
-
-                {{-- Week Days --}}
-                <div class="grid grid-cols-7 text-center text-xs font-medium border-b border-white/10 py-2">
-                    <div>Sun</div>
-                    <div>Mon</div>
-                    <div>Tue</div>
-                    <div>Wed</div>
-                    <div>Thu</div>
-                    <div>Fri</div>
-                    <div>Sat</div>
-                </div>
-
-
-                {{-- Calendar --}}
-                <div
-                    id="calendarDays"
-                    class="grid grid-cols-7 gap-1 p-2"></div>
-
-
-                {{-- Footer --}}
-                <div class="flex items-center justify-between border-y border-white/10 px-4 py-2">
-
-                    <button
-                        id="calToday"
-                        class="h-8 px-3 text-sm rounded hover:bg-white/10">
-                        Agreements
-                    </button>
-
-                    <span
-                        id="calCount"
-                        class="text-xs text-muted-foreground"></span>
-
-                </div>
-
-
-                <div
-                    id="calList"
-                    class="max-h-80 overflow-y-auto p-2"></div>
-
             </div>
 
-        </div>
+            {{-- Tiles — the first 3 tiles (that used to sit in the left column) are moved to the end --}}
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
+                @php
+                    $allTiles = $this->getTiles();
+                    $movedTiles = array_slice($allTiles, 0, 3);   // 128, 7, 45
+                    $remainingTiles = array_slice($allTiles, 3);  // 14, 92, 9, 21, 33, 5
+                    $orderedTiles = array_merge($remainingTiles, $movedTiles);
+                @endphp
 
-        {{-- Tiles — full width now that the calendar lives in the popup --}}
-        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
-            @foreach ($this->getTiles() as $tile)
-            <button type="button" @click="selected = (selected === '{{ $tile['key'] }}') ? null : '{{ $tile['key'] }}'" class="text-left">
-                <x-filament::section>
-                    <div class="flex items-center gap-3">
-                        <span @class([ 'flex h-10 w-10 shrink-0 items-center justify-center rounded-lg' ,
-                            match ($tile['color']) { 'success'=> 'bg-success-50 text-success-600 dark:bg-success-500/10',
-                            'danger' => 'bg-danger-50 text-danger-600 dark:bg-danger-500/10',
-                            'warning' => 'bg-warning-50 text-warning-600 dark:bg-warning-500/10',
-                            'info' => 'bg-info-50 text-info-600 dark:bg-info-500/10',
-                            'gray' => 'bg-gray-100 text-gray-600 dark:bg-white/5',
-                            default => 'bg-primary-50 text-primary-600 dark:bg-primary-500/10',
-                            },
-                            ])>
-                            @svg($tile['icon'], 'h-5 w-5')
-                        </span>
+                @foreach ($orderedTiles as $tile)
+                <button type="button" @click="selected = (selected === '{{ $tile['key'] }}') ? null : '{{ $tile['key'] }}'" class="text-left">
+                    <x-filament::section>
+                        <div class="flex items-center gap-3">
+                            <span @class([ 'flex h-10 w-10 shrink-0 items-center justify-center rounded-lg' ,
+                                match ($tile['color']) { 'success'=> 'bg-success-50 text-success-600 dark:bg-success-500/10',
+                                'danger' => 'bg-danger-50 text-danger-600 dark:bg-danger-500/10',
+                                'warning' => 'bg-warning-50 text-warning-600 dark:bg-warning-500/10',
+                                'info' => 'bg-info-50 text-info-600 dark:bg-info-500/10',
+                                'gray' => 'bg-gray-100 text-gray-600 dark:bg-white/5',
+                                default => 'bg-primary-50 text-primary-600 dark:bg-primary-500/10',
+                                },
+                                ])>
+                                @svg($tile['icon'], 'h-5 w-5')
+                            </span>
 
-                        <span class="min-w-0">
-                            <span class="block text-2xl font-bold text-gray-950 dark:text-white">
-                                {{ $tile['count'] }}
+                            <span class="min-w-0">
+                                <span class="block text-2xl font-bold text-gray-950 dark:text-white">
+                                    {{ $tile['count'] }}
+                                </span>
+                                <span class="block truncate text-sm text-gray-500 dark:text-gray-400">
+                                    {{ $tile['label'] }}
+                                </span>
                             </span>
-                            <span class="block truncate text-sm text-gray-500 dark:text-gray-400">
-                                {{ $tile['label'] }}
-                            </span>
-                        </span>
-                    </div>
-                </x-filament::section>
-            </button>
-            @endforeach
+                        </div>
+                    </x-filament::section>
+                </button>
+                @endforeach
+            </div>
+
         </div>
 
         {{-- Short review panel, shown once a tile is clicked --}}
@@ -150,7 +146,7 @@
     </main>
 
     <script>
-        var AGREEMENTS_URL = "{{ route('drafts.data') }}";
+        var AGREEMENTS_URL = "{{ route('agreements.data') }}";
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/4.0.0/jquery.min.js" integrity="sha512-8LENNbXmzI/Gbj+OwXmqR6V4QaUAw0/porPzy1+dQoJqC0JPHedWoe0DDOTL2uHA5XXJyIsPtiMHH86pVlay6A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
