@@ -1,4 +1,54 @@
 $(document).ready(function () {
+    function fetchDashboardStat(organisationUin, year, month) {
+        $.ajax({
+            url: DASHBOARD_STATS_URL,
+            type: "POST",
+            dataType: "json",
+            data: {
+                _token: $('meta[name="csrf-token"]').attr("content"),
+                selected_orga_uin: organisationUin,
+                year: year,
+                month: month,
+            },
+            success: function (response) {
+                updateTileCounts(response);
+            },
+            error: function (xhr) {
+                console.error(
+                    "Failed to fetch dashboard stats:",
+                    xhr.responseText,
+                );
+            },
+        });
+    }
+
+    function updateTileCounts(stats) {
+        $(".tile-count").each(function () {
+            const $el = $(this);
+            const key = $el.data("key");
+
+            if (!(key in stats)) return; // key not present in this response, leave as-is
+
+            const from = parseInt($el.data("current"), 10) || 0;
+            const to = parseInt(stats[key], 10) || 0;
+
+            $({ count: from }).animate(
+                { count: to },
+                {
+                    duration: 700,
+                    easing: "swing",
+                    step: function () {
+                        $el.text(Math.floor(this.count));
+                    },
+                    complete: function () {
+                        $el.text(to);
+                        $el.data("current", to); // remember new value as the baseline for next update
+                    },
+                },
+            );
+        });
+    }
+
     let companyId = null;
     let dateFilterType = "agreement_date";
     const $initial = $(".company-item")
@@ -11,7 +61,6 @@ $(document).ready(function () {
         companyId = $initial.data("company-id");
     }
     let AGREEMENTS = [];
-    let currentPage = 1;
     let perPage = 5;
 
     // ---------- Search & Date filter state ----------
@@ -113,6 +162,8 @@ $(document).ready(function () {
     function renderCalendar() {
         const year = current.getFullYear();
         const month = current.getMonth();
+
+        fetchDashboardStat(companyId, year, month + 1);
 
         $calTitle.text(
             current.toLocaleString("default", {
@@ -916,7 +967,6 @@ $(document).ready(function () {
             }
         });
     });
-    
 
     // Helper to format the button label from the selected range
     function updateFilterButtonLabel() {

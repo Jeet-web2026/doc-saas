@@ -82,12 +82,12 @@
             </div>
 
             {{-- Tiles — the first 3 tiles (that used to sit in the left column) are moved to the end --}}
-            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 flex-1">
                 @php
-                    $allTiles = $this->getTiles();
-                    $movedTiles = array_slice($allTiles, 0, 3);   // 128, 7, 45
-                    $remainingTiles = array_slice($allTiles, 3);  // 14, 92, 9, 21, 33, 5
-                    $orderedTiles = array_merge($remainingTiles, $movedTiles);
+                $allTiles = $this->getTiles();
+                $movedTiles = array_slice($allTiles, 0, 3); // 128, 7, 45
+                $remainingTiles = array_slice($allTiles, 3); // 14, 92, 9, 21, 33, 5
+                $orderedTiles = array_merge($remainingTiles, $movedTiles);
                 @endphp
 
                 @foreach ($orderedTiles as $tile)
@@ -107,7 +107,10 @@
                             </span>
 
                             <span class="min-w-0">
-                                <span class="block text-2xl font-bold text-gray-950 dark:text-white">
+                                <span
+                                    class="tile-count block text-2xl font-bold text-gray-950 dark:text-white"
+                                    data-key="{{ $tile['key'] }}"
+                                    data-current="{{ $tile['count'] }}">
                                     {{ $tile['count'] }}
                                 </span>
                                 <span class="block truncate text-sm text-gray-500 dark:text-gray-400">
@@ -147,6 +150,7 @@
 
     <script>
         var AGREEMENTS_URL = "{{ route('agreements.data') }}";
+        var DASHBOARD_STATS_URL = "{{ route('dashboard-data') }}";
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/4.0.0/jquery.min.js" integrity="sha512-8LENNbXmzI/Gbj+OwXmqR6V4QaUAw0/porPzy1+dQoJqC0JPHedWoe0DDOTL2uHA5XXJyIsPtiMHH86pVlay6A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

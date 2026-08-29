@@ -2,6 +2,7 @@
 
 namespace App\Services\Dashboard;
 
+use App\Models\AgmtDraft;
 use App\Models\Agreement;
 use Carbon\Carbon;
 
@@ -21,35 +22,43 @@ class DashboardManagementService
             'new_draft'      => ['label' => 'New Draft Added',          'icon' => 'heroicon-o-document-plus',        'color' => 'info'],
         ];
 
-        $counts = $this->getCounts($orgaUin);
 
         $tiles = [];
         foreach ($definitions as $key => $meta) {
             $tiles[] = array_merge($meta, [
                 'key'   => $key,
-                'count' => $counts[$key] ?? 0,
+                'count' =>  0,
             ]);
         }
 
         return $tiles;
     }
 
-    protected function getCounts(string $orgaUin): array
+    public function getCounts(string $orgaUin, int $year, int $month): array
     {
         $base = Agreement::query()->where('Orga_UIN', $orgaUin);
+        $draftBase = AgmtDraft::query()->where('Orga_UIN', $orgaUin);
+        $monthStart = Carbon::create($year, $month, 1)->startOfMonth();
+        $monthEnd = $monthStart->copy()->endOfMonth();
 
         return [
             'available'       => (clone $base)->count(),
             'expired'         => (clone $base)->where('Agmt_Expy_Date', '<', now())->count(),
             'active'          => (clone $base)->where('Agmt_Expy_Date', '>=', now())->count(),
-            'new'             => 2,
-            'renew'           => (clone $base)->whereBetween('Agmt_Expy_Date', [now(), now()->addDays(30)])->count(),
+            'new'             => (clone $base)
+                ->whereYear('Agmt_Strt_Date', $year)
+                ->whereMonth('Agmt_Strt_Date', $month)
+                ->count(),
+            'renew'           => (clone $base)
+                ->whereBetween('Agmt_Expy_Date', [$monthStart, $monthEnd])
+                ->count(),
             'sign_pending'    => (clone $base)->where('Stau_UIN', 'sign_pending')->count(),
             'received'        => (clone $base)->where('Stau_UIN', 'received')->count(),
-            'draft_available' => (clone $base)->where('Stau_UIN', 'draft')->count(),
-            'new_draft'       => (clone $base)->where('Stau_UIN', 'draft')
-                ->whereMonth('created_at', now()->month)
-                ->whereYear('created_at', now()->year)->count(),
+            'draft_available' => (clone $draftBase)->count(),
+            'new_draft'       => (clone $draftBase)
+                ->whereYear('created_at', $year)
+                ->whereMonth('created_at', $month)
+                ->count(),
         ];
     }
 
@@ -65,53 +74,6 @@ class DashboardManagementService
             'received' => 'Signed agreements received back and ready for filing.',
             'draft_available' => 'Drafts saved but not yet converted into a live agreement.',
             'new_draft' => 'Drafts added within the selected calendar month.',
-        ];
-    }
-
-    /**
-     * Month-wise calendar payload: per-day created/renewal flags + a sorted event list.
-     */
-    public function getCalendarData(string $orgaUin, int $year, int $month): array
-    {
-        $start = Carbon::create($year, $month, 1)->startOfMonth();
-        $end = $start->copy()->endOfMonth();
-
-        $created = Agreement::query()
-            ->where('orga_uin', $orgaUin)
-            ->whereBetween('created_at', [$start, $end])
-            ->get(['id', 'name', 'type', 'created_at as date']);
-
-        $expiring = Agreement::query()
-            ->where('orga_uin', $orgaUin)
-            ->whereBetween('expiry_date', [$start, $end])
-            ->get(['id', 'name', 'type', 'expiry_date as date']);
-
-        $days = [];
-        $events = [];
-
-        foreach ($created as $a) {
-            $d = Carbon::parse($a->date)->toDateString();
-            $days[$d]['created'] = true;
-            $events[] = ['date' => $d, 'type' => 'new', 'name' => $a->name, 'type_label' => $a->type];
-        }
-
-        foreach ($expiring as $a) {
-            $d = Carbon::parse($a->date)->toDateString();
-            $days[$d]['renewal'] = true;
-            $events[] = ['date' => $d, 'type' => 'renewal', 'name' => $a->name, 'type_label' => $a->type];
-        }
-
-        usort($events, fn($a, $b) => $a['date'] <=> $b['date']);
-
-        return [
-            'year' => $year,
-            'month' => $month,
-            'title' => $start->format('F Y'),
-            'first_day_of_week' => $start->copy()->startOfMonth()->dayOfWeek, // 0 = Sun
-            'days_in_month' => $start->daysInMonth,
-            'days' => $days,
-            'events' => $events,
-            'events_count' => count($events),
         ];
     }
 }
