@@ -192,8 +192,8 @@ class AgreementService
             $query->where(function ($q) use ($statuses) {
                 foreach ($statuses as $status) {
                     match ($status) {
-                        'expired' => $q->orWhere('Agmt_Expy_Date', '<', now()),
-                        'renew' => $q->orWhereBetween('Agmt_Expy_Date', [now(), now()->addDays(30)]),
+                        'expired' => $q->orWhere('Agmt_Expy_Date', 'expired'),
+                        'renew' => $q->orWhere('Stau_UIN', 'renewed'),
                         'new' => $q->orWhere(function ($sub) {
                             $sub->whereMonth('created_at', now()->month)
                                 ->whereYear('created_at', now()->year);
