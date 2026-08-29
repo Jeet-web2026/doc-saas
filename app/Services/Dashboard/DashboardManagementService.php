@@ -56,7 +56,7 @@ class DashboardManagementService
                 ->count(),
             'renew'           => (clone $base)
                 ->where('Stau_UIN', 'renewed')
-                ->whereBetween('Agmt_Expy_Date', [$monthStart, $monthEnd])
+                ->whereBetween('Agmt_Strt_Date', [$monthStart, $monthEnd])
                 ->count(),
             'sign_pending'    => (clone $base)->whereBetween('Agmt_Strt_Date', [$monthStart, $monthEnd])->where('Stau_UIN', 'sign_pending')->count(),
             'received'        => (clone $base)->whereBetween('Agmt_Strt_Date', [$monthStart, $monthEnd])->where('Stau_UIN', 'received')->count(),
