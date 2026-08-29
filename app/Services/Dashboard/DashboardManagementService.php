@@ -44,7 +44,7 @@ class DashboardManagementService
         return [
             'available'       => (clone $base)->count(),
             'expired'         => (clone $base)->where('Stau_UIN', 'expired')
-                ->whereBetween('Agmt_Expy_Date', [$monthStart, $monthEnd])->count(),
+                ->whereBetween('ExpOn', [$monthStart, $monthEnd])->count(),
             'active' => (clone $base)
                 ->where('Stau_UIN', 'active')
                 ->where('Agmt_Strt_Date', '<=', $monthEnd)
@@ -56,6 +56,7 @@ class DashboardManagementService
                 ->count(),
             'renew'           => (clone $base)
                 ->where('Stau_UIN', 'renewed')
+                ->whereBetween('RenwOn', [$monthStart, $monthEnd])
                 ->count(),
             'sign_pending'    => (clone $base)->where('Agmt_Signed', 'no')->count(),
             'received'        => (clone $base)->where('Agmt_Recv_Type', 'original_hard_copy')->count(),

@@ -67,6 +67,15 @@ class Agreement extends Model
 
                 $agreement->Agmt_UIN = $candidate;
             }
+            if ($agreement->Stau_UIN === 'expired') {
+                $agreement->ExpOn = now();
+            }
+        });
+
+        static::updating(function ($agreement) {
+            if ($agreement->Stau_UIN === 'expired' && $agreement->isDirty('Stau_UIN')) {
+                $agreement->ExpOn = now();
+            }
         });
     }
 

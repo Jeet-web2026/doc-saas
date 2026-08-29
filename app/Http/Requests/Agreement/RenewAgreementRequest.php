@@ -72,7 +72,10 @@ class RenewAgreementRequest extends FormRequest
                     table: 'tbl_tran_agmt',
                     companyId: $this->input('company_id'),
                 ),
-            ]
+            ],
+            'agreement_signed' => 'nullable',
+            'signed_document_received_date' => 'nullable',
+            'agreement_received_type' => 'required'
         ];
     }
 
