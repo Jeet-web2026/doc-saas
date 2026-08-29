@@ -84,7 +84,10 @@ class EditAgreementRequest extends FormRequest
                     ignoreId: $agreementId,
                     idColumn: 'Agmt_UIN'
                 ),
-            ]
+            ],
+            'agreement_signed' => 'nullable',
+            'signed_document_received_date' => 'nullable',
+            'agreement_received_type' => 'required'
         ];
     }
 

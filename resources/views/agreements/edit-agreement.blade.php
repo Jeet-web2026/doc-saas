@@ -301,7 +301,7 @@
                     :file-no="$agreement->Agmt_File_no"
                     :ref-no="$agreement->Agmt_Ref_No"
                     :agreement-signed="$agreement->Agmt_Signed"
-                    :signed-document-received-date="optional($agreement->Signed_Recv_Date)->format('Y-m-d')"
+                    :signed-document-received-date="$agreement->Signed_Recv_Date"
                     :agreement-received-type="$agreement->Agmt_Recv_Type"
                 />
 

@@ -329,6 +329,9 @@ class AgreementService
                 'Stau_UIN'       => $request->expiry_date ? $this->determineStatusUin($request->expiry_date) : $this->determineStatusUin($agreement->expiry_date),
                 'Agmt_Ref_No' => $refNo,
                 'Agmt_Depst_Amt' => $request->deposit_amount ?? null,
+                'Agmt_Signed' => $request->agreement_signed,
+                'Signed_Recv_Date' => $request->signed_document_received_date,
+                'Agmt_Recv_Type' => $request->agreement_received_type
             ];
 
             $remarks = trim($request->remarks);
