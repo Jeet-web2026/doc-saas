@@ -57,8 +57,8 @@ class DashboardManagementService
             'renew'           => (clone $base)
                 ->where('Stau_UIN', 'renewed')
                 ->count(),
-            'sign_pending'    => (clone $base)->whereBetween('Agmt_Strt_Date', [$monthStart, $monthEnd])->where('Stau_UIN', 'sign_pending')->count(),
-            'received'        => (clone $base)->whereBetween('Agmt_Strt_Date', [$monthStart, $monthEnd])->where('Stau_UIN', 'received')->count(),
+            'sign_pending'    => (clone $base)->where('Agmt_Signed', 'no')->count(),
+            'received'        => (clone $base)->where('Agmt_Recv_Type', 'original_hard_copy')->count(),
             'draft_available' => (clone $draftBase)->count(),
             'new_draft'       => (clone $draftBase)
                 ->whereYear('created_at', $year)
