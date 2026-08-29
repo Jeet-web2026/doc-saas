@@ -39,8 +39,7 @@ class EditAgreementController extends Controller
     {
         $this->agreementService->updateAgreement($agreementId, $request);
 
-        return redirect()
-            ->route('all-agreements')
+        return redirect('/dashboard/agreements')
             ->with('success', 'Agreement updated successfully.');
     }
 }
