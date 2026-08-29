@@ -42,7 +42,12 @@ class Agreement extends Model
         'update_count',
         'Agmt_Size_KB',
         'Agmt_Ref_No',
-        'Agmt_Depst_Amt'
+        'Agmt_Depst_Amt',
+        'RenwOn',
+        'ExpOn',
+        'Agmt_Signed',
+        'Signed_Recv_Date',
+        'Agmt_Recv_Type'
     ];
 
     protected $casts = [
