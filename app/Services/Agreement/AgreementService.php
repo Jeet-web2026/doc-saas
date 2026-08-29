@@ -144,7 +144,8 @@ class AgreementService
         ?string $dateTo = null,
         ?string $dateFilterType = 'agreement_date',
         int $perPage = 5,
-        ?int $companyId = null
+        ?int $companyId = null,
+        array $statuses = []
     ) {
         $userData = Session::get('partaker_user_data');
         $query = Agreement::query()
@@ -185,6 +186,24 @@ class AgreementService
 
         if ($companyId) {
             $query->where('Orga_UIN', $companyId);
+        }
+
+        if (! empty($statuses)) {
+            $query->where(function ($q) use ($statuses) {
+                foreach ($statuses as $status) {
+                    match ($status) {
+                        'expired' => $q->orWhere('Agmt_Expy_Date', '<', now()),
+                        'renew' => $q->orWhereBetween('Agmt_Expy_Date', [now(), now()->addDays(30)]),
+                        'new' => $q->orWhere(function ($sub) {
+                            $sub->whereMonth('created_at', now()->month)
+                                ->whereYear('created_at', now()->year);
+                        }),
+                        'sign_pending' => $q->orWhere('Stau_UIN', 'sign_pending'),
+                        'received' => $q->orWhere('Stau_UIN', 'received'),
+                        default => null,
+                    };
+                }
+            });
         }
 
         if ($search) {

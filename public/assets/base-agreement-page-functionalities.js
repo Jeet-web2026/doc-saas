@@ -950,13 +950,10 @@ $(document).ready(function () {
             return;
         }
 
-        const typeLabel =
-            dateFilterType === "expiry_date" ? "Expiry Date" : "Agreement Date";
-
         const fromStr = fmtDate(selectedRange[0].toISOString().split("T")[0]);
         const toStr = fmtDate(selectedRange[1].toISOString().split("T")[0]);
 
-        $filterBtn.html(`${typeLabel}: ${fromStr} - ${toStr}`);
+        $filterBtn.html(`${fromStr} to ${toStr}`);
     }
 
     document.getElementById("applyDate").addEventListener("click", () => {
@@ -1145,4 +1142,52 @@ $(document).ready(function () {
     }
 
     initGenerateLinkModal();
+
+    // ---------- Status filter (server-side) ----------
+    const $statusFilterLabel = $("#statusFilterLabel");
+    const defaultStatusLabel = $statusFilterLabel.text().trim(); // "Status"
+
+    const statusLabels = {
+        new: "New",
+        renew: "Renew",
+        expired: "Expired",
+        sign_pending: "Sign Pending",
+        received: "Hard Copy Received",
+    };
+
+    function updateStatusFilterLabel() {
+        if (!statuses.length) {
+            $statusFilterLabel.text(defaultStatusLabel);
+            return;
+        }
+
+        if (statuses.length === 1) {
+            $statusFilterLabel.text(statusLabels[statuses[0]] ?? statuses[0]);
+        } else {
+            $statusFilterLabel.text(`${statuses.length} statuses`);
+        }
+    }
+
+    $("#applyStatusFilter").on("click", function () {
+        statuses = $(".status-checkbox:checked")
+            .map(function () {
+                return $(this).val();
+            })
+            .get();
+
+        updateStatusFilterLabel();
+        fetchAgreements(1);
+        $("#statusMenuForFilter").addClass("hidden");
+    });
+
+    $("#clearStatusFilter").on("click", function () {
+        $(".status-checkbox").prop("checked", false);
+        statuses = [];
+        updateStatusFilterLabel();
+        fetchAgreements(1);
+    });
+
+    $("#closeStatusFilter").on("click", function () {
+        $("#statusMenuForFilter").addClass("hidden");
+    });
 });

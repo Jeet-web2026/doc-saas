@@ -124,7 +124,8 @@ class HomeController extends Controller
             'date_filter_type' => 'nullable|string|in:agreement_date,expiry_date',
             'per_page'         => 'nullable|integer|min:1|max:100',
             'page'             => 'nullable|integer|min:1',
-            'statuses' => 'nullable|string'
+            'statuses'         => 'nullable|array',
+            'statuses.*'       => 'string|in:new,renew,expired,sign_pending,received',
         ]);
 
         $agreements = $this->agreementService->getAgreements(
@@ -134,6 +135,7 @@ class HomeController extends Controller
             dateFilterType: $validated['date_filter_type'] ?? 'agreement_date',
             perPage: $validated['per_page'] ?? 100,
             companyId: $orgaUin,
+             statuses: $validated['statuses'] ?? []
         );
 
         return response()->json($agreements);
