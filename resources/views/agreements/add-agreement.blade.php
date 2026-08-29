@@ -1,5 +1,5 @@
 <x-base-component tailwind="true" jQuery="true" subheading="Add Agreement" metadata="Add Agreement — Renewal Tracker" metadescription="description" bIcons="true">
-    <x-secondary-header backurl="{{ route('all-agreements') }}" :companyInformation="$companyInformation" :userData="$userData" title="Agreements" />
+    <x-secondary-header backurl="/dashboard/agreements" :companyInformation="$companyInformation" :userData="$userData" title="Agreements" />
 
     <main class="mx-auto max-w-5xl px-6 py-8">
 
@@ -279,23 +279,7 @@
                             <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
                             @enderror
                         </div>
-                        <!-- File No -->
-                        <div class="space-y-1.5 md:col-span-2 lg:w-1/2 w-full">
-                            <label class="label">File No</label>
-
-                            <input
-                                type="text"
-                                class="input"
-                                name="file_no"
-                                value="{{ old('file_no') }}" maxlength="4">
-
-                            @error('file_no')
-                            <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="flex flex-col lg:flex-row gap-3">
-                        <div class="flex-1 mt-4">
+                       <div class="space-y-1.5 md:col-span-2 lg:w-1/2 w-full">
                             <h2 class="label mb-2">Deposit Amount</h2>
                             <input
                                 type="text"
@@ -304,18 +288,6 @@
                                 value="{{ old('deposit_amount') }}">
 
                             @error('deposit_amount')
-                            <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <div class="flex-1 mt-4">
-                            <h2 class="label mb-2">Reference No.</h2>
-                            <input
-                                type="text"
-                                class="input"
-                                name="ref_no"
-                                value="{{ old('ref_no') }}">
-
-                            @error('ref_no')
                             <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
                             @enderror
                         </div>
@@ -338,6 +310,9 @@
                                 </div>
                         </div>
             </section>
+
+            <!-- Additional Documents -->
+            <x-additional-documents />
 
             <!-- Remarks (Rich Text Editor) -->
             <x-rich-text-editor :editable="true" />
