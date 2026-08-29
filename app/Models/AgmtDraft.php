@@ -29,6 +29,7 @@ class AgmtDraft extends Model
 
         'Agmt_Drft_File_Name',
         'Agmt_Chklst_File_Name',
+        'CrOn'
     ];
 
     protected $casts = [

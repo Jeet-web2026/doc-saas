@@ -630,6 +630,7 @@ class AgreementService
 
             'Agmt_Drft_File_Name'   => $draftFileName,
             'Agmt_Chklst_File_Name' => $checklistFileName,
+            'CrOn' => now()
         ]);
     }
 

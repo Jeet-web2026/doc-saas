@@ -62,8 +62,7 @@ class DashboardManagementService
             'received'        => (clone $base)->where('Agmt_Recv_Type', 'original_hard_copy')->count(),
             'draft_available' => (clone $draftBase)->count(),
             'new_draft'       => (clone $draftBase)
-                ->whereYear('created_at', $year)
-                ->whereMonth('created_at', $month)
+                ->whereBetween('CrOn', [$monthStart, $monthEnd])
                 ->count(),
         ];
     }
