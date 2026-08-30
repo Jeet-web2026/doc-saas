@@ -14,7 +14,7 @@
         class="space-y-6">
 
         {{-- Layout: calendar fixed on the left, tiles grid on the right --}}
-        <div class="flex flex-row mt-6 gap-6 items-start">
+        <div class="flex lg:flex-row flex-col mt-6 gap-6 items-start">
 
             {{-- Calendar — always visible, left side --}}
             <div class="w-100">
@@ -82,7 +82,7 @@
             </div>
 
             {{-- Tiles — the first 3 tiles (that used to sit in the left column) are moved to the end --}}
-            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 flex-1">
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:flex-1 w-full">
                 @foreach ($this->getTiles() as $tile)
                 <button type="button" @click="selected = (selected === '{{ $tile['key'] }}') ? null : '{{ $tile['key'] }}'" class="text-left">
                     <x-filament::section>
