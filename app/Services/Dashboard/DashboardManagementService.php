@@ -11,23 +11,23 @@ class DashboardManagementService
     public function getTiles(string $orgaUin): array
     {
         $definitions = [
-            'available'      => ['label' => 'Agreement Available',      'icon' => 'heroicon-o-document-text',        'color' => 'primary'],
-            'expired'        => ['label' => 'Expired Agreement',        'icon' => 'heroicon-o-x-circle',             'color' => 'danger'],
-            'active'         => ['label' => 'Active Agreement',         'icon' => 'heroicon-o-check-circle',         'color' => 'success'],
-            'new'            => ['label' => 'New Agreement',            'icon' => 'heroicon-o-sparkles',             'color' => 'info'],
-            'renew'          => ['label' => 'Renew Agreement',          'icon' => 'heroicon-o-arrow-path',           'color' => 'warning'],
-            'sign_pending'   => ['label' => 'Agreement Sign Pending',   'icon' => 'heroicon-o-pencil-square',        'color' => 'warning'],
-            'received'       => ['label' => 'Agreement Received',       'icon' => 'heroicon-o-inbox-arrow-down',     'color' => 'success'],
-            'draft_available' => ['label' => 'Draft Available',          'icon' => 'heroicon-o-document',             'color' => 'gray'],
-            'new_draft'      => ['label' => 'New Draft Added',          'icon' => 'heroicon-o-document-plus',        'color' => 'info'],
+            'available'       => ['label' => 'Agreement Available',              'icon' => 'heroicon-o-document-text',    'color' => 'primary'],
+            'draft_available' => ['label' => 'Draft Available',                  'icon' => 'heroicon-o-document',         'color' => 'gray'],
+            'expired'         => ['label' => 'Expired Agreement',                'icon' => 'heroicon-o-x-circle',         'color' => 'danger'],
+            'new_draft'       => ['label' => 'New Draft Added',                  'icon' => 'heroicon-o-document-plus',    'color' => 'info'],
+            'active'          => ['label' => 'Active Agreement',                 'icon' => 'heroicon-o-check-circle',     'color' => 'success'],
+            'sign_pending'    => ['label' => 'Agreement Sign Pending',           'icon' => 'heroicon-o-pencil-square',    'color' => 'warning'],
+            'new'             => ['label' => 'New Agreement',                    'icon' => 'heroicon-o-sparkles',         'color' => 'info'],
+            'received_hard'   => ['label' => 'Agreement Received (Hard Copy)',   'icon' => 'heroicon-o-inbox-arrow-down', 'color' => 'success'],
+            'renew'           => ['label' => 'Renew Agreement',                  'icon' => 'heroicon-o-arrow-path',       'color' => 'warning'],
+            'received_soft'   => ['label' => 'Agreement Received (Soft Copy)',   'icon' => 'heroicon-o-inbox-arrow-down', 'color' => 'success'],
         ];
-
 
         $tiles = [];
         foreach ($definitions as $key => $meta) {
             $tiles[] = array_merge($meta, [
                 'key'   => $key,
-                'count' =>  0,
+                'count' => 0,
             ]);
         }
 
@@ -43,42 +43,41 @@ class DashboardManagementService
 
         return [
             'available'       => (clone $base)->count(),
+            'draft_available' => (clone $draftBase)->count(),
             'expired'         => (clone $base)->where('Stau_UIN', 'expired')
-                ->whereBetween('ExpOn', [$monthStart, $monthEnd])->orwhereBetween('Agmt_Expy_Date', [$monthStart, $monthEnd])->count(),
-            'active' => (clone $base)
+                ->whereBetween('ExpOn', [$monthStart, $monthEnd])
+                ->orWhereBetween('Agmt_Expy_Date', [$monthStart, $monthEnd])->count(),
+            'new_draft'       => (clone $draftBase)
+                ->whereBetween('CrOn', [$monthStart, $monthEnd])->count(),
+            'active'          => (clone $base)
                 ->where('Stau_UIN', 'active')
                 ->where('Agmt_Strt_Date', '<=', $monthEnd)
-                ->where('Agmt_Expy_Date', '>=', $monthStart)
-                ->count(),
+                ->where('Agmt_Expy_Date', '>=', $monthStart)->count(),
+            'sign_pending'    => (clone $base)->where('Agmt_Signed', 'no')->count(),
             'new'             => (clone $base)
                 ->whereYear('Agmt_Strt_Date', $year)
-                ->whereMonth('Agmt_Strt_Date', $month)
-                ->count(),
+                ->whereMonth('Agmt_Strt_Date', $month)->count(),
+            'received_hard'   => (clone $base)->where('Agmt_Recv_Type', 'original_hard_copy')->count(),
             'renew'           => (clone $base)
                 ->where('Stau_UIN', 'renewed')
-                ->whereBetween('RenwOn', [$monthStart, $monthEnd])
-                ->count(),
-            'sign_pending'    => (clone $base)->where('Agmt_Signed', 'no')->count(),
-            'received'        => (clone $base)->where('Agmt_Recv_Type', 'original_hard_copy')->count(),
-            'draft_available' => (clone $draftBase)->count(),
-            'new_draft'       => (clone $draftBase)
-                ->whereBetween('CrOn', [$monthStart, $monthEnd])
-                ->count(),
+                ->whereBetween('RenwOn', [$monthStart, $monthEnd])->count(),
+            'received_soft'   => (clone $base)->where('Agmt_Recv_Type', 'pdf_copy')->count(),
         ];
     }
 
     public function getTileDetails(): array
     {
         return [
-            'available' => 'All agreements currently on file across every status, regardless of month.',
-            'expired' => 'Agreements past their end date with no renewal recorded yet.',
-            'active' => 'Agreements currently in force and within their valid date range.',
-            'new' => 'Agreements created within the selected calendar month.',
-            'renew' => 'Agreements flagged for renewal in the selected month.',
-            'sign_pending' => 'Agreements sent out and awaiting a counter-party signature.',
-            'received' => 'Signed agreements received back and ready for filing.',
+            'available'       => 'All agreements currently on file across every status, regardless of month.',
             'draft_available' => 'Drafts saved but not yet converted into a live agreement.',
-            'new_draft' => 'Drafts added within the selected calendar month.',
+            'expired'         => 'Agreements past their end date with no renewal recorded yet.',
+            'new_draft'       => 'Drafts added within the selected calendar month.',
+            'active'          => 'Agreements currently in force and within their valid date range.',
+            'sign_pending'    => 'Agreements sent out and awaiting a counter-party signature.',
+            'new'             => 'Agreements created within the selected calendar month.',
+            'received_hard'   => 'Signed agreements received back as a physical hard copy.',
+            'renew'           => 'Agreements flagged for renewal in the selected month.',
+            'received_soft'   => 'Signed agreements received back as a scanned/soft copy.',
         ];
     }
 }

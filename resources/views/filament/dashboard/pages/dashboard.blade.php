@@ -83,14 +83,7 @@
 
             {{-- Tiles — the first 3 tiles (that used to sit in the left column) are moved to the end --}}
             <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 flex-1">
-                @php
-                $allTiles = $this->getTiles();
-                $movedTiles = array_slice($allTiles, 0, 3); // 128, 7, 45
-                $remainingTiles = array_slice($allTiles, 3); // 14, 92, 9, 21, 33, 5
-                $orderedTiles = array_merge($remainingTiles, $movedTiles);
-                @endphp
-
-                @foreach ($orderedTiles as $tile)
+                @foreach ($this->getTiles() as $tile)
                 <button type="button" @click="selected = (selected === '{{ $tile['key'] }}') ? null : '{{ $tile['key'] }}'" class="text-left">
                     <x-filament::section>
                         <div class="flex items-center gap-3">
