@@ -1,5 +1,5 @@
 <x-base-component tailwind="true" jQuery="true" subheading="Add Agreement Name" metadata="Add Agreement Name — Renewal Tracker" metadescription="description" bIcons="true">
-    <x-secondary-header backurl="/settings/settings" :companyInformation="$companyInformation" :userData="$userData" title="Agreements" />
+    <x-secondary-header backurl="/settings/settings" :companyInformation="$companyInformation" :userData="$userData" title="Agreements" backurlforSettings="https://partakers.in/dashboard" />
 
     <main class="mx-auto max-w-5xl px-6 py-8">
 
@@ -99,6 +99,7 @@
 
     @section('extracsscdns')
     <link href="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.snow.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css">
     @endsection
 
     @section('extracss')
