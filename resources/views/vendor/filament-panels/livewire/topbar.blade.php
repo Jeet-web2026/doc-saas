@@ -38,7 +38,7 @@
             <x-header
                 :userData="$userData"
                 :companyInformation="$companyInformation"
-                :backurl="$backurl"
+                :backurlforSettings="$backurlforSettings"
                 :title="$title"
             />
         </div>

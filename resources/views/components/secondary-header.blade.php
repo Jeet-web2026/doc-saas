@@ -2,24 +2,18 @@
 'companyInformation' => '',
 'userData' => '',
 'backurl' => '',
-'title' => ''
+'title' => '',
+'backurlforSettings' => ''
 ])
 <header class="border-b border-white/10 bg-white/[0.03]">
     <div class="mx-auto flex flex-wrap gap-3 max-w-5xl items-center justify-between px-6 py-4 relative">
         <div class="flex flex-wrap gap-2 items-start">
-            <div class="relative" data-menu>
+            <div class="relative flex flex-row items-center" data-menu>
                 <button type="button" data-menu-toggle="companyMenu"
                     class="inline-flex h-9 w-9 items-center justify-center rounded-full hover:bg-white/10 transition">
                     <!-- building icon -->
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z" />
-                        <path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2" />
-                        <path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2" />
-                        <path d="M10 6h4" />
-                        <path d="M10 10h4" />
-                        <path d="M10 14h4" />
-                        <path d="M10 18h4" />
-                    </svg>
+                    <i
+                        class="cursor-pointer lg:block text-2xl ri-menu-line"></i>
                 </button>
                 <div id="companyMenu" class="hidden absolute lg:right-0  lg:right-auto mt-2 w-56 rounded-md border border-white/10 bg-card shadow-xl z-30 py-1">
                     <div class="px-3 py-1.5 text-xs font-semibold text-muted-foreground">Switch company</div>
@@ -47,6 +41,7 @@
                     </button>
                 </div>
             </div>
+
             <div>
                 <div class="text-lg font-semibold" id="companyName">{{ $companyInformation->Orga_Name }}</div>
                 <p class="text-xs text-muted-foreground">{{ $userData['data'][0]['User_Name'] ?? '' }}</p>
@@ -56,10 +51,42 @@
         <div class="flex flex-col items-end">
             <div class="text-xl font-semibold lg:absolute lg:left-[45%]">{{ $title }}</div>
             <!-- Company switcher -->
-            <div class="relative flex flex-row items-center">
-                <a href="{{ $backurl }}" class="inline-flex items-center gap-2 px-3 py-1.5 border border-white/10 rounded-md text-sm text-white/80 hover:text-white hover:bg-white/10 transition">
-                    Back
-                </a>
+            <div class="flex flex-col items-end gap-2 bg-card">
+                <div class="text-xl font-semibold lg:absolute lg:left-[45%] hidden">Agreements</div>
+
+                <!-- Company switcher -->
+                <div class="relative flex flex-row items-center" data-menu-wrapper>
+                    <button
+                        type="button"
+                        class="menu-toggle-btn inline-flex items-center justify-center h-9 w-9 rounded-md hover:bg-white/10 transition"
+                        aria-label="Menu">
+                        <i class="ri-menu-3-line text-lg"></i>
+                    </button>
+
+                    <div
+                        class="menu-dropdown hidden absolute right-0 top-[50px] mt-2 w-40 rounded-md border border-white/10 bg-slate-900 shadow-xl z-50 py-1">
+
+                        <a href="{{ request()->routeIs('filament.settings.pages.settings') ? '/dashboard' : $backurl }}"
+                        class="flex items-center gap-2 px-3 py-2 text-sm text-white/80 hover:text-white hover:bg-white/10 transition">
+                        <i class="ri-arrow-left-long-line"></i>
+                        Back
+                        </a>
+
+
+                        <a href="{{ $backurlforSettings }}"
+                        class="flex items-center gap-2 px-3 py-2 text-sm text-white/80 hover:text-white hover:bg-white/10 transition">
+                        <i class="ri-home-9-line"></i>
+                        Home
+                        </a>
+
+
+                        <A href="{{ \Filament\Facades\Filament::getPanel('settings')->getUrl() }}"
+                        class="flex items-center gap-2 px-3 py-2 text-sm text-white/80 hover:text-white hover:bg-white/10 transition">
+                        <i class="bi bi-gear"></i>
+                        Settings
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -10,6 +10,7 @@ use App\Models\AgreementType;
 use App\Models\TranAgmtRemk;
 use App\Services\Agreement\AgreementService;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
 class ViewAgreementController extends Controller
@@ -29,8 +30,9 @@ class ViewAgreementController extends Controller
             ->get();
 
         $types = AgreementType::all();
+        $userData = $this->agreementService->fetchUserData(Session::get('partaker_access_token'));
 
-        return view('agreements.view-agreement', compact('agreement', 'agreementCategories', 'types'));
+        return view('agreements.view-agreement', compact('agreement', 'agreementCategories', 'types', 'userData'));
     }
 
     public function history(int $agreementId)

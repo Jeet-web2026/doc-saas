@@ -75,14 +75,14 @@
                     x-transition
                     class="absolute right-0 top-[50px] mt-2 w-40 rounded-md border border-white/10 bg-card shadow-xl z-50 py-1">
                     <a
-                        href="{{ request()->routeIs('filament.settings.pages.settings') ? '/dashboard' : $backurl }}"
+                        href="{{ request()->routeIs('filament.settings.pages.settings') ? '/dashboard' : '' }}"
                         class="flex items-center gap-2 px-3 py-2 text-sm text-white/80 hover:text-white hover:bg-white/10 transition">
                         <i class="ri-arrow-left-long-line"></i>
                         Back
                     </a>
-
+                    
                     <a
-                        href="{{ request()->routeIs('filament.settings.pages.settings') ? '/dashboard' : $backurl }}"
+                        href="{{ $backurlforSettings }}"
                         class="flex items-center gap-2 px-3 py-2 text-sm text-white/80 hover:text-white hover:bg-white/10 transition">
                         <i class="ri-home-9-line"></i>
                         Home

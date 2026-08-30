@@ -64,7 +64,7 @@ class DashboardPanelProvider extends PanelProvider
             $view->with([
                 'userData' => Session::get('partaker_user_data', []),
                 'companyInformation' => Session::get('company_information'),
-                'backurl' => 'https://partakers.in/dashboard',
+                'backurlforSettings' => 'https://partakers.in/dashboard',
                 'title' => Str::headline(collect(explode('/', request()->path()))->last()),
             ]);
         });

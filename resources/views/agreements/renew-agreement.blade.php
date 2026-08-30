@@ -1,6 +1,6 @@
 <x-base-component tailwind="true" jQuery="true" subheading="Renew Agreement" metadata="Renew Agreement — Renewal Tracker" metadescription="description" bIcons="true">
 
-    <x-secondary-header backurl="{{ route('all-agreements') }}" :companyInformation="$agreement->organisationDetails" :userData="$userData" />
+    <x-secondary-header backurl="/dashboard/agreements" :companyInformation="$agreement->organisationDetails" :userData="$userData" title="Agreements" backurlforSettings="https://partakers.in/dashboard" />
 
     <main class="mx-auto max-w-5xl px-6 py-8">
         <div class="flex flex-col lg:flex-row items-center justify-between">
@@ -532,5 +532,6 @@
 
     @section('extracsscdns')
     <link href="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.snow.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css">
     @endsection
 </x-base-component>

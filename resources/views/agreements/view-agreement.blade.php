@@ -1,19 +1,13 @@
 <x-base-component tailwind="true" jQuery="true" subheading="View Agreement" metadata="View Agreement — Renewal Tracker" metadescription="description" bIcons="true">
+    @php
+        if($public ?? false){
+            $headerName = "Shared Agreement";
+        }else{
+            $headerName = "View Agreement";
+        }
+    @endphp
 
-    <header class="border-b border-white/10 bg-white/[0.02]">
-        <div class="mx-auto max-w-5xl flex items-center justify-between px-6 py-4">
-            @if($public ?? false)
-                <span class="inline-flex items-center gap-2 text-sm text-slate-400">
-                    <i class="bi bi-link-45deg"></i> Shared Agreement
-                </span>
-            @else
-                <a href="{{ route('all-agreements') }}" class="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-white">
-                    <i class="bi bi-arrow-left"></i> Back
-                </a>
-            @endif
-            <span class="text-xs uppercase tracking-wider text-slate-400" id="mode-label">View Agreement</span>
-        </div>
-    </header>
+    <x-secondary-header backurl="/dashboard/agreements" :companyInformation="$agreement->organisationDetails" :userData="$userData ?? null" :title="$headerName" backurlforSettings="https://partakers.in/dashboard" />
 
     @if($public ?? false)
         <div class="max-w-5xl mx-auto mt-8 px-5">
@@ -486,11 +480,14 @@
 
     @section('extrajscdns')
     <script src="{{ asset('assets/agreement-page-functionality.js') }}"></script>
+    @unless($public ?? false)
     <script src="{{ asset('assets/common.js') }}"></script>
+    @endunless
     <script src="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.js"></script>
     @endsection
 
     @section('extracsscdns')
     <link href="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.snow.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css">
     @endsection
 </x-base-component>
