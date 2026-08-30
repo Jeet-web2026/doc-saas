@@ -110,8 +110,8 @@ class AgreementService
                     'agmt_remk_date' => now()->toDateString(),
                     'agmt_remk'      => $remarks,
                     'stau_uin'       => 1,
-                    'crby'           => $userData['User_UIN'] ?? 1,
-                    'moby'           => $userData['User_UIN'] ?? 1,
+                    'crby'           => $userData['User_Name'] ?? 1,
+                    'moby'           => $userData['User_Name'] ?? 1,
                 ]);
             }
 
@@ -353,8 +353,8 @@ class AgreementService
                     'agmt_remk_date' => now()->toDateString(),
                     'agmt_remk'      => $request->remarks,
                     'stau_uin'       => 1,
-                    'crby'           => $userData['User_UIN'] ?? 1,
-                    'moby'           => $userData['User_UIN'] ?? 1,
+                    'crby'           => $userData['User_Name'] ?? 1,
+                    'moby'           => $userData['User_Name'] ?? 1,
                 ]);
             }
 
@@ -492,8 +492,8 @@ class AgreementService
                     'agmt_remk_date' => now()->toDateString(),
                     'agmt_remk'      => $request->remarks,
                     'stau_uin'       => 1,
-                    'crby'           => $userData['User_UIN'] ?? 1,
-                    'moby'           => $userData['User_UIN'] ?? 1,
+                    'crby'           => $userData['User_Name'] ?? 1,
+                    'moby'           => $userData['User_Name'] ?? 1,
                 ]);
             }
 

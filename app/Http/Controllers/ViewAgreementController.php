@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Agreement;
 use App\Models\AgmtDraft;
 use App\Models\AgreementCategories;
+use App\Models\AgreementParty;
 use App\Models\AgreementType;
+use App\Models\TranAgmtRemk;
 use App\Services\Agreement\AgreementService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -44,6 +46,9 @@ class ViewAgreementController extends Controller
         DB::transaction(function () use ($agreement) {
             Agreement::where('Agmt_Parn_UIN', $agreement->Agmt_UIN)
                 ->update(['Agmt_Parn_UIN' => null]);
+
+            TranAgmtRemk::where('agmt_uin', $agreement->Agmt_UIN)->delete();
+            AgreementParty::where('Agmt_UIN', $agreement->Agmt_UIN)->delete();
 
             $agreement->delete();
         });
