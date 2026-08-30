@@ -7,6 +7,7 @@ use App\Http\Controllers\DraftAgreementManagementController;
 use App\Http\Controllers\EditAgreementController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Optimization\OptimizationController;
 use App\Http\Controllers\RenewalAgreementController;
 use App\Http\Controllers\ViewAgreementController;
 use Illuminate\Support\Facades\Route;
@@ -70,9 +71,14 @@ Route::middleware('partaker.session')->group(function () {
     Route::controller(FeedbackController::class)->group(function () {
         Route::post('feedback-store', 'store')->name('feedback-store');
     });
-    
+
     Route::controller(DashboardManagementController::class)->group(function () {
         Route::post('dashboard/data', 'index')->name('dashboard-data');
+    });
+
+    Route::prefix('optimize')->controller(OptimizationController::class)->group(function () {
+        Route::get('cache', 'cache')->name('optimize.cache');
+        Route::get('clear', 'clear')->name('optimize.clear');
     });
 
     Route::fallback(function () {
