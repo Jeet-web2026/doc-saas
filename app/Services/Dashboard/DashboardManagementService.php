@@ -45,8 +45,7 @@ class DashboardManagementService
             'available'       => (clone $base)->count(),
             'draft_available' => (clone $draftBase)->count(),
             'expired'         => (clone $base)->where('Stau_UIN', 'expired')
-                ->whereBetween('ExpOn', [$monthStart, $monthEnd])
-                ->orWhereBetween('Agmt_Expy_Date', [$monthStart, $monthEnd])->count(),
+                ->whereBetween('ExpOn', [$monthStart, $monthEnd])->count(),
             'new_draft'       => (clone $draftBase)
                 ->whereBetween('CrOn', [$monthStart, $monthEnd])->count(),
             'active'          => (clone $base)

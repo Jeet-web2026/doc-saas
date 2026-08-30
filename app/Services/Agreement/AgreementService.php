@@ -430,6 +430,7 @@ class AgreementService
             $oldAgreement->update([
                 'Stau_UIN' => 'renewed',
                 'MoBy'     => $userData['User_UIN'] ?? 1,
+                'RenwOn' => now()
             ]);
 
             // 2. Handle new attachment if uploaded, otherwise carry over the old one
@@ -477,8 +478,7 @@ class AgreementService
                 'Agmt_Depst_Amt' => $request->deposit_amount ?? null,
                 'Agmt_Signed' => $request->agreement_signed,
                 'Signed_Recv_Date' => $request->signed_document_received_date,
-                'Agmt_Recv_Type' => $request->agreement_received_type,
-                'RenwOn' => now()
+                'Agmt_Recv_Type' => $request->agreement_received_type
             ]);
 
             $remarks = trim($request->remarks);
