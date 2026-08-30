@@ -171,7 +171,10 @@ class AgreementService
                 'Agmt_Parn_UIN',
                 'User_UIN',
                 'Agmt_Ref_No',
-                'Agmt_Depst_Amt'
+                'Agmt_Depst_Amt',
+                'Agmt_Signed',
+                'Signed_Recv_Date',
+                'Agmt_Recv_Type'
             ])
             ->with([
                 'category:Agmt_Catg_UIN,Agmt_Catg_Name',
@@ -273,6 +276,11 @@ class AgreementService
                 'jurisdiction' => $agreement->Agmt_Judn ?? '-',
                 'remarks' => $agreement->remarks->pluck('agmt_remk')->implode(', ') ?? '-',
                 'fileNo' => $agreement->Agmt_File_no ?? '-',
+                'refNo' => $agreement->Agmt_Ref_No,
+                'depositAmount' => $agreement->Agmt_Depst_Amt,
+                'agmtSigned' => $agreement->Agmt_Signed,
+                'agmtRecDate' => $agreement->Signed_Recv_Date,
+                'agmtRecType' => ucfirst(str_replace('_', ' ', $agreement->Agmt_Recv_Type))
             ];
         });
 

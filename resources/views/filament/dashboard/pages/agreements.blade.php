@@ -410,6 +410,11 @@
                                 </label>
 
                                 <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-white/5 text-sm cursor-pointer">
+                                    <input type="checkbox" data-col="referenceNo" class="accent-primary">
+                                    Reference No
+                                </label>
+
+                                <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-white/5 text-sm cursor-pointer">
                                     <input type="checkbox" data-col="category" class="accent-primary">
                                     Category
                                 </label>
@@ -427,6 +432,11 @@
                                 <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-white/5 text-sm cursor-pointer">
                                     <input type="checkbox" data-col="secondParty" class="accent-primary" checked>
                                     2nd Party
+                                </label>
+
+                                <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-white/5 text-sm cursor-pointer">
+                                    <input type="checkbox" data-col="depositAmount" class="accent-primary" checked>
+                                    Deposited Amount
                                 </label>
 
                                 <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-white/5 text-sm cursor-pointer">
@@ -462,6 +472,21 @@
                                 <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-white/5 text-sm cursor-pointer">
                                     <input type="checkbox" data-col="drafted" class="accent-primary">
                                     Drafted By
+                                </label>
+
+                                <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-white/5 text-sm cursor-pointer">
+                                    <input type="checkbox" data-col="agreementSigned" class="accent-primary">
+                                    Agreement Signed
+                                </label>
+
+                                <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-white/5 text-sm cursor-pointer">
+                                    <input type="checkbox" data-col="agreementRecDate" class="accent-primary">
+                                    Signed Document Received Date
+                                </label>
+
+                                <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-white/5 text-sm cursor-pointer">
+                                    <input type="checkbox" data-col="agreementReceived" class="accent-primary">
+                                    Agreement Received
                                 </label>
 
                                 <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-white/5 text-sm cursor-pointer">
@@ -529,6 +554,10 @@
                             File No
                         </th>
 
+                        <th data-col="referenceNo" class="px-5 py-3 hidden">
+                            Reference No
+                        </th>
+
                         <th data-col="category" class="px-5 py-3 hidden">
                             Category
                         </th>
@@ -551,6 +580,10 @@
                                 2nd Party
                                 <span class="sort-icon"></span>
                             </button>
+                        </th>
+
+                        <th data-col="depositAmount" class="px-5 py-3 hidden">
+                            Deposited Amount
                         </th>
 
                         <th data-col="date" class="px-5 py-3">
@@ -591,6 +624,18 @@
 
                         <th data-col="drafted" class="px-5 py-3 hidden">
                             Drafted By
+                        </th>
+
+                        <th data-col="agreementSigned" class="px-5 py-3 hidden">
+                            Agreement Signed
+                        </th>
+
+                        <th data-col="agreementRecDate" class="px-5 py-3 hidden">
+                            Signed Document Received Date
+                        </th>
+
+                        <th data-col="agreementReceived" class="px-5 py-3 hidden">
+                            Agreement Received
                         </th>
 
                         <th data-col="jurisdiction" class="px-5 py-3 hidden">

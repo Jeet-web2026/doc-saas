@@ -288,10 +288,12 @@ $(document).ready(function () {
     let sort = null; // {key, dir}
     const visible = {
         fileNo: false,
+        referenceNo: false,
         category: false,
         type: false,
         firstParty: true,
         secondParty: true,
+        depositAmount: false,
         date: true,
         expiry: true,
         expiry_by: true,
@@ -299,6 +301,9 @@ $(document).ready(function () {
         notaryDate: false,
         version: true,
         drafted: false,
+        agreementSigned: false,
+        agreementRecDate: false,
+        agreementReceived: false,
         jurisdiction: false,
         remarks: false,
     };
@@ -321,6 +326,7 @@ $(document).ready(function () {
     // Server already applies search filtering, so we only sort client-side here.
     function renderTable(data = AGREEMENTS) {
         let rows = data;
+        console.log(data);
 
         // Sorting
         if (sort) {
@@ -363,6 +369,11 @@ $(document).ready(function () {
                     ${r.fileNo ?? "—"}
                 </td>
 
+                <td data-col="referenceNo"
+                    class="px-5 py-4 text-muted-foreground hidden">
+                    ${r.refNo ?? "—"}
+                </td>
+
                 <td data-col="category"
                     class="px-5 py-4 text-muted-foreground hidden">
                     ${r.categoryLabel ?? "—"}
@@ -381,6 +392,11 @@ $(document).ready(function () {
                 <td data-col="secondParty"
                     class="px-5 py-4 text-muted-foreground">
                     ${r.parties?.[1]?.org ?? "—"}
+                </td>
+
+                 <td data-col="depositAmount"
+                    class="px-5 py-4 text-muted-foreground">
+                    ${r.depositAmount ?? "—"}
                 </td>
 
                 <td data-col="date"
@@ -416,6 +432,21 @@ $(document).ready(function () {
                 <td data-col="drafted"
                     class="px-5 py-4 text-muted-foreground hidden">
                     ${r.drafted ?? "—"}
+                </td>
+
+                <td data-col="agreementSigned"
+                    class="px-5 py-4 text-muted-foreground hidden capitalize">
+                    ${r.agmtSigned ?? "—"}
+                </td>
+
+                <td data-col="agreementRecDate"
+                    class="px-5 py-4 text-muted-foreground hidden">
+                     ${fmtDate(r.agmtRecDate)}
+                </td>
+
+                <td data-col="agreementReceived"
+                    class="px-5 py-4 text-muted-foreground hidden">
+                    ${r.agmtRecType ?? "—"}
                 </td>
 
                 <td data-col="jurisdiction"
