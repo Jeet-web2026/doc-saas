@@ -82,6 +82,13 @@
                     </a>
 
                     <a
+                        href="{{ request()->routeIs('filament.settings.pages.settings') ? '/dashboard' : $backurl }}"
+                        class="flex items-center gap-2 px-3 py-2 text-sm text-white/80 hover:text-white hover:bg-white/10 transition">
+                        <i class="ri-home-9-line"></i>
+                        Home
+                    </a>
+
+                    <a
                         href="{{ \Filament\Facades\Filament::getPanel('settings')->getUrl() }}"
                         class="flex items-center gap-2 px-3 py-2 text-sm text-white/80 hover:text-white hover:bg-white/10 transition">
                         <i class="bi bi-gear"></i>
