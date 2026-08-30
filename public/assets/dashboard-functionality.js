@@ -1137,4 +1137,9 @@ $(document).ready(function () {
     }
 
     initGenerateLinkModal();
+
+    $(document).on("click", ".tiles-btn", function () {
+        const key = $(this).find(".tiles-key").data("current");
+        $("#count-view").text(key);
+    });
 });

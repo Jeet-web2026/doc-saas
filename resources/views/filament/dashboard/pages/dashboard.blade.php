@@ -84,7 +84,7 @@
             {{-- Tiles — the first 3 tiles (that used to sit in the left column) are moved to the end --}}
             <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:flex-1 w-full">
                 @foreach ($this->getTiles() as $tile)
-                <button type="button" @click="selected = (selected === '{{ $tile['key'] }}') ? null : '{{ $tile['key'] }}'" class="text-left">
+                <button type="button" @click="selected = (selected === '{{ $tile['key'] }}') ? null : '{{ $tile['key'] }}'" class="text-left tiles-btn">
                     <x-filament::section>
                         <div class="flex items-center gap-3">
                             <span @class([ 'flex h-10 w-10 shrink-0 items-center justify-center rounded-lg' ,
@@ -101,7 +101,7 @@
 
                             <span class="min-w-0">
                                 <span
-                                    class="tile-count block text-2xl font-bold text-gray-950 dark:text-white"
+                                    class="tile-count block text-2xl font-bold text-gray-950 dark:text-white tiles-key"
                                     data-key="{{ $tile['key'] }}"
                                     data-current="{{ $tile['count'] }}">
                                     {{ $tile['count'] }}
@@ -124,7 +124,7 @@
                 <div class="flex items-start justify-between gap-4">
                     <div>
                         <h4 class="text-sm font-semibold text-gray-500 dark:text-gray-400" x-text="selectedTile?.label"></h4>
-                        <p class="mt-1 text-2xl font-bold text-gray-950 dark:text-white" x-text="selectedTile?.count"></p>
+                        <p class="mt-1 text-2xl font-bold text-gray-950 dark:text-white" id="count-view"></p>
                         <p class="mt-2 max-w-2xl text-sm text-gray-600 dark:text-gray-300" x-text="selectedDetail"></p>
                     </div>
                     <x-filament::icon-button
