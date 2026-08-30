@@ -1,7 +1,67 @@
 $(document).ready(function () {
-    function rte(cmd, val = null) {
-        document.execCommand(cmd, false, val);
+    function fetchAgreementNames(orgaUin, categoryId, typeId) {
+        const $select = $("#agreementName");
+
+        if (!categoryId || !typeId) {
+            $select.html(
+                '<option value="">Select agreement category & type first</option>',
+            );
+            return;
+        }
+
+        $select.html('<option value="">Loading…</option>');
+
+        $.ajax({
+            url: AGREEMENT_NAMES_URL,
+            type: "GET",
+            dataType: "json",
+            data: {
+                orga_uin: orgaUin,
+                category: categoryId,
+                type: typeId,
+            },
+            success: function (names) {
+                const currentValue = $("#currentAgreementName").val();
+
+                let html = names.length
+                    ? '<option value="" class="bg-slate-900">Select agreement name</option>'
+                    : '<option value="" class="bg-slate-900">No agreement name added</option>';
+
+                names.forEach(function (n) {
+                    const selected =
+                        currentValue === n.Agmt_Name ? "selected" : "";
+                    html += `<option value="${n.Agmt_Name}" class="bg-slate-900" ${selected}>${n.Agmt_Name}</option>`;
+                });
+
+                $select.html(html);
+            },
+            error: function (xhr) {
+                $select.html(
+                    '<option value="">Failed to load agreement names</option>',
+                );
+            },
+        });
     }
+
+    // Re-fetch whenever category or type changes
+    $(document).on("change", "#agreementCategory, #agreementType", function () {
+        console.log('demo');
+        const category = $("#agreementCategory").val();
+        const type = $("#agreementType").val();
+
+        fetchAgreementNames(ORGA_UIN, category, type);
+    });
+
+    // On initial page load (edit mode), if category+type are already pre-filled, fetch immediately
+    $(document).ready(function () {
+        const category = $("#agreementCategory").val();
+        const type =
+            $("#currentAgreementType").val() || $("#agreementType").val();
+
+        if (category && type) {
+            fetchAgreementNames(ORGA_UIN, category, type);
+        }
+    });
 
     function loadAgreementTypes(categoryId, selectedType = null) {
         $("#agreementType").html(

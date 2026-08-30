@@ -803,4 +803,17 @@ class AgreementService
     {
         return AgreementCategories::with('children')->get();
     }
+
+    public function getByOrgaCategoryAndType(
+        string|int $orgaUin,
+        string|int $categoryUin,
+        string|int $typeUin,
+    ): Collection {
+        return AgreementName::query()
+            ->where('Orga_UIN', $orgaUin)
+            ->where('Agmt_Catg_UIN', $categoryUin)
+            ->where('Agmt_Type_UIN', $typeUin)
+            ->orderBy('Agmt_Name')
+            ->get(['Agmt_Name', 'Agmt_Name_UIN']);
+    }
 }

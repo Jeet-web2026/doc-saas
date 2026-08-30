@@ -66,6 +66,7 @@ Route::middleware('partaker.session')->group(function () {
             ->name('agreement-names.store');
         Route::delete('/agreement-names/{id}', 'destroy')
             ->name('agreement-names.destroy');
+        Route::get('fetchNameByCategoryandType', 'fetchAgreementName')->name('fetchagreements.name');
     });
 
     Route::controller(FeedbackController::class)->group(function () {

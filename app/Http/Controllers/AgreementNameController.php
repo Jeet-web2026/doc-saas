@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class AgreementNameController extends Controller
 {
@@ -39,5 +40,23 @@ class AgreementNameController extends Controller
         return redirect()
             ->back()
             ->with('success', 'Agreement name deleted successfully.');
+    }
+
+    public function fetchAgreementName(Request $request): JsonResponse
+    {
+
+        $request->validate([
+            'orga_uin'  => ['required'],
+            'category'  => ['required'],
+            'type'      => ['required'],
+        ]);
+
+        $names = $this->agreementService->getByOrgaCategoryAndType(
+            $request->input('orga_uin'),
+            $request->input('category'),
+            $request->input('type'),
+        );
+
+        return response()->json($names);
     }
 }
