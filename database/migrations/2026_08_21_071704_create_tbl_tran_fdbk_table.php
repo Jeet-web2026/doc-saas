@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('PinCod');
             $table->unsignedBigInteger('CrBy');
             $table->integer('CrOn');
+            $table->text('Fdbk_Attachment')->nullable();
 
             $table->index('Orga_UIN');
             $table->index('Page_UIN');

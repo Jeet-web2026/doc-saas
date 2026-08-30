@@ -8,6 +8,12 @@ class FeedbackService
 {
     public function store(array $data): TranFdbk
     {
+        $attachmentPath = null;
+
+        if (!empty($data['attachment'])) {
+            $attachmentPath = $data['attachment']->store('feedback-attachments', 'public');
+        }
+
         return TranFdbk::create([
             'Orga_UIN'  => $data['orga_uin'],
             'Page_UIN'  => 4,
@@ -20,6 +26,7 @@ class FeedbackService
             'PinCod'    => $data['pincode'],
             'CrBy'      => $data['created_by'],
             'CrOn'      => now()->timestamp,
+            'Fdbk_Attachment' => $attachmentPath,
         ]);
     }
 }

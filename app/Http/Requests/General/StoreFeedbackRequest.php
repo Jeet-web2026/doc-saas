@@ -27,6 +27,7 @@ class StoreFeedbackRequest extends FormRequest
                 Rule::exists((new PinCode())->getTable(), 'pin_code_No')
             ],
             'orga_uin'      => ['required'],
+            'attachment' => ['nullable', 'mimes:pdf,jpg,jpeg', 'max:1000'],
         ];
     }
 

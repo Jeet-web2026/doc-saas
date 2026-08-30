@@ -26,7 +26,7 @@
 
         <x-globalresponse />
 
-        <form action="{{ route('feedback-store') }}" method="POST" class="bg-card border border-white/10 rounded-lg p-8 text-white">
+        <form action="{{ route('feedback-store') }}" method="POST" class="bg-card border border-white/10 rounded-lg p-8 text-white"  enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="orga_uin" value="{{ $orgaUin }}">
 
@@ -132,12 +132,22 @@
             </div>
 
             <div class="mt-6 flex items-end justify-between flex-wrap gap-4">
-                <button
-                    type="submit"
-                    class="bg-blue-800 hover:bg-blue-700 text-white font-medium px-6 py-2.5 rounded-md transition-colors">
-                    Submit
-                </button>
+                <div class="flex-1">
+                    <label class="block text-white mb-2">Attachment</label>
+                    <input
+                        type="file"
+                        class="input file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:bg-slate-700 file:text-slate-100 file:text-sm hover:file:bg-slate-600 cursor-pointer"
+                        name="attachment"
+                        id="attachment">
+                    @error('attachment') <p class="text-sm text-red-700 mt-1">{{ $message }}</p> @enderror
+                </div>
             </div>
+
+            <button
+                type="submit"
+                class="bg-blue-800 mt-5 hover:bg-blue-700 text-white font-medium px-6 py-2.5 rounded-md transition-colors">
+                Submit
+            </button>
 
         </form>
 

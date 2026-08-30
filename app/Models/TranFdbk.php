@@ -40,6 +40,7 @@ class TranFdbk extends Model
         'PinCod',
         'CrBy',
         'CrOn',
+        'Fdbk_Attachment'
     ];
 
     /**
