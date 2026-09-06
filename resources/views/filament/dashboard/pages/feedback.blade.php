@@ -30,6 +30,18 @@
                 <h1 class="text-center text-xl font-medium text-white mb-6">
                     Page Reviews
                 </h1>
+
+                <div class="mb-6">
+                    <label class="block text-white mb-2">Page Name</label>
+                    <select
+                        name="page_name"
+                        class="w-full rounded-md input px-3 py-2 text-white">
+                        <option value="" class="bg-slate-900" disabled {{ old('page_name') ? '' : 'selected' }}>Select a page name</option>
+                        <option value="2000154" class="bg-slate-900" @selected(old('page_name')==='2000154' )>Agreement</option>
+                    </select>
+                    @error('page_name') <p class="text-sm text-red-700 mt-1">{{ $message }}</p> @enderror
+                </div>
+
                 <p class="text-white mb-3 text-white">How satisfied were you using this page?</p>
 
                 <div class="overflow-hidden rounded-md border border-white/10">
@@ -88,9 +100,11 @@
                         </tbody>
                     </table>
                 </div>
-                @error('page_load') <p class="text-sm text-red-700 mt-1">{{ $message }}</p> @enderror
+                @error('page_load_speed') <p class="text-sm text-red-700 mt-1">{{ $message }}</p> @enderror
                 @error('page_design') <p class="text-sm text-red-700 mt-1">{{ $message }}</p> @enderror
-                @error('overall') <p class="text-sm text-red-700 mt-1">{{ $message }}</p> @enderror
+                @error('ease_of_use') <p class="text-sm text-red-700 mt-1">{{ $message }}</p> @enderror
+                @error('information_clarity') <p class="text-sm text-red-700 mt-1">{{ $message }}</p> @enderror
+                @error('overall_experience') <p class="text-sm text-red-700 mt-1">{{ $message }}</p> @enderror
 
                 <p class="text-sm text-white mt-2">Tick mark one of the cells</p>
             </div>
@@ -237,7 +251,7 @@
                             class="input file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:bg-slate-700 file:text-slate-100 file:text-sm hover:file:bg-slate-600 cursor-pointer"
                             name="attachment"
                             id="attachment"
-                            accept="image/png">
+                            accept=".png,.pdf,.jpg,.jpeg">
                         @error('attachment') <p class="text-sm text-red-700 mt-1">{{ $message }}</p> @enderror
                     </div>
                     <div class="flex-1">
