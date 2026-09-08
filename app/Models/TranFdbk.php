@@ -32,15 +32,20 @@ class TranFdbk extends Model
         'Orga_UIN',
         'Page_UIN',
         'Page_Name',
-        'Page_load',
+        'Page_load_speed',
         'Page_Dsin',
+        'Page_Ease_Of_Use',
         'Page_Oall',
+        'Page_InfoClarity',
         'Fdbk_Type',
+        'Lokn_for',
+        'Rcmd_Page',
+        'Cnta_Us',
         'Mesg_Fdbk',
         'PinCod',
         'CrBy',
         'CrOn',
-        'Fdbk_Attachment'
+        'Fdbk_Attachment',
     ];
 
     /**

@@ -30,7 +30,7 @@ class StoreFeedbackRequest extends FormRequest
             ],
             'orga_uin'      => ['required'],
             'attachment' => ['nullable', 'mimes:pdf,jpg,jpeg,png', 'max:1000'],
-            'page_name' => ['required', 'string', 'max:255'],
+            'page_uin' => ['required', 'string', 'max:255'],
             'Lokn_for' => ['required', 'string', 'max:255'],
             'Rcmd_Page' => ['required', 'string', 'max:255'],
             'Cnta_Us' => ['required', 'string', 'max:255'],
