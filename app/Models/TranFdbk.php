@@ -31,7 +31,6 @@ class TranFdbk extends Model
     protected $fillable = [
         'Orga_UIN',
         'Page_UIN',
-        'Page_Name',
         'Page_load_speed',
         'Page_Dsin',
         'Page_Ease_Of_Use',

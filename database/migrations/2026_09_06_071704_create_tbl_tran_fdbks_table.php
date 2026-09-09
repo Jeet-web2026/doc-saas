@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id('Fdbk_UIN');
             $table->unsignedBigInteger('Orga_UIN');
             $table->unsignedBigInteger('Page_UIN');
-            $table->string('Page_Name', 300)->default('');
             $table->string('Page_load_speed', 20);
             $table->string('Page_Dsin', 20);
             $table->string('Page_Ease_Of_Use', 20);

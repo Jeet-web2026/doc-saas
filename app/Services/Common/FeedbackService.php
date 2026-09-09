@@ -17,7 +17,6 @@ class FeedbackService
         $feedback = TranFdbk::create([
             'Orga_UIN'          => $data['orga_uin'],
             'Page_UIN'          => $data['page_uin'],
-            'Page_Name'         => $data['page_name'],
             'Page_load_speed'   => $data['page_load_speed'],
             'Page_Dsin'         => $data['page_design'],
             'Page_Ease_Of_Use'  => $data['ease_of_use'],

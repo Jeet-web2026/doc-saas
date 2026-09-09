@@ -27,9 +27,13 @@ use Illuminate\Support\Facades\Storage;
 use Throwable;
 use Illuminate\Support\Str;
 use App\Models\ShareLink;
+use App\Services\Common\FileStorageService;
 
 class AgreementService
 {
+
+    public function __construct(private readonly FileStorageService $fileStorageService) {}
+
     public function fetchAgreementCategories(): ?Collection
     {
         return AgreementCategories::with(['children' => function ($query) {
@@ -55,12 +59,6 @@ class AgreementService
 
             $attachment = null;
             $attachmentSizeKb = null;
-
-            if ($request->hasFile('attachment')) {
-                $file = $request->file('attachment');
-                $attachment = $this->storeAgreementAttachment($file);
-                $attachmentSizeKb = $this->getFileSizeInKb($file);
-            }
 
             $refNo = $request->ref_no ?? $this->generateAgreementRefNo($request->company_id);
 
@@ -132,8 +130,16 @@ class AgreementService
                 }
             }
 
+            if ($request->hasFile('attachment')) {
+                $file = $request->file('attachment');
+                $attachment =  $this->storeAgreementAttachment($file, $agreement->Agmt_UIN, $agreement->Orga_UIN, $userData['User_UIN']);
+                $attachmentSizeKb = $this->getFileSizeInKb($file);
+            }
+
             if ($primaryPartyUin !== null) {
                 $agreement->Agmt_Prty_UIN = $primaryPartyUin;
+                $agreement->Agmt_Atch = $attachment;
+                $agreement->Agmt_Size_KB = $attachmentSizeKb;
                 $agreement->saveQuietly();
             }
 
@@ -308,15 +314,6 @@ class AgreementService
             $attachmentSizeKb = $agreement->Agmt_Size_KB;
             $userData = Session::get('partaker_user_data');
 
-            if ($request->hasFile('attachment')) {
-                $file = $request->file('attachment');
-                $attachment = $this->storeAgreementAttachment($file);
-                $attachmentSizeKb = $this->getFileSizeInKb($file);
-
-                if ($agreement->Agmt_Atch) {
-                    Storage::disk('public')->delete($agreement->Agmt_Atch);
-                }
-            }
             $refNo = $request->ref_no ?? $this->generateAgreementRefNo($request->company_id);
 
             $updatePayload = [
@@ -359,6 +356,18 @@ class AgreementService
             }
 
             $agreement->update($updatePayload);
+
+            if ($request->hasFile('attachment')) {
+                $file = $request->file('attachment');
+                $attachment = $this->storeAgreementAttachment($file, $agreement->Agmt_UIN, $agreement->Orga_UIN, $userData['User_UIN']);;
+                $attachmentSizeKb = $this->getFileSizeInKb($file);
+
+                if ($agreement->Agmt_Atch) {
+                    Storage::disk('public')->delete($agreement->Agmt_Atch);
+                }
+            }
+
+            $agreement->update(['Agmt_Atch' => $attachment, 'Agmt_Size_KB' => $attachmentSizeKb]);
 
             $agreement->increment('update_count');
 
@@ -437,12 +446,6 @@ class AgreementService
             $attachment = $oldAgreement->Agmt_Atch;
             $attachmentSizeKb = $oldAgreement->Agmt_Size_KB;
 
-            if ($request->hasFile('attachment')) {
-                $file = $request->file('attachment');
-                $attachment =  $this->storeAgreementAttachment($file);
-                $attachmentSizeKb = $this->getFileSizeInKb($file);
-            }
-
             $refNo = $request->ref_no ?? $this->generateAgreementRefNo($request->company_id);
 
             // 3. Create the new agreement as a copy of the old one, overriding only expiry (+ optional remarks/attachment)
@@ -515,8 +518,14 @@ class AgreementService
                 }
             }
 
+            if ($request->hasFile('attachment')) {
+                $file = $request->file('attachment');
+                $attachment =  $this->storeAgreementAttachment($file, $newAgreement->Agmt_UIN, $newAgreement->Orga_UIN, $userData['User_UIN'], 'renew-agreement-attachments');
+                $attachmentSizeKb = $this->getFileSizeInKb($file);
+            }
+
             if ($primaryPartyUin !== null) {
-                $newAgreement->update(['Agmt_Prty_UIN' => $primaryPartyUin]);
+                $newAgreement->update(['Agmt_Prty_UIN' => $primaryPartyUin, 'Agmt_Atch' => $attachment, 'Agmt_Size_KB' => $attachmentSizeKb]);
             }
 
             return $newAgreement->load('parties');
@@ -552,20 +561,15 @@ class AgreementService
         return $expiry->lt($today) ? 'expired' : 'active';
     }
 
-    private function storeAgreementAttachment($file): string
+    private function storeAgreementAttachment($file, $primaryKey, $orgUin, $userUin, $folderName = 'agreement-attachments'): string
     {
-        $systemNumber = $this->generateSystemNumber();
-
-        $originalName = $file->getClientOriginalName();
-
-        $fileName = $systemNumber . '_' . $originalName;
-
-        return $file->storeAs('agreements', $fileName, 'public');
-    }
-
-    private function generateSystemNumber(): string
-    {
-        return time() . rand(1000, 9999);
+        return $this->fileStorageService->store(
+            file: $file,
+            folder: $folderName,
+            primaryKey: $primaryKey,
+            orgUin: $orgUin,
+            userUin: $userUin,
+        );
     }
 
     private function getFileSizeInKb(UploadedFile $file): int
@@ -613,19 +617,19 @@ class AgreementService
         ?UploadedFile $draftFile,
         ?UploadedFile $checklistFile,
     ): AgmtDraft {
-        $userData = $this->fetchUserData($accessToken);
+        $userData = Session::get('partaker_user_data');
 
         $draftFileName = $draftFile
-            ? $draftFile->store('agreement-drafts', 'public')
+            ? $this->storeAgreementAttachment($draftFile, 'id', $validated['company_id'], $userData['User_UIN'] ?? null, 'draft-attachments')
             : null;
 
         $checklistFileName = $checklistFile
-            ? $checklistFile->store('agreement-checklists', 'public')
+            ? $this->storeAgreementAttachment($checklistFile, 'id', $validated['company_id'], $userData['User_UIN'] ?? null, 'checklist-attachments')
             : null;
 
         return AgmtDraft::create([
             'Orga_UIN'              => $validated['company_id'],
-            'User_UIN'              => $userData->User_UIN ?? null,
+            'User_UIN'              => $userData['User_UIN'] ?? null ?? null,
 
             'Agmt_Catg_UIN'         => $validated['agreement_category'],
             'Agmt_Type_UIN'         => $validated['agreement_type'],
