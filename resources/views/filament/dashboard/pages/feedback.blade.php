@@ -30,14 +30,17 @@
                 <h1 class="text-center text-xl font-medium text-white mb-6">
                     Page Reviews
                 </h1>
-
                 <div class="mb-6">
                     <label class="block text-white mb-2">Page Name</label>
                     <select
                         name="page_uin"
                         class="w-full rounded-md input px-3 py-2 text-white">
                         <option value="" class="bg-slate-900" disabled {{ old('page_uin') ? '' : 'selected' }}>Select a page name</option>
-                        <option value="2000154" class="bg-slate-900" @selected(old('page_uin')==='2000154' )>Agreement</option>
+                        @forelse($pages as $page)                        
+                            <option value="{{ $page->Page_UIN }}" class="bg-slate-900 text-white" @selected(old('page_uin')===$page->Page_UIN )>{{ $page->Page_name }}</option>
+                        @empty
+                            <option value="" class="bg-slate-900" disabled>No pages available</option>
+                        @endforelse
                     </select>
                     @error('page_uin') <p class="text-sm text-red-700 mt-1">{{ $message }}</p> @enderror
                 </div>

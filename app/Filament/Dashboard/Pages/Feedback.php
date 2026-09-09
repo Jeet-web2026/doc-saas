@@ -3,6 +3,7 @@
 namespace App\Filament\Dashboard\Pages;
 
 use App\Filament\Dashboard\Pages\Concerns\HasCompanyHeader;
+use App\Models\MasterVerticalPageName;
 use Filament\Pages\Page;
 use Illuminate\Support\Facades\Session;
 
@@ -21,6 +22,8 @@ class Feedback extends Page
     public string $userUin;
     public string $orgaUin;
 
+    public $pages = null;
+
     public function mount(): void
     {
         $this->userUin = Session::get('partaker_user_uin');
@@ -29,5 +32,9 @@ class Feedback extends Page
         if (! $this->userUin || ! $this->orgaUin || ! $this->userData) {
             $this->redirect(route('home'));
         }
+
+        $this->pages = MasterVerticalPageName::query()
+            ->select(['Page_UIN', 'Page_name'])
+            ->get();
     }
 }
