@@ -36,10 +36,11 @@ class FeedbackService
         if (!empty($data['attachment']) && $data['attachment']->isValid()) {
             $path = $this->fileStorageService->store(
                 file: $data['attachment'],
-                folder: 'feedback-attachments',
+                folder: "attachments/{$feedback->Orga_UIN}",
                 primaryKey: $feedback->Fdbk_UIN,
                 orgUin: $feedback->Orga_UIN,
                 userUin: $feedback->CrBy,
+                storageType: 'draft'
             );
 
             $feedback->update(['Fdbk_Attachment' => $path]);

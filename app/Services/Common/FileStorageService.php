@@ -14,9 +14,10 @@ class FileStorageService
         int|string $primaryKey,
         int|string $orgUin,
         int|string $userUin,
-        string $disk = 'public'
+        string $disk = 'public',
+        ?string $storageType = null
     ): string {
-        $fileName = $this->buildFileName($file, $primaryKey, $orgUin, $userUin);
+        $fileName = $this->buildFileName($storageType, $file, $primaryKey, $orgUin, $userUin);
 
         return $file->storeAs($this->buildFolderPath($folder), $fileName, $disk);
     }
@@ -54,6 +55,7 @@ class FileStorageService
     }
 
     protected function buildFileName(
+        ?string $storageType,
         UploadedFile $file,
         int|string $primaryKey,
         int|string $orgUin,
@@ -65,7 +67,8 @@ class FileStorageService
         $safeOriginalName = Str::slug($originalName);
 
         return sprintf(
-            '%s_%s_%s_%s.%s',
+            '%s_%s_%s_%s&+&%s.%s',
+            $storageType ?? 'file',
             $primaryKey,
             $orgUin,
             $userUin,

@@ -132,7 +132,7 @@ class AgreementService
 
             if ($request->hasFile('attachment')) {
                 $file = $request->file('attachment');
-                $attachment =  $this->storeAgreementAttachment($file, $agreement->Agmt_UIN, $agreement->Orga_UIN, $userData['User_UIN']);
+                $attachment =  $this->storeAgreementAttachment($file, $agreement->Agmt_UIN, $agreement->Orga_UIN, $userData['User_UIN'], 'agreement');
                 $attachmentSizeKb = $this->getFileSizeInKb($file);
             }
 
@@ -359,7 +359,7 @@ class AgreementService
 
             if ($request->hasFile('attachment')) {
                 $file = $request->file('attachment');
-                $attachment = $this->storeAgreementAttachment($file, $agreement->Agmt_UIN, $agreement->Orga_UIN, $userData['User_UIN']);;
+                $attachment = $this->storeAgreementAttachment($file, $agreement->Agmt_UIN, $agreement->Orga_UIN, $userData['User_UIN'], 'agreement');;
                 $attachmentSizeKb = $this->getFileSizeInKb($file);
 
                 if ($agreement->Agmt_Atch) {
@@ -520,7 +520,7 @@ class AgreementService
 
             if ($request->hasFile('attachment')) {
                 $file = $request->file('attachment');
-                $attachment =  $this->storeAgreementAttachment($file, $newAgreement->Agmt_UIN, $newAgreement->Orga_UIN, $userData['User_UIN'], 'renew-agreement-attachments');
+                $attachment =  $this->storeAgreementAttachment($file, $newAgreement->Agmt_UIN, $newAgreement->Orga_UIN, $userData['User_UIN'], 'agreement');
                 $attachmentSizeKb = $this->getFileSizeInKb($file);
             }
 
@@ -561,14 +561,15 @@ class AgreementService
         return $expiry->lt($today) ? 'expired' : 'active';
     }
 
-    private function storeAgreementAttachment($file, $primaryKey, $orgUin, $userUin, $folderName = 'agreement-attachments'): string
+    private function storeAgreementAttachment($file, $primaryKey, $orgUin, $userUin, string $storageType): string
     {
         return $this->fileStorageService->store(
             file: $file,
-            folder: $folderName,
+            folder: "attachments/{$orgUin}",
             primaryKey: $primaryKey,
             orgUin: $orgUin,
             userUin: $userUin,
+            storageType: $storageType
         );
     }
 
@@ -620,11 +621,11 @@ class AgreementService
         $userData = Session::get('partaker_user_data');
 
         $draftFileName = $draftFile
-            ? $this->storeAgreementAttachment($draftFile, 'id', $validated['company_id'], $userData['User_UIN'] ?? null, 'draft-attachments')
+            ? $this->storeAgreementAttachment($draftFile, 'id', $validated['company_id'], $userData['User_UIN'] ?? null, 'draft')
             : null;
 
         $checklistFileName = $checklistFile
-            ? $this->storeAgreementAttachment($checklistFile, 'id', $validated['company_id'], $userData['User_UIN'] ?? null, 'checklist-attachments')
+            ? $this->storeAgreementAttachment($checklistFile, 'id', $validated['company_id'], $userData['User_UIN'] ?? null, 'draft')
             : null;
 
         return AgmtDraft::create([
