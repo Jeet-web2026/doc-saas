@@ -47,7 +47,7 @@
 
                 <p class="text-white mb-3 text-white">How satisfied were you using this page?</p>
 
-                <div class="overflow-hidden rounded-md border border-white/10">
+                <div class="lg:overflow-hidden rounded-md border border-white/10 overflow-x-auto">
                     <table class="w-full border-collapse text-left">
                         <thead>
                             <tr>
@@ -118,7 +118,7 @@
                 </h1>
 
                 <div class="flex flex-col gap-4 mt-6 lg:flex-row items-center">
-                    <div class="flex-1">
+                    <div class="flex-1 w-full">
                         <label class="block text-white mb-2">Page Feedback</label>
                         <select
                             name="feedback_type"
@@ -276,8 +276,8 @@
                     </div>
                 </div>
 
-                <div class="mt-6 flex items-end justify-between flex-wrap gap-4">
-                    <div class="flex-1">
+                <div class="mt-6 flex items-end justify-between flex-col lg:flex-row gap-4">
+                    <div class="flex-1 w-full">
                         <label class="block text-white mb-4">
                             Would You Like Us to Contact You?
                         </label>
