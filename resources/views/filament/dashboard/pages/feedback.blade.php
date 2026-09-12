@@ -153,7 +153,7 @@
                                     type="button"
                                     @click="open = !open"
                                     @click.outside="open = false"
-                                    class="w-full flex items-center justify-between gap-2 rounded-md input px-3 py-2 text-white bg-slate-900 border border-white/10 border-r-0 rounded-r-none">
+                                    class="w-full flex items-center justify-between gap-2 rounded-md input px-3 py-2 text-white bg-slate-900 border border-white/10 border-r-0 rounded-r-none" style="border-right: 0px !important; border-end-end-radius: 0px !important; border-start-end-radius: 0px !important;">
 
                                     <span class="flex items-center gap-2" x-show="selectedCountry">
                                         <img :src="`https://flagsapi.com/${selectedCountry?.Code?.trim()}/flat/24.png`" class="w-full h-full object-cover"  loading="lazy">
@@ -193,7 +193,7 @@
                                 value="{{ old('pincode') }}"
                                 maxlength="6"
                                 placeholder="6 Digits Only"
-                                class="w-full rounded-md input px-3 py-2 text-white placeholder-slate-400 border border-white/10" />
+                                class="w-full rounded-md input pe-3 py-2 text-white placeholder-slate-400 border border-white/10" style="border-left: 0px !important; border-start-start-radius: 0px !important; border-end-start-radius: 0px !important;" />
                         </div>
                         @error('pincode') <p class="text-sm text-red-700 mt-1">{{ $message }}</p> @enderror
                     </div>
