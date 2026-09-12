@@ -137,13 +137,64 @@
                     </div>
                     <div class="flex-1">
                         <label class="block text-white mb-2">Present Location Pincode</label>
-                        <input
-                            type="text"
-                            name="pincode"
-                            value="{{ old('pincode') }}"
-                            maxlength="6"
-                            placeholder="6 Digits Only"
-                            class="w-full rounded-md input px-3 py-2 text-white placeholder-slate-400 border border-white/10" />
+                        <div class="flex" x-data="{
+                                open: false,
+                                selected: {{ old('country_uin', 101107) }},
+                                countries: {{ $countryDetails->toJson() }},
+                                get selectedCountry() {
+                                    return this.countries.find(c => c.Admn_Cutr_Mast_UIN == this.selected) ?? null;
+                                }
+                            }">
+
+                            <div class="relative w-40">
+                                <input type="hidden" name="country_uin" :value="selected">
+
+                                <button
+                                    type="button"
+                                    @click="open = !open"
+                                    @click.outside="open = false"
+                                    class="w-full flex items-center justify-between gap-2 rounded-md input px-3 py-2 text-white bg-slate-900 border border-white/10 border-r-0 rounded-r-none">
+
+                                    <span class="flex items-center gap-2" x-show="selectedCountry">
+                                        <img :src="`https://flagsapi.com/${selectedCountry?.Code?.trim()}/flat/24.png`" class="w-full h-full object-cover"  loading="lazy">
+                                        <span x-text="selectedCountry?.Name"></span>
+                                    </span>
+
+                                    <span x-show="!selectedCountry" class="text-slate-400">Select Country</span>
+
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-400 transition-transform" :class="open && 'rotate-180'" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+
+                                <ul
+                                    x-show="open"
+                                    x-transition
+                                    x-cloak
+                                    class="absolute z-10 mt-1 w-70 h-70 overflow-y-auto rounded-md bg-slate-900 border border-white/10 shadow-lg">
+
+                                    <template x-for="country in countries" :key="country.Admn_Cutr_Mast_UIN">
+                                        <li
+                                            @click="selected = country.Admn_Cutr_Mast_UIN; open = false"
+                                            class="flex items-center gap-2 px-3 py-2 text-white cursor-pointer"
+                                            :class="selected == country.Admn_Cutr_Mast_UIN && 'bg-slate-800'">
+                                            <span class="fi w-5 h-4 inline-block flex-shrink-0 rounded-sm overflow-hidden bg-cover bg-center bg-no-repeat">
+                                                <img :src="`https://flagsapi.com/${country.Code.trim()}/flat/64.png`" class="w-full h-full object-cover"  loading="lazy">
+                                            </span>
+                                            <span x-text="country.Name"></span>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div>
+
+                            <input
+                                type="text"
+                                name="pincode"
+                                value="{{ old('pincode') }}"
+                                maxlength="6"
+                                placeholder="6 Digits Only"
+                                class="w-full rounded-md input px-3 py-2 text-white placeholder-slate-400 border border-white/10" />
+                        </div>
                         @error('pincode') <p class="text-sm text-red-700 mt-1">{{ $message }}</p> @enderror
                     </div>
                 </div>
@@ -227,16 +278,6 @@
 
                 <div class="mt-6 flex items-end justify-between flex-wrap gap-4">
                     <div class="flex-1">
-                        <label class="block text-white mb-2">Attachment</label>
-                        <input
-                            type="file"
-                            class="input file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:bg-slate-700 file:text-slate-100 file:text-sm hover:file:bg-slate-600 cursor-pointer"
-                            name="attachment"
-                            id="attachment"
-                            accept=".png,.pdf,.jpg,.jpeg">
-                        @error('attachment') <p class="text-sm text-red-700 mt-1">{{ $message }}</p> @enderror
-                    </div>
-                    <div class="flex-1">
                         <label class="block text-white mb-4">
                             Would You Like Us to Contact You?
                         </label>
@@ -266,6 +307,16 @@
                         @error('Cnta_Us')
                         <p class="text-sm text-red-700 mt-1">{{ $message }}</p>
                         @enderror
+                    </div>
+                    <div class="flex-1">
+                        <label class="block text-white mb-2">Attachment</label>
+                        <input
+                            type="file"
+                            class="input file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:bg-slate-700 file:text-slate-100 file:text-sm hover:file:bg-slate-600 cursor-pointer"
+                            name="attachment"
+                            id="attachment"
+                            accept=".png,.pdf,.jpg,.jpeg">
+                        @error('attachment') <p class="text-sm text-red-700 mt-1">{{ $message }}</p> @enderror
                     </div>
                 </div>
 
