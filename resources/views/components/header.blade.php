@@ -6,7 +6,7 @@
 'backurlforSettings' => ''
 ])
 <header class="w-full">
-    <div class="mx-auto flex gap-3 items-center justify-between  py-4 relative">
+    <div class="mx-auto flex gap-3 items-center justify-between py-4 relative">
         <div class="flex flex-row relative items-center">
             <div class="flex flex-wrap gap-2 items-center">
                 <i

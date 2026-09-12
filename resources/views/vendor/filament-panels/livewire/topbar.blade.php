@@ -3,7 +3,7 @@
         $hasNavigation = filament()->hasNavigation();
     @endphp
 
-    <nav class="fi-topbar px-0">
+    <nav class="fi-topbar">
         {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::TOPBAR_START) }}
 
         @if ($hasNavigation)

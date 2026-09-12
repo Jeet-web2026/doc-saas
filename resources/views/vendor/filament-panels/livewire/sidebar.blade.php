@@ -101,7 +101,7 @@
             </div>
         @endif
 
-        <nav class="fi-sidebar-nav">
+        <nav class="fi-sidebar-nav mt-6 lg:mt-0">
             {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::SIDEBAR_NAV_START) }}
 
             <ul class="fi-sidebar-nav-groups">
