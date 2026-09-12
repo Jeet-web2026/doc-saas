@@ -620,15 +620,10 @@ class AgreementService
     ): AgmtDraft {
         $userData = Session::get('partaker_user_data');
 
-        $draftFileName = $draftFile
-            ? $this->storeAgreementAttachment($draftFile, 'id', $validated['company_id'], $userData['User_UIN'] ?? null, 'draft')
-            : null;
+        $draftFileName = null;
+        $checklistFileName = null;
 
-        $checklistFileName = $checklistFile
-            ? $this->storeAgreementAttachment($checklistFile, 'id', $validated['company_id'], $userData['User_UIN'] ?? null, 'draft')
-            : null;
-
-        return AgmtDraft::create([
+        $draft =  AgmtDraft::create([
             'Orga_UIN'              => $validated['company_id'],
             'User_UIN'              => $userData['User_UIN'] ?? null ?? null,
 
@@ -645,6 +640,21 @@ class AgreementService
             'Agmt_Chklst_File_Name' => $checklistFileName,
             'CrOn' => now()
         ]);
+
+        $draftFileName = $draftFile
+            ? $this->storeAgreementAttachment($draftFile, $draft->id, $validated['company_id'], $userData['User_UIN'] ?? null, 'draft')
+            : null;
+
+        $checklistFileName = $checklistFile
+            ? $this->storeAgreementAttachment($checklistFile, $draft->id, $validated['company_id'], $userData['User_UIN'] ?? null, 'draft')
+            : null;
+
+        $draft->update([
+            'Agmt_Drft_File_Name'   => $draftFileName,
+            'Agmt_Chklst_File_Name' => $checklistFileName,
+        ]);
+
+        return $draft->refresh();
     }
 
     public function getDraftAgreements(

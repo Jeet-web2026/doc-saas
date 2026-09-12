@@ -61,6 +61,9 @@ Route::middleware('partaker.session')->group(function () {
 
         Route::get('/files/{agreement}/download', 'download')
             ->name('agreements.download');
+
+        Route::get('/files/{draft}/{columnName}/download', 'draftdownload')
+            ->name('drafts.download');
     });
 
     Route::controller(AgreementNameController::class)->group(function () {
