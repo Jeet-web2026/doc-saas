@@ -28,10 +28,10 @@
 
             <div class="bg-card border border-white/10 rounded-lg p-8">
                 <h1 class="text-center text-xl font-medium text-white mb-6">
-                    Page Reviews
+                    Page Experience Review
                 </h1>
                 <div class="mb-6">
-                    <label class="block text-white mb-2">Page Name</label>
+                    <label class="block text-white mb-2">Which page are you reviewing?</label>
                     <select
                         name="page_uin"
                         class="w-full rounded-md input px-3 py-2 text-white">
