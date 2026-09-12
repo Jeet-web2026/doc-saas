@@ -9,6 +9,7 @@ use App\Models\AgreementParty;
 use App\Models\AgreementType;
 use App\Models\TranAgmtRemk;
 use App\Services\Agreement\AgreementService;
+use App\Services\Common\FileStorageService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
@@ -17,7 +18,7 @@ class ViewAgreementController extends Controller
 {
     protected AgreementService $agreementService;
 
-    public function __construct(AgreementService $agreementService)
+    public function __construct(AgreementService $agreementService, private readonly FileStorageService $fileStorageService)
     {
         $this->agreementService = $agreementService;
     }
@@ -97,5 +98,11 @@ class ViewAgreementController extends Controller
             ]),
             default => abort(404),
         };
+    }
+
+    public function download(Agreement $agreement)
+    {
+        return $this->fileStorageService
+            ->downloadAs($agreement->Agmt_Atch);
     }
 }

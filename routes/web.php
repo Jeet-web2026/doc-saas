@@ -58,6 +58,9 @@ Route::middleware('partaker.session')->group(function () {
         Route::delete('agreements/{agreement}', 'destroy')->name('agreements.destroy');
         Route::post('/agreements/{agreement}/generate-view-link', 'generateViewLink')->name('agreements.generate-view-link');
         Route::post('/drafts/{draft}/generate-view-link', 'generateDraftViewLink')->name('drafts.generate-view-link');
+
+        Route::get('/files/{agreement}/download', 'download')
+            ->name('agreements.download');
     });
 
     Route::controller(AgreementNameController::class)->group(function () {

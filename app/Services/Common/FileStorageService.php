@@ -5,6 +5,7 @@ namespace App\Services\Common;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class FileStorageService
 {
@@ -75,5 +76,17 @@ class FileStorageService
             $safeOriginalName,
             $extension
         );
+    }
+
+    public function downloadAs(string $path, string $disk = 'public'): StreamedResponse
+    {
+        if (!Storage::disk($disk)->exists($path)) {
+            abort(404, 'File not found.');
+        }
+
+        $extension = pathinfo($path, PATHINFO_EXTENSION);
+        $downloadName = 'download_' . now()->format('Ymd_His') . ($extension ? ".{$extension}" : '');
+
+        return Storage::disk($disk)->download($path, $downloadName);
     }
 }

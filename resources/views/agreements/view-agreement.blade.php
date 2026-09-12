@@ -169,7 +169,7 @@
                     <div class="flex items-center gap-3">
                         @if($agreement->Agmt_Atch)
                         <a
-                            href="{{ asset('storage/' . $agreement->Agmt_Atch) }}"
+                            href="{{ route('agreements.download', ['agreement' => $agreement]) }}"
                             target="_blank"
                             download
                             class="inline-flex items-center gap-2 px-3 py-1.5 border border-white/10 rounded-md text-sm text-slate-300 hover:text-white hover:bg-white/10 transition shrink-0">
