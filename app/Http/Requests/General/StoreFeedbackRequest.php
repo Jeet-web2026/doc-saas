@@ -49,8 +49,8 @@ class StoreFeedbackRequest extends FormRequest
             'Lokn_for.required'             => 'Please select an option.',
             'Rcmd_Page.required'            => 'Please select an option.',
             'feedback_type.required'        => 'Please select a feedback type.',
-            'pincode.required'              => 'Please enter a valid 6-digit pincode.',
-            'pincode.digits'                => 'Please enter your 6-digit pincode.',
+            'pincode.required'              => 'Please enter your 6-digit pincode.',
+            'pincode.digits'                => 'Please enter a valid 6-digit pincode.',
             'pincode.exists'                => 'The given pincode is invalid.',
             'Cnta_Us.required'              => 'Please select an option.',
         ];
