@@ -114,7 +114,7 @@
 
             <div class="bg-card border border-white/10 rounded-lg p-8">
                 <h1 class="text-center text-xl font-medium text-white mb-6">
-                    Page Feedback
+                    Share Your Feedback
                 </h1>
 
                 <div class="flex flex-col gap-4 mt-6 lg:flex-row items-center">
