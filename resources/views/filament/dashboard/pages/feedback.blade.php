@@ -18,7 +18,7 @@
             box-shadow: 0 0 0 3px rgba(59, 130, 246, .15);
         }
     </style>
-    <div class="min-h-screen py-6 w-full px-5 rounded text-white">
+    <div class="min-h-screen py-6 w-full rounded text-white">
 
         <x-globalresponse />
 
@@ -209,7 +209,7 @@
                     @error('comments') <p class="text-sm text-red-700 mt-1">{{ $message }}</p> @enderror
                 </div>
                 <div class="flex flex-col gap-4 mt-6 lg:flex-row items-center">
-                    <div class="flex-1">
+                    <div class="flex-1 w-full">
                         <label class="block text-white mb-4">
                             Did you find what you were looking for?
                         </label>
@@ -243,7 +243,7 @@
 
 
                     <!-- Would you recommend this page to others? -->
-                    <div class="flex-1">
+                    <div class="flex-1 w-full">
                         <label class="block text-white mb-4">
                             Would you recommend this page to others?
                         </label>
