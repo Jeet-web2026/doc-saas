@@ -119,6 +119,46 @@
 
                 <div class="flex flex-col gap-4 mt-6 lg:flex-row items-center">
                     <div class="flex-1">
+                        <label class="block text-white mb-2">Page Feedback</label>
+                        <select
+                            name="feedback_type"
+                            class="w-full rounded-md input px-3 py-2 text-white">
+                            <option value="" class="bg-slate-900" disabled {{ old('feedback_type') ? '' : 'selected' }}>Select a type</option>
+                            <option value="Query/Question" class="bg-slate-900" @selected(old('feedback_type')==='Query/Question' )>Query/Question</option>
+                            <option value="Page Bug/Error" class="bg-slate-900" @selected(old('feedback_type')==='Page Bug/Error' )>Page Bug/Error</option>
+                            <option value="Incorrect Information" class="bg-slate-900" @selected(old('feedback_type')==='Incorrect Information' )>Incorrect Information</option>
+                            <option value="Compliment / Positive Feedback" class="bg-slate-900" @selected(old('feedback_type')==='Compliment / Positive Feedback' )>Compliment / Positive Feedback</option>
+                            <option value=" Suggestion for Improvement" class="bg-slate-900" @selected(old('feedback_type')===' Suggestion for Improvement' )> Suggestion for Improvement</option>
+                            <option value="Idea/New Features" class="bg-slate-900" @selected(old('feedback_type')==='Idea/New Features' )>Idea/New Features</option>
+                            <option value="General Feedback" class="bg-slate-900" @selected(old('feedback_type')==='General Feedback' )>General Feedback</option>
+                            <option value="Other" class="bg-slate-900" @selected(old('feedback_type')==='Other' )>Other</option>
+                        </select>
+                        @error('feedback_type') <p class="text-sm text-red-700 mt-1">{{ $message }}</p> @enderror
+                    </div>
+                    <div class="flex-1">
+                        <label class="block text-white mb-2">Present Location Pincode</label>
+                        <input
+                            type="text"
+                            name="pincode"
+                            value="{{ old('pincode') }}"
+                            maxlength="6"
+                            placeholder="6 Digits Only"
+                            class="w-full rounded-md input px-3 py-2 text-white placeholder-slate-400 border border-white/10" />
+                        @error('pincode') <p class="text-sm text-red-700 mt-1">{{ $message }}</p> @enderror
+                    </div>
+                </div>
+
+                <div class="mt-6">
+                    <label class="block text-white mb-2">Tell Us More</label>
+                    <textarea
+                        name="comments"
+                        rows="4"
+                        placeholder="Comments here"
+                        class="w-full rounded-md input px-3 py-2 text-white placeholder-slate-400 border border-white/10">{{ old('comments') }}</textarea>
+                    @error('comments') <p class="text-sm text-red-700 mt-1">{{ $message }}</p> @enderror
+                </div>
+                <div class="flex flex-col gap-4 mt-6 lg:flex-row items-center">
+                    <div class="flex-1">
                         <label class="block text-white mb-4">
                             Did you find what you were looking for?
                         </label>
@@ -128,20 +168,10 @@
                                 <input
                                     type="radio"
                                     name="Lokn_for"
-                                    value="Yes, completely"
+                                    value="Yes"
                                     class="h-5 w-5 rounded border-2 border-slate-400 text-blue-600 focus:ring-blue-500 cursor-pointer"
-                                    @checked(old('Lokn_for')==='Yes, completely' )>
-                                <span>Yes, completely</span>
-                            </label>
-
-                            <label class="flex items-center gap-2 text-white text-sm cursor-pointer">
-                                <input
-                                    type="radio"
-                                    name="Lokn_for"
-                                    value="Partially"
-                                    class="h-5 w-5 rounded border-2 border-slate-400 text-blue-600 focus:ring-blue-500 cursor-pointer"
-                                    @checked(old('Lokn_for')==='Partially' )>
-                                <span>Partially</span>
+                                    @checked(old('Lokn_for')==='Yes' )>
+                                <span>Yes</span>
                             </label>
 
                             <label class="flex items-center gap-2 text-white text-sm cursor-pointer">
@@ -187,63 +217,12 @@
                                     @checked(old('Rcmd_Page')==='No' )>
                                 <span>No</span>
                             </label>
-
-                            <label class="flex items-center gap-2 text-white text-sm cursor-pointer">
-                                <input
-                                    type="radio"
-                                    name="Rcmd_Page"
-                                    value="Maybe"
-                                    class="h-5 w-5 rounded border-2 border-slate-400 text-blue-600 focus:ring-blue-500 cursor-pointer"
-                                    @checked(old('Rcmd_Page')==='Maybe' )>
-                                <span>Maybe</span>
-                            </label>
                         </div>
 
                         @error('Rcmd_Page')
                         <p class="text-sm text-red-700 mt-1">{{ $message }}</p>
                         @enderror
                     </div>
-                </div>
-
-                <div class="flex flex-col gap-4 mt-6 lg:flex-row items-center">
-                    <div class="flex-1">
-                        <label class="block text-white mb-2">Page Feedback</label>
-                        <select
-                            name="feedback_type"
-                            class="w-full rounded-md input px-3 py-2 text-white">
-                            <option value="" class="bg-slate-900" disabled {{ old('feedback_type') ? '' : 'selected' }}>Select a type</option>
-                            <option value="Query/Question" class="bg-slate-900" @selected(old('feedback_type')==='Query/Question' )>Query/Question</option>
-                            <option value="Page Bug/Error" class="bg-slate-900" @selected(old('feedback_type')==='Page Bug/Error' )>Page Bug/Error</option>
-                            <option value="Incorrect Information" class="bg-slate-900" @selected(old('feedback_type')==='Incorrect Information' )>Incorrect Information</option>
-                            <option value="Compliment / Positive Feedback" class="bg-slate-900" @selected(old('feedback_type')==='Compliment / Positive Feedback' )>Compliment / Positive Feedback</option>
-                            <option value=" Suggestion for Improvement" class="bg-slate-900" @selected(old('feedback_type')===' Suggestion for Improvement' )> Suggestion for Improvement</option>
-                            <option value="Idea/New Features" class="bg-slate-900" @selected(old('feedback_type')==='Idea/New Features' )>Idea/New Features</option>
-                            <option value="General Feedback" class="bg-slate-900" @selected(old('feedback_type')==='General Feedback' )>General Feedback</option>
-                            <option value="Other" class="bg-slate-900" @selected(old('feedback_type')==='Other' )>Other</option>
-                        </select>
-                        @error('feedback_type') <p class="text-sm text-red-700 mt-1">{{ $message }}</p> @enderror
-                    </div>
-                    <div class="flex-1">
-                        <label class="block text-white mb-2">Present Location Pincode</label>
-                        <input
-                            type="text"
-                            name="pincode"
-                            value="{{ old('pincode') }}"
-                            maxlength="6"
-                            placeholder="6 Digits Only"
-                            class="w-full rounded-md input px-3 py-2 text-white placeholder-slate-400 border border-white/10" />
-                        @error('pincode') <p class="text-sm text-red-700 mt-1">{{ $message }}</p> @enderror
-                    </div>
-                </div>
-
-                <div class="mt-6">
-                    <label class="block text-white mb-2">Tell Us More</label>
-                    <textarea
-                        name="comments"
-                        rows="4"
-                        placeholder="Comments here"
-                        class="w-full rounded-md input px-3 py-2 text-white placeholder-slate-400 border border-white/10">{{ old('comments') }}</textarea>
-                    @error('comments') <p class="text-sm text-red-700 mt-1">{{ $message }}</p> @enderror
                 </div>
 
                 <div class="mt-6 flex items-end justify-between flex-wrap gap-4">
@@ -262,32 +241,27 @@
                             Would You Like Us to Contact You?
                         </label>
 
-                        <select
-                            name="Cnta_Us"
-                            class="w-full rounded-md input px-3 py-2 text-white">
+                        <div class="flex flex-wrap gap-4">
+                            <label class="flex items-center gap-2 text-white text-sm cursor-pointer">
+                                <input
+                                    type="radio"
+                                    name="Cnta_Us"
+                                    value="Yes"
+                                    class="h-5 w-5 rounded border-2 border-slate-400 text-blue-600 focus:ring-blue-500 cursor-pointer"
+                                    @checked(old('Cnta_Us')==='Yes' )>
+                                <span>Yes</span>
+                            </label>
 
-                            <option
-                                value=""
-                                class="bg-slate-900"
-                                disabled
-                                {{ old('Cnta_Us') ? '' : 'selected' }}>
-                                Select an option
-                            </option>
-
-                            <option
-                                value="Yes"
-                                class="bg-slate-900"
-                                @selected(old('Cnta_Us')==='Yes' )>
-                                Yes
-                            </option>
-
-                            <option
-                                value="No"
-                                class="bg-slate-900"
-                                @selected(old('Cnta_Us')==='No' )>
-                                No
-                            </option>
-                        </select>
+                            <label class="flex items-center gap-2 text-white text-sm cursor-pointer">
+                                <input
+                                    type="radio"
+                                    name="Cnta_Us"
+                                    value="No"
+                                    class="h-5 w-5 rounded border-2 border-slate-400 text-blue-600 focus:ring-blue-500 cursor-pointer"
+                                    @checked(old('Cnta_Us')==='No' )>
+                                <span>No</span>
+                            </label>
+                        </div>
 
                         @error('Cnta_Us')
                         <p class="text-sm text-red-700 mt-1">{{ $message }}</p>
