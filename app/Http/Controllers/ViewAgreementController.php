@@ -108,7 +108,6 @@ class ViewAgreementController extends Controller
 
     public function draftdownload(AgmtDraft $draft, string $columnName)
     {
-        dd($draft->$columnName);
         return $this->fileStorageService
             ->downloadAs($draft->$columnName);
     }
