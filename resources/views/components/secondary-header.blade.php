@@ -55,7 +55,7 @@
                 <div class="text-xl font-semibold lg:absolute lg:left-[45%] hidden">Agreements</div>
 
                 <!-- Company switcher -->
-                <div class="relative flex flex-row items-center" data-menu-wrapper>
+                <div class="relative flex flex-row items-center order-first lg:order-none" data-menu-wrapper>
                     <button
                         type="button"
                         class="menu-toggle-btn inline-flex items-center justify-center h-9 w-9 rounded-md hover:bg-white/10 transition"
@@ -64,7 +64,7 @@
                     </button>
 
                     <div
-                        class="menu-dropdown hidden absolute right-0 top-[50px] mt-2 w-40 rounded-md border border-white/10 bg-slate-900 shadow-xl z-50 py-1">
+                        class="menu-dropdown hidden absolute right-0 top-[50px] mt-8 w-40 rounded-md border border-white/10 bg-slate-900 shadow-xl z-50 py-1">
 
                         <a href="{{ request()->routeIs('filament.settings.pages.settings') ? '/dashboard' : $backurl }}"
                         class="flex items-center gap-2 px-3 py-2 text-sm text-white/80 hover:text-white hover:bg-white/10 transition">

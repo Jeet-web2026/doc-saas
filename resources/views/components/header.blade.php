@@ -60,7 +60,7 @@
         <div class="flex flex-col items-end gap-2">
             <div class="text-xl font-semibold lg:absolute lg:left-[45%] lg:hidden block">Agreements</div>
             <!-- Company switcher -->
-            <div class="relative flex flex-row items-center" x-data="{ open: false }" @click.outside="open = false">
+            <div class="relative flex flex-row items-center order-first lg:order-none" x-data="{ open: false }" @click.outside="open = false">
                 <button
                     type="button"
                     @click="open = !open"
@@ -73,7 +73,7 @@
                     x-show="open"
                     x-cloak
                     x-transition
-                    class="absolute right-0 top-[50px] mt-2 w-40 rounded-md border border-white/10 bg-card shadow-xl z-50 py-1">
+                    class="absolute right-0 top-[50px] mt-8 w-40 rounded-md border border-white/10 bg-card shadow-xl z-50 py-1">
                     <a
                         href="{{ request()->routeIs('filament.settings.pages.settings') ? '/dashboard' : '' }}"
                         class="flex items-center gap-2 px-3 py-2 text-sm text-white/80 hover:text-white hover:bg-white/10 transition">
