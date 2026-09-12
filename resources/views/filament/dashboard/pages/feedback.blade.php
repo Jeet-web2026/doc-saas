@@ -27,7 +27,7 @@
             <input type="hidden" name="orga_uin" value="{{ $orgaUin }}">
 
             <div class="bg-card border border-white/10 rounded-lg p-8">
-                <h1 class="text-center text-xl font-medium text-white mb-6">
+                <h1 class="text-center text-xl font-medium text-white mb-8">
                     Page Experience Review
                 </h1>
                 <div class="mb-6">
@@ -113,7 +113,7 @@
             </div>
 
             <div class="bg-card border border-white/10 rounded-lg p-8">
-                <h1 class="text-center text-xl font-medium text-white mb-6">
+                <h1 class="text-center text-xl font-medium text-white mb-8">
                     Share Your Feedback
                 </h1>
 

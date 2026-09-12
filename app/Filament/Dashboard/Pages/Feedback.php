@@ -3,6 +3,7 @@
 namespace App\Filament\Dashboard\Pages;
 
 use App\Filament\Dashboard\Pages\Concerns\HasCompanyHeader;
+use App\Models\CountryMaster;
 use App\Models\MasterVerticalPageName;
 use Filament\Pages\Page;
 use Illuminate\Support\Facades\Session;
@@ -23,6 +24,7 @@ class Feedback extends Page
     public string $orgaUin;
 
     public $pages = null;
+    public $countryDetails = null;
 
     public function mount(): void
     {
@@ -35,6 +37,10 @@ class Feedback extends Page
 
         $this->pages = MasterVerticalPageName::query()
             ->select(['Page_UIN', 'Page_name'])
+            ->get();
+
+        $this->countryDetails = CountryMaster::query()
+            ->select(['Name', 'Flag_Emoj'])
             ->get();
     }
 }
