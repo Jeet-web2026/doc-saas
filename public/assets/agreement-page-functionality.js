@@ -45,7 +45,6 @@ $(document).ready(function () {
 
     // Re-fetch whenever category or type changes
     $(document).on("change", "#agreementCategory, #agreementType", function () {
-        console.log('demo');
         const category = $("#agreementCategory").val();
         const type = $("#agreementType").val();
 

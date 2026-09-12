@@ -326,7 +326,6 @@ $(document).ready(function () {
     // Server already applies search filtering, so we only sort client-side here.
     function renderTable(data = AGREEMENTS) {
         let rows = data;
-        console.log(data);
 
         // Sorting
         if (sort) {
