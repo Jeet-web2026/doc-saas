@@ -60,7 +60,7 @@
                         type="button"
                         class="menu-toggle-btn inline-flex items-center justify-center h-9 w-9 rounded-md hover:bg-white/10 transition"
                         aria-label="Menu">
-                        <i class="ri-menu-3-line text-lg"></i>
+                        <i class="ri-more-2-fill text-lg"></i>
                     </button>
 
                     <div
