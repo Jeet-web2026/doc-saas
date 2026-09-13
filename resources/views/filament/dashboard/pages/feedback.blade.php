@@ -135,9 +135,8 @@
                         </select>
                         @error('feedback_type') <p class="text-sm text-red-700 mt-1">{{ $message }}</p> @enderror
                     </div>
-                    <div class="flex-1">
-                        <label class="block text-white mb-2">Present Location Pincode</label>
-                        <div class="flex" x-data="{
+                    <div class="flex-1 w-full">
+                        <div class="flex gap-2" x-data="{
                                 open: false,
                                 selected: {{ old('country_uin', 101107) }},
                                 countries: {{ $countryDetails->toJson() }},
@@ -146,14 +145,15 @@
                                 }
                             }">
 
-                            <div class="relative w-40">
+                            <div class="relative">
+                                <label class="block text-white mb-2">Country</label>
                                 <input type="hidden" name="country_uin" :value="selected">
 
                                 <button
                                     type="button"
                                     @click="open = !open"
                                     @click.outside="open = false"
-                                    class="w-full flex items-center justify-between gap-2 rounded-md input px-3 py-2 text-white bg-slate-900 border border-white/10 border-r-0 rounded-r-none" style="border-right: 0px !important; border-end-end-radius: 0px !important; border-start-end-radius: 0px !important;">
+                                    class="w-full flex items-center justify-between gap-2 rounded-md input px-3 py-2 text-white bg-slate-900 border border-white/10 border-r-0 rounded-r-none">
 
                                     <span class="flex items-center gap-2" x-show="selectedCountry">
                                         <img :src="`https://flagsapi.com/${selectedCountry?.Code?.trim()}/flat/24.png`" class="w-full h-full object-cover"  loading="lazy">
@@ -186,14 +186,15 @@
                                     </template>
                                 </ul>
                             </div>
-
+                        <div class="flex-1">
+                            <label class="block text-white mb-2">Present Location Pincode</label>
                             <input
                                 type="text"
                                 name="pincode"
                                 value="{{ old('pincode') }}"
-                                maxlength="6"
-                                placeholder="6 Digits Only"
-                                class="w-full rounded-md input pe-3 py-2 text-white placeholder-slate-400 border border-white/10" style="border-left: 0px !important; border-start-start-radius: 0px !important; border-end-start-radius: 0px !important;" />
+                                placeholder="Enter you pin code"
+                                class="w-full rounded-md input pe-3 py-3 text-white placeholder-slate-400 border border-white/10" />
+                            </div>
                         </div>
                         @error('pincode') <p class="text-sm text-red-700 mt-1">{{ $message }}</p> @enderror
                     </div>
@@ -308,7 +309,7 @@
                         <p class="text-sm text-red-700 mt-1">{{ $message }}</p>
                         @enderror
                     </div>
-                    <div class="flex-1">
+                    <div class="flex-1 w-full">
                         <label class="block text-white mb-2">Attachment</label>
                         <input
                             type="file"

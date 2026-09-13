@@ -110,7 +110,30 @@ $(document).ready(function () {
 
         Swal.fire({
             html: `
-                <p>Confirm Agreement Submission Once saved, Internal Notes cannot be modified or deleted. Please ensure that all information is correct before saving.</p>
+                <p>This agreement is being renewed. Once saved, the Internal Notes cannot be modified or deleted. Please review all details before proceeding.</p>
+            `,
+            showCancelButton: true,
+            confirmButtonText: "Renew",
+            cancelButtonText: "Cancel",
+            background: "#0f172b",
+            confirmButtonColor: "#155dfc",
+            color: "#ffffff",
+            didOpen: (popup) => {
+                popup.style.border = "1px solid #ffffff14";
+            },
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $(this).closest("form").submit();
+            }
+        });
+    });
+
+    $(document).on("click", "#addBtn", function (e) {
+        e.preventDefault();
+
+        Swal.fire({
+            html: `
+                <p>You are adding a new agreement. Once saved, the Internal Notes cannot be modified or deleted. Please review all details before proceeding.</p>
             `,
             showCancelButton: true,
             confirmButtonText: "Add",
@@ -155,9 +178,9 @@ $(document).ready(function () {
         e.preventDefault();
 
         Swal.fire({
-            title: "Are you sure you want to draft this agreement?",
+            title: "Are you sure you want to save this agreement as a draft?",
             html: `
-                <p>Please verify that all information is complete and accurate before proceeding.</p>
+                <p>This draft cannot be edited after saving. Please review all details carefully before proceeding.</p>
             `,
             showCancelButton: true,
             confirmButtonText: "Save Draft",
