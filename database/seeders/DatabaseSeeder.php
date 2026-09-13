@@ -20,7 +20,10 @@ class DatabaseSeeder extends Seeder
             OrganizationSeeder::class,
             UserLoginSeeder::class,
             UserOrgaRelaSeeder::class,
-            TblMastPinCodeSeeder::class
+            TblMastPinCodeSeeder::class,
+            CountryIndiaSeeder::class,
+            MasterVerticalPageNameSeeder::class,
+            AgreementStatusSeeder::class
         ]);
     }
 }
