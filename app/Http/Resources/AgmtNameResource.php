@@ -14,6 +14,7 @@ class AgmtNameResource extends JsonResource
             'categoryLabel' => $this->category?->Agmt_Catg_Name,
             'type'          => $this->type?->Agmt_Type_Name,
             'createdAt'     => $this->CrOn?->toDateString(),
+            'draftCount'    => $this->drafts_count ?? 0,
         ];
     }
 }

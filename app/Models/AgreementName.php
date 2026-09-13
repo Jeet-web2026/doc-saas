@@ -37,4 +37,9 @@ class AgreementName extends Model
     {
         return $this->belongsTo(OrganisationDetails::class, 'Orga_UIN', 'Orga_UIN');
     }
+
+    public function drafts()
+    {
+        return $this->hasMany(AgmtDraft::class, 'Agmt_Name', 'Agmt_Name');
+    }
 }

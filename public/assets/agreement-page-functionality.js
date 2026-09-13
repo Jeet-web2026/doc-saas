@@ -118,6 +118,9 @@ $(document).ready(function () {
             background: "#0f172b",
             confirmButtonColor: "#155dfc",
             color: "#ffffff",
+            didOpen: (popup) => {
+                popup.style.border = "1px solid #ffffff14";
+            },
         }).then((result) => {
             if (result.isConfirmed) {
                 $(this).closest("form").submit();
@@ -138,6 +141,9 @@ $(document).ready(function () {
             background: "#0f172b",
             confirmButtonColor: "#155dfc",
             color: "#ffffff",
+            didOpen: (popup) => {
+                popup.style.border = "1px solid #ffffff14";
+            },
         }).then((result) => {
             if (result.isConfirmed) {
                 $(this).closest("form").submit();
@@ -159,6 +165,9 @@ $(document).ready(function () {
             background: "#0f172b",
             confirmButtonColor: "#155dfc",
             color: "#ffffff",
+            didOpen: (popup) => {
+                popup.style.border = "1px solid #ffffff14";
+            },
         }).then((result) => {
             if (result.isConfirmed) {
                 $(this).closest("form").submit();
@@ -180,6 +189,9 @@ $(document).ready(function () {
             background: "#0f172b",
             confirmButtonColor: "#155dfc",
             color: "#ffffff",
+            didOpen: (popup) => {
+                popup.style.border = "1px solid #ffffff14";
+            },
         }).then((result) => {
             if (result.isConfirmed) {
                 $(this).closest("form").submit();
@@ -351,6 +363,9 @@ $(document).ready(function () {
                 background: "#0f172b",
                 confirmButtonColor: "#155dfc",
                 color: "#ffffff",
+                didOpen: (popup) => {
+                    popup.style.border = "1px solid #ffffff14";
+                },
             });
             return;
         }
@@ -389,6 +404,9 @@ $(document).ready(function () {
                 confirmButtonColor: "#d33",
                 background: "#0f172b",
                 color: "#ffffff",
+                didOpen: (popup) => {
+                    popup.style.border = "1px solid #ffffff14";
+                },
             });
             $(this).val(""); // reset input
             return;
@@ -406,6 +424,9 @@ $(document).ready(function () {
                 confirmButtonColor: "#d33",
                 background: "#0f172b",
                 color: "#ffffff",
+                didOpen: (popup) => {
+                    popup.style.border = "1px solid #ffffff14";
+                },
             });
             $(this).val("");
             return;
@@ -427,6 +448,9 @@ $(document).ready(function () {
                         confirmButtonColor: "#d33",
                         background: "#0f172b",
                         color: "#ffffff",
+                        didOpen: (popup) => {
+                            popup.style.border = "1px solid #ffffff14";
+                        },
                     });
                     $("#document").val("");
                 };
@@ -452,6 +476,9 @@ $(document).ready(function () {
                         confirmButtonColor: "#d33",
                         background: "#0f172b",
                         color: "#ffffff",
+                        didOpen: (popup) => {
+                            popup.style.border = "1px solid #ffffff14";
+                        },
                     });
                     $("#document").val("");
                 }
@@ -479,6 +506,9 @@ $(document).ready(function () {
                 background: "#0f172b",
                 confirmButtonColor: "#155dfc",
                 color: "#ffffff",
+                didOpen: (popup) => {
+                    popup.style.border = "1px solid #ffffff14";
+                },
             }).then((result) => {
                 if (result.isConfirmed) {
                     file.value = "";
@@ -598,6 +628,9 @@ $(document).ready(function () {
                     background: "#0f172b",
                     confirmButtonColor: "#155dfc",
                     color: "#ffffff",
+                    didOpen: (popup) => {
+                        popup.style.border = "1px solid #ffffff14";
+                    },
                 });
             }
         });

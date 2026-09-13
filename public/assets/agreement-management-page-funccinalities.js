@@ -238,18 +238,28 @@ $(document).ready(function () {
                         class="px-5 py-4 text-muted-foreground hidden">
                         ${r.type ?? "—"}
                     </td>
-
+                    
                     <td data-col="name"
                         class="px-5 py-4 text-muted-foreground">
                         ${r.name ?? "—"}
                     </td>
+
+                    <td data-col="draftCount"
+                        class="px-5 py-4 text-muted-foreground">
+                        ${r.draftCount ?? "—"}
+                    </td>
                     <!-- Action -->
                     <td class="px-5 py-4 text-right">
                         <a href="#"
-                            data-id="${r.id}"
-                            class="delete-agreement-btn flex items-center justify-center gap-2 px-2 py-1.5 text-sm rounded hover:bg-white/5 text-red-400">
-                            <i class="ri-delete-bin-line text-base"></i>
-                        </a>
+                        data-id="${r.id}"
+                        ${r.draftCount > 0 ? 'aria-disabled="true"' : ""}
+                        class="delete-agreement-btn flex items-center justify-center gap-2 px-2 py-1.5 text-sm rounded text-red-400 ${
+                            r.draftCount > 0
+                                ? "opacity-40 cursor-not-allowed pointer-events-none"
+                                : "hover:bg-white/5"
+                        }">
+                        <i class="ri-delete-bin-line text-base"></i>
+                    </a>
                     </td>
 
                 </tr>
@@ -538,6 +548,9 @@ $(document).ready(function () {
                 background: "#0f172b",
                 confirmButtonColor: "#155dfc",
                 color: "#ffffff",
+                didOpen: (popup) => {
+                    popup.style.border = "1px solid rgba(255, 255, 255, 0.1)";
+                },
             });
             return;
         }
@@ -629,6 +642,9 @@ $(document).ready(function () {
             background: "#0f172b",
             confirmButtonColor: "#155dfc",
             color: "#ffffff",
+            didOpen: (popup) => {
+                popup.style.border = "1px solid #ffffff14";
+            },
         }).then((result) => {
             if (result.isConfirmed) {
                 const csrfToken = $('meta[name="csrf-token"]').attr("content");

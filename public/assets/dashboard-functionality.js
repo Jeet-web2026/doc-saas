@@ -1056,6 +1056,9 @@ $(document).ready(function () {
             confirmButtonColor: "#d33",
             background: "#0f172b",
             color: "#ffffff",
+            didOpen: (popup) => {
+                popup.style.border = "1px solid #ffffff14";
+            },
         }).then((result) => {
             if (result.isConfirmed) {
                 const csrfToken = $('meta[name="csrf-token"]').attr("content");

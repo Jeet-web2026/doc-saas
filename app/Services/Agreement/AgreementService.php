@@ -746,6 +746,7 @@ class AgreementService
             ->when($dateTo, function ($query, $dateTo) {
                 $query->whereDate('CrOn', '<=', $dateTo);
             })
+            ->withCount('drafts')
             ->latest()
             ->paginate($perPage);
 

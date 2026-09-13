@@ -302,6 +302,10 @@
                             Agreement Name
                         </th>
 
+                        <th data-col="draftCount" class="px-5 py-3">
+                            Total Drafts
+                        </th>
+
                         <th class="px-5 py-3 text-right">
                             Action
                         </th>
