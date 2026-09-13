@@ -51,11 +51,11 @@
         <div class="flex flex-col items-end">
             <div class="text-xl font-semibold lg:absolute lg:left-[45%]">{{ $title }}</div>
             <!-- Company switcher -->
-            <div class="flex flex-col items-end gap-2 bg-card">
+            <div class="flex flex-col items-end gap-2 bg-card order-first lg:order-none">
                 <div class="text-xl font-semibold lg:absolute lg:left-[45%] hidden">Agreements</div>
 
                 <!-- Company switcher -->
-                <div class="relative flex flex-row items-center order-first lg:order-none" data-menu-wrapper>
+                <div class="relative flex flex-row items-center" data-menu-wrapper>
                     <button
                         type="button"
                         class="menu-toggle-btn inline-flex items-center justify-center h-9 w-9 rounded-md hover:bg-white/10 transition"
