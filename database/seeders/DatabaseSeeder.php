@@ -22,8 +22,7 @@ class DatabaseSeeder extends Seeder
             UserOrgaRelaSeeder::class,
             TblMastPinCodeSeeder::class,
             CountryIndiaSeeder::class,
-            MasterVerticalPageNameSeeder::class,
-            AgreementStatusSeeder::class
+            MasterVerticalPageNameSeeder::class
         ]);
     }
 }
