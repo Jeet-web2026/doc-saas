@@ -759,7 +759,13 @@ class AgreementService
 
     public function deleteAgreementName(int|string $id): bool
     {
-        $agreementName = AgreementName::query()->findOrFail($id);
+        $agreementName = AgreementName::query()
+            ->withCount('drafts')
+            ->findOrFail($id);
+
+        if ($agreementName->drafts_count > 0) {
+            return false;
+        }
 
         return $agreementName->delete();
     }

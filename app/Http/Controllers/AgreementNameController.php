@@ -35,7 +35,13 @@ class AgreementNameController extends Controller
 
     public function destroy(int|string $id)
     {
-        $this->agreementService->deleteAgreementName($id);
+        $response = $this->agreementService->deleteAgreementName($id);
+
+        if (!$response) {
+            return redirect()
+                ->back()
+                ->with('error', 'Agreement can not be deletd.');
+        }
 
         return redirect()
             ->back()
