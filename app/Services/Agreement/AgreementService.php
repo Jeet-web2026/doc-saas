@@ -453,20 +453,20 @@ class AgreementService
                 'Orga_UIN'       => $oldAgreement->Orga_UIN,
                 'User_UIN'       => $oldAgreement->User_UIN,
 
-                'Agmt_Catg_UIN'  => $request->agreement_category ?? $oldAgreement->Agmt_Catg_UIN,
-                'Agmt_Type_UIN'  => $request->agreement_type ?? $oldAgreement->Agmt_Type_UIN,
-                'Agmt_Name'      => $request->agreement_name ?? $oldAgreement->Agmt_Name,
+                'Agmt_Catg_UIN'  => $request->agreement_category,
+                'Agmt_Type_UIN'  => $request->agreement_type,
+                'Agmt_Name'      => $request->agreement_name,
 
-                'Agmt_File_no'        => $request->file_no ?? $oldAgreement->Agmt_File_no,
+                'Agmt_File_no'        => $request->file_no,
 
-                'Agmt_Strt_Date' => $request->agreement_date ?? $oldAgreement->Agmt_Strt_Date,
-                'Agmt_Expy_Date' => $request->expiry_date ?? $oldAgreement->expiry_date, // ← the only date field that changes
-                'Agmt_Sign_Date' => $request->signing_date ?? $oldAgreement->Agmt_Sign_Date,
-                'Agmt_Ntry_Date' => $request->notary_date ?? $oldAgreement->Agmt_Ntry_Date,
+                'Agmt_Strt_Date' => $request->agreement_date,
+                'Agmt_Expy_Date' => $request->expiry_date, // ← the only date field that changes
+                'Agmt_Sign_Date' => $request->signing_date,
+                'Agmt_Ntry_Date' => $request->notary_date,
 
-                'Agmt_Vson'      => $request->agreement_version ?? $oldAgreement->Agmt_Vson,
-                'Agmt_Drft_By'   => $request->drafted_by ?? $oldAgreement->Agmt_Drft_By,
-                'Agmt_Judn'      => $request->jurisdiction ?? $oldAgreement->Agmt_Judn,
+                'Agmt_Vson'      => $request->agreement_version,
+                'Agmt_Drft_By'   => $request->drafted_by,
+                'Agmt_Judn'      => $request->jurisdiction,
                 'Agmt_Atch'      => $attachment,
                 'Agmt_Size_KB'  => $attachmentSizeKb,
 
