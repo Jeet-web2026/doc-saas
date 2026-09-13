@@ -25,8 +25,10 @@ class StoreFeedbackRequest extends FormRequest
             'comments'            => ['nullable', 'string'],
             'pincode'             => [
                 'required',
-                'digits:6',
-                Rule::exists((new PinCode())->getTable(), 'pin_code_No')
+                Rule::when(
+                    $this->input('country_uin') === "101107",
+                    [Rule::exists((new PinCode())->getTable(), 'pin_code_No')]
+                ),
             ],
             'orga_uin'  => ['required'],
             'attachment' => ['nullable', 'mimes:pdf,jpg,jpeg,png', 'max:1000'],
@@ -50,7 +52,6 @@ class StoreFeedbackRequest extends FormRequest
             'Rcmd_Page.required'            => 'Please select an option.',
             'feedback_type.required'        => 'Please select a feedback type.',
             'pincode.required'              => 'Please enter your 6-digit pincode.',
-            'pincode.digits'                => 'Please enter a valid 6-digit pincode.',
             'pincode.exists'                => 'The given pincode is invalid.',
             'Cnta_Us.required'              => 'Please select an option.',
         ];

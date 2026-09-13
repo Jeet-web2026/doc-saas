@@ -17,7 +17,7 @@
         <div class="flex lg:flex-row flex-col mt-6 gap-6 items-start">
 
             {{-- Calendar — always visible, left side --}}
-            <div class="w-100">
+            <div class="lg:w-100 w-full">
                 <div
                     id="calMenu"
                     class="rounded-md border border-white/10 bg-card shadow-xl">

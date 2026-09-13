@@ -11,7 +11,6 @@ $(document).ready(function () {
         companyId = $initial.data("company-id");
     }
     let AGREEMENTS = [];
-    let currentPage = 1;
     let perPage = 5;
 
     // ---------- Search & Date filter state ----------
