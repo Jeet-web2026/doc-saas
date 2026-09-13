@@ -192,7 +192,7 @@
                                 type="text"
                                 name="pincode"
                                 value="{{ old('pincode') }}"
-                                placeholder="Enter you pin code"
+                                placeholder="Enter your pin code"
                                 class="w-full rounded-md input pe-3 py-3 text-white placeholder-slate-400 border border-white/10" />
                             </div>
                         </div>
