@@ -283,21 +283,13 @@ $(document).ready(function () {
 
                         <!-- Card Header -->
                         <div class="flex items-center justify-between px-4 py-3">
-                            <div class="font-semibold text-lg truncate">
+                            <div class="font-semibold text-lg truncate capitalize">
                                 ${name}
                             </div>
 
                             <!-- Right Side -->
                             <div class="flex items-center gap-2 shrink-0">
 
-                                <span
-                                    class="rounded-md bg-white/5 px-2 py-1
-                                    text-[10px] font-medium
-                                    text-muted-foreground capitalize">
-
-                                    ${fmtDate(r.approvedDate)}
-
-                                </span>
 
                                 <!-- Menu -->
                                 <div class="relative" data-menu>
@@ -331,12 +323,16 @@ $(document).ready(function () {
                                         bg-card shadow-xl z-50 p-1">
 
                                         
-                                            href="#"
+                                            <a href="#"
                                             data-id="${r.id}"
-                                            class="delete-agreement-btn block px-3 py-2 text-sm rounded hover:bg-white/5 text-red-400">
-
+                                            ${r.draftCount > 0 ? 'aria-disabled="true"' : ""}
+                                            class="delete-agreement-btn gap-2 px-2 py-2 text-sm rounded text-red-400 ${
+                                                r.draftCount > 0
+                                                    ? "opacity-40 cursor-not-allowed pointer-events-none"
+                                                    : "hover:bg-white/5"
+                                            }">
+                                            <i class="ri-delete-bin-line text-base"></i>
                                             Delete
-
                                         </a>
 
                                     </div>
@@ -362,31 +358,23 @@ $(document).ready(function () {
                             <div>
                                 <div class="flex flex-row items-center gap-3">
                                     <div class="text-[10px] font-semibold uppercase tracking-wider text-cyan-400">
-                                        Version
+                                        Type
                                     </div>
                                     <div class="text-[10px] text-muted-foreground">
-                                        ${r.version ?? "—"}
+                                        ${r.type ?? "—"}
                                     </div>
                                 </div>
 
                                 <div class="flex flex-row items-center gap-3 mt-4">
                                     <div class="text-[10px] font-semibold uppercase tracking-wider text-cyan-400">
-                                        Approved By
+                                        Total Drafts
                                     </div>
                                     <div class="text-[10px] text-muted-foreground">
-                                        ${r.approvedBy ?? "—"}
+                                        ${r.draftCount ?? "—"}
                                     </div>
                                 </div>
                             </div>
 
-                        </div>
-
-                        <!-- Bottom Info -->
-                        <div class="border-t border-white/5 px-4 py-2.5 flex items-center justify-between">
-                            <div class="text-xs text-muted-foreground">
-                                Approved:
-                                <span class="text-white/70">${fmtDate(r.approvedDate)}</span>
-                            </div>
                         </div>
 
                     </div>
